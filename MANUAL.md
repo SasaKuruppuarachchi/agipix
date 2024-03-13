@@ -1,4 +1,4 @@
-# Holybro x500 v2 Drone docs
+# Agipix Agile Autonomous development platform Operating manual
 
 <p style="text-align: justify;">This user manual contains information about the components, software, firmware, custom-made parts (e.g., 3D printed), and custom software features. The drone is mainly used for computer vision, edge computing, and aerial robotics research in computer vision and software engineering research groups at the Tampere University.
 
