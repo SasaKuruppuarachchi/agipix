@@ -114,6 +114,13 @@ https://kb.nomachine.com/AR02R01074
 ## change power mode
 https://forums.developer.nvidia.com/t/power-mode-in-terminal/287224
 
+## isntalling docker and nvidia docker
+https://docs.docker.com/engine/install/ubuntu/
+https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+https://git-lfs.com/
+
+## compose and run docker
+
 ## Referances
 1. https://connecttech.com/product/hadron-carrier-for-nvidia-jetson-orin-nx/
 2. https://connecttech.com/ftp/Drivers/L4T-Release-Notes/Jetson-Orin-NX-Orin-Nano/ORIN-NX-NANO-36.3.0.pdf
