@@ -121,6 +121,14 @@ https://git-lfs.com/
 
 ## compose and run docker
 
+## build torchvision from source
+We need to build torchvision from source in order to link against the right libraries as compiled with the NVIDIA-compiled build of pytorch
+export FORCE_CUDA=1
+git clone -b v0.17.2 https://github.com/pytorch/vision.git
+cd vision
+sudo -E python setup.py develop  # use install instead of develop if you don't care about development.
+
+
 ## Referances
 1. https://connecttech.com/product/hadron-carrier-for-nvidia-jetson-orin-nx/
 2. https://connecttech.com/ftp/Drivers/L4T-Release-Notes/Jetson-Orin-NX-Orin-Nano/ORIN-NX-NANO-36.3.0.pdf
