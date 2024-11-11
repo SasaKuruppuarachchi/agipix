@@ -133,4 +133,5 @@ sudo -E python setup.py develop  # use install instead of develop if you don't c
 1. https://connecttech.com/product/hadron-carrier-for-nvidia-jetson-orin-nx/
 2. https://connecttech.com/ftp/Drivers/L4T-Release-Notes/Jetson-Orin-NX-Orin-Nano/ORIN-NX-NANO-36.3.0.pdf
 3. https://connecttech.com/resource-center/kdb373/
+4. https://github.com/pytorch/vision/blob/main/CONTRIBUTING.md#development-installation
 
