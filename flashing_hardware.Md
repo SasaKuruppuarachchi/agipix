@@ -112,6 +112,7 @@ ssh [user]@[ip]
 https://kb.nomachine.com/AR02R01074
 
 ## change power mode
+sudo nvpmodel -m <# of power mode>
 https://forums.developer.nvidia.com/t/power-mode-in-terminal/287224
 
 ## isntalling docker and nvidia docker
