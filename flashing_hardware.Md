@@ -103,6 +103,8 @@ https://jetsonhacks.com/2019/04/19/jetson-nano-serial-console/
 2. skip network setup for now
 
 3. connect to the network 
+sudo nmcli dev wifi rescan
+
 sudo nmcli d wifi connect [SSID] password [PASSWORD
 
 4. ssh in
