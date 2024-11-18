@@ -131,6 +131,8 @@ git clone -b v0.17.2 https://github.com/pytorch/vision.git
 cd vision
 sudo -E python setup.py develop  # use install instead of develop if you don't care about development.
 
+## Mount USB
+https://linuxconfig.org/howto-mount-usb-drive-in-linux
 
 ## Referances
 1. https://connecttech.com/product/hadron-carrier-for-nvidia-jetson-orin-nx/
