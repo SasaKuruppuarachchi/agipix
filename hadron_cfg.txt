@@ -1,0 +1,60 @@
+agipix_control
+	agipix_user_interfaces - main
+	*mocap4r2_msgs -rolling  https://github.com/MOCAP4ROS2-Project/mocap4r2_msgs
+	odom_epub - master
+	odom_transformer - main
+	px4_msgs - main
+	px4_ros2_offboard - agipicv2_hard
+	
+dds
+	Micro-XRCE-DDS-Agent -master release 2.4.3 https://github.com/eProsima/Micro-XRCE-DDS-Agent/tree/v2.4.3
+
+lidar_ws
+	FAST_LIO - agipixv2
+	livox_ros_driver2 - agipixv2
+	Livox-SDK2 - master https://github.com/Livox-SDK/Livox-SDK2
+	yolov5_ros2_detector - agipixv2_hard
+
+raicam-ros
+	isaac_ros_common - agipix-dard
+	git clone -b v0.17.2 https://github.com/pytorch/vision.git
+	
+	
+ebash
+alias ebash='gedit ~/.bashrc'
+alias sbash='source ~/.bashrc'
+alias agidocker="cd ~/workspace/raicam-ros/src/isaac_ros_common/scripts/ && ./run_dev.sh"
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+
+# enable programmable completion features (you don't need to enable
+# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
+# sources /etc/bash.bashrc).
+if ! shopt -oq posix; then3
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+#export PATH=/usr/local/cuda-11.4/bin:$PATH
+#export LD_LIBRARY_PATH=/usr/local/cuda-11.4/lib64:$LD_LIBRARY_PATH
+#export ISAAC_ROS_WS=~/workspace/isaac_ros-dev/
+#journalctl --vacuum-time=2d 
+#journalctl --list-boots
+#journalctl -b-1
+
+export WORKSPACES_DIR='/home/sasa/workspace'
+export ISAAC_ROS_DEV_DIR='/home/sasa/workspace/raicam-ros'
+
+
+
+sudo nmcli connection modify Wired\ connection\ 1 ipv4.addr 192.168.1.50/24 ipv4.method manual
+	
