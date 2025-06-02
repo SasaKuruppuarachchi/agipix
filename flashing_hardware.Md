@@ -137,7 +137,7 @@ https://linuxconfig.org/howto-mount-usb-drive-in-linux
 ## For livox lidar
 - Set up the static ip of the Livox lidar Via LivoxViewer 2
 - Set eth0 ip
-´´´ sudo ifconfig eth0 172.16.1.50 netmask 255.255.255.0 up´´´ 
+```sudo ifconfig eth0 172.16.1.50 netmask 255.255.255.0 up```
 (172.16.1.XX is the domain of the lidar)
 
 ## Referances
