@@ -134,6 +134,10 @@ sudo -E python setup.py develop  # use install instead of develop if you don't c
 ## Mount USB
 https://linuxconfig.org/howto-mount-usb-drive-in-linux
 
+## For livox lidar
+- Set up the static ip of the Livox lidar Via LivoxViewer 2
+- Set eth0 ip ´´´ sudo ifconfig eth0 172.16.1.50 netmask 255.255.255.0 up´´´ (172.16.1.XX is the domain of the lidar)
+
 ## Referances
 1. https://connecttech.com/product/hadron-carrier-for-nvidia-jetson-orin-nx/
 2. https://connecttech.com/ftp/Drivers/L4T-Release-Notes/Jetson-Orin-NX-Orin-Nano/ORIN-NX-NANO-36.3.0.pdf
