@@ -1,3 +1,7 @@
+---
+title: Autonomy Framework
+layout: doc
+---
 # Agipix Autonomy Framework
 [![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) 
 [![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/20.04/)
@@ -190,5 +194,4 @@ If you find this work useful, please consider to cite our papers:
 ## VI. Acknowledgement
 The author would like to express his sincere gratitude to Professor Kenji Shimada for his great support and all Agipix team members who contribute to the development of this research.
 
-## VII. Write at the End
-This repository concludes my first two-year Ph.D. work at CMU, and I would like to share it to contribute to the autonomous UAV research community. At the beginning, I truly felt the frustration as an autonomous robot researcher due to the lack of a comprehensive development framework. As a result, I hope my code can provide researchers a comprehensive and easy-to-understand platform and let them focus on algorithm/theory design instead of the software pipeline. In the meanwhile, this research and developed framework are not perfect and can be further improved; <ins>**thus, I am actively looking for collaborators in research and development to improve the UAV/robot autonomy level. Please don't hesitate to reach out for potential collaboration!**<ins>
+

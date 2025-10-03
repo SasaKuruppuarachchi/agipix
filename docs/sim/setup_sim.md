@@ -1,4 +1,8 @@
-# setting up agipix simulation environment
+---
+title: Simulation Setup
+layout: doc
+---
+# Setting Up the Agipix Simulation Environment
 
 ### Prerequisites for host PC
 - Ubuntu 20.04/22.04 Operating System

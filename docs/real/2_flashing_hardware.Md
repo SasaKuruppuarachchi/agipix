@@ -1,4 +1,8 @@
-# Compleate guide to flashing The Nvidia Jetson device to Jetpack 6.0
+---
+title: Flashing Jetson & Carrier
+layout: doc
+---
+# Complete Guide to Flashing the NVIDIA Jetson (JetPack 6.0)
 
 ## Prerequisites 
 1. Ubuntu 20.04 host machine x86

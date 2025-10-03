@@ -1,4 +1,9 @@
-# Complete Guide for building the Agipix hardware platform
+---
+title: Hardware Assembly
+layout: doc
+---
+
+# Complete Guide for Building the Agipix Hardware Platform
 
 ## Material checklist
 
