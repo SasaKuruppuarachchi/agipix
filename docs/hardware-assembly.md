@@ -3,15 +3,15 @@ layout: doc
 title: Hardware Assembly
 ---
 
-# Complete Guide for Building the Agipix Hardware Platform
+# Complete Guide for building the Agipix hardware platform
 
 ## Material checklist
 
-See the [Bill of Materials (BOM)]({{ '/bom.html' | relative_url }})
+[Bill of Materials (BOM)]({{ '/bom.html' | relative_url }})
 
-## Carbon Fibre Cuts
+## Carbon fibre cuts
 
-Use the supplied cutting patterns available at `cad/Fab/CF` and use a water-jet cutting method to cut.
+Use the supplied cutting patterns available at cad/Fab/CF and use a water-jet cutting method to cut.
 
 | File name                  | Material        |
 |---------------------------|-----------------|
@@ -22,18 +22,19 @@ Use the supplied cutting patterns available at `cad/Fab/CF` and use a water-jet 
 ### Postprocessing of parts
 Some CF parts need extra processing to support lateral fitting.
 
-## 3D Printed Parts
+> **Note:** TODO: Detailed description with images
 
-Use the supplied 3D printable STL files available at `cad/Fab/3D_prints` and use following settings to print them:
+## 3D printed parts
 
-- **Filament**: AmazonBasics TPU (preferred for durability)
-- **Nozzle**: 0.4 mm 
-- **Layer height**: 0.2 mm
-- **Infill**: 40% gyroid/cubic; 70% for bushings/adaptors
-- **Temperatures**: TPU 235–245°C nozzle
-- **Post-processing**: deburr, ream holes, clean support interfaces
+Use the supplied 3D printable stl files available at cad/Fab/3D_prints and use following settings to print them
 
-### Required 3D Printed Parts
+- Filament: AmazonBasics TPU (preferred for durability);
+- Nozzle: 0.4 mm 
+- Layer height: 0.2 mm
+- Infill: 40% gyroid/cubic; 70% for bushings/adaptors
+- Temperatures: TPU 235–245°C nozzle
+
+- Post-processing: deburr, ream holes, clean support interfaces
 
 | File name | Quantity |
 |---|---|
@@ -53,16 +54,57 @@ Use the supplied 3D printable STL files available at `cad/Fab/3D_prints` and use
 | side_joint_upper.stl | 1 |
 | top_gurd_flexies_x4.stl | 1 |
 
-## Assembly Process
+![parts](/_assets/images/real/making/carbon_fibre_parts.jpg)
 
-Detailed assembly instructions with images are available in the repository.
+## Assembly
 
-## Next Steps
+### Low level assembly and test
 
-After hardware assembly, proceed to:
-1. [Flashing Hardware]({{ '/docs/flashing-hardware.html' | relative_url }})
-2. [Software Setup]({{ '/docs/software-setup.html' | relative_url }})
+In this step we setup following components before the low level test
+- Frame
+- Power, Battery
+- ESC
+- Motors
+- Radio receiver
+- Telemetry radio
+- Flight Controller
 
----
+Finally we do a series of manual flight tests to verify
 
-**For detailed instructions**, visit the complete guide at [doc/real/1_hardware_assembly.md]({{ site.github.repository_url }}/blob/main/doc/real/1_hardware_assembly.md)
+> **Note:** TODO: Detailed steps with images
+
+### High level Assembly
+
+In this step we setup following components before attempting high level controls
+- Top plate
+- USB to TTL or RS323-USB converter
+- Jetson Orin NX with Hadron carrier
+- Wifi antenna
+- Wiring and Compliant frame stiffener 
+
+> **Note:** TODO: Detailed steps with images
+
+Now we are ready to Firmware setup. See [Flashing Hardware]({{ '/docs/flashing-hardware.html' | relative_url }}) to continue.
+
+### Sensor Assembly
+
+In this step we setup following components before attempting high level controls
+- Carbon Fibre Sensor Cage
+- Livox Mid-360 Lidar
+- (Optional) RGB camera
+- (Optional) RGBD camera
+
+> **Note:** TODO: Detailed steps with images
+
+### High level Assembly
+
+In this step we setup following components before attempting high level controls
+- Top plate
+- USB to TTL or RS323-USB converter
+- Jetson Orin NX with Hadron carrier
+- Wifi antenna
+- Wiring
+
+> **Note:** TODO: Detailed steps with images
+
+Now we are ready for software setup. See [Software Setup]({{ '/docs/software-setup.html' | relative_url }}) to continue.
