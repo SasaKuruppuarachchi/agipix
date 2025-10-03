@@ -37,8 +37,8 @@ Agipix is an open hardware and software platform for agile indoor autonomy. This
 
 - Project README (overview, highlights) → [README]({{ '/README' | relative_url }})
 - Bill of Materials (BOM) → [bom/BOM.md]({{ '/bom/BOM' | relative_url }})
-- CAD and fabrication files → [cad/]({{ '/cad/' | relative_url }})
-- Media assets used in docs → [_assets/]({{ '/_assets/' | relative_url }})
+- CAD and fabrication files → [cad/]({{ '/cad' | relative_url }})
+- Media assets used in docs → [_assets/]({{ '/_assets' | relative_url }})
 
 ## Tips
 
