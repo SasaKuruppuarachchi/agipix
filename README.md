@@ -41,16 +41,6 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 - `_assets/` — Images, videos, and datasheets used in docs
 - `todo` — IEEE-style paper source describing Agipix
 
-## Documentation
-
-📚 **[Visit the full documentation site](https://sasakuruppuarachchi.github.io/agipix/)** for detailed guides, tutorials, and references.
-
-The documentation site includes:
-- Interactive guides for simulation and hardware setup
-- Comprehensive autonomy stack documentation
-- Bill of Materials and CAD resources
-- Search functionality and easy navigation
-
 ## Quick start
 
 ### Simulation
