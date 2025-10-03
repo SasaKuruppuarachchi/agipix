@@ -1,4 +1,9 @@
-/cad/fab
 /cad/design
 /videos
 /etc
+_legacy
+*.3mf
+_assets/videos/_to_process
+_assets/images/real/making/_etc
+_assets/videos/real/to_process
+_assets/videos/sim/to_process
