@@ -7,3 +7,11 @@ _assets/videos/_to_process
 _assets/images/real/making/_etc
 _assets/videos/real/to_process
 _assets/videos/sim/to_process
+
+# Jekyll build artifacts
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+Gemfile.lock
+vendor/

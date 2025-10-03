@@ -1,0 +1,15 @@
+---
+layout: default
+---
+
+<article class="doc-content">
+  <h1>{{ page.title }}</h1>
+  {{ content }}
+  
+  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+    <p style="text-align: center;">
+      <a href="{{ '/' | relative_url }}" class="btn btn-secondary">← Back to Home</a>
+      <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
+    </p>
+  </div>
+</article>
