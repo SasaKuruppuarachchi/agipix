@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="{{ site.description }}">
+  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container">
+      <h1 class="site-title glow-text"><a href="{{ '/' | relative_url }}" style="color: inherit; text-decoration: none;">AGIPIX</a></h1>
+      <p class="site-subtitle">{{ site.description }}</p>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-container">
+      <a href="{{ '/' | relative_url }}" class="nav-link">Home</a>
+      <a href="{{ '/docs/sim-setup.html' | relative_url }}" class="nav-link">Simulation Setup</a>
+      <a href="{{ '/docs/hardware-assembly.html' | relative_url }}" class="nav-link">Hardware Assembly</a>
+      <a href="{{ '/docs/autonomy.html' | relative_url }}" class="nav-link">Autonomy Framework</a>
+      <a href="{{ '/bom.html' | relative_url }}" class="nav-link">BOM</a>
+      <a href="{{ site.github.repository_url }}" class="nav-link" target="_blank">GitHub</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    {{ content }}
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Contact Authors</h3>
+        <p>Sasanka Kuruppu Arachchige — sasa.kuruppuarachchi@gmail.com</p>
+        <p>Joni Kämäräinen — joni.kamarainen@tuni.fi</p>
+      </div>
+      <div class="footer-section">
+        <h3>Acknowledgment</h3>
+        <p>Agipix is supported by RAICAM, MSCA HORIZON EU.</p>
+      </div>
+      <div class="footer-section">
+        <p>© 2025 Agipix Project | <a href="{{ site.github.repository_url }}/blob/main/LICENSE">License</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

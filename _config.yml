@@ -1,0 +1,56 @@
+# Agipix GitHub Pages Configuration
+title: Agipix
+description: "An Open Sourced Aerial Autonomy from Sim-to-Real"
+url: "https://sasakuruppuarachchi.github.io"
+baseurl: "/agipix"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Exclude files from build
+exclude:
+  - bom/bom.csv
+  - cad/
+  - calibration/
+  - model_exports/
+  - todo/
+  - root.tex
+  - flashing_hardware.Md
+  - .git/
+  - .gitignore
+  - .vscode/
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+  - Gemfile.tmp
+  - vendor/
+
+# Include files
+include:
+  - _assets
+
+# Collections for documentation
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "doc"
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+
+# GitHub repository
+github:
+  repository_url: "https://github.com/SasaKuruppuarachchi/agipix"
+  is_project_page: true

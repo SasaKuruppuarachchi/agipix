@@ -1,0 +1,121 @@
+---
+layout: default
+title: Home
+---
+
+<section class="hero">
+  <img src="{{ '/_assets/images/exploded.gif' | relative_url }}" alt="Agipix Exploded View" class="hero-banner">
+  
+  <h2 class="hero-title">Bridging Simulation and Reality for Aerial Robotics</h2>
+  
+  <p class="hero-description">
+    Agipix is an open hardware and software platform for agile indoor autonomy that runs the same ROS 2, containerized stack in both Isaac Sim and on the real robot. A small 438×372 mm footprint with a multi-modal sensor suite (3D LiDAR, RGB camera, IMU) and a Jetson Orin NX companion enables robust exploration and mapping with <strong>zero code changes from sim to real</strong>.
+  </p>
+
+  <div>
+    <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
+    <a href="{{ '/docs/sim-setup.html' | relative_url }}" class="btn btn-secondary">Get Started</a>
+  </div>
+</section>
+
+<section class="sim-real-section">
+  <div class="sim-box">
+    <h3>Simulation</h3>
+    <img src="{{ '/_assets/images/sim.png' | relative_url }}" alt="Agipix Simulation">
+    <p>Digital Twin in Isaac Sim with full sensor fidelity and physics simulation</p>
+    <a href="{{ '/docs/sim-setup.html' | relative_url }}" class="btn btn-secondary">Setup Simulation →</a>
+  </div>
+  
+  <div class="real-box">
+    <h3>Real Hardware</h3>
+    <img src="{{ '/_assets/images/real.jpg' | relative_url }}" alt="Agipix Real Hardware">
+    <p>Physical platform ready for deployment with identical autonomy stack</p>
+    <a href="{{ '/docs/hardware-assembly.html' | relative_url }}" class="btn btn-secondary">Build Hardware →</a>
+  </div>
+</section>
+
+<section class="highlights">
+  <h2>Key Highlights</h2>
+  
+  <div class="highlight-grid">
+    <div class="highlight-item">
+      <h3>1. Sim-to-Real Deployability</h3>
+      <p>Identical ROS 2 containers and configs run in Isaac Sim and on hardware; <strong>zero code changes</strong> between environments.</p>
+    </div>
+    
+    <div class="highlight-item">
+      <h3>2. Open-Source Platform</h3>
+      <p>Full BOM, CAD, simulation assets, and the containerized ROS 2 stack are released in this repository.</p>
+    </div>
+    
+    <div class="highlight-item">
+      <h3>3. Modular Autonomy Stack</h3>
+      <p>ROS 2–based perception, state estimation, mapping, planning, PX4 interface, and logging run as decoupled nodes.</p>
+    </div>
+    
+    <div class="highlight-item">
+      <h3>4. Small Form Factor</h3>
+      <p>Compact 438×372 mm envelope with guards; measured thrust-to-weight ratio (TWR) ≈ 2.98:1 for precise indoor maneuvers.</p>
+    </div>
+    
+    <div class="highlight-item">
+      <h3>5. Extensive Sensor Suite</h3>
+      <p>3D LiDAR, RGB camera, and IMU integrated into a LiDAR–inertial–visual stack for robust mapping and exploration.</p>
+    </div>
+    
+    <div class="highlight-item">
+      <h3>6. Modular Hardware Design</h3>
+      <p>Layered decks and accessible power/data breakouts simplify sensor or compute upgrades without redesign.</p>
+    </div>
+  </div>
+</section>
+
+<section class="quick-start">
+  <h2>Quick Start</h2>
+  
+  <div class="quick-start-grid">
+    <div class="quick-start-card">
+      <h3>🖥️ Simulation</h3>
+      <ul>
+        <li><a href="{{ '/docs/sim-setup.html' | relative_url }}">Simulation Setup Guide</a></li>
+        <li>Isaac Sim Integration</li>
+        <li>ROS 2 Docker Containers</li>
+        <li>Digital Twin Environment</li>
+      </ul>
+    </div>
+    
+    <div class="quick-start-card">
+      <h3>🔧 Hardware</h3>
+      <ul>
+        <li><a href="{{ '/docs/hardware-assembly.html' | relative_url }}">Hardware Assembly</a></li>
+        <li><a href="{{ '/docs/flashing-hardware.html' | relative_url }}">Flashing Firmware</a></li>
+        <li><a href="{{ '/docs/software-setup.html' | relative_url }}">Software Setup</a></li>
+        <li><a href="{{ '/bom.html' | relative_url }}">Bill of Materials</a></li>
+      </ul>
+    </div>
+    
+    <div class="quick-start-card">
+      <h3>🤖 Autonomy</h3>
+      <ul>
+        <li><a href="{{ '/docs/autonomy.html' | relative_url }}">Autonomy Framework</a></li>
+        <li>Navigation & Mapping</li>
+        <li>Exploration Algorithms</li>
+        <li>PX4 Integration</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="highlights">
+  <h2>Repository Layout</h2>
+  <div class="doc-content" style="background: rgba(10, 10, 10, 0.5);">
+    <ul style="color: var(--text-secondary); line-height: 2;">
+      <li><code>doc/</code> — Setup and usage guides</li>
+      <li><code>bom/</code> — <a href="{{ '/bom.html' | relative_url }}">Bill of Materials</a></li>
+      <li><code>cad/</code> — Mechanical CAD (designs and fabrication)</li>
+      <li><code>model_exports/</code> — Exported models (STL/USD) for sim and docs</li>
+      <li><code>calibration/</code> — Calibration assets (real and sim)</li>
+      <li><code>_assets/</code> — Images, videos, and datasheets used in docs</li>
+    </ul>
+  </div>
+</section>
