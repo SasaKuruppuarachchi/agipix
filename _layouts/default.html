@@ -12,9 +12,12 @@
 <body>
   <header class="site-header"{% if page.title_bottom_gap %} style="--title-bottom-gap: {{ page.title_bottom_gap }}"{% endif %}>
     <div class="container">
-      <h1 class="site-title glow-text"><a href="{{ '' | relative_url }}" style="color: inherit; text-decoration: none;">AGIPIX</a></h1>
+      <!-- <h1 class="site-title glow-text"><a href="{{ '' | relative_url }}" style="color: inherit; text-decoration: none;">AGIPIX</a></h1> -->
       <!-- <p class="site-subtitle">{{ site.description }}</p> -->
     </div>
+    <!-- Banner layers: background image and glowing text -->
+    <div class="banner-image" aria-hidden="true"></div>
+    <div class="banner-text" aria-hidden="true"></div>
   </header>
 
   <nav class="site-nav">

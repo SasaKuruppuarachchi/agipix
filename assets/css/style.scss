@@ -73,17 +73,44 @@ html { scroll-padding-top: 72px; }
   pointer-events: none; /* let clicks pass through */
 }
 
-/* Overlay the banner image centered horizontally with its lower edge touching header bottom */
-.site-header::after {
-  content: "";
+/* Separate banner layers allowing distinct hover effects */
+.banner-image,
+.banner-text {
   position: absolute;
-  inset: 0; /* occupy full header */
-  background-image: url('../images/banner.png');
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1200px; /* keep within container-ish width */
+  height: auto;
+  aspect-ratio: 6 / 1; /* approximate banner ratio; adjust if needed */
   background-repeat: no-repeat;
   background-position: center bottom;
-  background-size: contain; /* scale to fit without cropping */
-  z-index: 1; /* above dark overlay */
-  pointer-events: none; /* keep header interactive */
+  background-size: contain;
+  pointer-events: none; /* so header remains interactive */
+}
+
+.banner-image {
+  background-image: url('../images/banner.png');
+  z-index: 1;
+  transition: transform 0.25s ease;
+}
+
+/* Grow the banner image slightly on hover over the header */
+.site-header:hover .banner-image {
+  transform: translateX(-50%) scale(1.03);
+}
+
+.banner-text {
+  background-image: url('../images/banner_text.png');
+  z-index: 1; /* same layer order, text will visually sit where alpha permits */
+  filter: drop-shadow(0 0 20px rgba(179,36,36,0.5)) drop-shadow(0 0 40px rgba(139,26,26,0.3));
+  transition: filter 0.25s ease;
+}
+
+/* Glow effect for banner text on hover over the header (similar to title) */
+.site-header:hover .banner-text {
+  filter: drop-shadow(0 0 30px rgba(179,36,36,0.8)) drop-shadow(0 0 60px rgba(139,26,26,0.5));
 }
 
 /* Ensure header text/content stays above overlays */
@@ -105,7 +132,7 @@ html { scroll-padding-top: 72px; }
   transition: all 0.3s ease;
   /* Place title behind banner (::after z-index:1) */
   position: relative;
-  z-index: 0;
+  z-index: 0; /* remains behind banner layers */
 }
 
 .site-title:hover {
