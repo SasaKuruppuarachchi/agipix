@@ -65,7 +65,27 @@ html { scroll-padding-top: 72px; }
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.28));
+  z-index: 0; /* under overlay image and text */
   pointer-events: none; /* let clicks pass through */
+}
+
+/* Overlay the banner image centered horizontally with its lower edge touching header bottom */
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0; /* occupy full header */
+  background-image: url('../images/banner.png');
+  background-repeat: no-repeat;
+  background-position: center bottom;
+  background-size: contain; /* scale to fit without cropping */
+  z-index: 1; /* above dark overlay */
+  pointer-events: none; /* keep header interactive */
+}
+
+/* Ensure header text/content stays above overlays */
+.site-header .container {
+  position: relative;
+  z-index: 2;
 }
 
 .site-title {
