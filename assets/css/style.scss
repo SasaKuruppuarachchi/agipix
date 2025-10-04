@@ -90,7 +90,7 @@ html { scroll-padding-top: 72px; }
 .doc-content {
   /* Accessible blue accents for links and buttons within docs */
   --accent-red: #ffffffc0;        /* replaces red within this scope */
-  --accent-red-light: #ffffffd2;
+  --accent-red-light: #ffffff;
   --accent-red-dark: #ffffff8a;
 }
 
@@ -100,7 +100,7 @@ html { scroll-padding-top: 72px; }
 }
 
 .doc-content a:hover {
-  color: #ffffff;
+  color: #ffffffd2;
   text-decoration: underline;
 }
 
