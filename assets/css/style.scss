@@ -53,7 +53,7 @@ html { scroll-padding-top: 72px; }
   position: relative; /* needed for overlay */
   border-bottom: 2px solid var(--accent-red);
   /* Use bottom padding to control distance between title and header bottom */
-  padding-top: 1rem;
+  padding-top: 0rem;
   padding-bottom: calc(1rem + var(--title-bottom-gap));
 
   /* Use the uploaded carbon image as the header background */
