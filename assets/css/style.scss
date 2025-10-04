@@ -86,22 +86,15 @@ html { scroll-padding-top: 72px; }
   backdrop-filter: blur(10px);
 }
 
-/* Docs: avoid red text accents by overriding accent variables locally */
+/* Docs: GitHub-like light theme scoped to documentation content */
 .doc-content {
-  /* Accessible blue accents for links and buttons within docs */
-  --accent-red: #4aa3ff;        /* replaces red within this scope */
-  --accent-red-light: #8bc1ff;
-  --accent-red-dark: #2b5c99;
-}
-
-.doc-content a {
-  color: var(--accent-red-light);
-  text-decoration: none;
-}
-
-.doc-content a:hover {
-  color: #ffffff;
-  text-decoration: underline;
+  /* Container */
+  background: #ffffff;
+  color: #24292f; /* body text */
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 1px 0 rgba(31,35,40,0.04);
 }
 
 .doc-content h1,
@@ -110,13 +103,116 @@ html { scroll-padding-top: 72px; }
 .doc-content h4,
 .doc-content h5,
 .doc-content h6 {
-  color: var(--text-primary);
+  color: #1f2328;
+  line-height: 1.25;
+  margin-top: 1.6em;
+  margin-bottom: 0.8em;
+}
+.doc-content h1 { font-size: 2em; border-bottom: 1px solid #d0d7de; padding-bottom: .3em; }
+.doc-content h2 { font-size: 1.5em; border-bottom: 1px solid #d0d7de; padding-bottom: .3em; }
+.doc-content h3 { font-size: 1.25em; }
+
+.doc-content p,
+.doc-content ul,
+.doc-content ol,
+.doc-content blockquote,
+.doc-content pre,
+.doc-content table {
+  margin-top: 0;
+  margin-bottom: 16px;
 }
 
-.doc-content strong,
-.doc-content b,
-.doc-content em {
-  color: var(--text-primary);
+.doc-content a {
+  color: #0969da; /* GitHub link blue */
+  text-decoration: none;
+}
+.doc-content a:hover {
+  text-decoration: underline;
+}
+.doc-content a:visited {
+  color: #8250df; /* GitHub visited purple */
+}
+
+.doc-content code {
+  background: rgba(175,184,193,0.2);
+  border-radius: 6px;
+  padding: .2em .4em;
+  font-size: 85%;
+}
+.doc-content pre {
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  padding: 16px;
+  overflow: auto;
+}
+.doc-content pre code {
+  background: transparent;
+  padding: 0;
+  font-size: 100%;
+}
+
+.doc-content blockquote {
+  color: #57606a;
+  border-left: .25em solid #d0d7de;
+  padding: 0 1em;
+  background: #f6f8fa;
+}
+
+.doc-content hr {
+  height: .25em;
+  padding: 0;
+  margin: 24px 0;
+  background-color: #d0d7de;
+  border: 0;
+}
+
+.doc-content table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.doc-content table th,
+.doc-content table td {
+  border: 1px solid #d0d7de;
+  padding: 6px 13px;
+}
+.doc-content table tr {
+  background-color: #ffffff;
+}
+.doc-content table tr:nth-child(2n) {
+  background-color: #f6f8fa;
+}
+
+.doc-content ul { list-style: disc inside; }
+.doc-content ol { list-style: decimal inside; }
+.doc-content li + li { margin-top: .25em; }
+
+.doc-content img,
+.doc-content video {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid #d0d7de;
+}
+
+/* Buttons within docs */
+.doc-content .btn {
+  background: #0969da;
+  border-color: #0969da;
+}
+.doc-content .btn:hover {
+  background: #1a7efb;
+  border-color: #1a7efb;
+}
+.doc-content .btn.btn-secondary {
+  background: #ffffff;
+  color: #0969da;
+  border-color: #d0d7de;
+}
+.doc-content .btn.btn-secondary:hover {
+  background: #f6f8fa;
+  color: #0969da;
+  border-color: #d0d7de;
 }
 
 .nav-container {

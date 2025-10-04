@@ -15,7 +15,7 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 
 1) Sim-to-real deployability — Identical ROS 2 containers and configs run in Isaac Sim and on hardware; zero code changes between environments.
 
-2) Open-source hardware and software — Full BOM, CAD, simulation assets, and the containerized ROS 2 stack are released in this repo: [bom/BOM.md](bom/BOM.md), [cad/](cad/), [model_exports/](model_exports/), [doc/](doc/), [LICENSE](LICENSE).
+2) Open-source hardware and software — Full BOM, CAD, simulation assets, and the containerized ROS 2 stack are released in this repo: [bom/BOM.md](bom/BOM.md), [cad/](cad/), [model_exports/](model_exports/), [doc/](docs/), [LICENSE](LICENSE).
 
 3) ROS 2–based modular autonomy stack — Perception, state estimation, mapping, planning, PX4 interface, and logging run as decoupled nodes/containers with DDS QoS tuning.
 
@@ -44,12 +44,12 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 ## Quick start
 
 ### Simulation
-- Follow the steps in [Simulation setup](doc/sim/setup_sim.md) to bring up Isaac Sim and the ROS 2 containers.
+- Follow the steps in [Simulation setup](docs/sim/setup_sim.md) to bring up Isaac Sim and the ROS 2 containers.
 
 ### Real hardware
-- Start with [Hardware assembly](doc/real/1_hardware_assembly.md) for assembly.
-- Then [Flashing and firmware](doc/real/2_flashing_hardware.Md).
-- Finally [Software setup](doc/real/3_software_setup.md) to deploy the containerized stack.
+- Start with [Hardware assembly](docs/real/1_hardware_assembly.md) for assembly.
+- Then [Flashing and firmware](docs/real/2_flashing_hardware.Md).
+- Finally [Software setup](docs/real/3_software_setup.md) to deploy the containerized stack.
 
 ## Bill of Materials (BOM)
 
