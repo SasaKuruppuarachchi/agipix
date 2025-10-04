@@ -32,6 +32,8 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 	- `real/1_hardware_assembly.md` — Hardware assembly
 	- `real/2_flashing_hardware.Md` — Flashing and firmware
 	- `real/3_software_setup.md` — Software setup on the robot
+	- `autonomy/1_perception` - Perception side of the Agipix Autonomy
+	- `autonomy/1_planning_control` - Planning and control side of the Agipix Autonomy
 - `bom/` — Bill of Materials
 	- `BOM.md` — Human-readable BOM
 	- `bom.csv` — Source BOM (CSV)

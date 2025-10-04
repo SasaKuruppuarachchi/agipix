@@ -29,7 +29,7 @@ Successfully built a complete GitHub Pages website for the Agipix project with a
   - `doc/real/1_hardware_assembly.md` → Hardware Assembly
   - `doc/real/2_flashing_hardware.Md` → Flashing Guide
   - `doc/real/3_software_setup.md` → Software Setup
-  - `doc/autonomy1_planning_control.md` → Autonomy Framework
+  - `doc/autonomy/1_planning_control.md` → Autonomy Framework
   - `bom/BOM.md` → Bill of Materials
 
 ### 5. Image Assets ✓
