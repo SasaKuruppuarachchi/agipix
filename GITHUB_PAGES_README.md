@@ -116,11 +116,11 @@ Modify these variables to change the color scheme.
 ### Updating Documentation
 
 Documentation pages in `docs/` pull content from the main repository documentation:
-- `doc/sim/setup_sim.md` → Simulation setup
+- `doc/sim/1_setup_sim.md` → Simulation setup
 - `doc/real/1_hardware_assembly.md` → Hardware assembly
 - `doc/real/2_flashing_hardware.Md` → Flashing guide
 - `doc/real/3_software_setup.md` → Software setup
-- `doc/autonomy/planning_control.md` → Autonomy framework
+- `doc/autonomy1_planning_control.md` → Autonomy framework
 
 When documentation in the `doc/` directory changes, the corresponding pages in `docs/` should be updated to reflect those changes.
 
