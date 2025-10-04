@@ -2,23 +2,27 @@
 layout: default
 ---
 
-{%- assign in_real = page.url contains '/docs/real/' -%}
-{%- assign in_sim = page.url contains '/docs/sim/' -%}
-{%- assign in_auto = page.url contains '/docs/autonomy/' -%}
-{%- assign in_scoped_section = in_real or in_sim or in_auto -%}
+{%- assign url_parts = page.url | split: '/' -%}
+{%- assign docs_index = nil -%}
+{%- for p in url_parts -%}
+  {%- if p == 'docs' and docs_index == nil -%}
+    {%- assign docs_index = forloop.index0 -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign scope = nil -%}
+{%- assign in_scoped_section = false -%}
+{%- if docs_index != nil -%}
+  {%- assign next_index = docs_index | plus: 1 -%}
+  {%- assign scope = url_parts[next_index] -%}
+  {%- if scope == 'real' or scope == 'sim' or scope == 'autonomy' -%}
+    {%- assign in_scoped_section = true -%}
+  {%- endif -%}
+{%- endif -%}
 
 {%- comment -%}
   Build a scope-aware list of docs within the same folder (real, sim, autonomy)
 {%- endcomment -%}
 {%- if in_scoped_section -%}
-  {%- assign scope = '' -%}
-  {%- if in_real -%}
-    {%- assign scope = 'real' -%}
-  {%- elsif in_sim -%}
-    {%- assign scope = 'sim' -%}
-  {%- elsif in_auto -%}
-    {%- assign scope = 'autonomy' -%}
-  {%- endif -%}
   {%- capture scope_url_prefix -%}/docs/{{ scope }}/{%- endcapture -%}
   {%- assign all_docs = site.pages | concat: site.docs -%}
   {%- assign scoped_docs = all_docs | where_exp: 'd', 'd.url contains scope_url_prefix' | sort: 'url' -%}
