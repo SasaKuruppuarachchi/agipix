@@ -85,20 +85,22 @@ html { scroll-padding-top: 72px; }
 /* Ensure header text/content stays above overlays */
 .site-header .container {
   position: relative;
-  z-index: 2;
 }
 
 .site-title {
   font-family: var(--header-font);
   font-size: 5.0rem;
   font-weight: 700;
-  color: var(--accent-red-light);
+  color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.0em;
   text-shadow: 0 0 20px rgba(179, 36, 36, 0.5), 0 0 40px rgba(139, 26, 26, 0.3);
   margin: 0;
   text-align: center;
   transition: all 0.3s ease;
+  /* Place title behind banner (::after z-index:1) */
+  position: relative;
+  z-index: 0;
 }
 
 .site-title:hover {
@@ -112,6 +114,9 @@ html { scroll-padding-top: 72px; }
   font-size: 1rem;
   margin-top: 0.2rem;
   letter-spacing: 0.05em;
+  /* Keep subtitle above banner */
+  position: relative;
+  z-index: 2;
 }
 
 /* Navigation */
