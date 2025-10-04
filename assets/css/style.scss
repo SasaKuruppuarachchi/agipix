@@ -53,7 +53,7 @@ html { scroll-padding-top: 72px; }
   position: relative; /* needed for overlay */
   border-bottom: 2px solid var(--accent-red);
   /* Use bottom padding to control distance between title and header bottom */
-  padding-top: 0rem;
+  padding-top: 1rem;
   padding-bottom: calc(1rem + var(--title-bottom-gap));
 
   /* Use the uploaded carbon image as the header background */
@@ -103,7 +103,7 @@ html { scroll-padding-top: 72px; }
 
 .banner-text {
   background-image: url('../images/banner_text.png');
-  z-index: 1; /* same layer order, text will visually sit where alpha permits */
+  z-index: 0; /* same layer order, text will visually sit where alpha permits */
   filter: drop-shadow(0 0 20px rgba(179,36,36,0.5)) drop-shadow(0 0 40px rgba(139,26,26,0.3));
   transition: filter 0.25s ease;
 }
