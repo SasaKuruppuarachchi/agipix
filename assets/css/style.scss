@@ -45,19 +45,57 @@ html { scroll-padding-top: 72px; }
 
 /* Header Styles */
 .site-header {
-  background: rgba(10, 10, 10, 0.95);
+  /* Optional: set this to url('/_assets/images/carbon.jpg') to use a custom image */
+  --header-bg: none;
+
+  position: relative; /* needed for overlay */
   border-bottom: 2px solid var(--accent-red);
   padding: 1rem 0;
-  /* Header should scroll with the page */
+
+  /* Layer 1: optional image, Layer 2+: carbon-fiber pattern */
+  background-image:
+    var(--header-bg),
+    linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
+    linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
+    linear-gradient(27deg, #222222 5px, transparent 5px) 0px 10px,
+    linear-gradient(207deg, #222222 5px, transparent 5px) 10px 5px,
+    linear-gradient(90deg, #1b1b1b 10px, transparent 10px),
+    linear-gradient(#1d1d1d 25%, #1a1a1a 25%, #1a1a1a 50%, transparent 50%, transparent 75%, #1a1a1a 75%, #1a1a1a);
+  background-color: #0f0f0f;
+  background-size:
+    cover,
+    20px 20px,
+    20px 20px,
+    20px 20px,
+    20px 20px,
+    20px 20px,
+    20px 20px;
+  background-position:
+    center,
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    0 0,
+    0 0;
+  background-repeat: no-repeat, repeat, repeat, repeat, repeat, repeat, repeat;
+}
+
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.42), rgba(0,0,0,0.42));
+  pointer-events: none; /* let clicks pass through */
 }
 
 .site-title {
   font-family: var(--header-font);
-  font-size: 3.0rem;
+  font-size: 5.0rem;
   font-weight: 700;
   color: var(--accent-red-light);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.0em;
   text-shadow: 0 0 20px rgba(179, 36, 36, 0.5), 0 0 40px rgba(139, 26, 26, 0.3);
   margin: 0;
   text-align: center;
@@ -73,7 +111,7 @@ html { scroll-padding-top: 72px; }
   text-align: center;
   color: var(--text-secondary);
   font-size: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 0.2rem;
   letter-spacing: 0.05em;
 }
 
