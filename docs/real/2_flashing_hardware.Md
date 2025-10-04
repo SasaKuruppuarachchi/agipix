@@ -1,149 +1,175 @@
 ---
 title: Flashing Jetson & Carrier
 layout: doc
+nav_title: 2. Flashing Hardware
 ---
-# Complete Guide to Flashing the NVIDIA Jetson (JetPack 6.0)
 
-## Prerequisites 
-1. Ubuntu 20.04 host machine x86
+# Flashing the NVIDIA Jetson (JetPack 6.x)
 
-## Installation
+> Note: These steps target Jetson Orin NX/Nano on Connect Tech carriers (Hadron, etc.), Jetson Linux R36.3. Adjust versions as needed.
 
-4.1.2 Installing JetPack from NVIDIA® Embedded Download Center
+## What you’ll do
+- Prepare a host machine and download JetPack BSP + sample rootfs
+- Install the CTI BSP on the host
+- Put the Jetson in recovery mode and flash (auto or manual)
+- Perform first boot steps and basic post-setup
 
- 1. Create a new directory for installing the Jetpack. Referred to as <BSP_ROOT>
- in these instructions.
+## Prerequisites
+- Host: Ubuntu 20.04 (x86_64)
+- USB cable for recovery/flash
+- NVMe M.2 SSD installed on the carrier
 
- 2. Go to Jetpack Release Page https://developer.nvidia.com/embedded/jetson-linux-r363
+---
 
- 3. Download the "Driver Package (BSP)" and "Sample Root Filesystem" files for
- Orin modules (t234 platform).
+## 1) Get JetPack (Driver Package + RootFS)
 
- 4. Put the "L4T Driver Package (BSP)" and "Sample Root Filesystem" in <BSP_ROOT>.
- Afterwards, you should have the following files in <BSP_ROOT>
-• Jetson_Linux_R36.3.0_aarch64.tbz2
-• Tegra_Linux_Sample-Root-Filesystem_R36.3.0_aarch64.tbz2
+1) Create a working directory, referred to as BSP_ROOT below.
 
- 5. Extract the "L4T Driver Package" tarball:
+2) Open the Jetson Linux R36.3 downloads and notes:
+   - Driver page: https://developer.nvidia.com/embedded/jetson-linux-r363
 
- cd <BSP_ROOT>
- sudo tar -jxf Jetson_Linux_R36.3.0_aarch64.tbz2
+3) Download both for Orin (t234):
+   - Driver Package (BSP): Jetson_Linux_R36.3.0_aarch64.tbz2
+   - Sample Root Filesystem: Tegra_Linux_Sample-Root-Filesystem_R36.3.0_aarch64.tbz2
 
- 6. You should now have a new directory called Linux_for_Tegra in your <BSP_ROOT> folder.
- Extract the "Sample Root Filesystem" into Linux_for_Tegra/rootfs.
+4) Place both files under BSP_ROOT, then extract them:
 
- sudo tar -C Linux_for_Tegra/rootfs/ -xjf Tegra_Linux_Sample-RootFilesystem_R36.3.0_aarch64.tbz2
+```bash
+cd <BSP_ROOT>
+sudo tar -jxf Jetson_Linux_R36.3.0_aarch64.tbz2
+sudo tar -C Linux_for_Tegra/rootfs/ -xjf Tegra_Linux_Sample-Root-Filesystem_R36.3.0_aarch64.tbz2
+```
 
-4.2 CTI BSP Installation
+After extraction, you should have `<BSP_ROOT>/Linux_for_Tegra` populated.
 
- 1. Copy the CTI-L4T-ORIN-NX-NANO-36.3.0-V###.tgz package into
-<BSP_ROOT>/Linux_for_Tegra.
-If you are using Nvidia's SDK manager then "<BSP_ROOT>" will be:
- ~/nvidia/nvidia_sdk/<JetPack_Version>_Linux_JETSON_NX_ORIN_TARGETS/
- or
- ~/nvidia/nvidia_sdk/<JetPack_Version>_Linux_JETSON_NANO_ORIN_TARGETS/
- depending on your target module.
+---
 
- Otherwise if manually installing from the NVIDIA® Embedded Download Center
- <BSP_ROOT> will be the folder created previously
+## 2) Install the CTI BSP
 
- cp CTI-L4T-ORIN-NX-NANO-36.3.0-V###.tgz <BSP_ROOT>/Linux_for_Tegra
+If you used NVIDIA SDK Manager, BSP_ROOT is typically:
+- `~/nvidia/nvidia_sdk/<JetPack_Version>_Linux_JETSON_NX_ORIN_TARGETS/`
+- or `~/nvidia/nvidia_sdk/<JetPack_Version>_Linux_JETSON_NANO_ORIN_TARGETS/`
 
- 2. Extract the BSP: tar -xzf CTI-L4T-ORIN-NX-NANO-36.3.0-V###.tgz
- cd <BSP_ROOT>/Linux_for_Tegra
- sudo tar -xzf CTI-L4T-ORIN-NX-NANO-36.3.0-V###.tgz
+If you manually downloaded from the Embedded Download Center, use the folder you created as BSP_ROOT.
 
- 3. Change into the CTI-L4T directory:
- cd <BSP_ROOT>/Linux_for_Tegra/CTI-L4T
+1) Copy the CTI package to Linux_for_Tegra:
 
- 4. Run the install script (as root or sudo) to automatically install the BSP files
- to the correct locations:
+```bash
+cp CTI-L4T-ORIN-NX-NANO-36.3.0-V###.tgz <BSP_ROOT>/Linux_for_Tegra
+```
 
- sudo ./install.sh
- #return to Linux_for_Tegra
- cd ..
+2) Extract it and run the installer:
 
- 5. The CTI-L4T BSP is now installed on the host system and it should now be able
- to flash the Orin™ NX/Orin™ Nano module.
+```bash
+cd <BSP_ROOT>/Linux_for_Tegra
+sudo tar -xzf CTI-L4T-ORIN-NX-NANO-36.3.0-V###.tgz
+cd CTI-L4T
+sudo ./install.sh
+cd .. # back to Linux_for_Tegra
+```
 
-## Flasing
-1. Connect an NVMe m.2 card to one of the m.2 slots on your Orin™ NX/Orin™ Nano carrier.
+> The CTI-L4T BSP is now installed on the host, and you can flash Orin NX/Nano.
 
- 2. Connect the Orin™ NX/Orin™ Nano and Carrier to the computer via USB, following the
- instructions in the appropriate manual.
+---
 
- 3. Put the system to be flashed into recovery mode, following the
- instructions in the appropriate manual
+## 3) Put the device in Recovery Mode
 
+1) Connect the carrier to your host via USB per the carrier manual.
+2) Ensure an NVMe M.2 SSD is installed.
+3) Follow the carrier instructions to enter recovery (button/strap sequence).
 
- 4. There are two options for flashing Jetson modules:
+> Tip: You can verify via `lsusb` for an NVIDIA device in recovery.
 
- Using CTI's automated script:
- sudo ./cti-flash.sh
+---
 
-Follow the menu and select your desired configuration. Once selected,
+## 4) Flashing options
 
- the device will start to flash.
+You can use either the CTI automated script or the manual NVMe flash script.
 
+### Option A: Automated (menu-driven)
 
- Using the Manual Method with cti-nvme-flash:
+```bash
+cd <BSP_ROOT>/Linux_for_Tegra
+sudo ./cti-flash.sh
+```
+Follow the menu to select your module and board configuration. Flashing will begin.
 
- Note do not add the ".conf" file extension to the <config> parameter:
+### Option B: Manual NVMe flash
 
- Manual Flash: sudo ./cti-nvme-flash.sh cti/<module>/<boardname>/<config>
+Do not include the `.conf` extension in `<config>`.
 
- <module> is either orin-nx or orin-nano depending on your module.
+```bash
+cd <BSP_ROOT>/Linux_for_Tegra
+sudo ./cti-nvme-flash.sh cti/<module>/<boardname>/<config>
+# <module> is one of: orin-nx | orin-nano
+```
+Examples:
+```bash
+sudo ./cti-nvme-flash.sh cti/orin-nx/boson/base
+sudo ./cti-nvme-flash.sh cti/orin-nano/boson/base
+```
 
- Examples:
- sudo ./cti-nvme-flash.sh cti/orin-nx/boson/base
- sudo ./cti-nvme-flash.sh cti/orin-nano/boson/base
+When flashing completes, the device will reboot.
 
- 5. Once the flashing has completed, the Orin™ NX/Orin™ Nano will reboot 
+---
 
-## Connecting and first setup
-1. conncet to the debug consol and follow the setup
-https://jetsonhacks.com/2019/04/19/jetson-nano-serial-console/
+## 5) First boot and basic setup
 
-2. skip network setup for now
+### Connect via serial console (recommended)
+- Guide: https://jetsonhacks.com/2019/04/19/jetson-nano-serial-console/
+- Complete the initial setup prompts. You can skip network here and do it below.
 
-3. connect to the network 
-sudo nmcli dev wifi rescan
+### Join Wi‑Fi via nmcli
+```bash
+nmcli dev wifi rescan
+nmcli d wifi connect <SSID> password <PASSWORD>
+```
 
-sudo nmcli d wifi connect [SSID] password [PASSWORD
+### SSH in
+```bash
+ssh <user>@<device-ip>
+```
 
-4. ssh in
-ssh [user]@[ip]
+---
 
-## Setting up Nomachine
-https://kb.nomachine.com/AR02R01074
+## 6) Useful post-setup
 
-## change power mode
-sudo nvpmodel -m <# of power mode>
-https://forums.developer.nvidia.com/t/power-mode-in-terminal/287224
+### NoMachine (remote desktop)
+- https://kb.nomachine.com/AR02R01074
 
-## isntalling docker and nvidia docker
-https://docs.docker.com/engine/install/ubuntu/
-https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
-https://git-lfs.com/
+### Change power mode
+```bash
+sudo nvpmodel -m <mode-number>
+```
+- Reference: https://forums.developer.nvidia.com/t/power-mode-in-terminal/287224
 
-## compose and run docker
+### Install Docker + NVIDIA Container Toolkit + Git LFS
+- Docker: https://docs.docker.com/engine/install/ubuntu/
+- NVIDIA Container Toolkit: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+- Git LFS: https://git-lfs.com/
 
-## build torchvision from source
-We need to build torchvision from source in order to link against the right libraries as compiled with the NVIDIA-compiled build of pytorch
+### Build torchvision from source (matches NVIDIA PyTorch)
+```bash
 export FORCE_CUDA=1
 git clone -b v0.17.2 https://github.com/pytorch/vision.git
 cd vision
-sudo -E python setup.py develop  # use install instead of develop if you don't care about development.
+sudo -E python setup.py develop  # use 'install' if you don't need editable mode
+```
 
-## Mount USB
-https://linuxconfig.org/howto-mount-usb-drive-in-linux
+### Mount a USB drive
+- https://linuxconfig.org/howto-mount-usb-drive-in-linux
 
-## Referances
-1. https://connecttech.com/product/hadron-carrier-for-nvidia-jetson-orin-nx/
-2. https://connecttech.com/ftp/Drivers/L4T-Release-Notes/Jetson-Orin-NX-Orin-Nano/ORIN-NX-NANO-36.3.0.pdf
-3. https://connecttech.com/resource-center/kdb373/
-4. https://github.com/pytorch/vision/blob/main/CONTRIBUTING.md#development-installation
+---
 
+## References
+1) Hadron carrier: https://connecttech.com/product/hadron-carrier-for-nvidia-jetson-orin-nx/
+2) CTI L4T release notes (36.3.0): https://connecttech.com/ftp/Drivers/L4T-Release-Notes/Jetson-Orin-NX-Orin-Nano/ORIN-NX-NANO-36.3.0.pdf
+3) CTI knowledge base: https://connecttech.com/resource-center/kdb373/
+4) torchvision dev install: https://github.com/pytorch/vision/blob/main/CONTRIBUTING.md#development-installation
 
-back to   [Furthur Assembly](./1_hardware_assembly.md) to continue.
+---
+
+### Continue
+- ← Back: [Hardware Assembly](./1_hardware_assembly.md)
+- Next → [Software Setup](./3_software_setup.md)
 

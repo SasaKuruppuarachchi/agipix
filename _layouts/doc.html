@@ -32,6 +32,7 @@ layout: default
 <div class="docs-layout">
   <aside class="docs-sidebar">
     <div class="docs-sidebar-inner">
+      <p class="docs-back"><a href="{{ '/docs/' | relative_url }}" class="btn btn-secondary">← Back to Docs Hub</a></p>
       <div class="docs-sidebar-title">{{ scope | capitalize }}</div>
       <ul class="docs-nav">
         {%- for d in scoped_docs -%}
