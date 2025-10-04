@@ -46,7 +46,7 @@ html { scroll-padding-top: 72px; }
 /* Header Styles */
 .site-header {
   /* Optional: set this to url('/_assets/images/carbon.jpg') to use a custom image */
-  --header-bg: url('{{ "/assets/images/carbon.jpg" | relative_url }}');
+  /* Using direct URL for header background to avoid SCSS parsing issues with custom properties */
 
   position: relative; /* needed for overlay */
   border-bottom: 2px solid var(--accent-red);
@@ -54,7 +54,7 @@ html { scroll-padding-top: 72px; }
 
   /* Layer 1: optional image, Layer 2+: carbon-fiber pattern */
   background-image:
-    var(--header-bg),
+    url('{{ "/assets/images/carbon.jpg" | relative_url }}'),
     linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
     linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
     linear-gradient(27deg, #222222 5px, transparent 5px) 0px 10px,
