@@ -36,15 +36,15 @@ body {
   min-height: 100vh;
 }
 
+/* Ensure in-page anchor links account for sticky nav height */
+html { scroll-padding-top: 72px; }
+
 /* Header Styles */
 .site-header {
   background: rgba(10, 10, 10, 0.95);
   border-bottom: 2px solid var(--accent-red);
   padding: 1rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  backdrop-filter: blur(10px);
+  /* Header should scroll with the page */
 }
 
 .site-title {
@@ -78,6 +78,12 @@ body {
   background: var(--secondary-bg);
   border-bottom: 1px solid var(--accent-red-dark);
   padding: 0.75rem 0;
+  /* Nav stays in place (sticks to top) when scrolling */
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
 }
 
 .nav-container {
