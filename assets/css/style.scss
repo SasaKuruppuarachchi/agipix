@@ -94,7 +94,7 @@ html { scroll-padding-top: 72px; }
   color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.0em;
-  text-shadow: 0 0 20px rgba(247, 247, 247, 0.822), 0 0 40px rgba(255, 255, 255, 0.897);
+  text-shadow: 0 0 0px rgba(247, 247, 247, 0.822), 0 0 40px rgba(255, 255, 255, 0.897);
   margin: 0;
   text-align: center;
   transition: all 0.3s ease;
@@ -644,4 +644,25 @@ a:not(.btn):not(.nav-link):hover {
 
 .glow-text {
   animation: glow 2s ease-in-out infinite;
+}
+
+/* Title effects flag: add `title-effects-off` to <body> or `.site-header` to disable glow/shadow and keep basic title */
+.title-effects-off .site-title,
+.site-header.title-effects-off .site-title {
+  text-shadow: none !important;
+  animation: none !important;
+  text-transform: none;
+  letter-spacing: normal;
+  filter: none;
+}
+
+.title-effects-off .site-title:hover,
+.site-header.title-effects-off .site-title:hover {
+  text-shadow: none !important;
+  transform: none !important;
+}
+
+.title-effects-off .glow-text,
+.site-header.title-effects-off .glow-text {
+  animation: none !important;
 }
