@@ -120,7 +120,7 @@ Documentation pages in `docs/` pull content from the main repository documentati
 - `doc/real/1_hardware_assembly.md` → Hardware assembly
 - `doc/real/2_flashing_hardware.Md` → Flashing guide
 - `doc/real/3_software_setup.md` → Software setup
-- `doc/autonomy/1_planning_control.md` → Autonomy framework
+- `doc/autonomy/2_planning_control.md` → Autonomy framework
 
 When documentation in the `doc/` directory changes, the corresponding pages in `docs/` should be updated to reflect those changes.
 
