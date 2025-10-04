@@ -14,6 +14,8 @@
   /* Gold accent for inline links */
   --accent-gold: #d4af37;
   --accent-gold-light: #f0d879;
+  /* Spacing between header bottom and the title */
+  --title-bottom-gap: 0.5rem;
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0a0;
   --text-muted: #606060;
@@ -89,13 +91,14 @@ html { scroll-padding-top: 72px; }
 
 .site-title {
   font-family: var(--header-font);
-  font-size: 8.0rem;
+  font-size: 11.0rem;
   font-weight: 700;
   color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.0em;
-  text-shadow: 0 0 0px rgba(247, 247, 247, 0.822), 0 0 40px rgba(255, 255, 255, 0.897);
-  margin: 0;
+  text-shadow: 0 0 0px rgba(247, 247, 247, 0.822), 0 0 0px rgba(255, 255, 255, 0.897);
+  /* Top margin 0, bottom margin provides spacing from header bottom */
+  margin: 0 0 var(--title-bottom-gap) 0;
   text-align: center;
   transition: all 0.3s ease;
   /* Place title behind banner (::after z-index:1) */
