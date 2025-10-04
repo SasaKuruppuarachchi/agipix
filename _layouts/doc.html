@@ -2,16 +2,69 @@
 layout: default
 ---
 
-<article class="doc-content">
-  {% if page.show_doc_title %}
-  <h1>{{ page.title }}</h1>
-  {% endif %}
-  {{ content }}
-  
-  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
-    <p style="text-align: center;">
-      <a href="{{ '' | relative_url }}" class="btn btn-secondary">← Back to Home</a>
-      <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
-    </p>
-  </div>
-</article>
+{%- assign in_real = page.path contains 'docs/real/' -%}
+{%- assign in_sim = page.path contains 'docs/sim/' -%}
+{%- assign in_auto = page.path contains 'docs/autonomy/' -%}
+{%- assign in_scoped_section = in_real or in_sim or in_auto -%}
+
+{%- comment -%}
+  Build a scope-aware list of docs within the same folder (real, sim, autonomy)
+{%- endcomment -%}
+{%- if in_scoped_section -%}
+  {%- assign scope = '' -%}
+  {%- if in_real -%}{% assign scope = 'real' %}{%- endif -%}
+  {%- if in_sim -%}{% assign scope = 'sim' %}{%- endif -%}
+  {%- if in_auto -%}{% assign scope = 'autonomy' %}{%- endif -%}
+  {%- capture scope_path -%}docs/{{ scope }}/{%- endcapture -%}
+  {%- assign all_docs = site.docs | concat: site.pages -%}
+  {%- assign scoped_docs = all_docs | where_exp: 'd', 'd.path contains scope_path' | sort: 'path' -%}
+{%- endif -%}
+
+{%- if in_scoped_section -%}
+<div class="docs-layout">
+  <aside class="docs-sidebar">
+    <div class="docs-sidebar-inner">
+      <div class="docs-sidebar-title">{{ scope | capitalize }}</div>
+      <ul class="docs-nav">
+        {%- for d in scoped_docs -%}
+          {%- comment -%} Only show Markdown pages (skip assets like txt) {%- endcomment -%}
+          {%- if d.extname == ".md" -%}
+          <li class="docs-nav-item{%- if d.url == page.url -%} active{%- endif -%}">
+            <a href="{{ d.url | relative_url }}">{{ d.nav_title | default: d.title | default: d.basename }}</a>
+          </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </aside>
+  <main class="docs-main">
+    <article class="doc-content">
+      {% if page.show_doc_title %}
+      <h1>{{ page.title }}</h1>
+      {% endif %}
+      {{ content }}
+
+      <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+        <p style="text-align: center;">
+          <a href="{{ '' | relative_url }}" class="btn btn-secondary">← Back to Home</a>
+          <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
+        </p>
+      </div>
+    </article>
+  </main>
+</div>
+{%- else -%}
+  <article class="doc-content">
+    {% if page.show_doc_title %}
+    <h1>{{ page.title }}</h1>
+    {% endif %}
+    {{ content }}
+    
+    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+      <p style="text-align: center;">
+        <a href="{{ '' | relative_url }}" class="btn btn-secondary">← Back to Home</a>
+        <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
+      </p>
+    </div>
+  </article>
+{%- endif -%}
