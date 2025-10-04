@@ -11,6 +11,9 @@
   --accent-red: #8b1a1a;
   --accent-red-light: #b32424;
   --accent-red-dark: #5a0f0f;
+  /* Gold accent for inline links */
+  --accent-gold: #d4af37;
+  --accent-gold-light: #f0d879;
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0a0;
   --text-muted: #606060;
@@ -94,14 +97,17 @@ html { scroll-padding-top: 72px; }
   --accent-red-dark: #ffffff8a;
 }
 
-.doc-content a {
-  color: var(--accent-red-light);
-  text-decoration: none;
+.doc-content a:not(.btn):not(.nav-link) {
+  color: var(--accent-gold);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
 
-.doc-content a:hover {
-  color: #ffffffd2;
-  text-decoration: underline;
+.doc-content a:not(.btn):not(.nav-link):hover {
+  color: var(--accent-gold-light);
+  text-decoration-style: solid;
 }
 
 .doc-content h1,
@@ -362,14 +368,17 @@ html { scroll-padding-top: 72px; }
 }
 
 .quick-start-card a {
-  color: var(--accent-red-light);
-  text-decoration: none;
+  color: var(--accent-gold);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
   transition: color 0.3s ease;
 }
 
 .quick-start-card a:hover {
-  color: #fff;
-  text-decoration: underline;
+  color: var(--accent-gold-light);
+  text-decoration-style: solid;
 }
 
 /* Buttons */
@@ -438,7 +447,7 @@ html { scroll-padding-top: 72px; }
 }
 
 .footer-section a:hover {
-  color: var(--accent-red-light);
+  color: var(--accent-gold-light);
 }
 
 /* Code Blocks */
@@ -460,14 +469,19 @@ code {
   color: var(--accent-red-light);
 }
 
-/* Links */
-a {
-  color: var(--accent-red-light);
-  transition: color 0.3s ease;
+/* Links - inline (exclude buttons and nav) */
+a:not(.btn):not(.nav-link) {
+  color: var(--accent-gold);
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
 }
 
-a:hover {
-  color: #fff;
+a:not(.btn):not(.nav-link):hover {
+  color: var(--accent-gold-light);
+  text-decoration-style: solid;
 }
 
 /* Documentation Page Styles */
