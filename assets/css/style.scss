@@ -14,6 +14,8 @@
   /* Gold accent for inline links */
   --accent-gold: #d4af37;
   --accent-gold-light: #f0d879;
+  /* Banner width/height aspect ratio (e.g., 6 means 6:1) */
+  --banner-aspect: 6;
   /* Spacing between header bottom and the title */
   --title-bottom-gap: 0.9rem;
   --text-primary: #e0e0e0;
@@ -55,6 +57,9 @@ html { scroll-padding-top: 72px; }
   /* Use bottom padding to control distance between title and header bottom */
   padding-top: 1rem;
   padding-bottom: calc(1rem + var(--title-bottom-gap));
+
+  /* Ensure header is at least as tall as the banner would render */
+  min-height: calc(min(100vw, 1200px) / var(--banner-aspect));
 
   /* Use the uploaded carbon image as the header background */
   background-image: url('../images/carbon.jpg');
