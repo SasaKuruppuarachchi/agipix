@@ -51,10 +51,11 @@ html { scroll-padding-top: 72px; }
   position: relative; /* needed for overlay */
   border-bottom: 2px solid var(--accent-red);
   padding: 1rem 0;
+  min-height: 200px; /* ensure image is visible */
 
   /* Layer 1: optional image, Layer 2+: carbon-fiber pattern */
   background-image:
-    url('{{ "/assets/images/carbon.jpg" | relative_url }}'),
+    url('../images/carbon.jpg'),
     linear-gradient(27deg, #151515 5px, transparent 5px) 0 5px,
     linear-gradient(207deg, #151515 5px, transparent 5px) 10px 0px,
     linear-gradient(27deg, #222222 5px, transparent 5px) 0px 10px,
@@ -85,7 +86,7 @@ html { scroll-padding-top: 72px; }
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(0,0,0,0.42), rgba(0,0,0,0.42));
+  background: linear-gradient(180deg, rgba(0,0,0,0.28), rgba(0,0,0,0.28));
   pointer-events: none; /* let clicks pass through */
 }
 
