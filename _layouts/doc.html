@@ -2,9 +2,9 @@
 layout: default
 ---
 
-{%- assign in_real = page.path contains 'docs/real/' -%}
-{%- assign in_sim = page.path contains 'docs/sim/' -%}
-{%- assign in_auto = page.path contains 'docs/autonomy/' -%}
+{%- assign in_real = page.url contains '/docs/real/' -%}
+{%- assign in_sim = page.url contains '/docs/sim/' -%}
+{%- assign in_auto = page.url contains '/docs/autonomy/' -%}
 {%- assign in_scoped_section = in_real or in_sim or in_auto -%}
 
 {%- comment -%}
@@ -12,12 +12,16 @@ layout: default
 {%- endcomment -%}
 {%- if in_scoped_section -%}
   {%- assign scope = '' -%}
-  {%- if in_real -%}{% assign scope = 'real' %}{%- endif -%}
-  {%- if in_sim -%}{% assign scope = 'sim' %}{%- endif -%}
-  {%- if in_auto -%}{% assign scope = 'autonomy' %}{%- endif -%}
-  {%- capture scope_path -%}docs/{{ scope }}/{%- endcapture -%}
-  {%- assign all_docs = site.docs | concat: site.pages -%}
-  {%- assign scoped_docs = all_docs | where_exp: 'd', 'd.path contains scope_path' | sort: 'path' -%}
+  {%- if in_real -%}
+    {%- assign scope = 'real' -%}
+  {%- elsif in_sim -%}
+    {%- assign scope = 'sim' -%}
+  {%- elsif in_auto -%}
+    {%- assign scope = 'autonomy' -%}
+  {%- endif -%}
+  {%- capture scope_url_prefix -%}/docs/{{ scope }}/{%- endcapture -%}
+  {%- assign all_docs = site.pages | concat: site.docs -%}
+  {%- assign scoped_docs = all_docs | where_exp: 'd', 'd.url contains scope_url_prefix' | sort: 'url' -%}
 {%- endif -%}
 
 {%- if in_scoped_section -%}
@@ -27,12 +31,9 @@ layout: default
       <div class="docs-sidebar-title">{{ scope | capitalize }}</div>
       <ul class="docs-nav">
         {%- for d in scoped_docs -%}
-          {%- comment -%} Only show Markdown pages (skip assets like txt) {%- endcomment -%}
-          {%- if d.extname == ".md" -%}
           <li class="docs-nav-item{%- if d.url == page.url -%} active{%- endif -%}">
-            <a href="{{ d.url | relative_url }}">{{ d.nav_title | default: d.title | default: d.basename }}</a>
+            <a href="{{ d.url | relative_url }}">{{ d.nav_title | default: d.title | default: d.slug | default: d.url }}</a>
           </li>
-          {%- endif -%}
         {%- endfor -%}
       </ul>
     </div>
