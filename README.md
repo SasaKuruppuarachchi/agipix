@@ -1,4 +1,4 @@
-# Agipix — Bridging Simulation and Reality for Aerial Robotics
+# [Agipix](https://sasakuruppuarachchi.github.io/agipix/) — Bridging Simulation and Reality for Aerial Robotics
 
 ![banner](_assets/images/exploded.gif)
 

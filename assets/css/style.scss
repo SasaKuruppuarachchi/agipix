@@ -20,6 +20,7 @@
   --border-color: #2a2a2a;
   --code-bg: #151515;
   --header-font: 'Osake', sans-serif;
+  --heading-font: 'Orbitron', sans-serif;
   --body-font: 'Space Mono', monospace;
 }
 
@@ -52,8 +53,8 @@ html { scroll-padding-top: 72px; }
 
 .site-title {
   font-family: var(--header-font);
-  font-size: 2.5rem;
-  font-weight: 900;
+  font-size: 3.0rem;
+  font-weight: 700;
   color: var(--accent-red-light);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -231,7 +232,7 @@ html { scroll-padding-top: 72px; }
 }
 
 .sim-real-section h3 {
-  font-family: var(--header-font);
+  font-family: var(--heading-font);
   font-size: 1.5rem;
   color: var(--accent-red-light);
   margin-bottom: 1rem;
@@ -257,7 +258,7 @@ html { scroll-padding-top: 72px; }
 }
 
 .highlights h2 {
-  font-family: var(--header-font);
+  font-family: var(--heading-font);
   font-size: 2rem;
   color: var(--accent-red-light);
   margin-bottom: 1.5rem;
@@ -309,7 +310,7 @@ html { scroll-padding-top: 72px; }
 }
 
 .quick-start h2 {
-  font-family: var(--header-font);
+  font-family: var(--heading-font);
   font-size: 2rem;
   color: var(--accent-red-light);
   margin-bottom: 1.5rem;
@@ -341,7 +342,7 @@ html { scroll-padding-top: 72px; }
 }
 
 .quick-start-card h3 {
-  font-family: var(--header-font);
+  font-family: var(--heading-font);
   color: var(--accent-red-light);
   margin-bottom: 1rem;
   text-transform: uppercase;
@@ -494,7 +495,7 @@ a:not(.btn):not(.nav-link):hover {
 }
 
 .doc-content h1 {
-  font-family: var(--header-font);
+  font-family: var(--heading-font);
   color: var(--accent-red-light);
   border-bottom: 2px solid var(--accent-red-dark);
   padding-bottom: 0.5rem;
