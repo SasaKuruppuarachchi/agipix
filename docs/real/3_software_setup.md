@@ -16,4 +16,4 @@ See [Instructions](../sim/setup_sim.md) to continue.
 
 ## Agipix Autonomy stack setup
 
-Now we are ready for autonomy setup. See [Instructions](./4_agipix_autonomy.md) to continue.
+Now we are ready for autonomy setup. See [Instructions](../autonomy/perception.md) to continue.

@@ -126,7 +126,7 @@ The site pulls content from the repository's `doc/` directory:
 - `doc/real/1_hardware_assembly.md` → Hardware Assembly page
 - `doc/real/2_flashing_hardware.Md` → Flashing Hardware page
 - `doc/real/3_software_setup.md` → Software Setup page
-- `doc/real/4_agipix_autonomy.md` → Autonomy Framework page
+- `doc/autonomy/planning_control.md` → Autonomy Framework page
 - `bom/BOM.md` → Bill of Materials page
 
 Each page includes:
