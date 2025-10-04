@@ -3,7 +3,9 @@ layout: default
 ---
 
 <article class="doc-content">
+  {% if page.show_doc_title %}
   <h1>{{ page.title }}</h1>
+  {% endif %}
   {{ content }}
   
   <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
