@@ -46,7 +46,7 @@ html { scroll-padding-top: 72px; }
 /* Header Styles */
 .site-header {
   /* Optional: set this to url('/_assets/images/carbon.jpg') to use a custom image */
-  --header-bg: url('/assets/images/carbon.jpg'); //none;
+  --header-bg: url('{{ "/assets/images/carbon.jpg" | relative_url }}');
 
   position: relative; /* needed for overlay */
   border-bottom: 2px solid var(--accent-red);
