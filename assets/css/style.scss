@@ -52,7 +52,9 @@ html { scroll-padding-top: 72px; }
 
   position: relative; /* needed for overlay */
   border-bottom: 2px solid var(--accent-red);
-  padding: 1rem 0;
+  /* Use bottom padding to control distance between title and header bottom */
+  padding-top: 1rem;
+  padding-bottom: calc(1rem + var(--title-bottom-gap));
 
   /* Use the uploaded carbon image as the header background */
   background-image: url('../images/carbon.jpg');
@@ -97,8 +99,8 @@ html { scroll-padding-top: 72px; }
   text-transform: uppercase;
   letter-spacing: 0.0em;
   text-shadow: 0 0 0px rgba(247, 247, 247, 0.822), 0 0 0px rgba(255, 255, 255, 0.897);
-  /* Top margin 0, bottom margin provides spacing from header bottom */
-  margin: 0 0 var(--title-bottom-gap) 0;
+  /* Keep margins zero; spacing is handled by header padding-bottom */
+  margin: 0;
   text-align: center;
   transition: all 0.3s ease;
   /* Place title behind banner (::after z-index:1) */
