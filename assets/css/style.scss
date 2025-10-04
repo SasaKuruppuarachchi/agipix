@@ -89,9 +89,9 @@ html { scroll-padding-top: 72px; }
 /* Docs: avoid red text accents by overriding accent variables locally */
 .doc-content {
   /* Accessible blue accents for links and buttons within docs */
-  --accent-red: #4aa3ff;        /* replaces red within this scope */
-  --accent-red-light: #8bc1ff;
-  --accent-red-dark: #2b5c99;
+  --accent-red: #ffffffc0;        /* replaces red within this scope */
+  --accent-red-light: #ffffffd2;
+  --accent-red-dark: #ffffff8a;
 }
 
 .doc-content a {
