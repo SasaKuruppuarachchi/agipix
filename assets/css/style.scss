@@ -86,6 +86,39 @@ html { scroll-padding-top: 72px; }
   backdrop-filter: blur(10px);
 }
 
+/* Docs: avoid red text accents by overriding accent variables locally */
+.doc-content {
+  /* Accessible blue accents for links and buttons within docs */
+  --accent-red: #4aa3ff;        /* replaces red within this scope */
+  --accent-red-light: #8bc1ff;
+  --accent-red-dark: #2b5c99;
+}
+
+.doc-content a {
+  color: var(--accent-red-light);
+  text-decoration: none;
+}
+
+.doc-content a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.doc-content h1,
+.doc-content h2,
+.doc-content h3,
+.doc-content h4,
+.doc-content h5,
+.doc-content h6 {
+  color: var(--text-primary);
+}
+
+.doc-content strong,
+.doc-content b,
+.doc-content em {
+  color: var(--text-primary);
+}
+
 .nav-container {
   max-width: 1200px;
   margin: 0 auto;
