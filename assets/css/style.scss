@@ -26,6 +26,8 @@
   --header-font: 'Osake', sans-serif;
   --heading-font: 'Orbitron', sans-serif;
   --body-font: 'Space Mono', monospace;
+  --banner-max-width: 2000px;
+
 }
 
 /* Global Styles */
@@ -59,7 +61,7 @@ html { scroll-padding-top: 72px; }
   padding-bottom: calc(1rem + var(--title-bottom-gap));
 
   /* Ensure header is at least as tall as the banner would render */
-  min-height: calc(min(100vw, 1200px) / var(--banner-aspect));
+  min-height: calc(min(100vw, var(--banner-max-width)) / var(--banner-aspect));
 
   /* Use the uploaded carbon image as the header background */
   background-image: url('../images/carbon.jpg');
@@ -86,7 +88,7 @@ html { scroll-padding-top: 72px; }
   bottom: 0;
   transform: translateX(-50%);
   width: 100%;
-  max-width: 2000px; /* keep within container-ish width */
+  max-width: var(--banner-max-width); /* keep within container-ish width */
   height: auto;
   aspect-ratio: 6 / 1; /* approximate banner ratio; adjust if needed */
   background-repeat: no-repeat;
