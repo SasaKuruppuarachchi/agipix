@@ -15,7 +15,7 @@
   --accent-gold: #d4af37;
   --accent-gold-light: #f0d879;
   /* Spacing between header bottom and the title */
-  --title-bottom-gap: 0.5rem;
+  --title-bottom-gap: 0.9rem;
   --text-primary: #e0e0e0;
   --text-secondary: #a0a0a0;
   --text-muted: #606060;
@@ -92,7 +92,7 @@ html { scroll-padding-top: 72px; }
 .site-title {
   font-family: var(--header-font);
   font-size: 11.0rem;
-  font-weight: 700;
+  font-weight: 0;
   color: var(--text-primary);
   text-transform: uppercase;
   letter-spacing: 0.0em;
