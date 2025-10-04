@@ -1,7 +1,7 @@
 ---
 title: Flashing Jetson & Carrier
 layout: doc
-nav_title: 2. Flashing Hardware
+nav_title: Flashing Hardware
 ---
 
 # Flashing the NVIDIA Jetson (JetPack 6.x)
