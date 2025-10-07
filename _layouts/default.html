@@ -22,15 +22,36 @@
 
   <nav class="site-nav">
     <div class="nav-container">
-      <a href="{{ '' | relative_url }}" class="nav-link">Home</a>
-      <a href="{{ '/docs' | relative_url }}" class="nav-link">Docs Hub</a>
-      <a href="{{ '/docs/sim/index' | relative_url }}" class="nav-link">Sim</a>
-      <a href="{{ '/docs/real/index' | relative_url }}" class="nav-link">Real</a>
-      <a href="{{ '/docs/autonomy/index' | relative_url }}" class="nav-link">Autonomy</a>
-      <a href="{{ '/bom.html' | relative_url }}" class="nav-link">BOM</a>
-      <a href="{{ site.github.repository_url }}" class="nav-link" target="_blank">GitHub</a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <div class="nav-links" id="primary-navigation">
+        <a href="{{ '' | relative_url }}" class="nav-link">Home</a>
+        <a href="{{ '/docs' | relative_url }}" class="nav-link">Docs Hub</a>
+        <a href="{{ '/docs/sim/index' | relative_url }}" class="nav-link">Sim</a>
+        <a href="{{ '/docs/real/index' | relative_url }}" class="nav-link">Real</a>
+        <a href="{{ '/docs/autonomy/index' | relative_url }}" class="nav-link">Autonomy</a>
+        <a href="{{ '/bom.html' | relative_url }}" class="nav-link">BOM</a>
+        <a href="{{ site.github.repository_url }}" class="nav-link" target="_blank">GitHub</a>
+      </div>
     </div>
   </nav>
+
+  <script>
+    (function(){
+      const siteNav = document.querySelector('.site-nav');
+      const toggle = document.querySelector('.nav-toggle');
+      const links = document.getElementById('primary-navigation');
+      if (!siteNav || !toggle || !links) return;
+      toggle.addEventListener('click', () => {
+        const isOpen = siteNav.getAttribute('data-open') === 'true';
+        siteNav.setAttribute('data-open', String(!isOpen));
+        toggle.setAttribute('aria-expanded', String(!isOpen));
+      });
+    })();
+  </script>
 
   <main class="container">
     {{ content }}

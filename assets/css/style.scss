@@ -217,6 +217,35 @@ html { scroll-padding-top: 72px; }
   flex-wrap: wrap;
 }
 
+/* Group of navigation links (wrap anchors) */
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+/* Hamburger toggle hidden on desktop */
+.nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+}
+
+.nav-toggle-bar + .nav-toggle-bar { margin-top: 5px; }
+
 .nav-link {
   color: var(--text-primary);
   text-decoration: none;
@@ -756,9 +785,34 @@ a:not(.btn):not(.nav-link):hover {
     grid-template-columns: 1fr;
   }
 
+  /* Mobile nav: show hamburger, collapse links by default */
   .nav-container {
     flex-direction: column;
     gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    flex-direction: column;
+    align-self: flex-end;
+  }
+
+  .nav-links {
+    display: none; /* collapsed by default */
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  /* Expanded state controlled by data-open on .site-nav */
+  .site-nav[data-open="true"] .nav-links {
+    display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    text-align: center;
   }
 
   .container {
