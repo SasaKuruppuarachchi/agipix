@@ -18,7 +18,7 @@ Pick a scope to dive into. Each scoped index has a sidebar of its own pages.
 			<li>Flashing Jetson & carrier</li>
 			<li>Onboard software setup</li>
 		</ul>
-		<p><a class="btn" href="{{ '/docs/real/' | relative_url }}">Open Real Docs →</a></p>
+		<p><a class="btn" href="{{ '/docs/real/' | relative_url }}">Real Docs →</a></p>
 	</div>
 	<div class="quick-start-card">
 		<h3>Simulation</h3>
@@ -28,7 +28,7 @@ Pick a scope to dive into. Each scoped index has a sidebar of its own pages.
 			<li>Containerized workflow</li>
 			<li>Demo scenarios</li>
 		</ul>
-		<p><a class="btn" href="{{ '/docs/sim/' | relative_url }}">Open Sim Docs →</a></p>
+		<p><a class="btn" href="{{ '/docs/sim/' | relative_url }}">Sim Docs →</a></p>
 	</div>
 	<div class="quick-start-card">
 		<h3>Autonomy</h3>
@@ -38,7 +38,7 @@ Pick a scope to dive into. Each scoped index has a sidebar of its own pages.
 			<li>Planning and control</li>
 			<li>Integration notes</li>
 		</ul>
-		<p><a class="btn" href="{{ '/docs/autonomy/' | relative_url }}">Open Autonomy Docs →</a></p>
+		<p><a class="btn" href="{{ '/docs/autonomy/' | relative_url }}">Autonomy Docs →</a></p>
 	</div>
 </div>
 

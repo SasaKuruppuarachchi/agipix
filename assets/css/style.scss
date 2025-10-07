@@ -8,9 +8,9 @@
 :root {
   --primary-bg: #0a0a0a;
   --secondary-bg: #1a1a1a;
-  --accent-red: #8b1a1a;
-  --accent-red-light: #b32424;
-  --accent-red-dark: #5a0f0f;
+  --accent-red: #dd4f17;
+  --accent-red-light: #e46432;
+  --accent-red-dark: #c2400ddc;
   /* Gold accent for inline links */
   --accent-gold: #d4af37;
   --accent-gold-light: #f0d879;
@@ -495,6 +495,47 @@ html { scroll-padding-top: 72px; }
 .btn-secondary:hover {
   background: var(--accent-red);
   color: #fff;
+}
+
+/* Docs: button theming via CSS variables scoped to .doc-content */
+.doc-content {
+  /* Customize these to change all doc buttons at once */
+  --doc-btn-bg: var(--accent-red);
+  --doc-btn-bg-hover: var(--accent-red-light);
+  --doc-btn-text: #fff;
+  --doc-btn-border: var(--accent-red);
+  --doc-btn-shadow: rgba(179, 36, 36, 0.5);
+
+  /* Secondary button variants */
+  --doc-btn-secondary-bg: transparent;
+  --doc-btn-secondary-text: var(--accent-red-light);
+  --doc-btn-secondary-border: var(--accent-red);
+  --doc-btn-secondary-hover-bg: var(--accent-red);
+  --doc-btn-secondary-hover-text: #fff;
+}
+
+/* Apply doc button variables without affecting global buttons */
+.doc-content .btn {
+  background: var(--doc-btn-bg);
+  border-color: var(--doc-btn-border);
+  color: var(--doc-btn-text);
+}
+
+.doc-content .btn:hover {
+  background: var(--doc-btn-bg-hover);
+  border-color: var(--doc-btn-bg-hover);
+  box-shadow: 0 0 20px var(--doc-btn-shadow);
+}
+
+.doc-content .btn-secondary {
+  background: var(--doc-btn-secondary-bg);
+  border-color: var(--doc-btn-secondary-border);
+  color: var(--doc-btn-secondary-text);
+}
+
+.doc-content .btn-secondary:hover {
+  background: var(--doc-btn-secondary-hover-bg);
+  color: var(--doc-btn-secondary-hover-text);
 }
 
 /* Footer */
