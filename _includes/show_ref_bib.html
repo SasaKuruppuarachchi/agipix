@@ -1,0 +1,34 @@
+{% assign omit = include.omit_comments | default: false %}
+{% assign comment_char = include.comment_char | default: '%' %}
+{% assign font_size = include.font_size | default: '' %}
+
+{%- comment -%}
+  Load the ref.bib content. The path is relative to this include file in _includes.
+{%- endcomment -%}
+{% capture bib_raw %}
+{% include_relative ../ref.bib %}
+{% endcapture %}
+
+{%- comment -%}
+  Optionally strip comment lines that start with the specified comment_char after trimming leading whitespace.
+  Only single-character line comment delimiters are supported.
+{%- endcomment -%}
+{% assign lines = bib_raw | split: '\n' %}
+{% capture bib_filtered %}
+{% for l in lines %}
+  {% assign s = l | strip %}
+  {% if omit and s != '' and s | slice: 0, 1 == comment_char %}
+  {% else %}
+{{ l }}
+  {% endif %}
+{% endfor %}
+{% endcapture %}
+
+<div class="code-copy"{% if font_size != '' %} style="--code-font-size: {{ font_size }}"{% endif %}>
+  <button class="code-copy__btn" aria-label="Copy to clipboard" title="Copy">
+    <svg class="code-copy__icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+      <path fill="currentColor" d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/>
+    </svg>
+  </button>
+  <pre><code>{{ bib_filtered | escape }}</code></pre>
+</div>

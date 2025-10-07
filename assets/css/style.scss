@@ -621,6 +621,52 @@ code {
   color: var(--accent-red-light);
 }
 
+/* Copyable code block component */
+.code-copy {
+  position: relative;
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  background: var(--code-bg);
+  overflow: hidden;
+  /* customizable font size via CSS var; default inherits */
+  --code-font-size: inherit;
+}
+
+.code-copy pre {
+  margin: 0;
+  border: 0;
+  background: transparent;
+}
+
+.code-copy code {
+  display: block;
+  font-size: var(--code-font-size);
+  color: var(--text-primary);
+  text-align: left; /* left aligned */
+  white-space: pre;
+}
+
+.code-copy__btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.06);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.code-copy__btn:hover { background: rgba(255,255,255,0.12); }
+.code-copy__btn:active { transform: scale(0.98); }
+.code-copy__icon { pointer-events: none; }
+
 /* Links - inline (exclude buttons and nav) */
 a:not(.btn):not(.nav-link) {
   color: var(--accent-gold);
