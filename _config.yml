@@ -30,7 +30,7 @@ exclude:
 
 # Include files
 include:
-  - _assets
+  - assets
 
 # Collections for documentation
 collections:

@@ -1,12 +1,12 @@
 # [Agipix](https://sasakuruppuarachchi.github.io/agipix/) — Bridging Simulation and Reality for Aerial Robotics
 
-![banner](_assets/images/exploded.gif)
+![banner](assets/images/exploded.gif)
 
 Agipix is an open hardware and software platform for agile indoor autonomy that runs the same ROS 2, containerized stack in both Isaac Sim and on the real robot. A small 438×372 mm footprint with a multi-modal sensor suite (3D LiDAR, RGB camera, IMU) and a Jetson Orin NX companion enables robust exploration and mapping with zero code changes from sim to real.
 
 <p align="center">
-	<img alt="Agipix simulation" src="_assets/images/sim.png" width="45%" />
-	<img alt="Agipix real prototype" src="_assets/images/real.jpg" width="45%" />
+	<img alt="Agipix simulation" src="assets/images/sim.png" width="45%" />
+	<img alt="Agipix real prototype" src="assets/images/real.jpg" width="45%" />
 </p>
 
 For the accompanying paper-style write-up, see `todo` (IEEE conference format). It details hardware co-design, the LiDAR–inertial–visual stack, the Isaac Sim digital twin, and sim-to-real synchronization.
@@ -40,7 +40,7 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 - `cad/` — Mechanical CAD (designs and fabrication)
 - `model_exports/` — Exported models (STL/USD) for sim and docs
 - `calibration/` — Calibration assets (real and sim)
-- `_assets/` — Images, videos, and datasheets used in docs
+- `assets/` — Images, videos, and datasheets used in docs
 - `todo` — IEEE-style paper source describing Agipix
 
 ## Quick start

@@ -137,9 +137,9 @@ Each page includes:
 ## Image Assets
 
 The site uses images directly from the repository:
-- `_assets/images/exploded.gif` - Hero banner
-- `_assets/images/sim.png` - Simulation screenshot
-- `_assets/images/real.jpg` - Real hardware photo
+- `assets/images/exploded.gif` - Hero banner
+- `assets/images/sim.png` - Simulation screenshot
+- `assets/images/real.jpg` - Real hardware photo
 
 ## Responsive Design
 
@@ -214,7 +214,7 @@ jekyll serve --baseurl /agipix
 ✅ **Page Rendering**: All pages render correctly with dark theme  
 ✅ **Navigation**: All links work correctly  
 ✅ **Responsive**: Layout adapts to different screen sizes  
-✅ **Images**: All images load from `_assets/images/`  
+✅ **Images**: All images load from `assets/images/`  
 ✅ **Typography**: Orbitron font loads and displays correctly  
 ✅ **CSS**: Dark theme with red accents renders perfectly  
 

@@ -139,9 +139,9 @@ When documentation in the `doc/` directory changes, the corresponding pages in `
 
 ## Assets
 
-- Images: `_assets/images/`
-- The site uses images directly from the repository's `_assets` directory
-- Image paths in the site: `/_assets/images/filename.ext`
+- Images: `assets/images/`
+- The site uses images directly from the repository's `assets` directory
+- Image paths in the site: `/assets/images/filename.ext`
 
 ## Configuration
 
@@ -163,8 +163,8 @@ Key settings in `_config.yml`:
 ### Images not showing?
 
 - Verify image paths start with `/` and include the baseurl
-- Check that images exist in `_assets/images/` directory
-- Use relative_url filter in Liquid: `{{ '/_assets/images/file.png' | relative_url }}`
+- Check that images exist in `assets/images/` directory
+- Use relative_url filter in Liquid: `{{ '/assets/images/file.png' | relative_url }}`
 
 ### Local serve not working?
 

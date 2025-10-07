@@ -106,7 +106,7 @@ agipix/
 
 ### Content Integration
 - Documentation pulls from `doc/` directory
-- Images load from `_assets/images/`
+- Images load from `assets/images/`
 - Links to original repository docs for complete info
 - Automatic markdown rendering
 
@@ -167,7 +167,7 @@ Edit `assets/css/style.scss`:
 - [x] Dark theme with red accents renders correctly
 - [x] Orbitron font loads for "AGIPIX" header
 - [x] All navigation links work
-- [x] Images load from _assets/images/
+- [x] Images load from assets/images/
 - [x] Documentation pages render properly
 - [x] Responsive design works on mobile
 - [x] Footer displays contact info
@@ -202,7 +202,7 @@ The site features:
 - Verify _config.yml is valid YAML
 
 ### Images not showing?
-- Confirm images exist in `_assets/images/`
+- Confirm images exist in `assets/images/`
 - Check that baseurl is set to `/agipix`
 - Images should use relative paths
 

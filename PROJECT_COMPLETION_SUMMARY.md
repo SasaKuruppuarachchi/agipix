@@ -33,7 +33,7 @@ Successfully built a complete GitHub Pages website for the Agipix project with a
   - `bom/BOM.md` → Bill of Materials
 
 ### 5. Image Assets ✓
-- Uses images from `_assets/images/`:
+- Uses images from `assets/images/`:
   - exploded.gif (hero banner)
   - sim.png (simulation screenshot)
   - real.jpg (real hardware photo)
@@ -158,7 +158,7 @@ Navigation
 - Dark theme renders correctly
 - Red accents display properly
 - Orbitron font loads successfully
-- Images display from _assets/images/
+- Images display from assets/images/
 - Responsive layout works on all screen sizes
 
 ### Functional Testing ✓
@@ -191,7 +191,7 @@ The Agipix GitHub Pages website is:
 - ✅ Emphasizes Sim-to-Real deployability
 - ✅ Uses Orbitron font for headers
 - ✅ Integrates documentation from doc/
-- ✅ Uses images from _assets/images/
+- ✅ Uses images from assets/images/
 - ✅ Has easy navigation to setup docs and GitHub
 - ✅ Project showcase style presentation
 - ✅ Ready for immediate deployment
