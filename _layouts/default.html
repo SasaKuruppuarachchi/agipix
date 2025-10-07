@@ -68,50 +68,11 @@
         <h3>Acknowledgment</h3>
         <p>Agipix is supported by RAICAM, MSCA HORIZON EU.</p>
       </div>
-      <div class="footer-section">
-        <h3>Reference BibTeX</h3>
-        {% comment %}
-          Set omit_comments:true to hide lines starting with '%', and adjust font_size if desired (e.g., 0.9rem)
-        {% endcomment %}
-        {% include show_ref_bib.html omit_comments:true comment_char:'%' font_size:'0.9rem' %}
-      </div>
       
       <div class="footer-section">
         <p>© 2025 Agipix Project | <a href="{{ site.github.repository_url }}/blob/main/LICENSE">License</a></p>
       </div>
     </div>
   </footer>
-  <script>
-    // Copy handler for .code-copy blocks (supports multiple instances)
-    (function(){
-      function handleCopy(btn){
-        const container = btn.closest('.code-copy');
-        if(!container) return;
-        const code = container.querySelector('pre > code');
-        if(!code) return;
-        const text = code.innerText;
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(text).then(() => {
-            btn.classList.add('copied');
-            const prevTitle = btn.title;
-            btn.title = 'Copied';
-            setTimeout(() => { btn.classList.remove('copied'); btn.title = prevTitle; }, 1200);
-          }).catch(() => { fallbackCopy(text); });
-        } else {
-          fallbackCopy(text);
-        }
-        function fallbackCopy(t){
-          const ta = document.createElement('textarea');
-          ta.value = t; document.body.appendChild(ta); ta.select();
-          try { document.execCommand('copy'); } catch(e) {}
-          document.body.removeChild(ta);
-        }
-      }
-      document.addEventListener('click', (e) => {
-        const btn = e.target.closest('.code-copy__btn');
-        if(btn) { e.preventDefault(); handleCopy(btn); }
-      });
-    })();
-  </script>
 </body>
 </html>
