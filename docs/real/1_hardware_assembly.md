@@ -7,7 +7,7 @@ layout: doc
 
 ## Material checklist
 
- [Bill of Materials (BOM)](./BOM.md)
+ [Bill of Materials (BOM)](https://sasakuruppuarachchi.github.io/agipix/bom.html)
 
 ## Carbon fibre cuts
 

@@ -40,5 +40,15 @@ Pick a scope to dive into. Each scoped index has a sidebar of its own pages.
 		</ul>
 		<p><a class="btn" href="{{ '/docs/autonomy/' | relative_url }}">Autonomy Docs →</a></p>
 	</div>
+	<div class="quick-start-card">
+		<h3>User Interface</h3>
+		<p>User Interface and remote control.</p>
+		<ul>
+			<li>Teleoperation</li>
+			<li>Exploration mode control</li>
+			<li>Human in the loop Control</li>
+		</ul>
+		<p><a class="btn" href="{{ '/docs/ui/' | relative_url }}">Autonomy Docs →</a></p>
+	</div>
 </div>
 
