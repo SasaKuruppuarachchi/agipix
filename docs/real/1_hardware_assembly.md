@@ -54,7 +54,7 @@ Use the supplied 3D printable stl files available at cad/Fab/3D_prints and use f
 | side_joint_upper.stl | 1 |
 | top_gurd_flexies_x4.stl | 1 |
 
-![parts](/assets/images/real/making/carbon_fibre_parts.jpg)
+![parts]({{ "/assets/images/real/making/carbon_fibre_parts.jpg" | relative_url }})
 
 ## Assembly
 
