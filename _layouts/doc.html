@@ -14,7 +14,7 @@ layout: default
 {%- if docs_index != nil -%}
   {%- assign next_index = docs_index | plus: 1 -%}
   {%- assign scope = url_parts[next_index] -%}
-  {%- if scope == 'real' or scope == 'sim' or scope == 'autonomy' -%}
+  {%- if scope == 'real' or scope == 'sim' or scope == 'autonomy' or scope == 'ui' -%}
     {%- assign in_scoped_section = true -%}
   {%- endif -%}
 {%- endif -%}
