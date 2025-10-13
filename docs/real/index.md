@@ -5,10 +5,9 @@ layout: doc
 # Agipix (Real Robot) — Quick Guide
 
 Use this page to jump into the real robot setup. Each section below gives a short summary and links to the full guide.
-<div style="display:flex; gap:12px; align-items:flex-start; flex-wrap:wrap;">
-    <img src="../../assets/images/diag/hard_overview.png" alt="HW overview diagram" style="flex:1 1 360px; max-width:100%; height:auto;">
-    <img src="../../assets/images/real.jpg" alt="HW overview photo" style="flex:1 1 360px; max-width:100%; height:auto;">
-</div>
+
+<img src="../../assets/images/diag/hard_overview.png" alt="HW overview" style="width:50%; max-width:50%; height:auto;">
+<img src="../../assets/images/real.jpg" alt="HW overview" style="width:50%; max-width:50%; height:auto;">
 
 ## 1) Hardware Assembly
 

@@ -22,6 +22,13 @@ Use this page to jump into the autonomy stack. It stays brief and links to the f
 - Built with colcon; typically used with Docker + Isaac ROS runtime.
 - Demos mirror between simulation and PX4/real flight for behavior parity.
 
+## Data‑Driven Autonomy
+
+- End‑to‑end policy that navigates via sub‑goals using learned visual representations.
+- Leverages pretrained features; reports up to ~50% higher navigation success.
+- Generalizes across ground and aerial robots.
+- See the page for the illustrative figure and demo video.
+
 ## Next steps
 - If you haven’t set up the runtime yet, see real robot [Software Setup](../real/3_software_setup.md).
 - To run in simulator first: go to simulation [Quick Guide](../sim/index.md).
