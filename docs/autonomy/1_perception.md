@@ -1,6 +1,7 @@
 ---
 title: Autonomy-Perception
 layout: doc
+nav_title: Perception
 ---
 # Agipix Autonomy: Perception
 [![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) 
