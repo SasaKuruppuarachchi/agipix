@@ -6,7 +6,7 @@ layout: doc
 
 Use this page to jump into the real robot setup. Each section below gives a short summary and links to the full guide.
 
-![HW overview](../../assets/images/diag/hard_overview.png)
+<img src="../../assets/images/diag/hard_overview.png" alt="HW overview" style="width:50%; max-width:50%; height:auto;">
 
 ## 1) Hardware Assembly
 
