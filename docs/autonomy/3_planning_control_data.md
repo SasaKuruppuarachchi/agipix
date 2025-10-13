@@ -10,6 +10,8 @@ nav_title: Data driven Autonomy
 
 ![Autonomy overview](../../assets/images/diag/autonomy_data.png)
 
+## [FAINT](https://lasuomela.github.io/faint/)
+
 The Robot Navigates to given subgoals using the end to end model. By leveraging pretrained visual representations, the proposed policy achieves up to 50% higher navigation success and generalizes across ground and aerial robots.
 
  <div class="video-container text-width">

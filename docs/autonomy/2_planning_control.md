@@ -10,6 +10,8 @@ nav_title: Huristic autonomy
 
 ![Autonomy overview](../../assets/images/diag/autonomy_heuristcs.png)
 
+## [Agipix Autonomy Framework](https://github.com/SasaKuruppuarachchi/agipix_px4_autonomy) (Github)
+
 Welcome to the **Agipix Autonomy Framework**, a versatile and modular ROS2 framework for autonomous unmanned aerial vehicles (UAVs). This framework comprises distinct components (simulator, perception, mapping, planning, and control) to achieve autonomous navigation, unknown exploration, and target inspection.
 
 **Author**: [Sasanka Kuruppu Arachchige](https://sasakuruppuarachchi.github.io/), Vision Group, Tampere University, Finland.
