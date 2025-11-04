@@ -41,13 +41,13 @@
 \usepackage{dsfont}
 \usepackage{paralist}
 \usepackage[font=footnotesize]{subcaption}
-\usepackage{cite}
+% \usepackage{cite} % duplicate, removed
 \usepackage{tabularx}
 \usepackage{cancel}
 \usepackage{bm}
 \usepackage{url}
 \usepackage{mathtools}
-\usepackage{textcomp}
+% \usepackage{textcomp} % duplicate, removed
 \usepackage{nccmath}
 \usepackage{xcolor}
 \usepackage{multirow}
@@ -69,7 +69,8 @@ Agipix: A Comprehensive Aerial Robotics Platform \\ Bridging Simulation and Real
 
 \begin{document}
 
-\graphicspath{/Pictures}
+% Graphics path for figures used across the paper
+\graphicspath{{assets/images/}}
 
 \maketitle
 \thispagestyle{empty}
@@ -102,11 +103,8 @@ The main contributions of this paper are:
 \subsection{System Overview}
 \begin{figure*}[t]
         \centering
-        \framebox{\parbox{0.96\textwidth}{Hardware/Software Architecture Placeholder:\\
-        Left: exploded hardware view (frame, LiDAR, camera, PX4 FCU, Jetson Orin NX, power distribution).\\
-        Center: dataflow (sensors -> ROS~2 topics -> estimation -> mapping -> planning -> setpoints -> PX4).\\
-        Right: container graph with QoS profiles (IMU high-rate BEST\_EFFORT, LiDAR RELIABLE, map TRANSIENT\_LOCAL).}}
-        \caption{Placeholder: Integrated hardware and software architecture of Agipix. The PX4 FCU handles low-level control while the Jetson Orin NX runs ROS~2 containers for perception, mapping, planning, and mission management. Native DDS over serial (micro XRCE-DDS) provides direct topic bridging without protocol translation.}
+        \includegraphics[width=0.96\textwidth]{images/diag/autonomy_heuristcs.png}
+        \caption{Integrated hardware and software architecture of Agipix. The PX4 FCU handles low-level control while the Jetson Orin NX runs ROS~2 containers for perception, mapping, planning, and mission management. Native DDS over serial (micro XRCE-DDS) provides direct topic bridging without protocol translation.}
         \label{fig:arch_overview}
 \end{figure*}
 Agipix integrates: (1) an embedded NVIDIA Jetson Orin NX companion computer running perception, mapping, planning, and mission management under ROS~2; (2) a PX4-based flight control unit (FCU) handling low-level attitude/thrust loops; (3) a 3D LiDAR (placeholder: 32/16 channel mid-range) mounted top-front; (4) a global-shutter RGB camera front-facing; and (5) a 6-axis IMU synchronized to both LiDAR and camera via software time compensation inside containers. High-rate state, actuator, and health data are exchanged between PX4 and the companion through native DDS (micro XRCE-DDS) over a robust serial (UART) link, eliminating intermediate protocol translation layers. All high-level processes run inside coordinated Docker containers sharing a common ROS~2 domain for zero-copy intra-host transport where feasible.
@@ -151,9 +149,8 @@ The Jetson Orin NX provides heterogeneous GPU/CPU acceleration for deep percepti
 
 \begin{figure}[t]
         \centering
-        % Placeholder platform image
-        \includegraphics[width=0.95\linewidth]{imgs/Agipix.jpg}
-        \caption{Agipix hardware prototype (placeholder). Annotated sensor positions and dimensions (438~\(\times\)~372~mm envelope).}
+        \includegraphics[width=0.95\linewidth]{images/real.jpg}
+        \caption{Agipix hardware prototype. Annotated sensor positions and dimensions (438~\(\times\)~372~mm envelope).}
         \label{fig:platform_overview}
 \end{figure}
 
@@ -161,28 +158,35 @@ The Jetson Orin NX provides heterogeneous GPU/CPU acceleration for deep percepti
 \subsection{Containerized Architecture}
 Each major subsystem (perception, mapping, planning, PX4 interface, logging, simulation bridge) resides in an isolated Docker image derived from a minimal base. All containers share a single ROS~2 middleware layer (Fast DDS or Cyclone DDS configurable) to exploit QoS tuning (e.g., BEST\_EFFORT + KEEP\_LAST for high-rate IMU, RELIABLE + TRANSIENT\_LOCAL for map data). Advantages include reproducibility, dependency pinning, multi-architecture builds (desktop vs Jetson), and deterministic launch via a compose file. The PX4 interface container embeds a micro XRCE-DDS client/server stack, exposing FCU topics directly as ROS~2 messages without MAVLink/MAVROS translation.
 \subsection{Middleware and Interfaces}
-ROS~2 (DDS) underpins all inter-process communication. The PX4 autopilot publishes actuator status, odometry, battery, and IMU streams directly as ROS~2 topics over micro XRCE-DDS on the serial link; command topics (trajectory setpoints, attitude/thrust targets) flow in the reverse direction with bounded latency. A simulation bridge node in Isaac Sim mirrors this interface contract (topic names, QoS profiles), publishing synthetic LiDAR point clouds, camera frames, and IMU packets with configurable noise models matched to real sensor statistics (Table~\ref{tab:noise_models}). Thus identical ROS~2 launch descriptions apply in both simulation and hardware.
+ROS~2 (DDS) underpins all inter-process communication. On the companion computer, a Micro XRCE-DDS Agent runs alongside the autonomy containers and exposes the PX4 autopilot topics natively in ROS~2 over a UART transport. The PX4 autopilot publishes actuator status, odometry, battery, and IMU streams as ROS~2 topics; command topics (trajectory setpoints, attitude/thrust targets) flow in the reverse direction with bounded latency. This direct DDS integration eliminates MAVLink/MAVROS translation and reduces serialization overhead. QoS is tuned per stream (e.g., IMU: BEST\_EFFORT/KEEP\_LAST, LiDAR: RELIABLE, maps: TRANSIENT\_LOCAL). A simulation bridge in Isaac Sim mirrors the exact interface (topic names and QoS), publishing synthetic LiDAR, camera, and IMU with noise models (Table~\ref{tab:noise_models}), enabling identical launch descriptions in simulation and hardware.
 \subsection{Perception and State Estimation}
-We employ a LiDAR-inertial odometry backend (e.g., FAST-LIO2 style) fused with camera keypoint-based visual constraints when texture is sufficient. Failure detection triggers LiDAR-only fallback. Pose graph maintained for loop closures (placeholder details).
+We employ Direct LiDAR-Inertial Odometry (DLIO) as the baseline LIO backend, featuring a coarse-to-fine continuous-time trajectory for motion correction and lightweight computation \cite{chen2022dlio}. Inputs are a deskewed LiDAR point cloud and a 6-axis IMU; strict LiDAR–IMU time synchronization is enforced. When visual texture permits, camera constraints can be fused for map enrichment; otherwise the pipeline falls back to LiDAR-only. The LIO publishes odometry for downstream mapping and planning and supports on-demand map export to PCD for evaluation reproducibility.
 \subsection{Mapping and Exploration}
-Voxel TSDF + occupancy layers built online; frontier detection operates on occupancy; planner selects next-best-view maximizing expected information gain under battery and clearance constraints. Multi-modal semantic enrichment (placeholder future work) overlays per-pixel or per-point class labels.
+Online mapping maintains voxel TSDF and occupancy layers derived from LIO poses and LiDAR depth. Frontier detection operates on the occupancy layer to identify candidate exploration goals. An information-gain objective selects the next-best-view subject to clearance, flight envelope, and battery constraints. The mapping module exposes persistent map topics (TRANSIENT\_LOCAL) for late-joining consumers and supports semantic overlays as an optional future extension.
 \subsection{Planning and Control}
-Hierarchical: (i) global frontier planner, (ii) kinodynamic trajectory optimizer (polynomial or sampling-based) respecting thrust and body-rate limits of the small-footprint platform, (iii) low-level attitude controller residing on PX4. The optimizer outputs either position-velocity setpoints or attitude/thrust targets published as ROS~2 setpoint topics (native DDS) consumed directly by PX4 via the micro XRCE-DDS bridge, avoiding MAVLink encapsulation to reduce serialization overhead and latency.
+The autonomy stack comprises modular packages: a global planner for waypoint/frontier selection, a trajectory planner (time-parameterized polynomials or sampling-based) with a time optimizer, and a tracking controller. Plans are generated against the online map (clearance and dynamic updates) and respect thrust and body-rate limits. The controller publishes position/velocity or attitude/thrust setpoints as ROS~2 topics consumed directly by PX4 via the Micro XRCE-DDS Agent, matching the same interface in simulation and on the real platform.
+
+\subsection{Operator Interface}
+Three operator workflows are supported: (i) Safety RC as the primary manual failsafe, (ii) manual flight via UDP-MAVLink from a ground station with a USB joystick, and (iii) ROS~2 velocity teleoperation over DDS using a joystick. During autonomous exploration, the UI visualizes live point clouds/maps, robot state, and mission progress, and exposes pause/resume and goal selection. Human-in-the-loop autonomy allows high-level intents (waypoints/regions) to be converted into trajectories with explainable overlays and smooth handover between autonomy and manual control.
 \begin{figure}[t]
         \centering
-        % Placeholder simulation pipeline image
-        \includegraphics[width=0.95\linewidth]{imgs/Sim_model.png}
-        \caption{Simulation-to-reality workflow: Isaac Sim digital twin generates synchronized sensor streams passed through container bridge; identical perception and planning containers run in sim and real flights for zero-shot transfer.}
+        \includegraphics[width=0.95\linewidth]{images/diag/sim_overview.png}
+        \caption{Simulation-to-reality workflow: Isaac Sim digital twin generates synchronized sensor streams passed through the ROS~2 bridge; identical perception and planning containers run in sim and real flights for zero-shot transfer.}
         \label{fig:sim_pipeline}
 \end{figure}
 
 \section{SIMULATION AND DIGITAL TWIN}
+\subsection{Simulation Environment and Workflow}
+Host requirements are Ubuntu 20.04/22.04 with an NVIDIA GPU; Isaac Sim (ROS~2 bridge autoload) provides photorealistic rendering and sensor simulation. Optional Nucleus enables asset sharing. Pegasus can be enabled as an Isaac Sim extension for flight scenario tooling. The typical workflow is: (i) launch Isaac Sim with the ROS~2 bridge, (ii) start the Micro XRCE-DDS Agent and autonomy containers (tmux layout), (iii) run PX4 SITL when applicable with \texttt{UXRCE\_DDS\_SYNCT=false} to align timestamps, and (iv) set \texttt{use\_sim\_time=true} in ROS~2 nodes. Visualization and introspection use Foxglove via \texttt{ws://localhost:8765}.
 \subsection{Isaac Sim Asset Pipeline}
 CAD imports, material assignment, lighting variation, and domain randomization parameters (texture, illumination, clutter). Automated dataset capture (RGB, depth, LiDAR, segmentation) for training and benchmarking.
 \subsection{Dynamics and Sensor Fidelity}
 Rotor dynamics modeled via plugin (placeholder) with thrust/drag coefficients tuned from static stand tests. Sensor noise (Table~\ref{tab:noise_models}) matched to Allan variance (IMU) and manufacturer LiDAR specs. Rolling-shutter and motion distortion emulation for camera \& LiDAR respectively.
 \subsection{Zero-Shot Deployment Strategy}
 Identical container images; configuration parity files (YAML) describing sensor topics and noise seeds; deterministic seeds for reproducibility. Only change: transport URL (sim vs hardware). No code rebuild.
+
+\subsection{Reproducibility and Configuration Parity}
+We enforce sim-to-real parity via: (i) pinned container images (reporting image digests), (ii) shared launch/compose files and QoS YAML across sim and hardware branches, (iii) a deterministic tmux orchestration, and (iv) strict time synchronization (PX4 parameterization and ROS~2 \texttt{use\_sim\_time}). These constraints reduce drift between environments and make experiments repeatable.
 
 \section{EVALUATION}
 \subsection{Metrics}
@@ -191,10 +195,10 @@ Identical container images; configuration parity files (YAML) describing sensor 
         \item Map fidelity: IoU of occupied voxels vs ground-truth floorplan (sim) / manual scan (real).
         \item Exploration efficiency: coverage (%) vs flight time and energy.
         \item Latency: end-to-end sensor timestamp to control output.
-        \item Container reproducibility: hash mismatch rate across rebuilds.
+        \item Reproducibility: container image digest checks and launch determinism (hash and QoS parity).
 \end{itemize}
 \subsection{Experimental Protocol}
-Define three scenario classes: narrow corridor traversal, multi-room exploration, mixed lighting. Each executed in sim then real with identical mission script. Record drift, coverage, CPU/GPU utilization.
+Define scenario classes aligned with indoor exploration: narrow corridor traversal, multi-room exploration, and mixed lighting. Execute each in simulation first, then on the real platform using identical mission scripts and configuration files. Record drift, coverage, latency (with Foxglove timelines), and CPU/GPU utilization.
 \subsection{Preliminary Results (Placeholder)}
 We expect <5\% degradation in ATE from sim to real and >90\% exploration coverage within mission budget in office-scale testbed. Tables and plots to be inserted (Figures~\ref{fig:results_mapping}--\ref{fig:results_exploration}).
 
@@ -240,8 +244,8 @@ We acknowledge RAICAM, MSCA HORIZON EU funding. We thank contributors to the ope
 
 \begin{figure}[t]
         \centering
-        \includegraphics[width=0.9\linewidth]{imgs/agipix_scematic.png}
-        \caption{Placeholder: System schematic / data flow.}
+        \includegraphics[width=0.9\linewidth]{images/diag/ui_overview.png}
+        \caption{Operator-facing UI overview used during teleoperation and exploration.}
         \label{fig:system_schematic}
 \end{figure}
 
@@ -300,5 +304,5 @@ We acknowledge RAICAM, MSCA HORIZON EU funding. We thank contributors to the ope
 
 
 \bibliographystyle{ieeetr}
-\bibliography{citation}
+\bibliography{ref}
 \end{document}
