@@ -129,6 +129,11 @@ nmcli d wifi connect <SSID> password <PASSWORD>
 ```bash
 ssh <user>@<device-ip>
 ```
+### Depth AI setup for OAK-D cameras (Optional)
+
+```bash
+curl -fL https://docs.luxonis.com/install_dependencies.sh | bash
+```
 
 ---
 
