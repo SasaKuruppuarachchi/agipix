@@ -133,7 +133,46 @@ ssh <user>@<device-ip>
 
 ```bash
 curl -fL https://docs.luxonis.com/install_dependencies.sh | bash
+
+## later
+cd isaac_ros_common/docker/
+git clone https://github.com/luxonis/depthai-python.git
+cd depthai-python/
+git submodule update --init --recursive
 ```
+
+## 6) Connecting Px4
+### PX4 Parameter setup
+List of all the updated parmeters
+TODO
+
+
+### Hardware wiring
+The Px4 serial runs TTL level logic and the connecttech Hadron carier runs Rs-232 level logic. We need to use [RS-232 To TTL Conveter (MAX3232IDR)](https://www.seeedstudio.com/RS-232-To-TTL-Conveter-MAX3232IDR-p-2851.html?srsltid=AfmBOoorzzVt8cIBUow6n3hfHMCEcNNeEVksGzzTceETeoXjmvNJLtpT) to establish connection.
+
+The wiring should look like below.
+![Px4 Wiring](../../assets/images/real/wiring/px4_peer.png)
+![Px4 Wiring](../../assets/images/real/wiring/rs232_converter.png)
+
+> **Note:** In each connection, wire TX -> RX and RX -> TX
+
+### Verify connection
+To verify hardware level connections use ```minicom```. Set (Using the QgrundControl Parameter editer) and change port number and baudrates accordingly.
+```bash
+sudo MicroXRCEAgent serial --dev /dev/ttyTHS2 -b 921600
+```
+
+#### MicroXRCE DDS Primary link -> THS2
+To verify primary control link to the Px4 Run this **AFTER** installing and launching ```agidocker```
+```bash
+# Inside agidocker
+sudo MicroXRCEAgent serial --dev /dev/ttyTHS2 -b 921600
+```
+#### MavLink Secondary telemetry link -> THS1
+This link is for routing the Mavlink Trafic to a Ground station in the local network or to internet
+
+Install and follow [Mavlink Anywhere guide](https://github.com/alireza787b/mavlink-anywhere)
+
 
 ---
 
