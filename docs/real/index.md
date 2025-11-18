@@ -27,7 +27,11 @@ Use this page to jump into the real robot setup. Each section below gives a shor
 - On first boot: complete setup, join Wi‑Fi, SSH in; consider NoMachine, nvpmodel, Docker/NVIDIA toolkit.
 - Keep handy: CTI docs/KB and NVIDIA references linked in the guide.
 
-## 3) Software Setup
+## 3) Interfacing PX4 and sensnors
+- PX4 low level controller is wired up and interfaced
+- Lidar, Mono camera, Realsense/Oak-D cameras are connected and interfaced
+
+## 4) Software Setup
 
 - Runtime is containerized; follow isaac_ros_common Docker setup.
 - Branches: `agipix-hard` (hardware), `agipix-sim` (simulation).
