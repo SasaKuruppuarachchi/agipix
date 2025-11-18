@@ -37,6 +37,9 @@ Use this page to jump into the real robot setup. Each section below gives a shor
 - Branches: `agipix-hard` (hardware), `agipix-sim` (simulation).
 - For sim instructions, see the simulation docs; for autonomy, continue to perception stack.
 
+## 5) MANET Mesh networking
+- This is a ***work in progress*** upgarde to the agipix framework to use the long rage robust capabilities of the [Wi-Fi HaLow](https://heltec.org/project/ht-hc01/) mesh networking.
+
 ## Appendix — Hadron/Env Notes
 File: `hadron_cfg.txt`
 

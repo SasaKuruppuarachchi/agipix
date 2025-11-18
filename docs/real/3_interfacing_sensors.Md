@@ -1,7 +1,7 @@
 ---
-title: Flashing Jetson & Carrier
+title: Interfacing PX4 and Sensors
 layout: doc
-nav_title: Interfacing PX4 and Sensors
+nav_title: PX4 and Sensors
 ---
 
 # Interfacing PX4 and Sensors
