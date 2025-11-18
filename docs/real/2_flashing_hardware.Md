@@ -178,6 +178,10 @@ Install and follow [Mavlink Anywhere guide](https://github.com/alireza787b/mavli
 
 ## 6) Useful post-setup
 
+### Increase Swap 
+You may need to increase swap depending on he RAM of your Jetson module
+Follow [This Guide](https://www.forecr.io/blogs/programming/how-to-increase-swap-space-on-jetson-modules?srsltid=AfmBOoqQdjadGieWKvqNFyLf5XFb0XoVjQ_sH9gjZORudTmtEU1wo2yX) to upgrade swap memeory.
+
 ### NoMachine (remote desktop)
 - https://kb.nomachine.com/AR02R01074
 
