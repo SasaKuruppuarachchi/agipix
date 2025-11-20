@@ -192,6 +192,22 @@ git submodule update --init --recursive
 ## 7) Hardware Syncronisation
 
 Refer the [Wiki](https://github.com/Livox-SDK/Livox-SDK/wiki/livox-device-time-synchronization-manual), [PX4](https://discuss.px4.io/t/how-to-test-the-time-synchronization-between-radar-and-camera)
-TODO
+
+### PTP method
+
+In the absence of GPS and PPS hardware signals, PTP v2 can be used for time synchronization between Livox LiDAR/Hub and other devices. This method requires minimal external hardware support, and only requires a master clock device in the entire network.
+
+1. **Set [UXRCE_DDS_SYCT](https://docs.px4.io/main/en/advanced_config/parameter_reference#UXRCE_DDS_SYNCT) to ```true```** - The messages from the flight controller have their timestamp adjusted with the estimated time offset between the flight controller and the onboard computer. Thus all the ROS2 messages would have a timestamp based on the time of the onboard computer.
+
+2. **Setup lidar side PTPv2 Sync** - Follow instructions at the [official Livox wiki](https://github.com/Livox-SDK/Livox-SDK/wiki/livox-device-time-synchronization-manual#2-instructions-of-use)
+
+![ptp sample](../../assets/images/real/wiring/wireshark_ptp.png)
+
+### GPS method
+This synchronization method can be used when Livox Hub is connected to multiple LiDARs. Livox Hub needs to be connected to the PPS signal of the GPS receiver and the time signal in GPRMC format. At this time, the LiDAR point cloud time will be automatically corrected to the GPS time.
+
+Livox LiDAR can also use GPS synchronization, but it needs to connect the GPRMC signal to the PC, and then send the time data to the LiDAR through the SDK protocol.
+
+> **Note:** Not implemented or tested on Agipix as the hardware platform do not have an GPS reciever at the moment
 
 ---
