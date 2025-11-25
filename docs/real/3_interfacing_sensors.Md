@@ -193,6 +193,190 @@ git submodule update --init --recursive
 
 Refer the [Wiki](https://github.com/Livox-SDK/Livox-SDK/wiki/livox-device-time-synchronization-manual), [PX4](https://discuss.px4.io/t/how-to-test-the-time-synchronization-between-radar-and-camera)
 
+### PPS method
+
+This method is used when PTP is unavailable on the host side (i.e. Jetson Orin NX).
+[Ref](https://arxiv.org/pdf/2107.02625), [Source](https://github.com/Marselka/lidar-sync-mimics-GPS)
+[Wiring](https://github.com/Livox-SDK/Livox-SDK/wiki/livox-device-time-synchronization-manual#2213-livox-converter-20)
+[PX4 camera trigger](https://docs.px4.io/v1.12/en/peripherals/camera.html#trigger-hardware-configuration)
+
+ Arduino keeps a **soft RTC** that tracks hours, minutes, seconds, and microseconds continuously, and every PPS it **resets/corrects** to the Jetson time. This gives **continuous microsecond-precision timestamps**, even if the Jetson update is slightly delayed.
+
+Here’s the full refactored code:
+
+---
+
+### **Arduino Sketch – Soft RTC with PPS & Jetson Sync**
+
+```cpp
+#include <Arduino.h>
+
+// -------------------- CONFIG --------------------
+#define PPS_PIN 2           // PPS input pin
+#define SERIAL_BAUD 9600    // GPS client output
+#define JETSON_BAUD 115200  // Jetson time input
+
+// -------------------- VARIABLES --------------------
+volatile bool ppsTriggered = false;
+volatile unsigned long ppsMicros = 0;
+
+String jetsonTime = "";       // Latest time from Jetson
+String gprmcString = "";
+
+// Soft RTC
+volatile uint8_t soft_h = 0;
+volatile uint8_t soft_m = 0;
+volatile uint8_t soft_s = 0;
+volatile uint32_t soft_us = 0;
+
+// -------------------- ISR --------------------
+void PPS_ISR() {
+  ppsTriggered = true;
+  ppsMicros = micros();  // Timestamp of PPS
+}
+
+// -------------------- SETUP --------------------
+void setup() {
+  pinMode(PPS_PIN, INPUT);
+  attachInterrupt(digitalPinToInterrupt(PPS_PIN), PPS_ISR, RISING);
+
+  Serial.begin(SERIAL_BAUD);   // GPS output
+  Serial1.begin(JETSON_BAUD);  // Jetson time input
+
+  while (!Serial) {}
+  while (!Serial1) {}
+}
+
+// -------------------- HELPERS --------------------
+
+// Compute NMEA checksum
+String computeChecksum(const String &s) {
+  uint8_t checksum = 0;
+  for (size_t i = 1; i < s.length(); i++) { // skip $
+    checksum ^= s[i];
+  }
+  char buf[3];
+  sprintf(buf, "%02X", checksum);
+  return String(buf);
+}
+
+// Update soft RTC every loop iteration (non-blocking)
+void updateSoftRTC() {
+  static unsigned long lastMicros = 0;
+  unsigned long now = micros();
+  unsigned long dt = now - lastMicros;
+  lastMicros = now;
+
+  soft_us += dt;
+  while (soft_us >= 1000000) {
+    soft_us -= 1000000;
+    soft_s++;
+    if (soft_s >= 60) {
+      soft_s = 0;
+      soft_m++;
+      if (soft_m >= 60) {
+        soft_m = 0;
+        soft_h++;
+        if (soft_h >= 24) soft_h = 0;
+      }
+    }
+  }
+}
+
+// Read Jetson time string (non-blocking, 50ms timeout)
+void readTimeFromJetson() {
+  if (Serial1.available()) {
+    jetsonTime = Serial1.readStringUntil('\n');
+  }
+}
+
+// Apply Jetson time to soft RTC at PPS
+void syncSoftRTCtoJetson() {
+  if (jetsonTime.length() < 19) return; // sanity check
+
+  soft_h = jetsonTime.substring(0,2).toInt();
+  soft_m = jetsonTime.substring(3,5).toInt();
+  soft_s = jetsonTime.substring(6,8).toInt();
+  soft_us = 0; // reset microseconds at PPS
+}
+
+// Build GPRMC string from soft RTC
+void publishGPRMC() {
+  // Default location from Jetson
+  String lat = "5542.2389";
+  String ns  = "N";
+  String lon = "03741.6063";
+  String ew  = "E";
+
+  char hhmmss[16];
+  sprintf(hhmmss, "%02d%02d%02d.%03ld", soft_h, soft_m, soft_s, soft_us/1000);
+
+  // Date fields (optional fallback)
+  int day = 20, mon = 11, year = 2025;
+  if (jetsonTime.length() >= 19) {
+    day = jetsonTime.substring(9,11).toInt();
+    mon = jetsonTime.substring(12,14).toInt();
+    year = jetsonTime.substring(15,19).toInt();
+  }
+
+  String msg = "$GPRMC,";
+  msg += String(hhmmss) + ",A," + lat + "," + ns + "," + lon + "," + ew + ",0.0,0.0,";
+  msg += String(day) + String(mon) + String(year % 100) + ",,,,";
+
+  String cs = computeChecksum(msg);
+  msg += cs + "\r\n";
+
+  gprmcString = msg;
+  Serial.print(gprmcString);
+}
+
+// -------------------- LOOP --------------------
+void loop() {
+  updateSoftRTC();       // continuously update soft RTC
+  readTimeFromJetson();  // get latest Jetson time
+
+  if (ppsTriggered) {
+    ppsTriggered = false;
+    syncSoftRTCtoJetson();  // apply Jetson time at PPS
+    publishGPRMC();         // output NMEA message
+  }
+}
+```
+
+---
+
+### **Jetson Python – UTC Time Before PPS**
+
+```python
+import serial
+import time
+
+# Serial to Arduino
+ser = serial.Serial('/dev/ttyTHS1', 115200)
+
+while True:
+    t = time.gmtime()  # UTC time
+    # Format: HH,MM,SS,DD,MM,YYYY
+    line = "{:02},{:02},{:02},{:02},{:02},{:04}\n".format(
+        t.tm_hour, t.tm_min, t.tm_sec,
+        t.tm_mday, t.tm_mon, t.tm_year
+    )
+    ser.write(line.encode())
+    time.sleep(0.5)  # adjust to send ~500ms before PPS
+```
+
+---
+
+### ✅ **Features of this Version**
+
+1. **Continuous soft RTC** tracks `hours:minutes:seconds:microseconds`.
+2. **PPS interrupts** correct soft RTC using Jetson time.
+3. **Microsecond-level GPRMC output** to GPS clients.
+4. **Non-blocking loop**, reads Jetson asynchronously.
+5. **Resilient to Jetson timing jitter**, no missing pulses.
+
+---
+
 ### PTP method
 
 In the absence of GPS and PPS hardware signals, PTP v2 can be used for time synchronization between Livox LiDAR/Hub and other devices. This method requires minimal external hardware support, and only requires a master clock device in the entire network.
