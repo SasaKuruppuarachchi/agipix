@@ -149,11 +149,11 @@ Error: Return value
 ```
 ##### 1. First try changing the USB port:
 
-Move to a different USB port, if available.
+- Move to a different USB port, if available.
 
-**Remove any USB-C docks if connected**
+- **Remove any USB-C docks if connected**
 
-Power cycle the board and retry flashing.
+- Power cycle the board and retry flashing.
 
 ##### 2. If that doesn’t work, try disabling autosuspend:
 
