@@ -243,17 +243,67 @@ sudo nvpmodel -m <mode-number>
 ```
 - Reference: https://forums.developer.nvidia.com/t/power-mode-in-terminal/287224
 
-### Install Docker + NVIDIA Container Toolkit + Git LFS
-- Docker: https://docs.docker.com/engine/install/ubuntu/
-- NVIDIA Container Toolkit: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
-- Git LFS: https://git-lfs.com/
-
 ### Install VSCode
 ```bash
 git clone https://github.com/JetsonHacksNano/installVSCode.git
 cd installVSCode
 ./installVSCodeWithPython.sh
 ```
+
+### Cuda and cudnn
+If cuda packages are not installed. ```ls /usr/local | grep cuda``` returns nothing
+```bash
+sudo apt install cuda-toolkit-12-6
+```
+
+if cudnn not installed. ```dpkg -l | grep cudnn``` returns nothing, [Get Cudnn](https://developer.nvidia.com/cudnn-downloads?target_os=Linux&target_arch=aarch64-jetson&Compilation=Native&Distribution=Ubuntu&target_version=22.04&target_type=deb_local)
+```bash
+wget https://developer.download.nvidia.com/compute/cudnn/9.16.0/local_installers/cudnn-local-tegra-repo-ubuntu2204-9.16.0_1.0-1_arm64.deb
+sudo dpkg -i cudnn-local-tegra-repo-ubuntu2204-9.16.0_1.0-1_arm64.deb
+sudo cp /var/cudnn-local-tegra-repo-ubuntu2204-9.16.0/cudnn-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cudnn9-cuda-12
+```
+
+### Setup ```.bashrc```
+
+
+
+Add following lines to your ```.bashrc``` to link important cuda libraries
+```bash
+export CUDA=12.6
+export PATH=/usr/local/cuda-$CUDA/bin${PATH:+:${PATH}}
+export CUDA_PATH=/usr/local/cuda-$CUDA
+export CUDA_HOME=/usr/local/cuda-$CUDA
+export LIBRARY_PATH=$CUDA_HOME/lib64:$LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-$CUDA/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+export NVCC=/usr/local/cuda-$CUDA/bin/nvcc
+export CFLAGS="-I$CUDA_HOME/include $CFLAGS"
+export LD_LIBRARY_PATH=/usr/local/cuda-$CUDA/targets/aarch64-linux/lib:$LD_LIBRARY_PATH
+export CPATH=/usr/local/cuda-$CUDA/targets/aarch64-linux/include:$CPATH
+```
+Source your ```.bshrc```
+
+#### Verify Cuda and CUDNN
+```bash
+echo '#include <cuda_runtime.h>
+#include <cudnn.h>
+#include <iostream>
+int main() {
+    int cudaVersion;
+    cudaRuntimeGetVersion(&cudaVersion);
+    std::cout << "CUDA runtime version: " << cudaVersion/1000 << "." << (cudaVersion%1000)/10 << std::endl;
+    std::cout << "cuDNN version: " << CUDNN_MAJOR << "." << CUDNN_MINOR << "." << CUDNN_PATCHLEVEL << std::endl;
+    return 0;
+}' > verify_cuda_cudnn.cpp && \
+g++ verify_cuda_cudnn.cpp \
+    -I/usr/local/cuda-12.6/targets/aarch64-linux/include \
+    -L/usr/local/cuda-12.6/targets/aarch64-linux/lib \
+    -lcudart -lcudnn -o verify_cuda_cudnn && \
+./verify_cuda_cudnn
+```
+
 ### Fix Snap apps
 If Snap apps like Chromium is not working, [ref](https://jetsonhacks.com/2025/07/12/why-chromium-suddenly-broke-on-jetson-orin-and-how-to-bring-it-back/)
 ```bash

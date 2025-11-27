@@ -34,17 +34,74 @@ sudo MicroXRCEAgent serial --dev /dev/ttyTHS2 -b 921600
 ```
 
 #### MicroXRCE DDS Primary link -> THS2
+![dds](../../assets/images/real/wiring/dds.png)
 To verify primary control link to the Px4 Run this **AFTER** installing and launching ```agidocker```
 ```bash
-# Inside agidocker
+agidocker
+# *** Inside agidocker
+cd /workspaces/dds
+git clone -b v2.4.3 https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
+cd Micro-XRCE-DDS-Agent
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+sudo ldconfig /usr/local/lib/
 sudo MicroXRCEAgent serial --dev /dev/ttyTHS2 -b 921600
 ```
 #### MavLink Secondary telemetry link -> THS1
 This link is for routing the Mavlink Trafic to a Ground station in the local network or to internet
 
 Install and follow [Mavlink Anywhere guide](https://github.com/alireza787b/mavlink-anywhere)
+1. **Clone the repository:**
+   ```sh
+   agidocker
+   # *** Inside agidocker
+   cd /workspaces/dds
+   git clone https://github.com/alireza787b/mavlink-anywhere.git
+   cd mavlink-anywhere
+   ```
+2. **Run the installation script:**
+   ```sh
+   chmod +x install_mavlink_router.sh
+   sudo ./install_mavlink_router.sh
+   ```
 
+3. **Run the configuration script:**
+   ```sh
+   chmod +x configure_mavlink_router.sh
+   sudo ./configure_mavlink_router.sh
+   ```
+2. **Follow the prompts to set up UART device, baud rate, and UDP endpoints:**
+   - If an existing configuration is found, the script will use these values as defaults and show them to you
+   - **UART Device**: Set this to `/dev/ttyTHS1`. This is the serial port connected to the mavlink of PX4.
+   - **Baud Rate**: Default is `57600`. This is the communication speed between the companion computer and connected devices
+   - **UDP Endpoints**: Input the ground station ip `0.0.0.0:14550`. You can enter multiple endpoints separated by spaces (e.g., `100.110.200.3:14550 100.110.220.4:14550`)
+
+2. **Connecting with QGroundControl**
+Use QGroundControl to connect to your companion computer's IP address on the configured UDP endpoints. For internet-based telemetry, make sure to follow the setup video to properly register your devices on your chosen VPN system or configure port forwarding on your router.
+
+
+
+- **Check the status of the service:**
+  ```sh
+  sudo systemctl status mavlink-router
+  ```
+- **View detailed logs:**
+  ```sh
+  sudo journalctl -u mavlink-router -f
+  ```
 ---
+
+#### [Smart WiFi Manager Project](https://github.com/alireza787b/smart-wifi-manager)
+Implement this if you need safe switiching between wifi APs
+
+#### [NetBird VPN](https://netbird.io/)
+NetBird can be used to 
+- SSH to the drone over internet
+- Forward data links like Mavlink telemetry over the internet
+- Forward lightweight UI over the internet
 
 ## 3) Interfacing and Verifying sensor connection
 
