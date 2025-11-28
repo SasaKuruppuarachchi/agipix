@@ -7,8 +7,8 @@ nav_title: PX4 and Sensors
 # Interfacing PX4 and Sensors
 
 ## 1)Wiring up PX4
-
-TODO
+Wire the Pixhawk up as shown in the diagram. Refer to the [official guide](https://docs.px4.io/main/en/assembly/quick_start_pixhawk4)
+![px4 wiring](../../assets/images/real/wiring/px4_wiring.png)
 
 ---
 
@@ -30,7 +30,7 @@ The wiring should look like below.
 ### Verify connection
 To verify hardware level connections use ```minicom```. Set (Using the QgrundControl Parameter editer) and change port number and baudrates accordingly.
 ```bash
-sudo MicroXRCEAgent serial --dev /dev/ttyTHS2 -b 921600
+minicom -D /dev/ttyTHS2 -b 921600 -o -8
 ```
 
 #### MicroXRCE DDS Primary link -> THS2
@@ -42,6 +42,22 @@ agidocker
 cd /workspaces/dds
 git clone -b v2.4.3 https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
 cd Micro-XRCE-DDS-Agent
+
+```
+According to the Fast RTPS documentation specify the ROS2 domain ID by adding the following to the participant profile into the `agent.refs`
+
+```xml
+<participant .....>
+    <rtps>
+        .....
+        <builtin>
+            <domainId>15</domainId>
+        </buitin>
+    </rtps>
+</participan
+```
+
+```bash
 mkdir build
 cd build
 cmake ..
@@ -56,9 +72,8 @@ This link is for routing the Mavlink Trafic to a Ground station in the local net
 Install and follow [Mavlink Anywhere guide](https://github.com/alireza787b/mavlink-anywhere)
 1. **Clone the repository:**
    ```sh
-   agidocker
-   # *** Inside agidocker
-   cd /workspaces/dds
+   # *** On the Host machine (not inside the container)
+   cd ~/workspace/dds
    git clone https://github.com/alireza787b/mavlink-anywhere.git
    cd mavlink-anywhere
    ```
@@ -77,7 +92,7 @@ Install and follow [Mavlink Anywhere guide](https://github.com/alireza787b/mavli
    - If an existing configuration is found, the script will use these values as defaults and show them to you
    - **UART Device**: Set this to `/dev/ttyTHS1`. This is the serial port connected to the mavlink of PX4.
    - **Baud Rate**: Default is `57600`. This is the communication speed between the companion computer and connected devices
-   - **UDP Endpoints**: Input the ground station ip `0.0.0.0:14550`. You can enter multiple endpoints separated by spaces (e.g., `100.110.200.3:14550 100.110.220.4:14550`)
+   - **UDP Endpoints**: Input the ground station ip. Default is `0.0.0.0:14550`. You can enter multiple endpoints separated by spaces (e.g., `100.110.200.3:14550 100.110.220.4:14550`), `14550` is the default port QGC connets to.
 
 2. **Connecting with QGroundControl**
 Use QGroundControl to connect to your companion computer's IP address on the configured UDP endpoints. For internet-based telemetry, make sure to follow the setup video to properly register your devices on your chosen VPN system or configure port forwarding on your router.
@@ -91,6 +106,18 @@ Use QGroundControl to connect to your companion computer's IP address on the con
 - **View detailed logs:**
   ```sh
   sudo journalctl -u mavlink-router -f
+  ```
+- **Check uxrce_dds_client status**
+go into the MAVLink consol of QGC and 
+  ```sh
+  nsh> uxrce_dds_client status
+  INFO  [uxrce_dds_client] Running, connected
+  INFO  [uxrce_dds_client] Using transport:     serial
+  INFO  [uxrce_dds_client] Payload tx:          65072 B/s
+  INFO  [uxrce_dds_client] Payload rx:          0 B/s
+  INFO  [uxrce_dds_client] timesync converged: true
+  uxrce_dds_client: cycle: 49416 events, 174925511us elapsed, 3539.86us avg, min 136us max 1013110us 12206.498us rms
+  uxrce_dds_client: cycle interval: 49424 events, 21668.49us avg, min 137us max 890938308us 4007537.750us rms
   ```
 ---
 
@@ -129,7 +156,7 @@ After the physical connection is made using the Lovix connecter to the Ethernet 
 > **Note:** We advice [modifying the static IP](https://github.com/Livox-SDK/livox_ros_driver2/issues/135) of the Livox lidar from 192.168.1.1XX to 172.16.0.XX to avoid issues assessing the local(Wifi) network when connected.
 
 
-
+Add the static wired connection using the GUI or CLI as follows,
 ```bash
 nmcli connection add type ethernet ifname eth0 con-name eth0-static ipv4.method manual ipv4.addresses 172.16.0.50/24 ipv4.gateway 255.255.255.0 ipv4.dns 8.8.8.8
 nmcli connection up eth0-static

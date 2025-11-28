@@ -44,7 +44,7 @@ To customise the docker configuration edit
 code ~/workspace/raicam-ros/src/isaac_ros_common/scripts/.isaac_ros_common-config
 # append the additional docker configuration layers you need built
 
-agidocker # this alias builds the container
+cd ~/workspace/raicam-ros/src/isaac_ros_common/scripts/ && ./run_dev.sh # this alias builds the container
 ```
 The build will take more than an hour and if successfull you will see ```Running isaac_ros_dev-aarch64-container``` and the container will start running in the background.
 
