@@ -223,6 +223,12 @@ ssh <user>@<device-ip>
 
 ## 6) Useful post-setup
 
+### Setup Git
+```bash
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+```
+
 ### Increase Swap 
 You may need to increase swap depending on he RAM of your Jetson module
 Follow [This Guide](https://www.forecr.io/blogs/programming/how-to-increase-swap-space-on-jetson-modules?srsltid=AfmBOoqQdjadGieWKvqNFyLf5XFb0XoVjQ_sH9gjZORudTmtEU1wo2yX) to upgrade swap memeory.

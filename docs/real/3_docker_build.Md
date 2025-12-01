@@ -33,7 +33,8 @@ git clone https://github.com/SasaKuruppuarachchi/isaac_ros_common.git -b agipix-
 
 echo "export WORKSPACES_DIR='~/workspace'" >> ~/.bashrc
 echo "export ISAAC_ROS_DEV_DIR='~/workspace/raicam-ros'" >> ~/.bashrc
-echo "alias agidocker="cd ~/workspace/raicam-ros/src/isaac_ros_common/scripts/ && ./run_dev.sh --skip-registry-check"" >> ~/.bashrc
+echo "alias agidocker='cd ~/workspace/raicam-ros/src/isaac_ros_common/scripts/ && ./run_dev.sh --skip-registry-check'" >> ~/.bashrc
+echo "alias killagidocker='docker container kill isaac_ros_dev-aarch64-container'" >> ~/.bashrc
 source ~/.bashrc
 ```
 ## 3) Build Docker

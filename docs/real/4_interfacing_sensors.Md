@@ -119,6 +119,8 @@ go into the MAVLink consol of QGC and
   uxrce_dds_client: cycle: 49416 events, 174925511us elapsed, 3539.86us avg, min 136us max 1013110us 12206.498us rms
   uxrce_dds_client: cycle interval: 49424 events, 21668.49us avg, min 137us max 890938308us 4007537.750us rms
   ```
+
+> ***Troubleshoot*** : If `ros2 topic list`do not show the /fmu/.. topics, check if the domain id settings match between the **ROS2** in the docker, **uxrce_dds_client** and the **MicroXRCEAgent**
 ---
 
 #### [Smart WiFi Manager Project](https://github.com/alireza787b/smart-wifi-manager)
@@ -174,6 +176,8 @@ Clone the [Lovox-SDK2](https://github.com/atinfinity/Livox-SDK2) and follow inst
 For the fist time launch ```agidocker```, Compile and install the Livox-SDK2:
 
 ```shell
+agidocker
+# Inside agidocker
 cd /workspaces/lidar_ws/src
 git clone https://github.com/atinfinity/Livox-SDK2.git
 cd Livox-SDK2
@@ -185,17 +189,29 @@ sudo make install
 sudo ldconfig
 ```
 
-Clone the [livox_ros_driver2](https://github.com/atinfinity/livox_ros_driver2) and floow the isntructions.
+Clone the [livox_ros_driver2](https://github.com/atinfinity/livox_ros_driver2) and follow the instructions.
 
-```shell
+```bash
+agidocker
+# Inside agidocker
 cd /workspaces/lidar_ws/src
 git clone https://github.com/atinfinity/livox_ros_driver2.git
 cd ..
+rosdep update
 rosdep install -y -i --from-paths src/livox_ros_driver2
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
-> **Note:** Change the point cloud mode ```xfer_format``` to 2 (0) (PointCloud2) from the ROS2 driver if you are using DLIO
+> **Note:** 
+> - In `launch/msg_MID360_launch.py` change the point cloud mode ```xfer_format``` to 0 (1) Pointcloud2(PointXYZRTL) from the ROS2 driver if you are using DLIO.
+> - `src/comm/pub_handler.cpp` has been modified to Skip points inside the bounding box of the robot.
+> - In `config/MID360_config.json` updated the sensor IP and the pitch to correlate to the 45 degree pitch of the Lidar
+
+##### Verify
+```bash
+ros2 launch livox_ros_driver2 rviz_MID360_launch.py
+```
+
 
 #### [DDS tuning](https://autowarefoundation.github.io/autoware-documentation/main/installation/additional-settings-for-developers/network-configuration/dds-settings/) to accomadate looseless pointcloud transfer (Optional)
 
@@ -258,7 +274,11 @@ export RMW_FASTRTPS_USE_QOS_FROM_XML=1
 Connect the camera to the USB interface and verify TODO
 
 ### Realsense Cameras
-Connect the camera to the USB interface and verify TODO
+Connect the camera to the USB interface and verify 
+```bash
+realsense-viewer
+```
+If the connection is stable you can move on to launching `realsense2_camera` ROS2 package
 
 ### Depth AI setup for OAK-D cameras (Optional)
 
