@@ -299,6 +299,8 @@ Refer the [Wiki](https://github.com/Livox-SDK/Livox-SDK/wiki/livox-device-time-s
 
 ### PPS method
 
+![PPS sync wiring](../../assets/images/real/wiring/hw_sync.png)
+
 This method is used when PTP is unavailable on the host side (i.e. Jetson Orin NX).
 [Ref](https://arxiv.org/pdf/2107.02625), [Source](https://github.com/Marselka/lidar-sync-mimics-GPS)
 [Wiring](https://github.com/Livox-SDK/Livox-SDK/wiki/livox-device-time-synchronization-manual#2213-livox-converter-20)
