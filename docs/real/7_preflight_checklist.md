@@ -16,8 +16,18 @@ sudo journalctl -u mavlink-router -f
 ```
 
 ### Todos:
+HW
 - PPS Sync
 - Netbird
 - smart netmanager
 - DDS tuning
-- 
+- Realsense test 
+
+SW
+- GLIM calib
+- DLIO update verification
+- DQ controller test on sim
+- Onboard detector test with realsense
+
+- Test Global planner, local planner
+- Test nav

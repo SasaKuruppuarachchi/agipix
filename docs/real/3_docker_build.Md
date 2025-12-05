@@ -27,7 +27,7 @@ Or use
 ```bash
 cd $HOME
 mkdir workspace && cd workspace
-mkdir -r agipix_control/src dds lidar_ws/src raicam-ros/src
+mkdir -r agipix_control/src dds lidar_ws/src raicam-ros/src logging/bags logging/flogs logging/crashreports
 cd raicam-ros/src
 git clone https://github.com/SasaKuruppuarachchi/isaac_ros_common.git -b agipix-hard # TODO
 
@@ -50,3 +50,17 @@ cd ~/workspace/raicam-ros/src/isaac_ros_common/scripts/ && ./run_dev.sh # this a
 The build will take more than an hour and if successfull you will see ```Running isaac_ros_dev-aarch64-container``` and the container will start running in the background.
 
 Run ```agidocker``` to attach to the container interactively.
+
+
+## 4) Prune Docker cash (Optional)
+
+Docker builder cash consumes lot of memory. You can clean manualy or schedule a clean as follows
+```bash
+docker system prune -a --volumes
+```
+Output will show the size of the volume freed up `Total reclaimed space: 60.52GB`
+
+Optional **not recommended**: Prevent buildup with a scheduled cleanup (e.g., every week):
+```bash
+docker system prune -a --filter "until=168h" --volumes
+```

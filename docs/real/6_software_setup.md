@@ -3,12 +3,7 @@ title: Software Setup
 layout: doc
 ---
 # Software Setup for Agipix
-
-All the deployment is dockerised [Setup Docker](https://github.com/RAICAM-EU-Project/isaac_ros_common) 
-- branch `agipix-hard` for Hardware
-- Branch `agipix-sim` for Software
-
-Follow instructions to setup docker
+Prerequisit for this setup is [setting up the Docker](./3_docker_build.Md))
 
 ## Sim setup
 
