@@ -18,8 +18,6 @@ sudo journalctl -u mavlink-router -f
 ### Todos:
 HW
 - PPS Sync
-- Netbird
-- smart netmanager
 - DDS tuning
 - Realsense test 
 

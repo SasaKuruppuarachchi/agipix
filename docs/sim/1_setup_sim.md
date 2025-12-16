@@ -58,7 +58,7 @@ sudo apt install git make cmake python3-pip
 pip install kconfiglib jinja2 empy jsonschema pyros-genmsg packaging toml numpy future
 
 cd $HOME
-git clone https://github.com/PX4/PX4-Autopilot.git --recursive
+git clone https://github.com/PX4/PX4-Autopilot.git -b v1.16.0 --recursive
 cd PX4-Autopilot
 make px4_sitl_default none
 ```
@@ -82,12 +82,12 @@ make px4_sitl_default none
 ### Pegusus simulaotor
 &emsp; Add the following lines to your ~/.bashrc or ~/.zshrc file.
 ```bash
-# Isaac Sim root directory
-export ISAACSIM_PATH="${HOME}/.local/share/ov/pkg/isaac_sim-4.1.0"
+# Isaac Sim root directory For Isaacsim 5.*
+export ISAACSIM_PATH="${HOME}/isaacsim"
 # Isaac Sim python executable
 alias ISAACSIM_PYTHON="${ISAACSIM_PATH}/python.sh"
 # Isaac Sim app
-alias ISAACSIM="${ISAACSIM_PATH}/isaac-sim.sh"
+alias ISAACSIM="${ISAACSIM_PATH}/isaac-sim.selector.sh"
 # Change {user} accordingly
 LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/{user}/.local/share/ov/pkg/isaac_sim-2023.1.1/exts/omni.isaac.ros2_bridge/humble/lib
 ```

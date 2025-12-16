@@ -211,7 +211,7 @@ System Configuration
 ### Join Wi‑Fi via nmcli
 ```bash
 nmcli dev wifi rescan
-nmcli d wifi connect <SSID> password <PASSWORD>
+nmcli dev wifi connect <SSID> password <PASSWORD>
 ```
 
 ### SSH in
@@ -233,6 +233,20 @@ git config --global user.email johndoe@example.com
 You may need to increase swap depending on he RAM of your Jetson module
 Follow [This Guide](https://www.forecr.io/blogs/programming/how-to-increase-swap-space-on-jetson-modules?srsltid=AfmBOoqQdjadGieWKvqNFyLf5XFb0XoVjQ_sH9gjZORudTmtEU1wo2yX) to upgrade swap memeory.
 
+### Install Jetpack extras and Jtop
+```bash
+sudo apt install nvidia-jetpack
+sudo pip3 install -U jetson-stats
+mkdir hacks && cd hacks
+git clone https://github.com/jetsonhacks/jetson-jtop-patch.git
+cd jetson-jtop-patch
+chmod +x apply_jtop_fix.sh
+./apply_jtop_fix.sh
+```
+Once pip installs the jetson-stats package, you will need to logout/login or reboot the Jetson.
+
+After rebooting, to run jtop open a Terminal and execute: `jtop`
+
 ### NoMachine (remote desktop)
 To setup remote desktop to the headless system for debugging follow [this guide](https://kb.nomachine.com/AR02R01074)
 
@@ -251,6 +265,7 @@ sudo nvpmodel -m <mode-number>
 
 ### Install VSCode
 ```bash
+cd hacks
 git clone https://github.com/JetsonHacksNano/installVSCode.git
 cd installVSCode
 ./installVSCodeWithPython.sh
@@ -317,13 +332,6 @@ snap download snapd --revision=24724
 sudo snap ack snapd_24724.assert
 sudo snap install snapd_24724.snap
 sudo snap refresh --hold snapd
-```
-### Build torchvision from source (matches NVIDIA PyTorch)
-```bash
-export FORCE_CUDA=1
-git clone -b v0.17.2 https://github.com/pytorch/vision.git
-cd vision
-sudo -E python setup.py develop  # use 'install' if you don't need editable mode
 ```
 
 ### Mount a USB drive

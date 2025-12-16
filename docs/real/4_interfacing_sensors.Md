@@ -14,6 +14,9 @@ Wire the Pixhawk up as shown in the diagram. Refer to the [official guide](https
 
 ## 2) Connecting Px4
 ### PX4 Parameter setup
+
+Flash the Pixhawk with the latest stable branch branch using QGroundControl. Branch `1.16.0` is tested.
+
 List of all the updated parmeters
 TODO
 
@@ -58,6 +61,7 @@ According to the Fast RTPS documentation specify the ROS2 domain ID by adding th
 ```
 
 ```bash
+# *** Inside agidocker
 mkdir build
 cd build
 cmake ..
@@ -125,12 +129,37 @@ go into the MAVLink consol of QGC and
 
 #### [Smart WiFi Manager Project](https://github.com/alireza787b/smart-wifi-manager)
 Implement this if you need safe switiching between wifi APs
+```bash
+cd ~/workspace/dds
+git clone https://github.com/alireza787b/smart-wifi-manager.git
+cd smart-wifi-manager
+nano known_networks.conf # add networks list and psk
+nano smart-wifi-manager.service # update /path/to/smart-wifi-manage
+sudo bash install.sh
+sudo systemctl status smart-wifi-manager.service
+```
 
 #### [NetBird VPN](https://netbird.io/)
 NetBird can be used to 
 - SSH to the drone over internet
 - Forward data links like Mavlink telemetry over the internet
 - Forward lightweight UI over the internet
+
+```bash
+curl -fsSL https://pkgs.netbird.io/install.sh | sh
+netbird up 
+
+# to add ssh keys to the remote host
+ssh-copy-id sasa@<hostname>
+
+# to reset key of ssh connections 
+ssh-keygen -f "/home/sasa/.ssh/known_hosts" -R "<hostname>"
+
+
+# Reconfigure mavlink router to add the GS ip over netbird
+cd ~/workspace/dds/smart-wifi-manager
+sudo ./configure_mavlink_router.sh
+```
 
 ## 3) Interfacing and Verifying sensor connection
 
