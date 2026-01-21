@@ -9,6 +9,38 @@ layout: doc
 - NVIDIA GPU (RTX 2070 or higher)
 - NVIDIA GPU Driver (recommended version 525.85)
 
+### Cuda and CUDnn
+Install cuda with the instructions [here](https://developer.nvidia.com/cuda-12-6-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local)
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/12.6.0/local_installers/cuda-repo-ubuntu2204-12-6-local_12.6.0-560.28.03-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu2204-12-6-local_12.6.0-560.28.03-1_amd64.deb
+sudo cp /var/cuda-repo-ubuntu2204-12-6-local/cuda-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-6
+```
+
+Install Cudnn with the instructions [here](https://developer.nvidia.com/cudnn-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local&Configuration=Full)
+```bash
+wget https://developer.download.nvidia.com/compute/cudnn/9.17.0/local_installers/cudnn-local-repo-ubuntu2204-9.17.0_1.0-1_amd64.deb
+sudo dpkg -i cudnn-local-repo-ubuntu2204-9.17.0_1.0-1_amd64.deb
+sudo cp /var/cudnn-local-repo-ubuntu2204-9.17.0/cudnn-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cudnn
+```
+
+Verify
+```bash
+nvcc -V
+cd /path/to/isaac_ros_common/verify
+g++ verify_cuda_cudnn.cpp \
+    -I/usr/local/cuda-12.6/targets/x86_64-linux/include \
+    -L/usr/local/cuda-12.6/targets/x86_64-linux/lib \
+    -lcudart -lcudnn -o verify_cuda_cudnn
+./verify_cuda_cudnn
+```
+
 ### Optional Docker
 All the deployment is dockerised [Setup Docker](https://github.com/RAICAM-EU-Project/isaac_ros_common) 
 - branch `agipix-hard` for Hardware
@@ -48,6 +80,7 @@ wget https://raw.githubusercontent.com/SasaKuruppuarachchi/SasaKuruppuarachchi/m
 ### Installing Nvidia Docker
 &emsp; Install the Nvidia Container toolkit with [These Instructions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 
+&emsp; Also configure the Nvidia Docker with [these instructions](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html#configuring-docker)
 ### PX4 firmware
 
 ```bash
