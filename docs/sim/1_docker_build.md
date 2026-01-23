@@ -1,8 +1,54 @@
 ---
-title: Building Containerised Development platform
+title: Host setup
 layout: doc
-nav_title: Docker Build
 ---
+# Setting Up the Agipix Simulation Environment
+
+### Prerequisites for host PC
+- Ubuntu 20.04/22.04 Operating System
+- NVIDIA GPU (RTX 2070 or higher)
+- NVIDIA GPU Driver (recommended version 525.85)
+
+### Cuda and CUDnn
+Install cuda with the instructions [here](https://developer.nvidia.com/cuda-12-8-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local)
+```bash
+wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
+sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
+wget https://developer.download.nvidia.com/compute/cuda/12.8.0/local_installers/cuda-repo-ubuntu2204-12-8-local_12.8.0-560.28.03-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu2204-12-8-local_12.8.0-560.28.03-1_amd64.deb
+sudo cp /var/cuda-repo-ubuntu2204-12-8-local/cuda-*-keyring.gpg /usr/nvcc -V
+cd $HOME/workspace/raicam-ros/src/isaac_ros_common/verify
+g++ verify_cuda_cudnn.cpp \
+    -I/usr/local/cuda-12.8/targets/x86_64-linux/include \
+    -L/usr/local/cuda-12.8/targets/x86_64-linux/lib \
+    -lcudart -lcudnn -o verify_cuda_cudnn
+./verify_cuda_cudnnshare/keyrings/
+sudo apt-get update
+sudo apt-get -y install cuda-toolkit-12-8
+```
+
+Install Cudnn with the instructions [here](https://developer.nvidia.com/cudnn-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local&Configuration=Full)
+```bash
+wget https://developer.download.nvidia.com/compute/cudnn/9.17.0/local_installers/cudnn-local-repo-ubuntu2204-9.17.0_1.0-1_amd64.deb
+sudo dpkg -i cudnn-local-repo-ubuntu2204-9.17.0_1.0-1_amd64.deb
+sudo cp /var/cudnn-local-repo-ubuntu2204-9.17.0/cudnn-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cudnn
+
+echo 'export PATH=/usr/local/cuda-12.8/bin:$PATH' >> ~/.bashrc
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda-12.8/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc
+```
+
+Verify
+```bash
+nvcc -V
+cd $HOME/workspace/raicam-ros/src/isaac_ros_common/verify
+g++ verify_cuda_cudnn.cpp \
+    -I/usr/local/cuda-12.8/targets/x86_64-linux/include \
+    -L/usr/local/cuda-12.8/targets/x86_64-linux/lib \
+    -lcudart -lcudnn -o verify_cuda_cudnn
+./verify_cuda_cudnn
+```
 
 # Building Containerised Development platform
 
@@ -57,14 +103,14 @@ sudo systemctl restart docker
 ```bash
 cd $HOME
 mkdir workspace && cd workspace
-mkdir -p agipix_control/src dds lidar_ws/src raicam-ros/src logging/bags logging/flogs logging/crashreports
+mkdir -p agipix_control/src dds lidar_ws/src raicam-ros/src ui/src logging/bags logging/flogs logging/crashreports
 cd raicam-ros/src
 git clone https://github.com/SasaKuruppuarachchi/isaac_ros_common.git # TODO
 
 echo "export WORKSPACES_DIR="$HOME/workspace"" >> ~/.bashrc
 echo "export ISAAC_ROS_DEV_DIR="$HOME/workspace/raicam-ros"" >> ~/.bashrc
 echo "alias agidocker='cd $HOME/workspace/raicam-ros/src/isaac_ros_common/scripts/ && ./run_dev.sh --skip-registry-check'" >> ~/.bashrc
-echo "alias killagidocker='docker container kill isaac_ros_dev-aarch64-container'" >> ~/.bashrc
+echo "alias killagidocker='docker container kill isaac_ros_dev-x86_64-container'" >> ~/.bashrc
 source ~/.bashrc
 ```
 ## 3) Build Docker
@@ -93,40 +139,5 @@ EOF
 
 ```
 
-
-
-
-## 4) Post setup (Optional)
-
-### Build Opencv with cuda From source
-> Note! OpenCV =< 4.8 had an incompatability with Cuda 12.x
-```bash
-agidocker
-# Inside docker
-cd /worckspaces/isaac_ros-dev/src/isaac_ros_common
-sudo ./build_ocv_cuda.sh
-# This will build and install the OCV for this running container locally 
-# but saves the build files on the mounted folder so we can use the Dockerfile.opencv layer later
-```
-
-### Build torchvision from source (matches NVIDIA PyTorch)
-```bash
-export FORCE_CUDA=1
-git clone -b v0.17.2 https://github.com/pytorch/vision.git
-cd vision
-sudo -E python setup.py develop  # use 'install' if you don't need editable mode
-```
-
-
-## 5) Prune Docker cash (Optional)
-
-Docker builder cash consumes lot of memory. You can clean manualy or schedule a clean as follows
-```bash
-docker system prune -a --volumes
-```
-Output will show the size of the volume freed up `Total reclaimed space: 60.52GB`
-
-Optional **not recommended**: Prevent buildup with a scheduled cleanup (e.g., every week):
-```bash
-docker system prune -a --filter "until=168h" --volumes
-```
+### (Optional) Installing Portainer CE
+&emsp; Portainer CE is an open-source GUI for creating and managing docker containers. Install it following [these instructions](https://docs.portainer.io/start/install-ce/server/docker/linux)

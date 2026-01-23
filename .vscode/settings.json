@@ -1,3 +1,42 @@
 {
-    "github.copilot.chat.codeGeneration.useInstructionFiles": true
+    "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+    "ROS2.distro": "humble",
+    "python.autoComplete.extraPaths": [
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_tools/lib/python3.11/site-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_sensor_msgs/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_kdl/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_geometry_msgs/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/examples_tf2_py/lib/python3.11/site-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_ros_py/lib/python3.11/site-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_py/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_msgs/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/simulation_interfaces/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/message_filters/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/isaac_ros_navigation_goal/lib/python3.11/site-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/isaac_ros2_messages/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/custom_message/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/humble_ws/install/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/humble_ws/install/lib/python3.11/site-packages"
+    ],
+    "python.analysis.extraPaths": [
+        "/opt/ros/humble/lib/python3.10/site-packages",
+        "/opt/ros/humble/local/lib/python3.10/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_tools/lib/python3.11/site-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_sensor_msgs/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_kdl/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_geometry_msgs/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/examples_tf2_py/lib/python3.11/site-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_ros_py/lib/python3.11/site-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_py/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/tf2_msgs/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/simulation_interfaces/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/message_filters/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/isaac_ros_navigation_goal/lib/python3.11/site-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/isaac_ros2_messages/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/isaac_sim_ros_ws/install/custom_message/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/humble_ws/install/local/lib/python3.11/dist-packages",
+        "/home/sasa/workspace/isaacsim/IsaacSim-ros_workspaces/build_ws/humble/humble_ws/install/lib/python3.11/site-packages"
+    ]
 }
