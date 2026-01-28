@@ -133,6 +133,7 @@ isaac_run() {
     fi
 }
 alias agisim="cd ~/workspace/raicam-ros/src/isaac_ros_common/ && ./run_sim.sh"
+export ROS_DOMAIN_ID=3
 EOF
 source ~/.bashrc
 ```
@@ -202,6 +203,7 @@ To synchronise the time stamps with the simulator we need to set the parameter [
 2. Paste the following line before ´#Autostart ID´
 ```bash
 param set-default UXRCE_DDS_SYNCT 0
+param set-default UXRCE_DDS_DOM_ID 3
 ```
 3. Rebuild the firmware
 ```bash
@@ -264,6 +266,30 @@ When enabling the extension for the first time, the python requirements should b
 6. The Pegasus Simulator window should appear docked to the bottom-right section of the screen.
 
    ![alt text](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/pegasus_gui_example.png?raw=1)
+
+## Post setups
+### Download assets
+- Download assets from [Official page](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/installation/download.html) and same them in `~/isaacsim/assets/` 
+- then `mkdir ~/isaacsim/assets/Isaac/5.1/NVIDIA`
+- Open `~/isaacsim/exts/isaacsim.asset.browser/config/extension.toml` and add the asset paths at 
+
+    ```toml
+    [settings]
+    # Root folder URLs to list and monitor.
+    exts."isaacsim.asset.browser".folders = [
+        # asset paths here
+    ]
+    ```
+
+- Open `~isaacsim/exts/isaacsim.storage.native/config/extension.toml` and replace persistent.isaac.asset_root.default with `persistent.isaac.asset_root.default = "/home/sasa/isaacsim/assets/Isaac/5.1"`
+
+
+### Add Lidar definitions
+To replicate Mid360 lidar in the Agipix we create this custom Lidar model in Isaacsim.
+
+- Copy Mid360 usda file `cp ~/PegasusSimulator/assets/lidar/Mid_360.usda ~/isaacsim/assets/Isaac/5.1/Isaac/Sensors/NVIDIA/Mid_360.usda`
+- Open `~/isaacsim/exts/isaacsim.sensors.rtx/isaacsim/sensors/rtx/impl/supported_lidar_configs.py` and add `"/Isaac/Sensors/NVIDIA/Mid_360.usda": set(),` under the `SUPPORTED_LIDAR_CONFIGS`
+
 
 ## Running the Simulation
 

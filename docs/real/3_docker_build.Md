@@ -129,4 +129,13 @@ Output will show the size of the volume freed up `Total reclaimed space: 60.52GB
 Optional **not recommended**: Prevent buildup with a scheduled cleanup (e.g., every week):
 ```bash
 docker system prune -a --filter "until=168h" --volumes
+
+sudo du -h --max-depth=1 /home/<user>/workspace | sort -hr
+
+rm -rf ~/.cache/*
+
+rm -rf ~/.local/share/Trash/*
+rm -rf ~/.local/share/pip
+rm -rf ~/.local/share/virtualenvs
+
 ```

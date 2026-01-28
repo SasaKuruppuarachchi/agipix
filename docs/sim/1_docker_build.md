@@ -10,28 +10,24 @@ layout: doc
 - NVIDIA GPU Driver (recommended version 525.85)
 
 ### Cuda and CUDnn
+> !! Importat: Always use the given liks to get the latest deb package links wt is statud here may be outdated.
+
 Install cuda with the instructions [here](https://developer.nvidia.com/cuda-12-8-0-download-archive?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local)
 ```bash
 wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-ubuntu2204.pin
 sudo mv cuda-ubuntu2204.pin /etc/apt/preferences.d/cuda-repository-pin-600
-wget https://developer.download.nvidia.com/compute/cuda/12.8.0/local_installers/cuda-repo-ubuntu2204-12-8-local_12.8.0-560.28.03-1_amd64.deb
-sudo dpkg -i cuda-repo-ubuntu2204-12-8-local_12.8.0-560.28.03-1_amd64.deb
-sudo cp /var/cuda-repo-ubuntu2204-12-8-local/cuda-*-keyring.gpg /usr/nvcc -V
-cd $HOME/workspace/raicam-ros/src/isaac_ros_common/verify
-g++ verify_cuda_cudnn.cpp \
-    -I/usr/local/cuda-12.8/targets/x86_64-linux/include \
-    -L/usr/local/cuda-12.8/targets/x86_64-linux/lib \
-    -lcudart -lcudnn -o verify_cuda_cudnn
-./verify_cuda_cudnnshare/keyrings/
+wget https://developer.download.nvidia.com/compute/cuda/12.8.0/local_installers/cuda-repo-ubuntu2204-12-8-local_12.8.0-570.86.10-1_amd64.deb
+sudo dpkg -i cuda-repo-ubuntu2204-12-8-local_12.8.0-570.86.10-1_amd64.deb
+sudo cp /var/cuda-repo-ubuntu2204-12-8-local/cuda-*-keyring.gpg /usr/share/keyrings/
 sudo apt-get update
 sudo apt-get -y install cuda-toolkit-12-8
 ```
 
 Install Cudnn with the instructions [here](https://developer.nvidia.com/cudnn-downloads?target_os=Linux&target_arch=x86_64&Distribution=Ubuntu&target_version=22.04&target_type=deb_local&Configuration=Full)
 ```bash
-wget https://developer.download.nvidia.com/compute/cudnn/9.17.0/local_installers/cudnn-local-repo-ubuntu2204-9.17.0_1.0-1_amd64.deb
-sudo dpkg -i cudnn-local-repo-ubuntu2204-9.17.0_1.0-1_amd64.deb
-sudo cp /var/cudnn-local-repo-ubuntu2204-9.17.0/cudnn-*-keyring.gpg /usr/share/keyrings/
+wget https://developer.download.nvidia.com/compute/cudnn/9.18.1/local_installers/cudnn-local-repo-ubuntu2204-9.18.1_1.0-1_amd64.deb
+sudo dpkg -i cudnn-local-repo-ubuntu2204-9.18.1_1.0-1_amd64.deb
+sudo cp /var/cudnn-local-repo-ubuntu2204-9.18.1/cudnn-*-keyring.gpg /usr/share/keyrings/
 sudo apt-get update
 sudo apt-get -y install cudnn
 
@@ -116,11 +112,20 @@ source ~/.bashrc
 ## 3) Build Docker
 
 In this step we pull source images and build the docker continer.
-To customise the docker configuration edit 
-```bash
-code ~/workspace/raicam-ros/src/isaac_ros_common/scripts/.isaac_ros_common-config
-# append the additional docker configuration layers you need built
+- To customise the docker configuration edit and append the additional docker configuration layers you need built
+    ```bash
+    code ~/workspace/raicam-ros/src/isaac_ros_common/scripts/.isaac_ros_common-config
+    ```
 
+
+- Change the ROS_DOMAIN_ID to 3 (To mactch the sim environment)
+    ```bash
+    code ~/workspace/raicam-ros/src/isaac_ros_common/scripts/bashrc
+    ```
+
+Build the Docker    
+
+```bash
 cd ~/workspace/raicam-ros/src/isaac_ros_common/scripts/ && ./run_dev.sh # this alias builds the container
 ```
 The build will take more than an hour and if successfull you will see ```Running isaac_ros_dev-aarch64-container``` and the container will start running in the background.
