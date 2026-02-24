@@ -191,7 +191,7 @@ sudo apt install git make cmake python3-pip
 pip install kconfiglib jinja2 empy jsonschema pyros-genmsg packaging toml numpy future
 
 cd $HOME
-git clone https://github.com/PX4/PX4-Autopilot.git -b v1.16.0 --recursive
+git clone https://github.com/PX4/PX4-Autopilot.git -b v1.16.1 --recursive
 cd PX4-Autopilot
 make px4_sitl_default none
 ```
