@@ -3,11 +3,17 @@ title: Autonomy-planning-control
 layout: doc
 nav_title: Huristic autonomy
 ---
-# AgiAUTO (ROS 2) — Agipix PX4 Autonomy Stack
+# Agipix Autonomy: Planning and Control
+[![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) 
+[![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/20.04/)
+[![Linux platform](https://img.shields.io/badge/platform-linux--arm-brown.svg)](https://releases.ubuntu.com/20.04/)
+
+![Autonomy overview](../../assets/images/diag/autonomy_heuristcs.png)
+
+
+## AgiAUTO (ROS 2) — Agipix PX4 Autonomy Stack
 
 This repository is the **AgiAUTO** autonomy module of **Agipix** for PX4-based UAV missions in ROS 2.
-
-<p align="center"><img src=".media/images/banner.png" alt="AgiAUTO banner"></p>
 
 - HW and SIM Platform Repository: https://github.com/SasaKuruppuarachchi/agipix.git
 - Platform docs: https://sasakuruppuarachchi.github.io/agipix/
