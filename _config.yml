@@ -52,5 +52,5 @@ defaults:
 
 # GitHub repository
 github:
-  repository_url: "https://github.com/SasaKuruppuarachchi/agipix"
+  repository_url: "https://github.com/SasaKuruppuarachchi/agipix_autonomy"
   is_project_page: true
