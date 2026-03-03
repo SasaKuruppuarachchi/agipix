@@ -84,41 +84,129 @@ title: Home
 
 <section class="highlights">
   <h2>Platform and Results Gallery</h2>
-  <div class="image-carousel" id="homeImageCarousel" aria-label="Agipix image carousel">
-    <button class="carousel-btn carousel-btn-prev" type="button" aria-label="Previous image">&#10094;</button>
+  <div class="base-template__wrapper">
+    <div class="emotions-slider swiper" id="homeEmotionsSlider" aria-label="Agipix image slider">
+      <div class="slider-nav">
+        <button class="slider-nav__item" id="homeSliderPrev" type="button" aria-label="Previous image">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button class="slider-nav__item" id="homeSliderNext" type="button" aria-label="Next image">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M9 6L15 12L9 18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
 
-    <div class="carousel-track" id="homeImageCarouselTrack">
-      <figure class="carousel-slide">
-        <img src="{{ '/assets/images/banner_paper.png' | relative_url }}" alt="AgiPIX paper banner">
-      </figure>
-      <figure class="carousel-slide">
-        <img src="{{ '/assets/images/diag/compare.jpg' | relative_url }}" alt="Platform comparison figure">
-      </figure>
-      <figure class="carousel-slide">
-        <img src="{{ '/assets/images/result/map.png' | relative_url }}" alt="Mapping result">
-      </figure>
+      <div class="swiper-wrapper" id="homeSliderTrack">
+        <article class="swiper-slide emotions-slider__slide">
+          <div class="emotions-slider-item">
+            <div class="emotions-slider-item__image">
+              <img src="{{ '/assets/images/banner_paper.png' | relative_url }}" alt="AgiPIX paper banner">
+            </div>
+          </div>
+        </article>
+
+        <article class="swiper-slide emotions-slider__slide">
+          <div class="emotions-slider-item">
+            <div class="emotions-slider-item__image">
+              <img src="{{ '/assets/images/diag/compare.jpg' | relative_url }}" alt="Platform comparison figure">
+            </div>
+          </div>
+        </article>
+
+        <article class="swiper-slide emotions-slider__slide">
+          <div class="emotions-slider-item">
+            <div class="emotions-slider-item__image">
+              <img src="{{ '/assets/images/result/map.png' | relative_url }}" alt="Mapping result">
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="slider-pagination" id="homeSliderPagination" aria-label="Slider pagination"></div>
     </div>
-
-    <button class="carousel-btn carousel-btn-next" type="button" aria-label="Next image">&#10095;</button>
   </div>
 </section>
 
 <script>
   (function () {
-    const track = document.getElementById('homeImageCarouselTrack');
-    const root = document.getElementById('homeImageCarousel');
-    if (!track || !root) return;
+    const slider = document.getElementById('homeEmotionsSlider');
+    const track = document.getElementById('homeSliderTrack');
+    const prevBtn = document.getElementById('homeSliderPrev');
+    const nextBtn = document.getElementById('homeSliderNext');
+    const pagination = document.getElementById('homeSliderPagination');
+    if (!slider || !track || !prevBtn || !nextBtn || !pagination) return;
 
-    const prevBtn = root.querySelector('.carousel-btn-prev');
-    const nextBtn = root.querySelector('.carousel-btn-next');
+    const slides = Array.from(track.querySelectorAll('.emotions-slider__slide'));
+    if (!slides.length) return;
 
-    function slideBy(direction) {
-      const width = track.clientWidth;
-      track.scrollBy({ left: direction * width, behavior: 'smooth' });
+    let activeIndex = 0;
+
+    slides.forEach(function (_, i) {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'slider-pagination__item';
+      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+      dot.addEventListener('click', function () {
+        setActive(i, true);
+      });
+      pagination.appendChild(dot);
+    });
+
+    const dots = Array.from(pagination.querySelectorAll('.slider-pagination__item'));
+
+    function setActive(index, smooth) {
+      activeIndex = Math.max(0, Math.min(index, slides.length - 1));
+
+      prevBtn.classList.toggle('disabled', activeIndex === 0);
+      nextBtn.classList.toggle('disabled', activeIndex === slides.length - 1);
+
+      dots.forEach(function (dot, i) {
+        dot.classList.toggle('active', i === activeIndex);
+      });
+
+      slides[activeIndex].scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', inline: 'center', block: 'nearest' });
     }
 
-    prevBtn.addEventListener('click', function () { slideBy(-1); });
-    nextBtn.addEventListener('click', function () { slideBy(1); });
+    function detectActiveFromScroll() {
+      const center = track.scrollLeft + track.clientWidth / 2;
+      let best = 0;
+      let min = Infinity;
+
+      slides.forEach(function (slide, i) {
+        const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
+        const dist = Math.abs(slideCenter - center);
+        if (dist < min) {
+          min = dist;
+          best = i;
+        }
+      });
+
+      if (best !== activeIndex) {
+        activeIndex = best;
+        prevBtn.classList.toggle('disabled', activeIndex === 0);
+        nextBtn.classList.toggle('disabled', activeIndex === slides.length - 1);
+        dots.forEach(function (dot, i) {
+          dot.classList.toggle('active', i === activeIndex);
+        });
+      }
+    }
+
+    prevBtn.addEventListener('click', function () {
+      if (activeIndex > 0) setActive(activeIndex - 1, true);
+    });
+
+    nextBtn.addEventListener('click', function () {
+      if (activeIndex < slides.length - 1) setActive(activeIndex + 1, true);
+    });
+
+    track.addEventListener('scroll', function () {
+      window.requestAnimationFrame(detectActiveFromScroll);
+    }, { passive: true });
+
+    setActive(0, false);
   })();
 </script>
 
