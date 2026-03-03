@@ -25,7 +25,9 @@ TODO
 The Px4 serial runs TTL level logic and the connecttech Hadron carier runs Rs-232 level logic. We need to use [RS-232 To TTL Conveter (MAX3232IDR)](https://www.seeedstudio.com/RS-232-To-TTL-Conveter-MAX3232IDR-p-2851.html?srsltid=AfmBOoorzzVt8cIBUow6n3hfHMCEcNNeEVksGzzTceETeoXjmvNJLtpT) to establish connection.
 
 The wiring should look like below.
+
 ![Px4 Wiring](../../assets/images/real/wiring/px4_peer.png)
+
 ![Px4 Wiring](../../assets/images/real/wiring/rs232_converter.png)
 
 > **Note:** In each connection, wire TX -> RX and RX -> TX
