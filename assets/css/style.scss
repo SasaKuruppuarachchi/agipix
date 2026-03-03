@@ -821,9 +821,10 @@ a:not(.btn):not(.nav-link):hover {
   border-radius: 8px;
   border: 1px solid #30363d;
   background: #0d1117;
-  color: #c9d1d9;
-  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  color: #aeb6c2;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, DejaVu Sans Mono, monospace;
   line-height: 1.45;
+  text-indent: 0;
 }
 
 .doc-content .highlighter-rouge,
@@ -837,6 +838,20 @@ a:not(.btn):not(.nav-link):hover {
   border: 1px solid #30363d;
   border-radius: 6px;
   padding: 0.15rem 0.35rem;
+}
+
+/* Remove inner code box inside fenced blocks (GitHub-like behavior) */
+.doc-content pre code,
+.doc-content .highlight pre code,
+.doc-content .highlighter-rouge pre code {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  font-family: inherit;
+  text-indent: 0;
 }
 
 /* Responsive Design */
