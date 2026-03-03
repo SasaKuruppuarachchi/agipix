@@ -32,6 +32,9 @@ layout: default
 <div class="docs-layout">
   <aside class="docs-sidebar">
     <div class="docs-sidebar-inner">
+      <div class="docs-sidebar-topbar">
+        <button class="docs-sidebar-toggle" id="docsSidebarToggle" type="button" aria-label="Collapse sidebar" aria-expanded="true">&laquo;</button>
+      </div>
       <p class="docs-back"><a href="{{ '/docs/' | relative_url }}" class="btn btn-secondary">← Back</a></p>
       <div class="docs-sidebar-title">{{ scope | capitalize }}</div>
       <ul class="docs-nav">
@@ -59,6 +62,64 @@ layout: default
     </article>
   </main>
 </div>
+<script>
+  (function () {
+    const layout = document.querySelector('.docs-layout');
+    const toggleBtn = document.getElementById('docsSidebarToggle');
+    const storageKey = 'docsSidebarCollapsed';
+
+    function setSidebarCollapsed(isCollapsed) {
+      if (!layout || !toggleBtn) return;
+      layout.classList.toggle('sidebar-collapsed', isCollapsed);
+      toggleBtn.innerHTML = isCollapsed ? '&raquo;' : '&laquo;';
+      toggleBtn.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
+      toggleBtn.setAttribute('aria-expanded', String(!isCollapsed));
+    }
+
+    if (layout && toggleBtn && window.matchMedia('(min-width: 769px)').matches) {
+      const saved = localStorage.getItem(storageKey) === 'true';
+      setSidebarCollapsed(saved);
+      toggleBtn.addEventListener('click', function () {
+        const collapsed = !layout.classList.contains('sidebar-collapsed');
+        setSidebarCollapsed(collapsed);
+        localStorage.setItem(storageKey, String(collapsed));
+      });
+    }
+
+    const codeBlocks = document.querySelectorAll('.doc-content pre');
+    codeBlocks.forEach(function (pre) {
+      if (pre.closest('.code-block-wrap')) return;
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'code-block-wrap';
+      pre.parentNode.insertBefore(wrapper, pre);
+      wrapper.appendChild(pre);
+
+      const copyButton = document.createElement('button');
+      copyButton.type = 'button';
+      copyButton.className = 'code-copy-btn';
+      copyButton.textContent = 'Copy';
+      copyButton.setAttribute('aria-label', 'Copy code block');
+      wrapper.appendChild(copyButton);
+
+      copyButton.addEventListener('click', async function () {
+        const code = pre.innerText;
+        try {
+          await navigator.clipboard.writeText(code);
+          copyButton.textContent = 'Copied';
+          setTimeout(function () {
+            copyButton.textContent = 'Copy';
+          }, 1200);
+        } catch (e) {
+          copyButton.textContent = 'Failed';
+          setTimeout(function () {
+            copyButton.textContent = 'Copy';
+          }, 1200);
+        }
+      });
+    });
+  })();
+</script>
 {%- else -%}
   <article class="doc-content">
     {% if page.show_doc_title %}

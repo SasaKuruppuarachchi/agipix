@@ -651,6 +651,11 @@ a:not(.btn):not(.nav-link):hover {
   grid-template-columns: 260px 1fr;
   gap: 1.5rem;
   align-items: start;
+  transition: grid-template-columns 0.2s ease;
+}
+
+.docs-layout.sidebar-collapsed {
+  grid-template-columns: 46px 1fr;
 }
 
 .docs-sidebar {
@@ -664,6 +669,34 @@ a:not(.btn):not(.nav-link):hover {
   border: 1px solid var(--border-color);
   border-radius: 8px;
   padding: 1rem;
+}
+
+.docs-sidebar-topbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.5rem;
+}
+
+.docs-sidebar-toggle {
+  border: 1px solid var(--border-color);
+  background: #21262d;
+  color: #c9d1d9;
+  border-radius: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.docs-layout.sidebar-collapsed .docs-sidebar-inner {
+  padding: 0.5rem;
+}
+
+.docs-layout.sidebar-collapsed .docs-back,
+.docs-layout.sidebar-collapsed .docs-sidebar-title,
+.docs-layout.sidebar-collapsed .docs-nav {
+  display: none;
 }
 
 .docs-back {
@@ -757,16 +790,73 @@ a:not(.btn):not(.nav-link):hover {
   background: rgba(139, 26, 26, 0.05);
 }
 
+/* GitHub-like code blocks for docs */
+.doc-content .code-block-wrap {
+  position: relative;
+  margin: 1rem 0;
+}
+
+.doc-content .code-copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  border: 1px solid #30363d;
+  background: #21262d;
+  color: #c9d1d9;
+  border-radius: 6px;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+
+.doc-content .code-copy-btn:hover {
+  background: #30363d;
+}
+
+.doc-content pre,
+.doc-content .highlight pre,
+.doc-content .highlighter-rouge pre {
+  margin: 0;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+  background: #0d1117;
+  color: #c9d1d9;
+  font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+  line-height: 1.45;
+}
+
+.doc-content .highlighter-rouge,
+.doc-content .highlight {
+  border-radius: 8px;
+}
+
+.doc-content :not(pre) > code {
+  background: rgba(110,118,129,0.2);
+  color: #e6edf3;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 0.15rem 0.35rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .docs-layout {
     display: block;
   }
 
+  .docs-layout.sidebar-collapsed {
+    grid-template-columns: 1fr;
+  }
+
   .docs-sidebar {
     position: static;
     height: auto;
     margin-bottom: 1rem;
+  }
+
+  .docs-sidebar-topbar {
+    display: none;
   }
 
   .site-title {
