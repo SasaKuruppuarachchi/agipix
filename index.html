@@ -83,21 +83,44 @@ title: Home
 </section>
 
 <section class="highlights">
-  <h2>Experimental Results Snapshot</h2>
-  <div class="highlight-grid">
-    <div class="highlight-item">
-      <h3>Mapping & Exploration</h3>
-      <p>Exploration mapping reached IoU = 0.96 in controlled tests, and the platform was validated during ENRICH 2025 deployments.</p>
-      <img src="{{ '/assets/images/result/map.png' | relative_url }}" alt="Mapping result" style="width:100%; margin-top:0.8rem; border-radius:10px;">
+  <h2>Platform and Results Gallery</h2>
+  <div class="image-carousel" id="homeImageCarousel" aria-label="Agipix image carousel">
+    <button class="carousel-btn carousel-btn-prev" type="button" aria-label="Previous image">&#10094;</button>
+
+    <div class="carousel-track" id="homeImageCarouselTrack">
+      <figure class="carousel-slide">
+        <img src="{{ '/assets/images/banner_paper.png' | relative_url }}" alt="AgiPIX paper banner">
+      </figure>
+      <figure class="carousel-slide">
+        <img src="{{ '/assets/images/diag/compare.jpg' | relative_url }}" alt="Platform comparison figure">
+      </figure>
+      <figure class="carousel-slide">
+        <img src="{{ '/assets/images/result/map.png' | relative_url }}" alt="Mapping result">
+      </figure>
     </div>
 
-    <!-- <div class="highlight-item">
-      <h3>Adaptability</h3>
-      <p>The architecture supports multiple morphologies with shared autonomy workflows, including UAV and UGV variants.</p>
-      <img src="{{ '/assets/images/agipix_adaptations.png' | relative_url }}" alt="Agipix adaptation variants" style="width:100%; margin-top:0.8rem; border-radius:10px;">
-    </div> -->
+    <button class="carousel-btn carousel-btn-next" type="button" aria-label="Next image">&#10095;</button>
   </div>
 </section>
+
+<script>
+  (function () {
+    const track = document.getElementById('homeImageCarouselTrack');
+    const root = document.getElementById('homeImageCarousel');
+    if (!track || !root) return;
+
+    const prevBtn = root.querySelector('.carousel-btn-prev');
+    const nextBtn = root.querySelector('.carousel-btn-next');
+
+    function slideBy(direction) {
+      const width = track.clientWidth;
+      track.scrollBy({ left: direction * width, behavior: 'smooth' });
+    }
+
+    prevBtn.addEventListener('click', function () { slideBy(-1); });
+    nextBtn.addEventListener('click', function () { slideBy(1); });
+  })();
+</script>
 
 <section class="quick-start">
   <h2>Quick Start</h2>

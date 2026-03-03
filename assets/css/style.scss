@@ -418,6 +418,55 @@ html { scroll-padding-top: 72px; }
   line-height: 1.6;
 }
 
+/* Home image carousel */
+.image-carousel {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.carousel-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  gap: 1rem;
+  scrollbar-width: none;
+}
+
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-slide {
+  flex: 0 0 100%;
+  margin: 0;
+  scroll-snap-align: center;
+}
+
+.carousel-slide img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  border: 1px solid var(--border-color);
+  display: block;
+}
+
+.carousel-btn {
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-primary);
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
 /* Quick Start Section */
 .quick-start {
   background: var(--secondary-bg);
@@ -920,6 +969,14 @@ a:not(.btn):not(.nav-link):hover {
 
   .quick-start-grid {
     grid-template-columns: 1fr;
+  }
+
+  .image-carousel {
+    grid-template-columns: 1fr;
+  }
+
+  .carousel-btn {
+    display: none;
   }
 
   /* Mobile nav: show hamburger, collapse links by default */
