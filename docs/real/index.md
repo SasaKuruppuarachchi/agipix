@@ -4,7 +4,7 @@ layout: doc
 ---
 # Agipix (Real Robot) — Quick Guide
 
-Use this page to jump into the real robot setup. Each section below gives a short summary and links to the full guide.
+Use this page to jump into the full real-platform bring-up flow, from mechanical assembly to preflight checks.
 
 <img src="../../assets/images/diag/hard_overview.png" alt="HW overview" style="width:50%; max-width:50%; height:auto;">
 <img src="../../assets/images/real.jpg" alt="HW overview" style="width:50%; max-width:50%; height:auto;">
@@ -19,6 +19,8 @@ Use this page to jump into the real robot setup. Each section below gives a shor
 
 ![Autonomy overview](../../assets/images/exploded_labled.jpg)
 
+Read: [Hardware Assembly](./1_hardware_assembly.md)
+
 ## 2) Flashing the Hardware
 
 - Target: JetPack 6.x (Jetson Linux R36.3) on Orin NX/Nano with Connect Tech carriers.
@@ -27,18 +29,31 @@ Use this page to jump into the real robot setup. Each section below gives a shor
 - On first boot: complete setup, join Wi‑Fi, SSH in; consider NoMachine, nvpmodel, Docker/NVIDIA toolkit.
 - Keep handy: CTI docs/KB and NVIDIA references linked in the guide.
 
-## 3) Interfacing PX4 and sensnors
-- PX4 low level controller is wired up and interfaced
-- Lidar, Mono camera, Realsense/Oak-D cameras are connected and interfaced
+Read: [Flashing Hardware](./2_flashing_hardware.Md)
 
-## 4) Software Setup
+## 3) PX4 and Sensor Interfacing
+- PX4 low-level control wiring and DDS interface setup.
+- LiDAR, monocular camera, and optional RGB-D sensor integration.
+
+Read: [Interfacing Sensors](./4_interfacing_sensors.Md)
+
+## 4) Container and Software Setup
 
 - Runtime is containerized; follow isaac_ros_common Docker setup.
 - Branches: `agipix-hard` (hardware), `agipix-sim` (simulation).
 - For sim instructions, see the simulation docs; for autonomy, continue to perception stack.
 
-## 5) MANET Mesh networking
-- This is a ***work in progress*** upgarde to the agipix framework to use the long rage robust capabilities of the [Wi-Fi HaLow](https://heltec.org/project/ht-hc01/) mesh networking.
+Read: [Docker Build](./3_docker_build.Md) and [Software Setup](./6_software_setup.md)
+
+## 5) MANET Mesh Networking
+- Work-in-progress extension using [Wi-Fi HaLow](https://heltec.org/project/ht-hc01/) for long-range resilient links.
+
+Read: [MANET Mesh Networking](./5_manet_mesh_networking.Md)
+
+## 6) Preflight Checklist
+- Mission readiness checks for power, sensing, comms, and safety.
+
+Read: [Preflight Checklist](./7_preflight_checklist.md)
 
 ## Appendix — Hadron/Env Notes
 File: `hadron_cfg.txt`
@@ -51,7 +66,7 @@ File: `hadron_cfg.txt`
 
 ---
 
-Next Steps ?
-- Simulation
-- Autonomy
-- UI
+Next steps:
+- [Simulation Quick Guide](../sim/index.md)
+- [Autonomy Quick Guide](../autonomy/index.md)
+- [UI Quick Guide](../ui/index.md)

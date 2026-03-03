@@ -4,18 +4,29 @@ title: Home
 ---
 
 <section class="hero">
-  <img src="{{ '/assets/images/exploded.gif' | relative_url }}" alt="Agipix Exploded View" class="hero-banner">
+  <img src="{{ '/assets/images/banner_paper_small.png' | relative_url }}" alt="Agipix Platform Overview" class="hero-banner">
   
-  <h2 class="hero-title">Bridging Simulation and Reality for Aerial Robotics</h2>
+  <h2 class="hero-title">Bridging Simulation and Reality in Indoor Aerial Inspection</h2>
   
   <p class="hero-description">
-    Agipix is an open hardware and software platform for agile indoor autonomy that runs the same ROS 2, containerized stack in both Isaac Sim and on the real robot. A small 438×372 mm footprint with a multi-modal sensor suite (3D LiDAR, RGB camera, IMU) and a Jetson Orin NX companion enables robust exploration and mapping with <strong>zero code changes from sim to real</strong>.
+    Agipix is an open, compact, actively sensed aerial robotics platform for indoor autonomy and critical-asset inspection. The same ROS 2 containerized autonomy stack runs in Isaac Sim and on real hardware, enabling fast and reproducible sim-to-real transfer.
   </p>
 
   <div>
   <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
   <a href="{{ '/docs' | relative_url }}" class="btn btn-secondary">Get Started</a>
   <!-- <a href="{{ '/docs/sim/index' | relative_url }}" class="btn btn-secondary">Get Started</a> -->
+  </div>
+</section>
+
+<section class="highlights">
+  <h2>System Architecture</h2>
+  <div class="doc-content" style="background: rgba(10, 10, 10, 0.5);">
+    <p style="color: var(--text-secondary);">
+      Agipix is co-designed as four connected subsystems: <strong>AgiREAL</strong> hardware, <strong>AgiAUTO</strong> ROS 2 autonomy,
+      <strong>AgiSIM</strong> digital twin, and <strong>AgiUI</strong> operator interface.
+    </p>
+    <img src="{{ '/assets/images/diag/sys_overview.png' | relative_url }}" alt="Agipix system architecture" style="width:100%; max-width:1100px; border-radius: 12px; display:block; margin: 1rem auto;">
   </div>
 </section>
 
@@ -56,7 +67,7 @@ title: Home
     
     <div class="highlight-item">
       <h3>4. Small Form Factor</h3>
-      <p>Compact 438×372 mm envelope with guards; measured thrust-to-weight ratio (TWR) ≈ 2.98:1 for precise indoor maneuvers.</p>
+      <p>Compact 438×372 mm frame with protected sensing and agile indoor operation in narrow industrial spaces.</p>
     </div>
     
     <div class="highlight-item">
@@ -71,6 +82,29 @@ title: Home
   </div>
 </section>
 
+<section class="highlights">
+  <h2>Experimental Results Snapshot</h2>
+  <div class="highlight-grid">
+    <div class="highlight-item">
+      <h3>Trajectory Tracking</h3>
+      <p>ATE RMSE: 0.0637 m / 0.0368 m in simulation and 0.1404 m / 0.1049 m on hardware (lemniscate / up-down spiral).</p>
+      <img src="{{ '/assets/images/plots/traj_tracking.png' | relative_url }}" alt="Trajectory tracking results" style="width:100%; margin-top:0.8rem; border-radius:10px;">
+    </div>
+
+    <div class="highlight-item">
+      <h3>Mapping & Exploration</h3>
+      <p>Exploration mapping reached IoU = 0.96 in controlled tests, and the platform was validated during ENRICH 2025 deployments.</p>
+      <img src="{{ '/assets/images/result/map.png' | relative_url }}" alt="Mapping result" style="width:100%; margin-top:0.8rem; border-radius:10px;">
+    </div>
+
+    <div class="highlight-item">
+      <h3>Adaptability</h3>
+      <p>The architecture supports multiple morphologies with shared autonomy workflows, including UAV and UGV variants.</p>
+      <img src="{{ '/assets/images/agipix_adaptations.png' | relative_url }}" alt="Agipix adaptation variants" style="width:100%; margin-top:0.8rem; border-radius:10px;">
+    </div>
+  </div>
+</section>
+
 <section class="quick-start">
   <h2>Quick Start</h2>
   
@@ -78,7 +112,7 @@ title: Home
     <div class="quick-start-card">
       <h3>🖥️ Simulation</h3>
       <ul>
-  <li><a href="{{ '/docs/sim/1_setup_sim' | relative_url }}">Simulation Setup Guide</a></li>
+  <li><a href="{{ '/docs/sim/2_setup_sim' | relative_url }}">Simulation Setup Guide</a></li>
         <li>Isaac Sim Integration</li>
         <li>ROS 2 Docker Containers</li>
         <li>Digital Twin Environment</li>
@@ -90,7 +124,7 @@ title: Home
       <ul>
   <li><a href="{{ '/docs/real/1_hardware_assembly' | relative_url }}">Hardware Assembly</a></li>
   <li><a href="{{ '/docs/real/2_flashing_hardware' | relative_url }}">Flashing Firmware</a></li>
-  <li><a href="{{ '/docs/real/3_software_setup' | relative_url }}">Software Setup</a></li>
+  <li><a href="{{ '/docs/real/6_software_setup' | relative_url }}">Software Setup</a></li>
         <li><a href="{{ '/bom.html' | relative_url }}">Bill of Materials</a></li>
       </ul>
     </div>
@@ -111,7 +145,7 @@ title: Home
   <h2>Repository Layout</h2>
   <div class="doc-content" style="background: rgba(10, 10, 10, 0.5);">
     <ul style="color: var(--text-secondary); line-height: 2;">
-      <li><code>doc/</code> — Setup and usage guides</li>
+      <li><code>docs/</code> — Setup and usage guides</li>
       <li><code>bom/</code> — <a href="{{ '/bom.html' | relative_url }}">Bill of Materials</a></li>
       <li><code>cad/</code> — Mechanical CAD (designs and fabrication)</li>
       <li><code>model_exports/</code> — Exported models (STL/USD) for sim and docs</li>

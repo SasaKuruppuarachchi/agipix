@@ -4,30 +4,38 @@ layout: doc
 ---
 # Agipix (UI) — Quick Guide
 
-Use this page to jump into the operator UI workflows. It’s brief and links to the detailed pages.
+Use this page to navigate AgiUI workflows for teleoperation, supervision, and autonomy handover.
 
 ![UI overview](../../assets/images/diag/ui_overview.png)
+![AgiUI interface](../../assets/images/ui/agiui_v2.png)
 
 ## Teleoperation
 
-- Safety RC as a manual failsafe (primary manual mode).
-- Manual control via UDP‑MAVLink from ground station with USB joystick.
-- ROS 2 velocity teleop over DDS with joystick input.
+- Safety RC as manual failsafe.
+- Joystick and remote command pathways for direct robot control.
+- Real-time state feedback for safe intervention.
+
+Read: [Teleoperation](./1_teleoperation.md)
 
 ## Exploration UI
 
-- Visualize robot and live point cloud/map during exploration.
-- Provide task context to the operator (state, progress, goals).
-- Simple controls for starting/pausing missions and monitoring safety.
+- Shared map and mission context visualization.
+- Progress and status feedback during exploration tasks.
+- Start/pause supervision actions for field use.
+
+Read: [Exploration Autonomy](./2_exploration_autonomy.md)
 
 ## Human‑in‑the‑Loop Autonomy
 
-- High‑level intent converted to trajectories (e.g., waypoints, regions of interest).
-- Explainable UI overlays: what the robot is doing and why.
-- Smooth handoff between autonomy and manual intervention.
+- High-level task specification with autonomy-level switching.
+- Operator-in-the-loop supervision and intervention.
+- Continuous state and map feedback for trust and safety.
+
+Read: [Human in the Loop Autonomy](./3_humen_in_the_loop_autonomy.md)
 
 ---
 
 Related:
-- Simulation quick guide: ../sim/[index](../sim/index.md)
-- Autonomy quick guide: ../autonomy/[index](../autonomy/index.md)
+- [Simulation quick guide](../sim/index.md)
+- [Autonomy quick guide](../autonomy/index.md)
+- [Real platform quick guide](../real/index.md)

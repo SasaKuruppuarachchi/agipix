@@ -1,4 +1,557 @@
-% Scitation (AIP) BibTeX templates. Replace placeholders as needed.
+
+
+
+@IEEEtranBSTCTL{IEEEexample:BSTcontrol,
+    CTLuse_forced_etal = "yes",
+    CTLmax_names_forced_etal = "3",
+    CTLnames_show_etal = "2"
+}
+
+% JOURNALS
+% - robotics
+@STRING{ijrr    = "Int. J. Robot. Research" }
+@STRING{tro     = "{IEEE} Trans. Robot." }
+@STRING{tra     = "{IEEE} Trans. Robot. Autom." }
+@STRING{ral     = "{IEEE} Robot. Autom. Lett." }
+@STRING{auro     = "Autonom. Rob." }
+
+% before TRO
+@STRING{ras     = "J. Robot. and Auton. Syst." }
+@STRING{jfr     = "J. Field Robot." }
+@STRING{fsr     = "Field and Service Robot." }
+@STRING{ar      = "Auton. Robots" }
+@STRING{ijhr    = "Int. J. Humanoid Robot." }
+@STRING{mech    = "J. Mechatronics" }
+@STRING{jirs    = "J. Intell. Robot. Syst." }
+@STRING{ijars   = "Int. J. Adv. Robot. Syst." }
+@STRING{jgcd    = "J. Guidance, Control, and Dynamics" }
+% - computer vision
+@STRING{ijcv    = "Int. J. Comput. Vis." }
+@STRING{cviu    = "Comput. Vis. Image. Und." }
+@STRING{jmiv    = "J. Math. Imaging Vis." }
+@STRING{pami    = "{IEEE} Trans. Pattern Anal. Machine Intell." }
+@STRING{jivc    = "Image Vis. Comput." }
+@STRING{jrtip   = "J. Real-Time Image Process." }
+@STRING{tip     = "{IEEE} Trans. Image Process." }
+% - neuroscience
+@STRING{fns     = "Front. Neurosci." }
+@STRING{tnnls   = "{IEEE} Trans. Neural Netw. Learn. Syst." }
+@STRING{tnn     = "{IEEE} Trans. Neural Netw." }
+@STRING{nn      = "Neural Netw." }
+@STRING{tbcas   = "{IEEE} Trans. Biomed. Circuits Syst." }
+@STRING{tcsi    = "{IEEE} Trans. Circuits Syst. I, Reg. Papers" }
+@STRING{neco    = "Neural Computation" }
+% - misc
+@STRING{ac      = "{IEEE} Trans. Autom. Control" }
+@STRING{aes     = "{IEEE} Trans. Aerosp. Electron. Syst." }
+@STRING{sp      = "{IEEE} Trans. Signal Process." }
+@STRING{it      = "{IEEE} Trans. Inf. Theory" }
+@STRING{ieee    = "Proc. {IEEE}" }
+@STRING{ssc     = "{IEEE} J. Solid-State Circuits" }
+@STRING{ai      = "J. Artificial Intell." }
+@STRING{jbe     = "J. Basic Eng." }
+@STRING{acmcs   = "{ACM} Comput. Surveys" }
+@STRING{tsmcb   = "{IEEE} Trans. Syst. Man, Cybern. B, Cybern." }
+@STRING{tsmca   = "{IEEE} Trans. Syst. Man, Cybern. A, Syst., Humans" }
+@STRING{vcip    = "J. Visual Comm. Image Representation" }
+@STRING{nme     = "Int. J. Numerical Methods in Eng." }
+% MAGAZINES
+@STRING{ram     = "{IEEE} Robot. Autom. Mag." }
+@STRING{mcs     = "{IEEE} Control Systems" }
+% CONFERENCES
+% - robotics
+@STRING{icra    = "{IEEE} Int. Conf. Robot. Autom. (ICRA)" }
+@STRING{iros    = "IEEE/RSJ Int. Conf. Intell. Robot. Syst. (IROS)" }
+@STRING{isrr    = "Proc. Int. Symp. Robot. Research (ISRR)" }
+@STRING{rss     = "Robotics: Science and Systems (RSS)" }
+@STRING{icar    = "{IEEE} Int. Conf. Adv. Robot. (ICAR)" }
+@STRING{emav    = "Eur. Micro Aerial Vehicle Conf." }
+@STRING{ssrr    = "{IEEE} Int. Symp. Safety, Security, and Rescue Robot. (SSRR)" }
+@STRING{ecmr    = "Eur. Conf. Mobile Robots (ECMR)" }
+@STRING{clawar  = "Int. Conf. Climbing and Walking Robots (CLAWAR)" }
+@STRING{aeroc   = "{IEEE} Aerosp. Conf." }
+@STRING{iser    = "Int. Symp. Experimental Robotics (ISER)" }
+@STRING{robio   = "{IEEE} Int. Conf. Robot. Biomimetics (ROBIO)" }
+@STRING{icaim   = "{IEEE/ASME} Int. Conf. Adv. Intell. Mechatronics" }
+@STRING{isr     = "Int. Symp. Robotics (ISR)" }
+@STRING{icuas   = "{IEEE} Int. Conf. Unmanned Aircraft Syst. (ICUAS)" }
+@STRING{ifac    = "{IFAC} World Congress" }
+% - vision
+@STRING{cvpr    = "{IEEE} Int. Conf. Comput. Vis. Pattern Recog. (CVPR)" }
+@STRING{cvprw   = "{IEEE} Int. Conf. Comput. Vis. Pattern Recog. Workshops
+                  (CVPRW)" }
+@STRING{iccv    = "Int. Conf. Comput. Vis. (ICCV)" }
+@STRING{iccvw   = "Int. Conf. Comput. Vis. Workshops (ICCVW)" }
+@STRING{eccv    = "Eur. Conf. Comput. Vis. (ECCV)" }
+@STRING{bmvc    = "British Machine Vis. Conf. (BMVC)" }
+@STRING{icpr    = "{IEEE} Int. Conf. Pattern Recog. (ICPR)" }
+@STRING{icvs    = "Int. Conf. Comput. Vis. Syst. (ICVS)" }
+@STRING{crv     = "Conf. Comput. Robot Vis. (CRV)" }
+@STRING{isvc    = "Int. Symp. Adv. Vis. Comput. (ISVC)" }
+% - artificial intelligence
+@STRING{ijcai   = "Int. Joint Conf. Artificial Intell. (IJCAI)" }
+@STRING{aaai    = "{AAAI} Conf. Artificial Intell." }
+@STRING{siggraph= "SIGGRAPH" }
+@STRING{fusion  = "Int. Conf. Inf. Fusion (FUSION)" }
+@STRING{ijcnn   = "Int. Joint Conf. Neural Netw. (IJCNN)" }
+% - control
+@STRING{cdc     = "{IEEE} Conf. Decision Control (CDC)" }
+@STRING{cca     = "{IEEE} Conf. Control Appl. (CCA)" }
+@STRING{ecc     = "{IEEE} Eur. Control Conf. (ECC)" }
+@STRING{ccc     = "{IEEE} Chin. Control Conf. (CCC)" }
+@STRING{acc     = "{IEEE} Am. Control Conf. (ACC)" }
+% - misc
+@STRING{iscas   = "{IEEE} Int. Symp. Circuits Syst. (ISCAS)" }
+@STRING{icann   = "Int. Conf. Artificial Neural Netw." }
+@STRING{sac     = "{ACM} Symp. Applied Computing (SAC)" }
+@STRING{icassp  = "Int. Conf. Acoust., Speech, Signal Proc. (ICASSP)" }
+@STRING{isairas = "Int. Symp. Artificial Intell., Robot. Autom. in Space
+                  (iSAIRAS)" }
+@STRING{ebccsp  = "Int. Conf. Event-Based Control, Comm. Signal Proc. (EBCCSP)" }
+@STRING{isscc   = "{IEEE} Intl. Solid-State Circuits Conf. (ISSCC)" }
+@STRING{iccp    = "{IEEE} Int. Conf. Comput. Photography (ICCP)" }
+% - misc workshops
+@STRING{ismar   = "{IEEE} ACM Int. Sym. Mixed and Augmented Reality (ISMAR)" }
+@STRING{icraoss = "{ICRA} Workshop Open Source Softw." }
+@STRING{wpnc    = "Workshop Positioning, Navigation Comm." }
+% PUBLISHERS
+@STRING{mit     = "The MIT Press, Cambridge, MA" }
+@STRING{arxiv   = "ar{X}iv e-prints" }
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Critical asset inspection
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{enrich2025raicam,
+  title={Low-Cost Rapid-Development Air-Ground Robotic Solution for Nuclear Power Plant Inspection},
+  author={Tian, Changda and Arachchige, Sasanka Kuruppu and Li, Haichuan and Cardenas, Juan Jose Garcia and Raei, Hamidreza and Dincer, Enes and Kenan, Alperen and Bremner, Paul and Giuliani, Manuel and Neumann, Gerhard and others},
+  booktitle={IEEE International Symposium on Safety, Security, and Rescue Robotics},
+  year={2025}
+}
+
+@article{sanchez2024toward,
+  title={Toward fully automated inspection of critical assets supported by autonomous mobile robots, vision sensors, and artificial intelligence},
+  author={Sanchez-Cubillo, Javier and Del Ser, Javier and Martin, Jos{\'e} Luis},
+  journal={Sensors},
+  volume={24},
+  number={12},
+  pages={3721},
+  year={2024},
+  publisher={MDPI}
+}
+
+@ARTICLE{rochaelectric2025ins,
+  author={Daniel Rocha, Pedro and Lopes, Fernando J. P. and Da Silva Cruz, Luís A.},
+  journal={IEEE Access}, 
+  title={Automating Electrical Grid Asset Inspection: From Current Challenges to Future Directions}, 
+  year={2025},
+  volume={13},
+  number={},
+  pages={201392-201438},
+  keywords={Inspection;Reviews;Maintenance;Costs;Sensors;Data models;Market research;Fault diagnosis;Visualization;Taxonomy;Active learning;asset inspection;computer vision;deep learning;electrical grid;embedded vision;multimodal;photovoltaic;power line;thermography},
+  doi={10.1109/ACCESS.2025.3636718}}
+
+@misc{skydio2024assetinspection,
+  author       = {Jason Tillman},
+  title        = {How Aerial Robotics Are Revolutionizing Asset Inspections: Key Factors to Consider},
+  year         = {2024},
+  month        = {June 27},
+  howpublished = {\url{https://www.skydio.com/blog/how-aerial-robotics-are-revolutionizing-asset-inspections-key-factors-to-consider}},
+  note         = {Accessed: 2026-02-03}
+}
+
+@misc{skydioRemoteOps2026,
+  author       = {{Skydio, Inc.}},
+  title        = {Remote Ops (Software)},
+  year         = {2026},
+  howpublished = {\url{https://www.skydio.com/software/remote-ops}},
+  note         = {Accessed: 2026-02-07}
+}
+
+@misc{flyabilityCockpit2025,
+  author       = {{XD4 Solutions}},
+  title        = {Flyability Cockpit: The Heart of Elios Drone Control},
+  year         = {2025},
+  month        = {January 13},
+  howpublished = {\url{https://xd4solutions.com.br/flyability-cockpit-the-heart-of-elios-drone-control/}},
+  note         = {Accessed: 2026-02-07}
+}
+
+@inproceedings{palomba2017unmanned,
+  title={Unmanned aerial vehicle inspections and environmental benefits},
+  author={Palomba, JV and MScEcon, M},
+  booktitle={15th Asia Pacific Conference for Non-Destructive Testing},
+  pages={13--17},
+  year={2017}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Challenges in subterranean robotics
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+@article{darpa2023subt,
+  title={Into the robotic depths: Analysis and insights from the darpa subterranean challenge},
+  author={Chung, Timothy H and Orekhov, Viktor and Maio, Angela},
+  journal={Annual Review of Control, Robotics, and Autonomous Systems},
+  volume={6},
+  number={1},
+  pages={477--502},
+  year={2023},
+  publisher={Annual Reviews}
+}
+
+@misc{europeanroboticsENRICH2025,
+  author       = {{European Robotics}},
+  title        = {ENRICH -- The European Robotics Hackathon},
+  year         = {2025},
+  howpublished = {\url{https://enrich.european-robotics.eu/}},
+  note         = {Accessed: 2026-02-03}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Platforms
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{ouguz2024open,
+  title={An open-source UAV platform for swarm robotics research: using cooperative sensor fusion for inter-robot tracking},
+  author={O{\u{g}}uz, Sinan and Heinrich, Mary Katherine and Allwright, Michael and Zhu, Weixu and Wahby, Mostafa and Garone, Emanuele and Dorigo, Marco},
+  journal={IEEE access},
+  volume={12},
+  pages={43378--43395},
+  year={2024},
+  publisher={IEEE}
+}
+
+@misc{marti2023borinot,
+  title={Borinot: An Open Thrust-Torque-Controlled Robot for Agile Aerial-Contact Motion Research},
+  author={Martí-Saumell, Josep and Duarte, Hugo and Grosch, Patrick and Andrade-Cetto, Juan and Santamaria-Navarro, Angel and Solà, Joan},
+  journal={arXiv preprint arXiv:2307.14686},
+  year={2023}
+}
+
+@misc{djiMatrice400Specs2026,
+  author       = {{DJI}},
+  title        = {Matrice 400 Technical Specifications},
+  year         = {2026},
+  howpublished = {\url{https://enterprise.dji.com/matrice-400/specs}},
+  note         = {Accessed: 2026-02-03}
+}
+
+@misc{skydioX102026,
+  author       = {{Skydio, Inc.}},
+  title        = {Skydio X10 Technical Specifications},
+  year         = {2026},
+  howpublished = {\url{https://www.skydio.com/x10/technical-specs}},
+  note         = {Accessed: 2026-02-03}
+}
+
+@inproceedings{liu2024omninxt,
+  title={Omninxt: A fully open-source and compact aerial robot with omnidirectional visual perception},
+  author={Liu, Peize and Feng, Chen and Xu, Yang and Ning, Yan and Xu, Hao and Shen, Shaojie},
+  booktitle={2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  pages={10605--10612},
+  year={2024},
+  organization={IEEE}
+}
+
+
+@misc{FastDrone250,
+  author       = {{ZJU-FAST Lab}},
+  title        = {Fast-Drone-250: hardware and software design of the 250\,mm autonomous drone},
+  year         = {2025},
+  howpublished = {\url{https://github.com/ZJU-FAST-Lab/Fast-Drone-250}},
+  note         = {Accessed: 2026-02-03}
+}
+
+@article{microswarm2022fast,
+author = {Xin Zhou  and Xiangyong Wen  and Zhepei Wang  and Yuman Gao  and Haojia Li  and Qianhao Wang  and Tiankai Yang  and Haojian Lu  and Yanjun Cao  and Chao Xu  and Fei Gao },
+title = {Swarm of micro flying robots in the wild},
+journal = {Science Robotics},
+volume = {7},
+number = {66},
+pages = {eabm5954},
+year = {2022},
+doi = {10.1126/scirobotics.abm5954},
+URL = {https://www.science.org/doi/abs/10.1126/scirobotics.abm5954},
+eprint = {https://www.science.org/doi/pdf/10.1126/scirobotics.abm5954},
+abstract = {Aerial robots are widely deployed, but highly cluttered environments such as dense forests remain inaccessible to drones and even more so to swarms of drones. In these scenarios, previously unknown surroundings and narrow corridors combined with requirements of swarm coordination can create challenges. To enable swarm navigation in the wild, we develop miniature but fully autonomous drones with a trajectory planner that can function in a timely and accurate manner based on limited information from onboard sensors. The planning problem satisfies various task requirements including flight efficiency, obstacle avoidance, and inter-robot collision avoidance, dynamical feasibility, swarm coordination, and so on, thus realizing an extensible planner. Furthermore, the proposed planner deforms trajectory shapes and adjusts time allocation synchronously based on spatial-temporal joint optimization. A high-quality trajectory thus can be obtained after exhaustively exploiting the solution space within only a few milliseconds, even in the most constrained environment. The planner is finally integrated into the developed palm-sized swarm platform with onboard perception, localization, and control. Benchmark comparisons validate the superior performance of the planner in trajectory quality and computing time. Various real-world field experiments demonstrate the extensibility of our system. Our approach evolves aerial robotics in three aspects: capability of cluttered environment navigation, extensibility to diverse task requirements, and coordination as a swarm without external facilities. A fully autonomous swarm composed of palm-sized drones with versatile task extensibility in the wild is realized.}}
+
+@article{tranzatto2022cerberus,
+author = {Marco Tranzatto  and Takahiro Miki  and Mihir Dharmadhikari  and Lukas Bernreiter  and Mihir Kulkarni  and Frank Mascarich  and Olov Andersson  and Shehryar Khattak  and Marco Hutter  and Roland Siegwart  and Kostas Alexis },
+title = {CERBERUS in the DARPA Subterranean Challenge},
+journal = {Science Robotics},
+volume = {7},
+number = {66},
+pages = {eabp9742},
+year = {2022},
+doi = {10.1126/scirobotics.abp9742},
+URL = {https://www.science.org/doi/abs/10.1126/scirobotics.abp9742},
+eprint = {https://www.science.org/doi/pdf/10.1126/scirobotics.abp9742},
+abstract = {This article presents the core technologies and deployment strategies of Team CERBERUS that enabled our winning run in the DARPA Subterranean Challenge finals. CERBERUS is a robotic system-of-systems involving walking and flying robots presenting resilient autonomy, as well as mapping and navigation capabilities to explore complex underground environments. This article details the winning performance of Team CERBERUS in the DARPA Subterranean Challenge Final Event.}}
+
+@article{Foehn2022Agilicious,
+author = {Philipp Foehn  and Elia Kaufmann  and Angel Romero  and Robert Penicka  and Sihao Sun  and Leonard Bauersfeld  and Thomas Laengle  and Giovanni Cioffi  and Yunlong Song  and Antonio Loquercio  and Davide Scaramuzza },
+title = {Agilicious: Open-source and open-hardware agile quadrotor for vision-based flight},
+journal = {Science Robotics},
+volume = {7},
+number = {67},
+pages = {eabl6259},
+year = {2022},
+doi = {10.1126/scirobotics.abl6259},
+URL = {https://www.science.org/doi/abs/10.1126/scirobotics.abl6259},
+eprint = {https://www.science.org/doi/pdf/10.1126/scirobotics.abl6259},
+abstract = {Autonomous, agile quadrotor flight raises fundamental challenges for robotics research in terms of perception, planning, learning, and control. A versatile and standardized platform is needed to accelerate research and let practitioners focus on the core problems. To this end, we present Agilicious, a codesigned hardware and software framework tailored to autonomous, agile quadrotor flight. It is completely open source and open hardware and supports both model-based and neural network–based controllers. Also, it provides high thrust-to-weight and torque-to-inertia ratios for agility, onboard vision sensors, graphics processing unit (GPU)–accelerated compute hardware for real-time perception and neural network inference, a real-time flight controller, and a versatile software stack. In contrast to existing frameworks, Agilicious offers a unique combination of flexible software stack and high-performance hardware. We compare Agilicious with prior works and demonstrate it on different agile tasks, using both model-based and neural network–based controllers. Our demonstrators include trajectory tracking at up to 5g and 70 kilometers per hour in a motion capture system, and vision-based acrobatic flight and obstacle avoidance in both structured and unstructured environments using solely onboard perception. Last, we demonstrate its use for hardware-in-the-loop simulation in virtual reality environments. Because of its versatility, we believe that Agilicious supports the next generation of scientific and industrial quadrotor research. We provide a codesigned hardware and software framework tailored to autonomous, agile quadrotor flight.}}
+
+
+@misc{flyabilityElios32022,
+  author       = {{Flyability}},
+  title        = {Elios 3 – Indoor LiDAR Drone for Industry 4.0},
+  year         = {2022},
+  howpublished = {\url{https://www.flyability.com/elios-3}},
+  note         = {Accessed: 2026-02-03}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% User interface / HRI
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{hayat2016surveyhdi,
+  title={Survey on Human-Drone Interaction},
+  author={Hayat, Sheraz and Yanmaz, Evsen and Muzaffar, Rashid},
+  journal={IEEE Access},
+  volume={4},
+  pages={8376--8399},
+  year={2016},
+  publisher={IEEE}
+}
+
+@inproceedings{cauchard2015droneme,
+  title={Drone \& Me: An Exploration into Natural Human-Drone Interaction},
+  author={Cauchard, Jessica R. and Zhai, Kevin Y. and Spadafora, Marc and Landay, James A.},
+  booktitle={Proceedings of the 33rd Annual ACM Conference on Human Factors in Computing Systems (CHI)},
+  year={2015},
+  organization={ACM}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Perception
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{shan2020lio,
+  title={Lio-sam: Tightly-coupled lidar inertial odometry via smoothing and mapping},
+  author={Shan, Tixiao and Englot, Brendan and Meyers, Drew and Wang, Wei and Ratti, Carlo and Rus, Daniela},
+  booktitle={2020 IEEE/RSJ international conference on intelligent robots and systems (IROS)},
+  pages={5135--5142},
+  year={2020},
+  organization={IEEE}
+}
+@article{xu2022fast,
+  title={Fast-lio2: Fast direct lidar-inertial odometry},
+  author={Xu, Wei and Cai, Yixi and He, Dongjiao and Lin, Jiarong and Zhang, Fu},
+  journal={IEEE Transactions on Robotics},
+  volume={38},
+  number={4},
+  pages={2053--2073},
+  year={2022},
+  publisher={IEEE}
+}
+
+@article{he2023point,
+  title={Point-LIO: robust high-bandwidth light detection and ranging inertial odometry},
+  author={He, Dongjiao and Xu, Wei and Chen, Nan and Kong, Fanze and Yuan, Chongjian and Zhang, Fu},
+  journal={Advanced Intelligent Systems},
+  volume={5},
+  number={7},
+  pages={2200459},
+  year={2023},
+  publisher={Wiley Online Library}
+}
+
+@article{chen2022direct,
+  title={Direct lidar-inertial odometry: Lightweight lio with continuous-time motion correction},
+  author={Chen, Kenny and Nemiroff, Ryan and Lopez, Brett T},
+  journal={arXiv preprint arXiv:2203.03749},
+  year={2022}
+}
+
+@article{gentil20242fast,
+  title={2FAST-2LAMAA: A Lidar-Inertial Localisation and Mapping Framework for Non-Static Environments},
+  author={Gentil, Cedric Le and Falque, Raphael and Vidal-Calleja, Teresa},
+  journal={arXiv preprint arXiv:2410.05433},
+  year={2024}
+}
+
+@article{zhao2024adaptive,
+  title={Adaptive-lio: Enhancing robustness and precision through environmental adaptation in lidar inertial odometry},
+  author={Zhao, Chengwei and Hu, Kun and Xu, Jie and Zhao, Lijun and Han, Baiwen and Wu, Kaidi and Tian, Maoshan and Yuan, Shenghai},
+  journal={IEEE Internet of Things Journal},
+  year={2024},
+  publisher={IEEE}
+}
+
+@article{LV-DOT,
+  title={LV-DOT: LiDAR-visual dynamic obstacle detection and tracking for autonomous robot navigation},
+  author={Xu, Zhefan and Shen, Haoyu and Han, Xinming and Jin, Hanyu and Ye, Kanlong and Shimada, Kenji},
+  journal={arXiv preprint arXiv:2502.20607},
+  year={2025}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Time-optimal quadrotor flight
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@inproceedings{kuruppu2024robust,
+  title={Robust Navigation Based on an Interacting Multiple-Model Filtering Framework Using Multiple Tracking Cameras},
+  author={Kuruppu Arachchige, Sasanka and Lee, Kyuman},
+  booktitle={AIAA SCITECH 2024 Forum},
+  pages={1175},
+  year={2024}
+}
+
+
+@article {Foehn2021science,
+	author = {Foehn, Philipp and Romero, Angel and Scaramuzza, Davide},
+	title = {Time-optimal planning for quadrotor waypoint flight},
+	volume = {6},
+	number = {56},
+	elocation-id = {eabh1221},
+	year = {2021},
+	doi = {10.1126/scirobotics.abh1221},
+	publisher = {Science Robotics},
+	URL = {https://robotics.sciencemag.org/content/6/56/eabh1221},
+	eprint = {https://robotics.sciencemag.org/content/6/56/eabh1221.full.pdf},
+	journal = {Science Robotics}
+}
+
+@inproceedings{guerra2019flightgoggles,
+  year = {2019},
+  publisher = {{IEEE}},
+  author = {Guerra, Winter and Tal, Ezra and Murali, Varun and Ryou, Gilhyun and Karaman, Sertac},
+  title = {{FlightGoggles}: Photorealistic Sensor Simulation for Perception-driven Robotics using Photogrammetry and Virtual Reality},
+  booktitle = {{IEEE}/{RSJ} International Conference on Intelligent Robots and Systems ({IROS})}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Simulation / digital twins
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@misc{rosaerialSimulationLandscape2026,
+  author       = {{ROS-Aerial community}},
+  title        = {Simulation of Aerial Robotics (Aerial Robotics Landscape)},
+  year         = {2026},
+  howpublished = {\url{https://ros-aerial.github.io/aerial_robotic_landscape/simulation/}},
+  note         = {Accessed: 2026-02-07}
+}
+
+@incollection{furrer2016rotors,
+  title     = {RotorS---A Modular Gazebo MAV Simulator Framework},
+  author    = {Furrer, Fadri and Burri, Michael and Achtelik, Markus W. and Siegwart, Roland},
+  booktitle = {Robot Operating System (ROS): The Complete Reference (Volume 1)},
+  editor    = {Koubaa, Anis},
+  pages     = {595--625},
+  year      = {2016},
+  publisher = {Springer International Publishing},
+  doi       = {10.1007/978-3-319-26054-9_23}
+}
+
+@inproceedings{silano2018crazys,
+  title={CrazyS: a software-in-the-loop platform for the Crazyflie 2.0 nano-quadcopter},
+  author={Silano, Giuseppe and Aucone, Emanuele and Iannelli, Luigi},
+  booktitle={2018 26th Mediterranean Conference on Control and Automation (MED)},
+  pages={1--6},
+  year={2018},
+  organization={IEEE}
+}
+
+@inproceedings{shah2017airsim,
+  title={Airsim: High-fidelity visual and physical simulation for autonomous vehicles},
+  author={Shah, Shital and Dey, Debadeepta and Lovett, Chris and Kapoor, Ashish},
+  booktitle={Field and service robotics: Results of the 11th international conference},
+  pages={621--635},
+  year={2017},
+  organization={Springer}
+}
+
+@inproceedings{song2021flightmare,
+  title={Flightmare: A flexible quadrotor simulator},
+  author={Song, Yunlong and Naji, Selim and Kaufmann, Elia and Loquercio, Antonio and Scaramuzza, Davide},
+  booktitle={Conference on Robot Learning},
+  pages={1147--1157},
+  year={2021},
+  organization={PMLR}
+}
+
+@article{kong2023marsim,
+  title={MARSIM: A light-weight point-realistic simulator for LiDAR-based UAVs},
+  author={Kong, Fanze and Liu, Xiyuan and Tang, Benxu and Lin, Jiarong and Ren, Yunfan and Cai, Yixi and Zhu, Fangcheng and Chen, Nan and Zhang, Fu},
+  journal={IEEE Robotics and Automation Letters},
+  volume={8},
+  number={5},
+  pages={2954--2961},
+  year={2023},
+  publisher={IEEE}
+}
+
+@inproceedings{jacinto2024pegasus,
+  author    = {Jacinto, Marcelo and Pinto, Jo{\~a}o and Patrikar, Jay and Keller, John and Cunha, Rita and Scherer, Sebastian and Pascoal, Ant{\'o}nio},
+  booktitle = {2024 International Conference on Unmanned Aircraft Systems (ICUAS)},
+  title     = {Pegasus Simulator: An Isaac Sim Framework for Multiple Aerial Vehicles Simulation},
+  year      = {2024},
+  pages     = {917--922},
+  doi       = {10.1109/ICUAS60882.2024.10556959}
+}
+
+@ARTICLE{Floreano2015nature,
+  title    = "Science, technology and the future of small autonomous drones",
+  author   = "Floreano, Dario and Wood, Robert J",
+  journal  = "Nature",
+  volume   =  521,
+  number   =  7553,
+  pages    = "460--466",
+  month    =  may,
+  year     =  2015,
+  language = "en",
+  issn     = "0028-0836, 1476-4687",
+  pmid     = "26017445",
+  doi      = "10.1038/nature14542"
+}
+
+@ARTICLE{Karydis2017if,
+  title    = "Energetics in robotic flight at small scales",
+  author   = "Karydis, Konstantinos and Kumar, Vijay",
+  journal  = "Interface Focus",
+  volume   =  7,
+  number   =  1,
+  pages    = "20160088",
+  month    =  feb,
+  year     =  2017,
+  language = "en",
+  issn     = "2042-8898",
+  pmid     = "28163880",
+  doi      = "10.1098/rsfs.2016.0088",
+  pmc      = "PMC5206607"
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Perception (LiDAR-Inertial Odometry)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@inproceedings{chen2022dlio,
+    title        = {Direct LiDAR-Inertial Odometry: Lightweight LIO with Continuous-Time Motion Correction},
+    author       = {Chen, Kenny and Nemiroff, Ryan and Lopez, Brett T},
+    booktitle    = {2023 IEEE International Conference on Robotics and Automation (ICRA)},
+    year         = {2023},
+    pages        = {3983--3989},
+    doi          = {10.1109/ICRA48891.2023.10160508},
+    url          = {https://ieeexplore.ieee.org/document/10160508}
+}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Platforms / Systems (Open-Source UAVs)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 @article{kuruppu2025agipix,
     author    = {Kuruppu Arachchige, Sasanka and Kämäräinen, Joni},
@@ -12,12 +565,3075 @@
     url       = {https://pubs.aip.org/doi/10.1063/5.xxxxxxx}
 }
 
-@inproceedings{chen2022dlio,
-    title        = {Direct LiDAR-Inertial Odometry: Lightweight LIO with Continuous-Time Motion Correction},
-    author       = {Chen, Kenny and Nemiroff, Ryan and Lopez, Brett T},
-    booktitle    = {2023 IEEE International Conference on Robotics and Automation (ICRA)},
-    year         = {2023},
-    pages        = {3983--3989},
-    doi          = {10.1109/ICRA48891.2023.10160508},
-    url          = {https://ieeexplore.ieee.org/document/10160508}
+@ARTICLE{Baca2021jirs,
+  title   = "The {MRS} {UAV} System: Pushing the Frontiers of Reproducible
+             Research, Real-world Deployment, and Education with Autonomous
+             Unmanned Aerial Vehicles",
+  author  = "Baca, Tomas and Petrlik, Matej and Vrba, Matous and Spurny,
+             Vojtech and Penicka, Robert and Hert, Daniel and Saska, Martin",
+  journal = "J. Intell. Rob. Syst.",
+  volume  =  102,
+  number  =  1,
+  pages   = "26",
+  month   =  apr,
+  year    =  2021,
+  issn    = "1573-0409",
+  doi     = "10.1007/s10846-021-01383-5"
+}
+
+
+
+
+ @ARTICLE{Sa2018ram,
+   title   = "Build Your Own {Visual-Inertial} Drone: A {Cost-Effective} and
+              {Open-Source} Autonomous Drone",
+   author  = "Sa, Inkyu and Kamel, Mina and Burri, Michael and Bloesch, Michael
+              and Khanna, Raghav and Popovic, Marija and Nieto, Juan and
+              Siegwart, Roland",
+   journal = "IEEE Robot. Autom. Mag.",
+   volume  =  25,
+   number  =  1,
+   pages   = "89--103",
+   month   =  mar,
+   year    =  2018,
+   issn    = "1070-9932"
+ }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Embedded VIO / Hardware Accelerators
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@ARTICLE{Suleiman2019jssc,
+  title    = "Navion: A 2-mW Fully Integrated {Real-Time} {Visual-Inertial}
+              Odometry Accelerator for Autonomous Navigation of Nano Drones",
+  author   = "Suleiman, Amr and Zhang, Zhengdong and Carlone, Luca and Karaman,
+              Sertac and Sze, Vivienne",
+  journal  = "IEEE J. Solid-State Circuits",
+  volume   =  54,
+  number   =  4,
+  pages    = "1106--1119",
+  month    =  apr,
+  year     =  2019,
+  issn     = "0018-9200, 1558-173X",
+  doi      = "10.1109/JSSC.2018.2886342"
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Control / MPC / Aggressive Flight
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@ARTICLE{lu2022onmpc,
+  author={Lu, Guozheng and Xu, Wei and Zhang, Fu},
+  journal={IEEE Transactions on Industrial Electronics}, 
+  title={On-Manifold Model Predictive Control for Trajectory Tracking on Robotic Systems}, 
+  year={2023},
+  volume={70},
+  number={9},
+  pages={9192-9202},
+  keywords={Manifolds;Robots;Trajectory;Robot kinematics;Autonomous aerial vehicles;Trajectory tracking;Predictive control;Manifolds;mobile robots;predictive control},
+  doi={10.1109/TIE.2022.3212397}}
+
+@article{tal2020tcst,
+  title={Accurate tracking of aggressive quadrotor trajectories using incremental nonlinear dynamic inversion and differential flatness},
+  author={Tal, Ezra and Karaman, Sertac},
+  journal={IEEE Transactions on Control Systems Technology},
+  volume={29},
+  number={3},
+  pages={1203--1218},
+  year={2020},
+  publisher={IEEE}
+}
+
+@article{torrente2021ral,
+  title={Data-driven mpc for quadrotors},
+  author={Torrente, Guillem and Kaufmann, Elia and F{\"o}hn, Philipp and Scaramuzza, Davide},
+  journal={IEEE Robotics and Automation Letters},
+  volume={6},
+  number={2},
+  pages={3769--3776},
+  year={2021},
+  publisher={IEEE}
+}
+
+@inproceedings{mellinger2011minsnap,
+  author    = {Mellinger, Daniel and Kumar, Vijay},
+  title     = {Minimum Snap Trajectory Generation and Control for Quadrotors},
+  booktitle = {2011 IEEE International Conference on Robotics and Automation (ICRA)},
+  year      = {2011},
+  pages     = {2520--2525},
+  doi       = {10.1109/ICRA.2011.5980409}
+}
+
+@inproceedings{kaufmann2022learnedpolicies,
+  title={A benchmark comparison of learned control policies for agile quadrotor flight},
+  author={Kaufmann, Elia and Bauersfeld, Leonard and Scaramuzza, Davide},
+  booktitle={2022 International Conference on Robotics and Automation (ICRA)},
+  pages={10504--10510},
+  year={2022},
+  organization={IEEE}
+}
+
+@misc{song2023perceptionaware,
+  title={Learning perception-aware agile flight in cluttered environments},
+  author={Song, Yunlong and Shi, Kexin and Penicka, Robert and Scaramuzza, Davide},
+  journal={arXiv preprint arXiv:2210.01841},
+  year={2022}
+}
+@article{xu2025navrl,
+  author={Xu, Zhefan and Han, Xinming and Shen, Haoyu and Jin, Hanyu and Shimada, Kenji},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={NavRL: Learning Safe Flight in Dynamic Environments}, 
+  year={2025},
+  volume={10},
+  number={4},
+  pages={3668-3675},
+  keywords={Navigation;Robots;Collision avoidance;Training;Safety;Vehicle dynamics;Heuristic algorithms;Detectors;Autonomous aerial vehicles;Learning systems;Aerial systems: Perception and autonomy;reinforcement learning;collision avoidance},
+  doi={10.1109/LRA.2025.3546069}
+}
+
+@article{suomela2025synthetic,
+  title={Synthetic vs. Real Training Data for Visual Navigation},
+  author={Suomela, Lauri and Arachchige, Sasanka Kuruppu and Torres, German F and Edelman, Harry and K{\"a}m{\"a}r{\"a}inen, Joni-Kristian},
+  journal={arXiv preprint arXiv:2509.11791},
+  year={2025}
+}
+
+@article{suomela2026data,
+  title={Data Scaling for Navigation in Unknown Environments},
+  author={Suomela, Lauri and Takahata, Naoki and Arachchige, Sasanka Kuruppu and Edelman, Harry and K{\"a}m{\"a}r{\"a}inen, Joni-Kristian},
+  journal={arXiv preprint arXiv:2601.09444},
+  year={2026}
+}
+
+
+@misc{li2025agiledelay,
+  title={Agile in the Face of Delay: Asynchronous End-to-End Learning for Real-World Aerial Navigation},
+  author={Li, Yude and Zhou, Zhexuan and Li, Huizhe and Gong, Youmin and Mei, Jie},
+  journal={arXiv preprint arXiv:2509.13816},
+  year={2025}
+}
+
+
+@article{zhou2021egoplanner,
+  title={Ego-planner: An esdf-free gradient-based local planner for quadrotors},
+  author={Zhou, Xin and Wang, Zhepei and Ye, Hongkai and Xu, Chao and Gao, Fei},
+  journal={IEEE Robotics and Automation Letters},
+  volume={6},
+  number={2},
+  pages={478--485},
+  year={2020},
+  publisher={IEEE}
+}
+
+@inproceedings{xuVigoPlanner2026,
+  title={Vision-aided UAV navigation and dynamic obstacle avoidance using gradient-based B-spline trajectory optimization},
+  author={Xu, Zhefan and Xiu, Yumeng and Zhan, Xiaoyang and Chen, Baihan and Shimada, Kenji},
+  booktitle={2023 IEEE International Conference on Robotics and Automation (ICRA)},
+  pages={1214--1220},
+  year={2023},
+  organization={IEEE}
+}
+
+
+@article{smeur2016jgcd,
+  title={Adaptive incremental nonlinear dynamic inversion for attitude control of micro air vehicles},
+  author={Smeur, Ewoud JJ and Chu, Qiping and De Croon, Guido CHE},
+  journal={Journal of Guidance, Control, and Dynamics},
+  volume={39},
+  number={3},
+  pages={450--461},
+  year={2016},
+  publisher={American Institute of Aeronautics and Astronautics}
+}
+
+@article{croonRAS20,
+  title={Autonomous drone race: A computationally efficient vision-based navigation and control strategy},
+  author={Shuo Li and Michaël MOI Ozo and Christophe De Wagter and Guido CHE de Croon},
+  journal={Robotics and Autonomous Systems
+},
+  volume={133},
+  year={2020}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Market reports / industry stats (previously footnotes)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{FortuneBusiness2019,
+ date    = {2019-04-01},
+ title   = {Aerial Imaging Market Size, Share and Industry Analysis By Camera Orientation (Oblique, Vertical), Platform (Fixed-Wing Aircraft, Helicopter, UAV/Drones), End-Use Industry (Government, Energy Sector, Defense, Forestry and Agriculture, Real Estate, Civil Engineering, Insurance) And Regional Forecast, 2018-2025},
+ journal = {Fortune Business Insights},
+ url     = {http://www.fortunebusinessinsights.com/industry-reports/aerial-imaging-market-100069},
+ urldate = {2019-04-01},
+ year    = {2019}
+}
+
+@article{Bloomberg2019,
+ author  = {Markets and Markets},
+ date    = {2019-07-15},
+ title   = {Autonomous Last Mile Delivery Market Worth \$91.5 Billion by 2030},
+ journal = {Bloomberg},
+ url     = {http://www.bloomberg.com/press-releases/2019-07-15/autonomous-last-mile-delivery-market-worth-91-5-billion-by-2030-exclusive-report-by-marketsandmarkets},
+ urldate = {2019-07-15},
+ year    = {2019}
+}
+
+@article{GlobeNewsWire2019,
+ author  = {Reports and Data},
+ date    = {2019-03-18},
+ title   = {Urban Air Mobility Market To Reach USD 7.9 Billion By 2030},
+ journal = {Globe NewsWire},
+ url     = {http://www.globenewswire.com/news-release/2019/03/18/1756495/0/en/Urban-Air-Mobility-Market-To-Reach-USD-7-9-Billion-By-2030-Reports-And-Data.html},
+ urldate = {2019-03-18},
+ year    = {2019}
+}
+
+@article{Forbes14,
+ author  = {Gregory McNeal},
+ date    = {2014-06-14},
+ title   = {Video Shows Kings Fans Knocking Drone Out Of Sky, Did It Belong To LAPD?},
+ journal = {Forbes},
+ url     = {https://www.forbes.com/sites/gregorymcneal/2014/06/14/video-shows-kings-fans-knocking-drone-out-of-sky-did-it-belong-to-lapd/#4377a6584284},
+ urldate = {2014-06-14},
+ year    = {2014}
+}
+
+@article{EveningStandard,
+ author  = {Tom Powell},
+ date    = {2017-07-19},
+ title   = {Bizarre moment Argentine football fan takes down drone with well-aimed toilet roll as it films crowd},
+ journal = {Evening Standard},
+ url     = {http://www.standard.co.uk/news/world/bizarre-moment-argentine-football-fan-takes-down-drone-with-wellaimed-toilet-roll-as-it-films-crowd-a3591066.html},
+ urldate = {2017-07-19},
+ year    = {2017}
+}
+
+@article{DailyMail,
+ author  = {Mail Online Reporter},
+ date    = {2016-01-27},
+ title   = {When eagles attack! Drone camera mistaken for rival},
+ journal = {Daily Mail},
+ url     = {http://www.dailymail.co.uk/video/news/video-1154408/Golden-Eagle-attacks-drone-camera-mistaking-rival.html},
+ urldate = {2016-01-27},
+ year    = {2016}
+}
+
+@article{CNet,
+ author  = {Anthony Domanico},
+ date    = {2014-10-10},
+ title   = {Hawk attacks drone in a battle of claw versus machine},
+ journal = {CNet},
+ url     = {http://www.cnet.com/news/this-hawk-has-no-love-for-your-drone/},
+ urldate = {2014-10-10},
+ year    = {2014}
+}
+
+@article{Ackerman2018Skydio,
+ author  = {Evan Ackerman},
+ date    = {2018-02-13},
+ title   = {Skydio Demonstrates Incredible Obstacle-Dodging Full Autonomy With New R1 Consumer Drone},
+ journal = {IEEE Spectrum},
+ url     = {http://spectrum.ieee.org/automaton/robotics/drones/skydio-r1-drone},
+ urldate = {2018-02-13},
+ year    = {2018}
+}
+
+@online{youtubevideoeventcameras,
+        title = {Event-based, 6-DOF Pose Tracking for High-Speed Maneuvers using a Dynamic Vision Sensor},
+        date = {2014},
+        organization = {Youtube},
+        author = {Elias Mueggler and Basil Huber and Davide Scaramuzza},
+        url = {https://youtu.be/LauQ6LWTkxM?t=32},
+    }
+    
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Sensor
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@Article{Lichtsteiner08ssc,
+  author        = {Patrick Lichtsteiner and Christoph Posch and Tobi Delbruck},
+  title         = {{A 128$\times$128 120 dB 15 $\mu$s latency asynchronous
+                  temporal contrast vision sensor}},
+  journal       = ssc,
+  year          = 2008,
+  volume        = 43,
+  number        = 2,
+  pages         = {566--576},
+  doi           = {10.1109/JSSC.2007.914337}
+}
+
+@Article{Brandli14ssc,
+  author        = {Christian Brandli and Raphael Berner and Minhao Yang and
+                  Shih-Chii Liu and Tobi Delbruck},
+  title         = {A 240x180 130{dB} 3us Latency Global Shutter Spatiotemporal
+                  Vision Sensor},
+  journal       = ssc,
+  year          = 2014,
+  volume        = 49,
+  number        = 10,
+  pages         = {2333--2341},
+  doi           = {10.1109/JSSC.2014.2342715}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Monocular, standard obstacle avoidance
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@InProceedings{Esrafilian16icrom, 
+    author      =   {O. Esrafilian and H. D. Taghirad}, 
+    booktitle   =   {International Conference on Robotics and Mechatronics (ICROM)}, 
+    title       =   {Autonomous flight and obstacle avoidance of a quadrotor by monocular SLAM}, 
+    year        =   {2016}, 
+    pages       =   {240-245}, 
+    doi         =   {10.1109/ICRoM.2016.7886853},
+    month={Oct}
+}
+
+@InProceedings{Stoffregen19iccv, 
+    author      =   {T. Stoffregen and G. Gallego and T. Drummond and L. Kleeman and D. Scaramuzza}, 
+    booktitle   =   {IEEE International Conference on Computer Vision (ICCV)}, 
+    title       =   {Event-Based Motion Segmentation by Motion Compensation}, 
+    year        =   {2019}, 
+}
+
+
+@Inbook{Alvarez2016iser,
+    author      =   {Alvarez, H. and Paz, L. M. and Cremers, D.},
+    title       =   {Collision Avoidance for Quadrotors with a Monocular Camera},
+    bookTitle   =   iser,
+    year        =   {2016},
+    pages       =   {195--209},
+    isbn        =   {978-3-319-23778-7},
+    doi         =   {10.1007/978-3-319-23778-7_14},
+}
+
+@article{Lin18jfr,
+    author      =   {Lin, Yi and Gao, Fei and Qin, Tong and Gao, Wenliang and Liu, Tianbo and Wu, William and Yang, Zhenfei and Shen, Shaojie},
+    title       =   {Autonomous aerial navigation using monocular visual-inertial fusion},
+    journal     =   jfr,
+    volume      =   {35},
+    number      =   {1},
+    pages       =   {23-51},
+    doi         =   {10.1002/rob.21732},
+    year        =   {2018}
+}
+
+@book{corke2011robotics,
+  title={Robotics, Vision and Control: Fundamental Algorithms in MATLAB},
+  author={Corke, Peter},
+  volume={73},
+  year={2011},
+  publisher={Springer}
+}
+
+@InProceedings{Delbruck14iscas,
+  author        = {Tobi Delbruck and Vicente Villanueva and Luca Longinotti},
+  title         = {Integration of dynamic vision sensor with inertial measurement unit for electronically stabilized event-based vision},
+  booktitle     = iscas,
+  year          = 2014,
+  pages         = {2636-2639},
+  doi           = {10.1109/ISCAS.2014.6865714}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Stereo, standard obstacle avoidance
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@InProceedings{Oleynikova15icra,
+    title       =   {Reactive Avoidance Using Embedded Stereo Vision for MAV Flight},
+    author      =   {Oleynikova, Helen and Honegger, Dominik and Pollefeys, Marc},
+    booktitle   =   icra,
+    pages       =   {50--56},
+    year        =   {2015}
+}
+
+@InProceedings{Burri15iros, 
+    author      =   {M. Burri and H. Oleynikova and M. W. Achtelik and R. Siegwart}, 
+    booktitle   =   iros, 
+    title       =   {Real-time visual-inertial mapping, re-localization and planning onboard MAVs in unknown environments}, 
+    year        =   {2015}, 
+    pages       =   {1872-1878}, 
+    doi         =   {10.1109/IROS.2015.7353622}, 
+}
+
+@InProceedings{vitale21icra, 
+    author      =   {Antonio Vitale1 and Alpha Renner and Celine Nauer and Davide Scaramuzza and Yulia Sandamirskaya}, 
+    booktitle   =   icra, 
+    title       =   {Event-driven  Vision  and  Control  for  UAVs  on  a  Neuromorphic  Chip}, 
+    year        =   {2021}
+}
+
+@inproceedings{decroonLoihi20Arxiv,
+    title={Neuromorphic control for optic-flow-based landing of MAVs using the Loihi processor},
+    author={Dupeyroux, Julien and Hagenaars, Jesse J and Paredes-Vall{\'e}s, Federico and de Croon, Guido CHE},
+    booktitle={2021 IEEE International Conference on Robotics and Automation (ICRA)},
+    pages={96--102},
+    year={2021},
+    organization={IEEE}
+}
+
+@InProceedings{delmerico19icra, 
+    author      =   {J. Delmerico and T. Cieslewski and H. Rebecq and M. Faessler and D. Scaramuzza}, 
+    booktitle   =   icra, 
+    title       =   {Are We Ready for Autonomous Drone Racing? The UZH-FPV Drone Racing Dataset}, 
+    year        =   {2019}
+}
+
+@article{Mohta18jfr,
+    author      =   {Mohta, Kartik and Watterson, Michael and Mulgaonkar, Yash and Liu, Sikang and Qu, Chao and Makineni, Anurag and Saulnier, Kelsey and Sun, Ke and Zhu, Alex and Delmerico, Jeffrey and Karydis, Konstantinos and Atanasov, Nikolay and Loianno, Giuseppe and Scaramuzza, Davide and Daniilidis, Kostas and Taylor, Camillo Jose and Kumar, Vijay},
+    title       =   {Fast, autonomous flight in GPS-denied and cluttered environments},
+    journal     =   jfr,
+    volume      =   {35},
+    number      =   {1},
+    pages       =   {101-120},
+    doi         =   {10.1002/rob.21774},
+    year        =   {2018}
+}
+
+
+@article{Barry18jfr,
+    author      =   {Barry, Andrew J. and Florence, Peter R. and Tedrake, Russ},
+    title       =   {High-speed autonomous obstacle avoidance with pushbroom stereo},
+    journal     =   jfr,
+    volume      =   {35},
+    number      =   {1},
+    pages       =   {52-68},
+    doi         =   {10.1002/rob.21741},
+    year        =   {2018}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% RGB-D, standard obstacle avoidance
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@InProceedings{Liu16icra, 
+    author      ={  Sikang Liu and M. Watterson and S. Tang and V. Kumar}, 
+    booktitle   =   icra, 
+    title       =   {High speed navigation for quadrotors with limited onboard sensing}, 
+    year        =   {2016}, 
+    pages       =   {1484-1491}, 
+    doi         =   {10.1109/ICRA.2016.7487284}
+}
+
+@InProceedings{Lopez17icra,
+  author        = {Brett T. Lopez and Jonathan P. How},
+  title         = {Aggressive 3-D collision avoidance for high-speed
+                  navigation},
+  booktitle     = icra,
+  year          = 2017,
+  month         = may,
+  doi           = {10.1109/icra.2017.7989677}
+}
+
+@Inbook{Huang2017isrr,
+    author      =   {Huang, Albert S. and Bachrach, Abraham and Henry, Peter and Krainin, Michael
+                    and Maturana, Daniel and Fox, Dieter and Roy, Nicholas},
+    title       =   {Visual Odometry and Mapping for Autonomous Flight Using an RGB-D Camera},
+    booktitle   =   isrr,
+    year        =   {2017},
+    pages       =   {235--252},
+    isbn        =   {978-3-319-29363-9},
+    doi         =   {10.1007/978-3-319-29363-9_14},
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Event-based obstacle avoidance and control
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{Gallego20pami,
+  author    = {Gallego, Guillermo and Delbruck, Tobi and Orchard, Garrick and Bartolozzi, Chiara and Taba, Brian and Censi, Andrea and Leutenegger, Stefan and Davison, Andew and Conradt, Joerg and Daniilidis, Kostas and Scaramuzza, Davide},
+  title     = {Event-based Vision: A Survey},
+  year      = {2020},
+  journal   = pami,
+}
+
+@InProceedings{Conradt09ecv,
+  author        = {Conradt, Jorg and Berner, Raphael and Cook, Matthew and
+                  Delbruck, Tobi},
+  title         = {An Embedded {AER} Dynamic Vision Sensor for Low-Latency Pole
+                  Balancing},
+  booktitle     = {IEEE Workshop on Embedded Computer Vision (ECV)},
+  year          = 2009
+}
+
+@InProceedings{Mueggler15ecmr,
+  author        = {Elias Mueggler and Nathan Baumli and Flavio Fontana and
+                  Davide Scaramuzza},
+  title         = {Towards Evasive Maneuvers with Quadrotors using Dynamic
+                  Vision Sensors},
+  booktitle     = ecmr,
+  year          = 2015,
+  pages         = {1--8},
+  doi           = {10.1109/ECMR.2015.7324048}
+}
+
+@article{Sanket19arxiv,
+  author    = {Sanket, Nitin J. and
+               Parameshwara, Chethan M. and
+               Singh, Chahat Deep and
+               Kuruttukulam, Ashwin V. and
+               Fermuller, Cornelia and
+               Scaramuzza, Davide and
+               Aloimonos, Yiannis},
+  title     = {EVDodge: Embodied AI For High-Speed Dodging On A Quadrotor Using Event Cameras},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1906.02919},
+  journal   = arxiv,
+  arxivid    = {1906.02919}
+}
+
+@InProceedings{Mitrokhin18iros,
+  author        = {Anton Mitrokhin and Cornelia Fermuller and Chethan
+                  Parameshwara and Yiannis Aloimonos},
+  title         = {Event-based Moving Object Detection and Tracking},
+  booktitle     = iros,
+  year          = 2018
+}
+
+@InProceedings{Glover16iros,
+  author        = {Arren Glover and Chiara Bartolozzi},
+  title         = {Event-driven ball detection and gaze fixation in clutter},
+  booktitle     = iros,
+  year          = 2016,
+  pages         = {2203--2208},
+  doi           = {10.1109/IROS.2016.7759345}
+}
+
+@Article{Clady14fns,
+  author        = {Xavier Clady and Charles Clercq and Sio-Hoi Ieng and Fouzhan
+                  Houseini and Marco Randazzo and Lorenzo Natale and Chiara
+                  Bartolozzi and Ryad Benosman},
+  title         = {Asynchronous visual event-based time-to-contact},
+  journal       = fns,
+  year          = 2014,
+  volume        = 8,
+  number        = 9,
+  doi           = {10.3389/fnins.2014.00009}
+}
+
+@InProceedings{Delbruck07iscas,
+  author        = {Tobi Delbruck and Patrick Lichtsteiner},
+  title         = {Fast Sensory Motor Control Based on Event-Based Hybrid
+                  Neuromorphic-Procedural System},
+  booktitle     = iscas,
+  year          = 2007,
+  pages         = {845--848},
+  doi           = {10.1109/ISCAS.2007.378038}
+}
+
+@Article{Delbruck13fns,
+  author        = {Tobi Delbruck and Manuel Lang},
+  title         = {Robotic Goalie with 3ms Reaction Time at 4\% {CPU} Load Using
+                  Event-Based Dynamic Vision Sensor},
+  journal       = fns,
+  year          = 2013,
+  volume        = 7,
+  pages         = 223,
+  doi           = {10.3389/fnins.2013.00223}
+}
+
+@InProceedings{Mueller15cdc,
+  author        = {Erich Mueller and Andrea Censi and Emilio Frazzoli},
+  title         = {Low-latency Heading Feedback Control with Neuromorphic Vision
+                  Sensors using Efficient Approximated Incremental Inference},
+  booktitle     = cdc,
+  year          = 2015,
+  doi           = {10.1109/CDC.2015.7402002}
+}
+
+@INPROCEEDINGS{Censi15acc, 
+  author={A. Censi}, 
+  booktitle={American Control Conference (ACC)}, 
+  title={Efficient neuromorphic optomotor heading regulation}, 
+  year={2015}, 
+  pages={3854-3861}, 
+  ISSN={0743-1619}, 
+  month={July}
+}
+
+@article{Salt17Arxiv,
+  author    = {Llewyn Salt and
+               David Howard},
+  title     = {Self-Adaptive Differential Evolution for Bio-Inspired Neuromorphic
+               Collision Avoidance},
+  journal   = {CoRR},
+  volume    = {abs/1704.04853},
+  year      = {2017},
+  url       = {http://arxiv.org/abs/1704.04853}
+}
+
+@InProceedings{Glover17iros,
+  author        = {Arren Glover and Chiara Bartolozzi},
+  title         = {Robust visual tracking with a freely-moving event camera},
+  booktitle     = iros,
+  year          = 2017,
+  pages         = {3769--3776},
+  doi           = {10.1109/IROS.2017.8206226}
+}
+
+@InProceedings{Blum17rss,
+  author        = {Hermann Blum and Alexander Dietmüller and Moritz Milde and
+                  Jörg Conradt and Giacomo Indiveri and Yulia Sandamirskaya},
+  title         = {A neuromorphic controller for a robotic vehicle equipped with
+                  a dynamic vision sensor},
+  booktitle     = rss,
+  year          = 2017,
+  doi           = {10.15607/rss.2017.xiii.035}
+}
+
+@Article{Milde18neco,
+  author        = {M. B. Milde and O. J. N. Bertrand and H. Ramachandran and M.
+                  Egelhaaf and E. Chicca},
+  title         = {Spiking Elementary Motion Detector in Neuromorphic Systems},
+  journal       = neco,
+  year          = 2018,
+  volume        = 30,
+  number        = 9,
+  pages         = {2384--2417},
+  month         = sep,
+  doi           = {10.1162/neco_a_01112}
+}
+
+@Article{Rosinol18ral,
+  author        = {Antoni {Rosinol Vidal} and Henri Rebecq and Timo
+                  Horstschaefer and Davide Scaramuzza},
+  title         = {Ultimate {SLAM}? Combining Events, Images, and {IMU} for
+                  Robust Visual {SLAM} in {HDR} and High Speed Scenarios},
+  journal       = ral,
+  year          = 2018,
+  volume        = 3,
+  number        = 2,
+  pages         = {994--1001},
+  month         = apr,
+  doi           = {10.1109/LRA.2018.2793357}
+}
+
+@INPROCEEDINGS{Galluppi14icra, 
+author={F. {Galluppi} and C. {Denk} and M. C. {Meiner} and T. C. {Stewart} and L. A. {Plana} and C. {Eliasmith} and S. {Furber} and J. {Conradt}}, 
+booktitle={2014 IEEE International Conference on Robotics and Automation (ICRA)}, 
+title={Event-based neural computing on an autonomous mobile platform}, 
+year={2014}, 
+volume={}, 
+number={}, 
+pages={2862-2867}, 
+doi={10.1109/ICRA.2014.6907270}, 
+ISSN={1050-4729}, 
+month={May},}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Potential fields
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@incollection{Khatib1986auro,
+    title={Real-time obstacle avoidance for manipulators and mobile robots},
+    author={Khatib, Oussama},
+    booktitle={Autonomous Robot Vehicles},
+    pages={396--404},
+    year={1986},
+    publisher={Springer}
+}
+
+@Article{Ge02auro,
+    author="Ge, S.S.
+    and Cui, Y.J.",
+    title="Dynamic Motion Planning for Mobile Robots Using Potential Field Method",
+    journal="Autonomous Robots",
+    year="2002",
+    month="Nov",
+    day="01",
+    volume="13",
+    number="3",
+    pages="207--222",
+    issn="1573-7527",
+    doi="10.1023/A:1020564024509",
+}
+
+% Flying robots
+@inproceedings{budiyanto2015uav,
+    title={UAV obstacle avoidance using potential field under dynamic environment},
+    author={Budiyanto, Almira and Cahyadi, Adha and Adji, Teguh Bharata and Wahyunggoro, Oyas},
+    booktitle={International Conference on Control, Electronics, Renewable Energy and Communications (ICCEREC)},
+    pages={187--192},
+    year={2015},
+}
+
+@article{nieuwenhuisen2013predictive,
+    title={Predictive potential field-based collision avoidance for multicopters},
+    author={Nieuwenhuisen, Matthias and Schadler, Mark and Behnke, Sven},
+    journal={Int. Arch. Photogramm. Remote Sens. Spatial Inf. Sci},
+    year={2013}
+}
+
+@inproceedings{sfeir2011improved,
+    title={An improved artificial potential field approach to real-time mobile robot path planning in an unknown environment},
+    author={Sfeir, Joe and Saad, Maarouf and Saliah-Hassane, Hamadou},
+    booktitle={Robotic and Sensors Environments (ROSE), 2011 IEEE International Symposium on},
+    pages={208--213},
+    year={2011},
+}
+
+@INPROCEEDINGS{Mac16sami, 
+    author={T. T. Mac and C. Copot and A. Hernandez and R. De Keyser}, 
+    booktitle={IEEE International Symposium on Applied Machine Intelligence and Informatics (SAMI)}, 
+    title={Improved potential field method for unknown obstacle avoidance using UAV in indoor environment}, 
+    year={2016}, 
+    pages={345-350}, 
+    doi={10.1109/SAMI.2016.7423032}
+}
+
+% Ground robots
+@INPROCEEDINGS{Bernes07mcca, 
+    author={L. Barnes and M. Fields and K. Valavanis}, 
+    booktitle={Mediterranean Conference on Control Automation}, 
+    title={Unmanned ground vehicle swarm formation control using potential fields}, 
+    year={2007}, 
+    pages={1-8}, 
+    doi={10.1109/MED.2007.4433724}
+}
+
+@article{Shingo07robotica,
+    title={High-speed navigation of unmanned ground vehicles on uneven terrain using potential fields},
+    volume={25},
+    DOI={10.1017/S0263574706003171},
+    number={4},
+    journal={Robotica},
+    author={Shimoda, Shingo and Kuroda, Yoji and Iagnemma, Karl},
+    year={2007}, 
+    pages={409–424}
+}
+
+% Potential formulation
+@inproceedings{khosla1988superquadric,
+    title={Superquadric artificial potentials for obstacle avoidance and approach},
+    author={Khosla, Pradeep and Volpe, Richard},
+    booktitle= {icra},
+    pages={1778--1784},
+    year={1988},
+    doi = {10.1109/ROBOT.1988.12323}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Event-based perception
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{gallego2018unifying,
+	title={A unifying contrast maximization framework for event cameras, with applications to motion, depth, and optical flow estimation},
+	author={Gallego, Guillermo and Rebecq, Henri and Scaramuzza, Davide},
+	booktitle={IEEE Int. Conf. Comput. Vis. Pattern Recog.(CVPR)},
+	volume={1},
+	year={2018}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Obstacle detection
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{dbscan,
+	title={A density-based algorithm for discovering clusters in large spatial databases with noise.},
+	author={Ester, Martin and Kriegel, Hans-Peter and Sander, J{\"o}rg and Xu, Xiaowei and others},
+	booktitle={Kdd},
+	volume={96},
+	pages={226--231},
+	year={1996}
+}
+
+@misc{dbscan_pseudocode,
+	author = {Siddharth Agrawal},
+	title = {DBSCAN Explanation},
+	note = {29.05.2013},
+	howpublished = {\url{https://algorithmicthoughts.wordpress.com/2013/05/29/machine-learning-dbscan/}},
+	organization = {Algorithmic Thoughts}
+}
+
+@article{rueckauer2016evaluation,
+	title={Evaluation of event-based algorithms for optical flow with ground-truth from inertial measurement sensor},
+	author={Rueckauer, Bodo and Delbruck, Tobi},
+	journal={Frontiers in neuroscience},
+	volume={10},
+	pages={176},
+	year={2016},
+	publisher={Frontiers}
+}
+
+@article{minvolellipsoid,
+	title={Minimum volume enclosing ellipsoid},
+	author={Moshtagh, Nima and others},
+	journal={Convex optimization},
+	volume={111},
+	pages={112},
+	year={2005}
+}
+
+@article{distancepointellipsoid,
+	title={Distance from a point to an ellipse, an ellipsoid, or a hyperellipsoid},
+	author={Eberly, David},
+	journal={Geometric Tools, LLC},
+	year={2011}
+}
+
+@inproceedings{Arthur06scg,
+ author = {Arthur, David and Vassilvitskii, Sergei},
+ title = {How Slow is the K-means Method?},
+ booktitle = {Proceedings of the Twenty-second Annual Symposium on Computational Geometry},
+ series = {SCG '06},
+ year = {2006},
+ isbn = {1-59593-340-9},
+ pages = {144--153},
+ numpages = {10},
+ doi = {10.1145/1137856.1137880},
+ publisher = {ACM},
+} 
+
+@article{forgy1965cluster,
+  title={Cluster analysis of multivariate data: efficiency versus interpretability of classifications},
+  author={Forgy, Edward W},
+  journal={biometrics},
+  volume={21},
+  pages={768--769},
+  year={1965}
+}
+
+
+@article{reynolds2015gaussian,
+  title={Gaussian mixture models},
+  author={Reynolds, Douglas},
+  journal={Encyclopedia of biometrics},
+  pages={827--832},
+  year={2015},
+  publisher={Springer}
+}
+
+@article{comaniciu2002mean,
+  title={Mean shift: A robust approach toward feature space analysis},
+  author={Comaniciu, Dorin and Meer, Peter},
+  journal={IEEE Transactions on Pattern Analysis \& Machine Intelligence},
+  number={5},
+  pages={603--619},
+  year={2002},
+  publisher={IEEE}
+}
+
+@article{mebius2007derivation,
+  author    = {Mebius, Johan Ernest},
+  title     = {Derivation of the Euler-Rodrigues formula for three-dimensional rotations from the general formula for four-dimensional rotations},
+  year      = {2007},
+  url       = {http://arxiv.org/abs/math/0701759},
+  journal   = arxiv,
+  arxivid    = {math/0701759}
+}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Misc
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{Palossi18arxiv,
+    author={D. {Palossi} and A. {Loquercio} and F. {Conti} and F. {Conti} and E. {Flamand} and E. {Flamand} and D. {Scaramuzza} and L. {Benini} and L. {Benini}}, 
+    journal={IEEE Internet of Things Journal}, 
+    title={A 64mW DNN-based Visual Navigation Engine for Autonomous Nano-Drones}, 
+    year={2019}, 
+    volume={}, 
+    number={}, 
+    pages={1-1}, 
+    keywords={Navigation;Internet of Things;Visualization;Engines;Drones;Robot sensing systems;Autonomous UAV;Convolutional Neural Networks;Ultra-low-power;Nano-UAV;End-to-end Learning.}, 
+    doi={10.1109/JIOT.2019.2917066}, 
+    ISSN={2327-4662}, 
+    month={}
+}
+
+@INPROCEEDINGS{Palossi2019dcoss,
+  title     = "An Open Source and Open Hardware Deep {Learning-Powered} Visual
+               Navigation Engine for Autonomous {Nano-UAVs}",
+  booktitle = "2019 15th International Conference on Distributed Computing in
+               Sensor Systems ({DCOSS})",
+  author    = "Palossi, Daniele and Conti, Francesco and Benini, Luca",
+  pages     = "604--611",
+  month     =  may,
+  year      =  2019,
+  issn      = "2325-2944",
+  doi       = "10.1109/DCOSS.2019.00111"
+}
+
+
+@Book{Siciliano16book,
+  author        = {Siciliano, B. and Khatib, O.},
+  title         = {Springer Handbook of Robotics},
+  publisher     = {Springer Publishing Company, Incorporated},
+  year          = 2016,
+  edition       = {2nd},
+  isbn          = {3319325507, 9783319325507}
+}
+
+@Article{Falanga19ral_howfast,
+  author        = {Davide Falanga and Suseong Kim and Davide Scaramuzza},
+  title         = {How Fast is Too Fast? The Role of Perception Latency
+                   in High-Speed Sense and Avoid},
+  journal       = "{IEEE} Robot. Autom. Lett.",
+  year          = 2019,
+  volume        = 4,
+  number        = 2,
+  pages         = {1884--1891},
+  month         = apr,
+  doi           = {10.1109/LRA.2019.2898117},
+  issn          = {2377-3766}
+}
+
+@inproceedings{Boroujerdian18isar,
+    title	    = {Why Compute Matters for UAV Energy Efficiency?},
+    author	    = {Behzad Boroujerdian and Hasan Genc and Srivatsan Krishnan and Aleksandra Faust and Vijay Janapa Reddi},
+    booktitle   = {2nd International Symposium on Aerial Robotics},
+    year	    = {2018}
+}
+
+
+@article{Brady85artificialintelligence,
+title = "Artificial intelligence and robotics",
+journal = "Artificial Intelligence",
+volume = "26",
+number = "1",
+pages = "79 - 121",
+year = "1985",
+issn = "0004-3702",
+doi = "https://doi.org/10.1016/0004-3702(85)90013-X",
+author = "Michael Brady",
+}
+
+
+@Article{Mueller15tro,
+  author        = {Mark Wilfried Mueller and Markus Hehn and Raffaello
+                  D'Andrea},
+  title         = {A Computationally Efficient Motion Primitive for Quadrocopter
+                  Trajectory Generation},
+  journal       = tro,
+  year          = 2015,
+  volume        = 31,
+  number        = 6,
+  pages         = {1294--1310}
+}
+
+@misc{triangulation,
+	author = {Andrea Fusiello},
+	title = {Elements of Geometric Computer Vision},
+	note = {16.09.2012},
+	howpublished = {\url{http://homepages.inf.ed.ac.uk/rbf/CVonline/LOCAL_COPIES/FUSIELLO4/tutorial.html#x1-130004}},
+	organization = {University of Edinburgh - School of Informatics}
+}
+
+%% Bio-inspired stuff
+@Article{Potter2014,
+author="Potter, Mary C.
+and Wyble, Brad
+and Hagmann, Carl Erick
+and McCourt, Emily S.",
+title="Detecting meaning in RSVP at 13 ms per picture",
+journal="Attention, Perception, {\&} Psychophysics",
+year="2014",
+month="Feb",
+day="01",
+volume="76",
+number="2",
+pages="270--279",
+issn="1943-393X",
+doi="10.3758/s13414-013-0605-z",
+url="https://doi.org/10.3758/s13414-013-0605-z"
+}
+
+
+@article{Woods2015,
+author = {Woods, David and M Wyma, John and Yund, E and Herron, Timothy and R. Reed, Bruce},
+year = {2015},
+month = {03},
+pages = {131},
+title = {Factors influencing the latency of simple reaction time},
+volume = {9},
+journal = {Frontiers in human neuroscience},
+doi = {10.3389/fnhum.2015.00131}
+}
+
+@inbook{ross2007,
+author = {Ross, Callum and Martin, Robert},
+year = {2007},
+month = {01},
+pages = {827-846},
+title = {The Role of Vision in the Origin and Evolution of Primates},
+volume = {4},
+journal = {Evolution of Nervous Systems},
+doi = {10.1016/B0-12-370878-8/00001-X}, 
+publisher={Elsevier}
+}
+
+@article {Nityananda2502,
+	author = {Nityananda, Vivek and Read, Jenny C. A.},
+	title = {Stereopsis in animals: evolution, function and mechanisms},
+	volume = {220},
+	number = {14},
+	pages = {2502--2512},
+	year = {2017},
+	doi = {10.1242/jeb.143883},
+	publisher = {The Company of Biologists Ltd},
+	issn = {0022-0949},
+	URL = {https://jeb.biologists.org/content/220/14/2502},
+	eprint = {https://jeb.biologists.org/content/220/14/2502.full.pdf},
+	journal = {Journal of Experimental Biology}
+}
+
+@Article{Faessler18ral,
+  author        = {Matthias Faessler and Antonio Franchi and Davide Scaramuzza},
+  title         = {Differential Flatness of Quadrotor Dynamics Subject to Rotor
+                  Drag for Accurate Tracking of High-Speed Trajectories},
+  journal       = ral,
+  year          = 2018,
+  volume        = 3,
+  number        = 2,
+  pages         = {620--626},
+  month         = apr,
+  doi           = {10.1109/LRA.2017.2776353}
+}
+
+
+@InProceedings{Lynen13iros,
+  author        = {Lynen, S. and Achtelik, M. and Weiss, S. and Chli, M. and
+                  Siegwart, R.},
+  title         = {A Robust and Modular Multi-Sensor Fusion Approach Applied to
+                  {MAV} Navigation},
+  booktitle     = iros,
+  year          = 2013
+}
+
+%% Obstacle avoidance in nature
+@article{annurev-neuro-061010-113632,
+author = {Fotowat, Haleh and Gabbiani, Fabrizio},
+title = {Collision Detection as a Model for Sensory-Motor Integration},
+journal = {Annual Review of Neuroscience},
+volume = {34},
+number = {1},
+pages = {1-19},
+year = {2011},
+doi = {10.1146/annurev-neuro-061010-113632},
+}
+
+
+@article{CHITTKA2009400,
+title={Speed--accuracy tradeoffs in animal decision making},
+  author={Chittka, Lars and Skorupski, Peter and Raine, Nigel E},
+  journal={Trends in ecology \& evolution},
+  volume={24},
+  number={7},
+  pages={400--407},
+  year={2009},
+  publisher={Elsevier}
+}
+
+@Article{Dyer2004,
+author="Dyer, Adrian G.
+and Chittka, Lars",
+title="Bumblebees (Bombus terrestris) sacrifice foraging speed to solve difficult colour discrimination tasks",
+journal="Journal of Comparative Physiology A",
+year="2004",
+month="Sep",
+day="01",
+volume="190",
+number="9",
+pages="759--763",
+issn="1432-1351",
+doi="10.1007/s00359-004-0547-y",
+}
+
+
+@article{rspb.2008.0417,
+author = {Pete C Trimmer  and Alasdair I Houston  and James A.R Marshall  and Rafal Bogacz  and Elizabeth S Paul  and Mike T Mendl  and John M McNamara },
+title = {Mammalian choices: combining fast-but-inaccurate and slow-but-accurate decision-making systems},
+journal = {Proceedings of the Royal Society B: Biological Sciences},
+volume = {275},
+number = {1649},
+pages = {2353-2361},
+year = {2008},
+doi = {10.1098/rspb.2008.0417},
+}
+
+@inproceedings{ng2012finger,
+  title={Finger response times to visual, auditory and tactile modality stimuli},
+  author={Ng, Annie WY and Chan, Alan HS},
+  booktitle={Proceedings of the international multiconference of engineers and computer scientists},
+  volume={2},
+  pages={1449--1454},
+  year={2012}
+}
+
+@article{king1996visually,
+  title={Visually elicited turning behavior in Rana pipiens: comparative organization and neural control of escape and prey capture},
+  author={King, J Roche and Comer, CM},
+  journal={Journal Of Comparative Physiology A},
+  volume={178},
+  number={3},
+  pages={293--305},
+  year={1996},
+  publisher={Springer}
+}
+
+@article{pomeroy1977laboratory,
+  title={Laboratory determination of startle reaction time of the starling (Sturnus vulgaris)},
+  author={Pomeroy, Harold and Heppner, Frank},
+  journal={Animal Behaviour},
+  volume={25},
+  pages={720--725},
+  year={1977},
+  publisher={Elsevier}
+}
+
+@article{wang1992time,
+  title={Time to collision is signalled by neurons in the nucleus rotundus of pigeons},
+  author={Wang, Yongchang and Frost, Barrie J},
+  journal={Nature},
+  volume={356},
+  number={6366},
+  pages={236},
+  year={1992},
+  publisher={Nature Publishing Group}
+}
+
+@article{cheng2016flight,
+  title={Flight mechanics and control of escape manoeuvres in hummingbirds. I. Flight kinematics},
+  author={Cheng, Bo and Tobalske, Bret W and Powers, Donald R and Hedrick, Tyson L and Wethington, Susan M and Chiu, George TC and Deng, Xinyan},
+  journal={Journal of Experimental Biology},
+  volume={219},
+  number={22},
+  pages={3518--3531},
+  year={2016},
+  publisher={The Company of Biologists Ltd}
+}
+
+@article{van2000escape,
+  title={Escape flights of yellowhammers and greenfinches: more than just physics},
+  author={van der Veen, Ineke T and Lindstr{\"o}m, Karin M},
+  journal={Animal Behaviour},
+  volume={59},
+  number={3},
+  pages={593--601},
+  year={2000},
+  publisher={Elsevier}
+}
+
+@article{otis1990jet,
+  title={Jet-propelled escape in the squid Loligo opalescens: concerted control by giant and non-giant motor axon pathways.},
+  author={Otis, Thomas S and Gilly, WF},
+  journal={Proceedings of the National Academy of Sciences},
+  volume={87},
+  number={8},
+  pages={2911--2915},
+  year={1990},
+  publisher={National Acad Sciences}
+}
+
+@article{batty1989escape,
+  title={Escape responses of herring larvae to visual stimuli},
+  author={Batty, RS},
+  journal={Journal of the Marine Biological Association of the United Kingdom},
+  volume={69},
+  number={3},
+  pages={647--654},
+  year={1989},
+  publisher={Cambridge University Press}
+}
+
+@article{oliva2007escape,
+  title={Escape behavior and neuronal responses to looming stimuli in the crab Chasmagnathus granulatus (Decapoda: Grapsidae)},
+  author={Oliva, Dami{\'a}n and Medan, Violeta and Tomsic, Daniel},
+  journal={Journal of Experimental Biology},
+  volume={210},
+  number={5},
+  pages={865--880},
+  year={2007},
+  publisher={The Company of Biologists Ltd}
+}
+
+@article{preuss2006neural,
+  title={Neural representation of object approach in a decision-making motor circuit},
+  author={Preuss, Thomas and Osei-Bonsu, Princess E and Weiss, Shennan A and Wang, Cuiling and Faber, Donald S},
+  journal={Journal of Neuroscience},
+  volume={26},
+  number={13},
+  pages={3454--3464},
+  year={2006},
+  publisher={Soc Neuroscience}
+}
+
+@article{bianco2011prey,
+  title={Prey capture behavior evoked by simple visual stimuli in larval zebrafish},
+  author={Bianco, Isaac Henry and Kampff, Adam R and Engert, Florian},
+  journal={Frontiers in systems neuroscience},
+  volume={5},
+  pages={101},
+  year={2011},
+  publisher={Frontiers}
+}
+
+@article{ramasamy2015plasticity,
+  title={Plasticity of escape responses: prior predator experience enhances escape performance in a coral reef fish},
+  author={Ramasamy, Ryan A and Allan, Bridie JM and McCormick, Mark I},
+  journal={PLoS One},
+  volume={10},
+  number={8},
+  pages={e0132790},
+  year={2015},
+  publisher={Public Library of Science}
+}
+
+@article{holmqvist1994visually,
+  title={A visually elicited escape response in the fly that does not use the giant fiber pathway},
+  author={Holmqvist, Mats H},
+  journal={Visual neuroscience},
+  volume={11},
+  number={6},
+  pages={1149--1161},
+  year={1994},
+  publisher={Cambridge University Press}
+}
+
+@article{sourakov2011faster,
+  title={Faster than a flash: the fastest visual startle reflex response is found in a long-legged fly, Condylostylus sp.(Dolichopodidae)},
+  author={Sourakov, Andrei},
+  journal={The Florida Entomologist},
+  volume={94},
+  number={2},
+  pages={367--369},
+  year={2011},
+  publisher={JSTOR}
+}
+
+@article{sprayberry2009responses,
+  title={Responses of descending visually-sensitive neurons in the hawkmoth, Manduca sexta, to three-dimensional flower-like stimuli.},
+  author={Sprayberry, Jordanna DH},
+  journal={Journal of Insect Science},
+  volume={9},
+  number={1},
+  year={2009},
+  publisher={Oxford University Press}
+}
+
+@article{muijres2014flies,
+  title={Flies evade looming targets by executing rapid visually directed banked turns},
+  author={Muijres, Florian T and Elzinga, Michael J and Melis, Johan M and Dickinson, Michael H},
+  journal={Science},
+  volume={344},
+  number={6180},
+  pages={172--177},
+  year={2014},
+  publisher={American Association for the Advancement of Science}
+}
+
+@article{burtt1954visual,
+  title={Visual perception of movement in the locust},
+  author={Burtt, ET and Catton, WT},
+  journal={The Journal of physiology},
+  volume={125},
+  number={3},
+  pages={566},
+  year={1954},
+  publisher={Wiley-Blackwell}
+}
+
+@article{more2018scaling,
+  title={Scaling of sensorimotor delays in terrestrial mammals},
+  author={More, Heather L and Donelan, J Maxwell},
+  journal={Proceedings of the Royal Society B: Biological Sciences},
+  volume={285},
+  number={1885},
+  pages={20180613},
+  year={2018},
+  publisher={The Royal Society}
+}
+
+@Article{Kalman60jbe,
+  author        = {R. Kalman},
+  title         = {A New Approach to Linear Filtering and Prediction Problems},
+  journal       = jbe,
+  year          = 1960,
+  volume        = 82,
+  pages         = {35--45},
+  issue         = 1
+}
+
+@Article{Baker04ijcv,
+  author        = {Baker, S. and Matthews, I.},
+  title         = {Lucas-Kanade 20 Years On: A Unifying Framework},
+  journal       = ijcv,
+  year          = 2004,
+  volume        = 56,
+  number        = 3,
+  pages         = {221--255}
+}
+
+@Article{zhou2019robust,
+  title={Robust and efficient quadrotor trajectory generation for fast autonomous flight},
+  author={Zhou, Boyu and Gao, Fei and Wang, Luqi and Liu, Chuhao and Shen, Shaojie},
+  journal={IEEE Robotics and Automation Letters},
+  volume={4},
+  number={4},
+  pages={3529--3536},
+  year={2019},
+  publisher={IEEE}
+}
+
+@incollection{florence2020integrated,
+  title={Integrated perception and control at high speed: Evaluating collision avoidance maneuvers without maps},
+  author={Florence, Pete and Carter, John and Tedrake, Russ},
+  booktitle={Algorithmic Foundations of Robotics XII},
+  pages={304--319},
+  year={2020},
+  publisher={Springer}
+}
+
+@inproceedings{karaman2012high,
+  title={High-speed flight in an ergodic forest},
+  author={Karaman, Sertac and Frazzoli, Emilio},
+  booktitle={2012 IEEE International Conference on Robotics and Automation},
+  pages={2899--2906},
+  year={2012},
+  organization={IEEE}
+}
+
+@article{hastings70,
+  author = {Hastings, W. K.},
+  journal = {Biometrika},
+  number = 1,
+  pages = {97-109},
+  title = {Monte Carlo sampling methods using Markov chains and their applications},
+  volume = 57,
+  year = 1970
+}
+
+@article{roberts1994simple,
+  title={Simple conditions for the convergence of the Gibbs sampler and Metropolis-Hastings algorithms},
+  author={Roberts, Gareth O and Smith, Adrian FM},
+  journal={Stochastic processes and their applications},
+  volume={49},
+  number={2},
+  pages={207--216},
+  year={1994},
+  publisher={Elsevier}
+}
+
+@article{liu2018search,
+  title={Search-based motion planning for aggressive flight in se (3)},
+  author={Liu, Sikang and Mohta, Kartik and Atanasov, Nikolay and Kumar, Vijay},
+  journal={IEEE Robotics and Automation Letters},
+  volume={3},
+  number={3},
+  pages={2439--2446},
+  year={2018},
+  publisher={IEEE}
+}
+
+@article{gao2019flying,
+  title={Flying on point clouds: Online trajectory generation and autonomous navigation for quadrotors in cluttered environments},
+  author={Gao, Fei and Wu, William and Gao, Wenliang and Shen, Shaojie},
+  journal={Journal of Field Robotics},
+  volume={36},
+  number={4},
+  pages={710--733},
+  year={2019},
+  publisher={Wiley Online Library}
+}
+
+@article{kaufmann2020RSS,
+  title={Deep Drone Acrobatics},
+  author={Kaufmann, Elia and Loquercio, Antonio and Ranftl, Ren{\'e} and M{\"u}ller, Matthias and Koltun, Vladlen and Scaramuzza, Davide},
+  journal={RSS: Robotics, Science, and Systems},
+  year={2020},
+  publisher={IEEE}
+}
+
+@inproceedings{allen2016real,
+  title={A real-time framework for kinodynamic planning with application to quadrotor obstacle avoidance},
+  author={Allen, Ross and Pavone, Marco},
+  booktitle={AIAA Guidance, Navigation, and Control Conference},
+  pages={1374},
+  year={2016}
+}
+
+@article{loianno2016estimation,
+  title={Estimation, control, and planning for aggressive flight with a small quadrotor with a single camera and IMU},
+  author={Loianno, Giuseppe and Brunner, Chris and McGrath, Gary and Kumar, Vijay},
+  journal={IEEE Robotics and Automation Letters},
+  volume={2},
+  number={2},
+  pages={404--411},
+  year={2017},
+  publisher={IEEE},
+}
+
+@inproceedings{falanga2018pampc,
+  title={PAMPC: Perception-aware model predictive control for quadrotors},
+  author={Falanga, Davide and Foehn, Philipp and Lu, Peng and Scaramuzza, Davide},
+  booktitle=iros,
+  pages={1--8},
+  year={2018},
+  organization={IEEE}
+}
+
+@Article{Foehn20rss,
+  author        = {P. Foehn and D. Brescianini and E. Kaufmann and T. Cieslewski and M. Gehrig and M. Muglikar and D. Scaramuzza},
+  title         = {AlphaPilot: Autonomous Drone Racing},
+  journal       = rss,
+  year          = 2020,
+  url           = {https://link.springer.com/article/10.1007/s11370-018-00271-6},
+}
+
+@inproceedings{oleynikova2017voxblox,
+  title={Voxblox: Incremental 3d euclidean signed distance fields for on-board mav planning},
+  author={Oleynikova, Helen and Taylor, Zachary and Fehr, Marius and Siegwart, Roland and Nieto, Juan},
+  booktitle={2017 Ieee/rsj International Conference on Intelligent Robots and Systems (iros)},
+  pages={1366--1373},
+  year={2017},
+  organization={IEEE}
+}
+
+@article{barry2018high,
+  title={High-speed autonomous obstacle avoidance with pushbroom stereo},
+  author={Barry, Andrew J and Florence, Peter R and Tedrake, Russ},
+  journal={Journal of Field Robotics},
+  volume={35},
+  number={1},
+  pages={52--68},
+  year={2018},
+  publisher={Wiley Online Library}
+}
+
+@article{beyeler2009vision,
+  title={Vision-based control of near-obstacle flight},
+  author={Beyeler, Antoine and Zufferey, Jean-Christophe and Floreano, Dario},
+  journal={Autonomous robots},
+  volume={27},
+  number={3},
+  pages={201},
+  year={2009},
+  publisher={Springer}
+}
+
+@inproceedings{Richter2013ISRR,
+	year = 2013,
+	author = {Charles Richter and Adam Bry and Nicholas Roy},
+	title = {Polynomial Trajectory Planning for Aggressive Quadrotor Flight in Dense Indoor Environments},
+	booktitle = isrr,
+}
+
+
+@inproceedings{Bry2011icra,
+	year = 2011,
+	author = {Adam Bry and Nicholas Roy},
+	title = {Rapidly-exploring Random Belief Trees for motion planning under uncertainty},
+	booktitle = icra,
+}
+
+@inproceedings{bry2012state,
+  title={State estimation for aggressive flight in GPS-denied environments using onboard sensing},
+  author={Bry, Adam and Bachrach, Abraham and Roy, Nicholas},
+  booktitle={International Conference on Robotics and Automation},
+  pages={1--8},
+  year={2012},
+  organization={IEEE}
+}
+
+@techreport{zufferey2008near,
+  title={Near-obstacle flight with small UAVs},
+  author={Zufferey, Jean-Christophe and Beyeler, Antoine and Floreano, Dario},
+  year={2008},
+  institution={Springer Verlag}
+}
+
+@article{hirschmuller2007stereo,
+  title={Stereo processing by semiglobal matching and mutual information},
+  author={Hirschmuller, Heiko},
+  journal={IEEE Transactions on pattern analysis and machine intelligence},
+  volume={30},
+  number={2},
+  pages={328--341},
+  year={2007},
+  publisher={IEEE}
+}
+
+@inproceedings{chen2020learning,
+  title={Learning by cheating},
+  author={Chen, Dian and Zhou, Brady and Koltun, Vladlen and Kr{\"a}henb{\"u}hl, Philipp},
+  booktitle={Conference on Robot Learning},
+  pages={66--75},
+  year={2019},
+}
+
+@inproceedings{mueller2018abstraction,
+  author    = {Matthias M{\"{u}}ller and
+               Alexey Dosovitskiy and
+               Bernard Ghanem and
+               Vladlen Koltun},
+  title     = {Driving Policy Transfer via Modularity and Abstraction},
+  booktitle = {Conference on Robot Learning},
+  pages     = {1--15},
+  year      = {2018},
+}
+
+@inproceedings{ryll2019efficient,
+  title={Efficient trajectory planning for high speed flight in unknown environments},
+  author={Ryll, Markus and Ware, John and Carter, John and Roy, Nick},
+  booktitle={2019 International Conference on Robotics and Automation (ICRA)},
+  pages={732--738},
+  year={2019},
+  organization={IEEE}
+}
+
+@inproceedings{mellinger2011minimum,
+  title={Minimum snap trajectory generation and control for quadrotors},
+  author={Mellinger, Daniel and Kumar, Vijay},
+  booktitle=icra,
+  pages     = {2520--2525},
+  year={2011},
+}
+
+
+@ARTICLE{Mellinger2012ijrr,
+  title     = "Trajectory generation and control for precise aggressive
+               maneuvers with quadrotors",
+  author    = "Mellinger, Daniel and Michael, Nathan and Kumar, Vijay",
+  journal   = ijrr,
+  publisher = "SAGE Publications Ltd STM",
+  volume    =  31,
+  number    =  5,
+  pages     = "664--674",
+  month     =  apr,
+  year      =  2012,
+  issn      = "0278-3649",
+  doi       = "10.1177/0278364911434236"
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%% Simulation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+@misc{nvidiaIsaacSim2026,
+  author       = {{NVIDIA}},
+  title        = {Isaac Sim – Robotics Simulation and Synthetic Data Generation},
+  year         = {2026},
+  howpublished = {\url{https://developer.nvidia.com/isaac/sim}},
+  note         = {Accessed: 2026-02-03}
+}
+
+
+@inproceedings{yunlong2020flightmare,
+            title={Flightmare: A Flexible Quadrotor Simulator},
+            author={Song, Yunlong and Naji, Selim and Kaufmann, Elia and Loquercio, Antonio and Scaramuzza, Davide},
+            booktitle={Conference on Robot Learning},
+            year={2020}}
+            
+@inproceedings{ross2011reduction,
+  title={A reduction of imitation learning and structured prediction to no-regret online learning},
+  author={Ross, St{\'e}phane and Gordon, Geoffrey and Bagnell, Drew},
+  booktitle={Proceedings of the fourteenth international conference on artificial intelligence and statistics},
+  pages={627--635},
+  year={2011}
+}
+
+@article{howard2017mobilenets,
+  title={Mobilenets: Efficient convolutional neural networks for mobile vision applications},
+  author={Howard, Andrew G and Zhu, Menglong and Chen, Bo and Kalenichenko, Dmitry and Wang, Weijun and Weyand, Tobias and Andreetto, Marco and Adam, Hartwig},
+  journal={arXiv preprint arXiv:1704.04861},
+  year={2017}
+}
+
+@inproceedings{koenig2004design,
+  title={Design and use paradigms for gazebo, an open-source multi-robot simulator},
+  author={Koenig, Nathan and Howard, Andrew},
+  booktitle={2004 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)(IEEE Cat. No. 04CH37566)},
+  volume={3},
+  pages={2149--2154},
+  year={2004},
+  organization={IEEE}
+}
+
+
+@phdthesis{tomppo1986models,
+  title={Models and methods for analysing spatial patterns of trees},
+  author={Tomppo, Erkki},
+  year={1986},
+  school={Finnish Forest Research Institute},
+  type={{PhD} dissertation},
+}
+
+@article{WilliamsDGRT18,
+  author    = {Grady Williams and
+               Paul Drews and
+               Brian Goldfain and
+               James M. Rehg and
+               Evangelos A. Theodorou},
+  title     = {Information-Theoretic Model Predictive Control: Theory and Applications
+               to Autonomous Driving},
+  journal   = {{IEEE} Trans. Robotics},
+  volume    = {34},
+  number    = {6},
+  pages     = {1603--1622},
+  year      = {2018},
+}
+
+@article{AndrieuFDJ03,
+  author    = {Christophe Andrieu and
+               Nando de Freitas and
+               Arnaud Doucet and
+               Michael I. Jordan},
+  title     = {An Introduction to {MCMC} for Machine Learning},
+  journal   = {Mach. Learn.},
+  volume    = {50},
+  number    = {1-2},
+  pages     = {5--43},
+  year      = {2003},
+}
+
+@book{Gallier99bspline,
+author = {Gallier, Jean},
+title = {Curves and Surfaces in Geometric Modeling: Theory and Algorithms},
+year = {1999},
+isbn = {1558605991},
+publisher = {Morgan Kaufmann Publishers Inc.},
+address = {San Francisco, CA, USA}
+}
+
+@inproceedings{HowardICCV19,
+  author    = {Andrew Howard and
+               Ruoming Pang and
+               Hartwig Adam and
+               Quoc V. Le and
+               Mark Sandler and
+               Bo Chen and
+               Weijun Wang and
+               Liang{-}Chieh Chen and
+               Mingxing Tan and
+               Grace Chu and
+               Vijay Vasudevan and
+               Yukun Zhu},
+  title     = {Searching for MobileNetV3},
+  booktitle = {International Conference on Computer Vision, {ICCV}},
+  pages     = {1314--1324},
+  year      = {2019},
+}
+
+@inproceedings{RupprechtICCV17,
+  author    = {Christian Rupprecht and
+               Iro Laina and
+               Robert S. DiPietro and
+               Maximilian Baust},
+  title     = {Learning in an Uncertain World: Representing Ambiguity Through Multiple
+               Hypotheses},
+  booktitle = {International Conference on Computer Vision, {ICCV}},
+  pages     = {3611--3620},
+  year      = {2017}
+}
+
+@book{bishop1994mixture,
+  title={Mixture density networks},
+  author={Bishop, Christopher M},
+  year={1994},
+  publisher={Aston University}
+}
+
+@article{Loquercio19TRO,
+  author    = {Antonio Loquercio and
+               Elia Kaufmann and
+               Ren{\'{e}} Ranftl and
+               Alexey Dosovitskiy and
+               Vladlen Koltun and
+               Davide Scaramuzza},
+  title     = {Deep Drone Racing: From Simulation to Reality With Domain Randomization},
+  journal   = {{IEEE} Trans. Robotics},
+  volume    = {36},
+  number    = {1},
+  pages     = {1--14},
+  year      = {2019},
+}
+
+@inproceedings{song2021autonomous,
+  title={Autonomous Drone Racing with Deep Reinforcement Learning},
+  author={Song, Yunlong and Steinweg, Mats and Kaufmann, Elia and Scaramuzza, Davide},
+  booktitle= iros,
+  year = 2021
+}
+
+@article {Amano06JoN,
+	author = {Amano, Kaoru and Goda, Naokazu and Nishida, Shin{\textquoteright}ya and Ejima, Yoshimichi and Takeda, Tsunehiro and Ohtani, Yoshio},
+	title = {Estimation of the Timing of Human Visual Perception from Magnetoencephalography},
+	volume = {26},
+	number = {15},
+	pages = {3981--3991},
+	year = {2006},
+	journal = {Journal of Neuroscience}
+}
+
+@article{Zhou19ScR,
+  author    = {Brady Zhou and
+               Philipp Kr{\"{a}}henb{\"{u}}hl and
+               Vladlen Koltun},
+  title     = {Does computer vision matter for action?},
+  journal   = {Sci. Robotics},
+  volume    = {4},
+  number    = {30},
+  year      = {2019},
+}
+
+@article{drone_commercial,
+  author    = {Juliane Hilf and
+               Klaus Umbach},
+	year = 2015,
+	volume = {16},
+	number = {3},
+	title = {The Commercial Use of Drones},
+	journal = {Computer Law Review International}
+}
+
+@ARTICLE{xu2021CFExplore,
+  author={Xu, Zhefan and Deng, Di and Shimada, Kenji},
+  journal={IEEE Robotics and Automation Letters}, 
+  title={Autonomous UAV Exploration of Dynamic Environments Via Incremental Sampling and Probabilistic Roadmap}, 
+  year={2021},
+  volume={6},
+  number={2},
+  pages={2729-2736},
+  keywords={Robot sensing systems;Robots;Trajectory;Unmanned aerial vehicles;Collision avoidance;Vehicle dynamics;Planning;Mapping;motion and path planning;search and rescue robots;unmanned aerial vehicle},
+  doi={10.1109/LRA.2021.3062008}}
+
+
+@article{Heng14jfr,
+  author    = {Lionel Heng and
+               Dominik Honegger and
+               Gim Hee Lee and
+               Lorenz Meier and
+               Petri Tanskanen and
+               Friedrich Fraundorfer and
+               Marc Pollefeys},
+  title     = {Autonomous Visual Mapping and Exploration With a Micro Aerial Vehicle},
+  journal   = {J. Field Robotics},
+  volume    = {31},
+  number    = {4},
+  pages     = {654--675},
+  year      = {2014},
+}
+
+@article{Saeedi17Us,
+  author    = {Sajad Saeedi G. and
+               Carl Thibault and
+               Michael Trentini and
+               Howard Li},
+  title     = {3D Mapping for Autonomous Quadrotor Aircraft},
+  journal   = {Unmanned Syst.},
+  volume    = {5},
+  number    = {3},
+  pages     = {181--196},
+  year      = {2017},
+  url       = {https://doi.org/10.1142/S2301385017400064},
+  doi       = {10.1142/S2301385017400064},
+  timestamp = {Mon, 08 Jun 2020 22:35:46 +0200},
+  biburl    = {https://dblp.org/rec/journals/us/GTTL17.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{Pizzoli14icra,
+  author    = {Matia Pizzoli and
+               Christian Forster and
+               Davide Scaramuzza},
+  title     = {{REMODE:} Probabilistic, monocular dense reconstruction in real time},
+  booktitle = {International Conference on Robotics and Automation, {ICRA}},
+  pages     = {2609--2616},
+  year      = {2014},
+}
+
+@inproceedings{SadeghiL17Rss,
+  author    = {Fereshteh Sadeghi and
+               Sergey Levine},
+  editor    = {Nancy M. Amato and
+               Siddhartha S. Srinivasa and
+               Nora Ayanian and
+               Scott Kuindersma},
+  title     = {{CAD2RL:} Real Single-Image Flight Without a Single Real Image},
+  booktitle = {Robotics: Science and Systems {RSS}},
+  year      = {2017},
+}
+
+@article{Loquercio18ral,
+  author    = {Antonio Loquercio and
+               Ana I. Maqueda and
+               Carlos R. del{-}Blanco and
+               Davide Scaramuzza},
+  title     = {DroNet: Learning to Fly by Driving},
+  journal   = {{IEEE} Robotics Autom. Lett.},
+  volume    = {3},
+  number    = {2},
+  pages     = {1088--1095},
+  year      = {2018},
+}
+
+@inproceedings{Gandhi17Iros,
+  author    = {Dhiraj Gandhi and
+               Lerrel Pinto and
+               Abhinav Gupta},
+  title     = {Learning to fly by crashing},
+  booktitle = { International Conference on Intelligent Robots and
+               Systems, {IROS}},
+  pages     = {3948--3955},
+  year      = {2017},
+}
+
+@inproceedings{Ross13icra,
+  author    = {St{\'{e}}phane Ross and
+               Narek Melik{-}Barkhudarov and
+               Kumar Shaurya Shankar and
+               Andreas Wendel and
+               Debadeepta Dey and
+               J. Andrew Bagnell and
+               Martial Hebert},
+  title     = {Learning monocular reactive {UAV} control in cluttered natural environments},
+  booktitle = icra,
+  pages     = {1765--1772},
+  year      = {2013},
+}
+
+@inproceedings{Kahn17icra,
+  author    = {Gregory Kahn and
+               Tianhao Zhang and
+               Sergey Levine and
+               Pieter Abbeel},
+  title     = {{PLATO:} Policy learning using adaptive trajectory optimization},
+  booktitle = icra,
+  pages     = {3342--3349},
+  publisher = {{IEEE}},
+  year      = {2017},
+}
+
+@article{abbeel2010autonomous,
+  title={Autonomous helicopter aerobatics through apprenticeship learning},
+  author={Abbeel, Pieter and Coates, Adam and Ng, Andrew Y},
+  journal={The International Journal of Robotics Research},
+  volume={29},
+  number={13},
+  pages={1608--1639},
+  year={2010},
+  publisher={SAGE Publications Sage UK: London, England}
+}
+
+@inproceedings{madaan2020airsim,
+  title={Airsim drone racing lab},
+  author={Madaan, Ratnesh and Gyde, Nicholas and Vemprala, Sai and Brown, Matthew and Nagami, Keiko and Taubner, Tim and Cristofalo, Eric and Scaramuzza, Davide and Schwager, Mac and Kapoor, Ashish},
+  booktitle={NeurIPS 2019 Competition and Demonstration Track},
+  year={2020},
+  organization={PMLR}
+}
+
+@inproceedings{FalMueFaeSca17,
+  title={Aggressive Quadrotor Flight through Narrow Gaps with Onboard Sensing and Computing using Active Vision},
+  author={Falanga, Davide and Mueggler, Elias and Faessler, Matthias and Scaramuzza, Davide},
+  booktitle=icra,
+  pages = {5774--5781},
+  year={2017},
+}
+
+@misc{FastDrones,
+  title = {World's Fastest Drone: Drone Racing League},
+  howpublished = {\url{https://www.youtube.com/watch?v=dPpQWIA59Wo}},
+  year = {2019},
+}
+
+@misc{AcrobaticDrones,
+  title = {AI-Powered Drone Learns Extreme Acrobatics},
+  howpublished = {\url{https://spectrum.ieee.org/automaton/robotics/drones/ai-powered-drone-extreme-acrobatics}},
+  year = {2020},
+}
+
+
+@MISC{Movidius,
+  title        = "Intel Movidius Myriad {X} Vision Processing Unit",
+  booktitle    = "Movidius",
+  author       = "{Intel Corporation}",
+  howpublished = "\url{https://www.intel.com/content/www/us/en/products/details/processors/movidius-vpu/movidius-myriad-x.html}",
+  note         = "Accessed: 2021-8-2"
+}
+
+
+@misc{Realsense_data_sheet,
+  title = {Intel RealSense D400 Series Product Family},
+  howpublished = {\url{https://www.intel.com/content/dam/support/us/en/documents/emerging-technologies/intel-realsense-technology/Intel-RealSense-D400-Series-Datasheet.pdf}},
+  year = {2019},
+}
+
+@techreport{whalley1991development,
+  title={Development and evaluation of an inverse solution technique for studying helicopter maneuverability and agility},
+  author={Whalley, Matthew S},
+  year={1991},
+  institution={ARMY AVIATION SYSTEMS COMMAND ST LOUIS MO}
+}
+
+@article {LeeSR2020,
+	author = {Lee, Joonho and Hwangbo, Jemin and Wellhausen, Lorenz and Koltun, Vladlen and Hutter, Marco},
+	title = {Learning quadrupedal locomotion over challenging terrain},
+	volume = {5},
+	number = {47},
+	year = {2020},
+	journal = {Science Robotics}
+}
+
+@article{Cho20IEEE,
+  author    = {Ji{-}Min Cho and
+               Soon{-}Yong Park and
+               Sung{-}Il Chien},
+  title     = {Hole-Filling of RealSense Depth Images Using a Color Edge Map},
+  journal   = {{IEEE} Access},
+  volume    = {8},
+  pages     = {53901--53914},
+  year      = {2020}
+}
+
+@article{juliani2018unity,
+  title={Unity: A general platform for intelligent agents},
+  author={Juliani, Arthur and Berges, Vincent-Pierre and Vckay, Esh and Gao, Yuan and Henry, Hunter and Mattar, Marwan and Lange, Danny},
+  journal=arxiv,
+  year={2018}
+}
+
+@inproceedings{yang_loquercio_2019,
+  title={Unsupervised Moving Object Detection via Contextual Information Separation},
+  author={Yang, Yanchao and Loquercio, Antonio and Scaramuzza, Davide and Soatto, Stefano},
+  booktitle = {Conference on Computer Vision and Pattern Recognition {(CVPR)}},
+  year={2019}
+}
+
+@article{loquercio_segu_2020,
+  title={A General Framework for Uncertainty Estimation in Deep Learning},
+  author={Loquercio, Antonio and Segu, Mattia and Scaramuzza, Davide},
+  journal={IEEE Robotics and Automation Letters},
+  year={2020},
+  publisher={IEEE}
+}
+
+@inproceedings{KingmaB14,
+  author    = {Diederik P. Kingma and
+               Jimmy Ba},
+  title     = {Adam: {A} Method for Stochastic Optimization},
+  booktitle = {International Conference on Learning Representations (ICLR)},
+  year      = {2015},
+}
+
+@InProceedings{Keselman_2017_CVPR_Workshops,
+author = {Keselman, Leonid and Iselin Woodfill, John and Grunnet-Jepsen, Anders and Bhowmik, Achintya},
+title = {Intel RealSense Stereoscopic Depth Cameras},
+booktitle = {Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) Workshops},
+year = {2017}
+}
+
+@inproceedings{sgm_gpu_iccs2016,
+  author    = {Daniel Hernandez-Juarez and
+               Alejandro Chac{\'{o}}n and
+               Antonio Espinosa and
+               David V{\'{a}}zquez and
+               Juan Carlos Moure and
+               Antonio M. L{\'{o}}pez},
+  title     = {Embedded Real-time Stereo Estimation via Semi-Global Matching on the
+               {GPU}},
+  booktitle = {International Conference on Computational Science 2016, {ICCS} 2016,
+               6-8 June 2016, San Diego, California, {USA}},
+  year      = {2016},
+}
+
+@inproceedings{Tordesillas19Iros,
+  author    = {Jesus Tordesillas and
+               Brett Thomas Lopez and
+               Jonathan P. How},
+  title     = {{FASTER:} Fast and Safe Trajectory Planner for Flights in Unknown
+               Environments},
+  booktitle = {International Conference on Intelligent Robots and
+               Systems ({IROS}) },
+  pages     = {1934--1940},
+  publisher = {{IEEE}},
+  year      = {2019},
+  doi       = {10.1109/IROS40897.2019.8968021},
+}
+
+@article{Verbeke18IJMAV,
+author = {Jon Verbeke and Joris De Schutter},
+title ={Experimental maneuverability and agility quantification for rotary unmanned aerial vehicle},
+journal = {International Journal of Micro Air Vehicles},
+volume = {10},
+number = {1},
+pages = {3-11},
+year = {2018},
+}
+
+@article{Faessler16JFR,
+  author    = {Matthias Faessler and
+               Flavio Fontana and
+               Christian Forster and
+               Elias Mueggler and
+               Matia Pizzoli and
+               Davide Scaramuzza},
+  title     = {Autonomous, Vision-based Flight and Live Dense 3D Mapping with a Quadrotor
+               Micro Aerial Vehicle},
+  journal   = {J. Field Robotics},
+  volume    = {33},
+  number    = {4},
+  pages     = {431--450},
+  year      = {2016}
+}
+
+@inproceedings{BloschWSS10,
+  author    = {Michael Bl{\"{o}}sch and
+               Stephan Weiss and
+               Davide Scaramuzza and
+               Roland Siegwart},
+  title     = {Vision based {MAV} navigation in unknown and unstructured environments},
+  booktitle = icra,
+  pages     = {21--28},
+  year      = {2010},
+}
+
+@article{Scaramuzza14RAM,
+  author    = {Davide Scaramuzza and
+               Michael Achtelik and
+               Lefteris Doitsidis and
+               Friedrich Fraundorfer and
+               Elias B. Kosmatopoulos and
+               Agostino Martinelli and
+               Markus W. Achtelik and
+               Margarita Chli and
+               Savvas A. Chatzichristofis and
+               Laurent Kneip and
+               Daniel Gurdan and
+               Lionel Heng and
+               Gim Hee Lee and
+               Simon Lynen and
+               Marc Pollefeys and
+               Alessandro Renzaglia and
+               Roland Siegwart and
+               Jan Carsten Stumpf and
+               Petri Tanskanen and
+               Chiara Troiani and
+               Stephan Weiss and
+               Lorenz Meier},
+  title     = {Vision-Controlled Micro Flying Robots: From System Design to Autonomous
+               Navigation and Mapping in GPS-Denied Environments},
+  journal   = {{IEEE} Robotics Autom. Mag.},
+  volume    = {21},
+  number    = {3},
+  pages     = {26--40},
+  year      = {2014},
+}
+
+@inproceedings{Cieslewsk17iros,
+  author    = {Titus Cieslewski and
+               Elia Kaufmann and
+               Davide Scaramuzza},
+  title     = {Rapid exploration with multi-rotors: {A} frontier selection method
+               for high speed flight},
+  booktitle = iros,
+  pages     = {2135--2142},
+  year      = {2017},
+}
+
+@inproceedings{Zhang18icra,
+  author    = {Zichao Zhang and
+               Davide Scaramuzza},
+  title     = {Perception-aware Receding Horizon Navigation for MAVs},
+  booktitle = icra,
+  pages     = {2534--2541},
+  year      = {2018},
+}
+
+@article{Loianno20JFR,
+author = {Loianno, Giuseppe and Scaramuzza, Davide},
+title = {Special issue on future challenges and opportunities in vision-based drone navigation},
+journal = {Journal of Field Robotics},
+volume = {37},
+number = {4},
+pages = {495-496},
+year = {2020}
+}
+
+@inproceedings{cocoma2019towards,
+  title={Towards high-speed localisation for autonomous drone racing},
+  author={Cocoma-Ortega, Jos{\'e} Arturo and Mart{\'\i}nez-Carranza, Jos{\'e}},
+  booktitle={Mexican International Conference on Artificial Intelligence},
+  year={2019},
+  organization={Springer}
+}
+
+@article{moon2019challenges,
+  title={Challenges and implemented technologies used in autonomous drone racing},
+  author={Moon, Hyungpil and Martinez-Carranza, Jose and Cieslewski, Titus and Faessler, Matthias and Falanga, Davide and Simovic, Alessandro and Scaramuzza, Davide and Li, Shuo and Ozo, Michael and De Wagter, Christophe and others},
+  journal={Intelligent Service Robotics},
+  year={2019},
+  publisher={Springer}
+}
+
+@inproceedings{Oleynikova17IROS,
+  author    = {Helen Oleynikova and
+               Zachary Taylor and
+               Marius Fehr and
+               Roland Siegwart and
+               Juan I. Nieto},
+  title     = {Voxblox: Incremental 3D Euclidean Signed Distance Fields for on-board {MAV} planning},
+  booktitle = iros,
+  pages     = {1366--1373},
+  year      = {2017}
+}
+
+
+@article{Ozaslan17RAL,
+author={T. {Ozaslan} and G. {Loianno} and J. {Keller} and C. J. {Taylor} and V. {Kumar} and J. M. {Wozencraft} and T. {Hood}},
+journal={IEEE Robotics and Automation Letters},
+title={Autonomous Navigation and Mapping for Inspection of Penstocks and Tunnels With MAVs},
+year={2017},
+volume={2},
+number={3},
+pages={1740-1747}
+}
+
+@inproceedings{Gallup08CVPR,
+  author    = {David Gallup and
+               Jan{-}Michael Frahm and
+               Philippos Mordohai and
+               Marc Pollefeys},
+  title     = {Variable baseline/resolution stereo},
+  booktitle = cvpr,
+  year      = {2008}
+}
+
+@article{ScharsteinS02,
+  author    = {Daniel Scharstein and
+               Richard Szeliski},
+  title     = {A Taxonomy and Evaluation of Dense Two-Frame Stereo Correspondence
+               Algorithms},
+  journal   = {Int. J. Comput. Vis.},
+  volume    = {47},
+  number    = {1-3},
+  pages     = {7--42},
+  year      = {2002}
+}
+
+
+@article {Falanga20SR,
+	author = {Falanga, Davide and Kleber, Kevin and Scaramuzza, Davide},
+	title = {Dynamic obstacle avoidance for quadrotors with event cameras},
+	volume = {5},
+	number = {40},
+	year = {2020},
+	journal = {Science Robotics}
+}
+
+@article{Zhou19arxiv,
+  author    = {Boyu Zhou and
+               Jie Pan and
+               Fei Gao and
+               Shaojie Shen},
+  title     = {{RAPTOR:} Robust and Perception-aware Trajectory Replanning for Quadrotor Fast Flight},
+  journal   = {IEEE Transactions on Robotics},
+  year      = {2021}
+}
+
+@INPROCEEDINGS{GiernackiCrazy,
+author={Giernacki, Wojciech and Skwierczyński, Mateusz and Witwicki, Wojciech and Wroński, Paweł and Kozierski, Piotr},
+booktitle={International Conference on Methods and Models in Automation and Robotics (MMAR)},
+title={Crazyflie 2.0 quadrotor as a platform for research and education in robotics and control engineering},
+year={2017},
+pages={37-42},
+doi={10.1109/MMAR.2017.8046794}
+}
+
+@mastersthesis{Forster2015CrazyflieIdentification,
+author={Julian Förster},
+type={Bachelor Thesis},
+title={System identification of the Crazyflie 2.0 Nano Quadrocopter},
+school  = {ETH Zurich},
+year    = {2015}
+}
+
+@article{BRISTEAUparrot,
+title = {The Navigation and Control technology inside the AR.Drone micro UAV},
+journal = {IFAC Proceedings Volumes},
+volume = {44},
+number = {1},
+pages = {1477-1484},
+year = {2011},
+note = {18th IFAC World Congress},
+issn = {1474-6670},
+doi = {https://doi.org/10.3182/20110828-6-IT-1002.02327},
+author = {Pierre-Jean Bristeau and François Callou and David Vissière and Nicolas Petit},
+}
+
+@article{bauersfeld2021neurobem,
+  title={NeuroBEM: Hybrid Aerodynamic Quadrotor Model},
+  author={Bauersfeld, Leonard and Kaufmann, Elia and Foehn, Philipp and Sun, Sihao and Scaramuzza, Davide},
+  journal={RSS: Robotics, Science, and Systems},
+  year={2021}
+}
+
+@inproceedings{shah2018airsim,
+  title={Airsim: High-fidelity visual and physical simulation for autonomous vehicles},
+  author={Shah, Shital and Dey, Debadeepta and Lovett, Chris and Kapoor, Ashish},
+  booktitle={Field and service robotics},
+  pages={621--635},
+  year={2018},
+  organization={Springer}
+}
+
+@inproceedings{kaufmann18icra,
+  title={Beauty and the beast: Optimal methods meet learning for drone racing},
+  author={Kaufmann, Elia and Gehrig, Mathias and Foehn, Philipp and Ranftl, Ren{\'e} and Dosovitskiy, Alexey and Koltun, Vladlen and Scaramuzza, Davide},
+  booktitle={2019 International Conference on Robotics and Automation (ICRA)},
+  pages={690--696},
+  year={2019},
+  organization={IEEE}
+}
+
+@article{cadena2016past,
+  title={Past, present, and future of simultaneous localization and mapping: Toward the robust-perception age},
+  author={Cadena, Cesar and Carlone, Luca and Carrillo, Henry and Latif, Yasir and Scaramuzza, Davide and Neira, Jos{\'e} and Reid, Ian and Leonard, John J},
+  journal=tro,
+  year={2016},
+  publisher={IEEE}
+}
+%   volume={32},
+%   number={6},
+%   pages={1309--1332},
+
+@INPROCEEDINGS{meier2015px4,
+  author={Meier, Lorenz and Honegger, Dominik and Pollefeys, Marc},
+  booktitle={2015 IEEE International Conference on Robotics and Automation (ICRA)}, 
+  title={PX4: A node-based multithreaded open source robotics framework for deeply embedded platforms}, 
+  year={2015},
+  pages={6235-6240},
+}
+%volume={},
+%number={},
+
+@misc{PX4_ROS2_Control_Interface,
+  author       = {PX4 Development Team},
+  title        = {PX4 ROS 2 Control Interface.},
+  year         = {2026},
+  howpublished = {\url{https://docs.px4.io/main/en/ros2/px4_ros2_control_interface}},
+  note         = {Accessed: 2026-02-09}
+}
+
+
+
+@misc{PX4_ROS2_bridge,
+  author       = {PX4 Development Team},
+  title        = {PX4 ROS 2 User Guide.},
+  year         = {2026},
+  howpublished = {\url{https://docs.px4.io/main/en/ros2/user_guide}},
+  note         = {Accessed: 2026-02-09}
+}
+
+@misc{kuruppuarachchi2026agi_logger,
+  author       = {Kuruppu Arachchige, Sasanka},
+  title        = {agi\_logger: Robust ROS 2 data logging for Agipix platform.},
+  year         = {2026},
+  howpublished = {\url{https://github.com/SasaKuruppuarachchi/agi_logger}},
+  note         = {Version v1.0.0. Accessed: 2026-02-09}
+}
+
+
+@misc{foxglove2026,
+  author       = {Foxglove Technologies, Inc},
+  title        = {Foxglove – The observability stack for Physical AI.},
+  year         = {2026},
+  howpublished = {\url{https://foxglove.dev/}},
+  note         = {Accessed: 2026-02-03}
+}
+
+@misc{ika_mqtt_client2026,
+  author       = {Institute for Automotive Engineering (ika), RWTH Aachen University},
+  title        = {mqtt\_client: ROS 2 MQTT client library.},
+  year         = {2026},
+  howpublished = {\url{https://github.com/ika-rwth-aachen/mqtt_client}},
+  note         = {Accessed: 2026-02-09}
+}
+
+
+
+@ARTICLE{Meier2012pixhawk,
+  title   = "{PIXHAWK}: A micro aerial vehicle design for autonomous flight using onboard computer vision",
+  author  = "Meier, Lorenz and Tanskanen, Petri and Heng, Lionel and Lee, Gim Hee and Fraundorfer, Friedrich and Pollefeys, Marc",
+  journal = auro,
+  volume  =  33,
+  number  =  1,
+  pages   = "21--39",
+  month   =  aug,
+  year    =  2012,
+  doi     = "10.1007/s10514-012-9281-4"
+}
+
+
+@ARTICLE{Nisar2019ral,
+  title   = "{VIMO}: Simultaneous Visual Inertial {Model-Based} Odometry and
+             Force Estimation",
+  author  = "Nisar, Barza and Foehn, Philipp and Falanga, Davide and
+             Scaramuzza, Davide",
+  journal = ral,
+  volume  =  4,
+  number  =  3,
+  pages   = "2785--2792",
+  month   =  jul,
+  year    =  2019,
+  doi     = "10.1109/LRA.2019.2918689"
+}
+
+@misc{TensorFlow,
+title={ {TensorFlow}: Large-Scale Machine Learning on Heterogeneous Systems},
+url={https://www.tensorflow.org/},
+note={Software available from tensorflow.org},
+author={
+    Mart\'{\i}n~Abadi and
+    Ashish~Agarwal and
+    Paul~Barham and
+    Eugene~Brevdo and
+    Zhifeng~Chen and
+    Craig~Citro and
+    Greg~S.~Corrado and
+    Andy~Davis and
+    Jeffrey~Dean and
+    Matthieu~Devin and
+    Sanjay~Ghemawat and
+    Ian~Goodfellow and
+    Andrew~Harp and
+    Geoffrey~Irving and
+    Michael~Isard and
+    Yangqing Jia and
+    Rafal~Jozefowicz and
+    Lukasz~Kaiser and
+    Manjunath~Kudlur and
+    Josh~Levenberg and
+    Dandelion~Man\'{e} and
+    Rajat~Monga and
+    Sherry~Moore and
+    Derek~Murray and
+    Chris~Olah and
+    Mike~Schuster and
+    Jonathon~Shlens and
+    Benoit~Steiner and
+    Ilya~Sutskever and
+    Kunal~Talwar and
+    Paul~Tucker and
+    Vincent~Vanhoucke and
+    Vijay~Vasudevan and
+    Fernanda~Vi\'{e}gas and
+    Oriol~Vinyals and
+    Pete~Warden and
+    Martin~Wattenberg and
+    Martin~Wicke and
+    Yuan~Yu and
+    Xiaoqiang~Zheng},
+  year={2015},
+}
+
+@incollection{PyTorch,
+title = {PyTorch: An Imperative Style, High-Performance Deep Learning Library},
+author = {Paszke, Adam and Gross, Sam and Massa, Francisco and Lerer, Adam and Bradbury, James and Chanan, Gregory and Killeen, Trevor and Lin, Zeming and Gimelshein, Natalia and Antiga, Luca and Desmaison, Alban and Kopf, Andreas and Yang, Edward and DeVito, Zachary and Raison, Martin and Tejani, Alykhan and Chilamkurthy, Sasank and Steiner, Benoit and Fang, Lu and Bai, Junjie and Chintala, Soumith},
+booktitle = {Advances in Neural Information Processing Systems 32},
+editor = {H. Wallach and H. Larochelle and A. Beygelzimer and F. d\textquotesingle Alch\'{e}-Buc and E. Fox and R. Garnett},
+pages = {8024--8035},
+year = {2019},
+publisher = {Curran Associates, Inc.},
+url = {http://papers.neurips.cc/paper/9015-pytorch-an-imperative-style-high-performance-deep-learning-library.pdf}
+}
+
+@MISC{Quasar,
+  title        = "Quasar Carrier Board",
+  booktitle    = "Quasar Carrier for nVidia Jetson {TX2/TX2i}",
+  author       = "{Connect Tech Inc.}",
+  month        =  aug,
+  year         =  2019,
+  howpublished = "\url{https://connecttech.com/product/quasar-carrier-nvidia-jetson-tx2/}",
+note         = "Accessed: 2021-7-20"
+}
+
+@MISC{Betaflight,
+  title        = "Betaflight",
+  author       = "{The Betaflight Open Source Flight Controller Firmware Project}",
+  howpublished = "\url{https://github.com/betaflight/betaflight}",
+  note         = "Accessed: 2021-7-20"
+}
+
+@MISC{YAML,
+  title    = "{YAML} Ain't Markup Language ({YAML™}) Version 1.2",
+  author   = "Ben-Kiki, Oren and Evans, Clark and Net, Ingy D{\"o}t",
+  month    =  oct,
+  year     =  2009,
+  howpublished = "\url{https://yaml.org/spec/1.2/spec.pdf}",
+  note         = "Accessed: 2021-7-20"
+}
+
+
+@MISC{NuttX,
+  title        = "{NuttX}",
+  booktitle    = "Apache {NuttX}",
+  author       = "{The Apache Software Foundation}",
+  howpublished = "\url{https://nuttx.apache.org/}",
+  note         = "Accessed: 2021-7-20"
+}
+
+
+@MISC{radix,
+  title        = "radix",
+  booktitle    = "brainfpv",
+  author       = "Luessi, Martin",
+  month        =  dec,
+  year         =  2017,
+  howpublished = "\url{https://www.brainfpv.com/product/radix-fc/}",
+  note         = "Accessed: 2021-7-20",
+  language     = "en"
+}
+
+@article{sun2021autonomous,
+  title={Autonomous quadrotor flight despite rotor failure with onboard vision sensors: Frames vs. events},
+  author={Sun, Sihao and Cioffi, Giovanni and De Visser, Coen and Scaramuzza, Davide},
+  journal={IEEE Robotics and Automation Letters},
+  volume={6},
+  number={2},
+  pages={580--587},
+  year={2021},
+  publisher={IEEE}
+}
+
+@ARTICLE{Jacquet2021TorqueNMPC,  
+author={Jacquet, Martin and Franchi, Antonio},  
+journal={IEEE Robotics and Automation Letters},   
+title={Motor and Perception Constrained NMPC for Torque-Controlled Generic Aerial Vehicles},   year={2021},  
+volume={6},  
+number={2},  pages={518-525}
+}
+
+
+@MISC{LAIRD,
+  title        = "Laird Connectivity",
+  booktitle    = "Laird Connectivity",
+  howpublished = "\url{https://www.lairdconnect.com/}",
+  note         = "Accessed: 2021-7-20"
+}
+
+
+@InProceedings{Hanover2021icra,
+    title       = {Performance, Precision, and Payloads: Adaptive Optimal Control for Quadrotors Under Uncertainty},
+    author      = {Hanover, Drew and Kaufmann, Elia and Foehn, Philipp and Scaramuzza, Davide},
+    booktitle   = ral,
+    year        = {2021},
+    doi        = {10.1109/LRA.2021.3131690}
+}
+
+
+@article{Sun2021arxiv,  
+  author={Sihao Sun and Angel Romero and Philipp Foehn and Elia Kaufmann and Davide Scaramuzza},
+  journal={IEEE Transactions on Robotics},   
+  title={A Comparative Study of Nonlinear MPC and Differential-Flatness-based Control for Quadrotor Agile Flight},   
+  year={2022}, 
+  pages={1-17},  
+  doi={10.1109/TRO.2022.3177279}
+}
+
+
+@article{loquercio2021wild,
+  title={Agile Autonomy: Learning High-Speed Flight in the Wild},
+  author={Loquercio, Antonio and Kaufmann, Elia and Ranftl, Ren{\'e} and M{\"u}ller, Matthias and Koltun, Vladlen and Scaramuzza, Davide},
+  journal = {Science Robotics},
+  year = {2021},
+  note = {under review}
+}
+
+@MISC{DJIFPV,
+  title        = "{DJI} Digital {FPV} System",
+  booktitle    = "{DJI} Digital {FPV} System",
+  author       = "{DJI}",
+  howpublished = "\url{https://www.dji.com/fpv}",
+  note         = "Accessed: 2021-7-20"
+}
+
+@MISC{UnityStore,
+  title        = "Unity Asset Store",
+  booktitle    = "Unity Asset Store",
+  author       = "{Unity}",
+  howpublished = "\url{https://assetstore.unity.com/}",
+  note         = "Accessed: 2021-08-02"
+}
+
+@MISC{ParrotANAFI_AI,
+  title        = "Parrot {ANAFI}  Ai",
+  booktitle    = "Parrot {ANAFI}  Ai",
+  author       = "Parrot Drone {SAS}",
+  howpublished = "\url{https://www.parrot.com/en/drones/anafi-ai}",
+  note         = "Accessed: 2021-7-20"
+}
+
+@inproceedings{paparazzi,
+  title={Using the Paparazzi UAV System for Scientific Research},
+  author={Hattenberger, Gautier and Bronz, Murat and Gorraz, Michel},
+  booktitle = {International Micro Air Vehicle Conference and Competition},
+  year={2014},
+  pages = {247--252},
+}
+
+@inproceedings{lupashin2010simple,
+  title={A simple learning strategy for high-speed quadrocopter multi-flips},
+  author={Lupashin, Sergei and Sch{\"o}llig, Angela and Sherback, Michael and D'Andrea, Raffaello},
+  booktitle={{IEEE} International Conference on Robotics and Automation (ICRA)},
+  pages={1642--1648},
+  year={2010},
+}
+
+@article{chen2019controller,
+  title={Controller Synthesis and Performance Optimization for Aerobatic Quadrotor Flight},
+  author={Chen, Ying and P{\'e}rez-Arancibia, N{\'e}stor O},
+  journal={IEEE Transactions on Control Systems Technology},
+  year={2019},
+  pages={1--16},
+  publisher={IEEE}
+}
+
+@article{kumar2012opportunities,
+  title={Opportunities and challenges with autonomous micro aerial vehicles},
+  author={Kumar, Vijay and Michael, Nathan},
+  journal={The International Journal of Robotics Research},
+  volume={31},
+  number={11},
+  pages={1279--1291},
+  year={2012},
+  publisher={SAGE Publications Sage UK: London, England}
+}
+
+@article{antonini202IJRR,
+author = {Amado Antonini and Winter Guerra and Varun Murali and Thomas Sayre-McCord and Sertac Karaman},
+title ={The Blackbird UAV dataset},
+journal = {The International Journal of Robotics Research},
+volume = {39},
+number = {10-11},
+pages = {1346-1364},
+year = {2020},
+doi = {10.1177/0278364920908331},
+}
+
+
+
+@INPROCEEDINGS{sayremccord2018visual,
+  title     = "{Visual-Inertial} Navigation Algorithm Development Using
+               Photorealistic Camera Simulation in the Loop",
+  booktitle = icra,
+  author    = "Sayre-McCord, Thomas and Guerra, Winter and Antonini, Amado and Arneberg, Jasper and Brown, Austin and Cavalheiro, Guilherme and Fang, Yajun and Gorodetsky, Alex and McCoy, Dave and Quilter, Sebastian and Riether, Fabian and Tal, Ezra and Terzioglu, Yunus and Carlone, Luca and Karaman, Sertac",
+  pages     = "2566--2573",
+  month     =  may,
+  year      =  2018,
+  doi       = "10.1109/ICRA.2018.8460692"
+}
+
+
+
+@ARTICLE{Davies2018micro,
+  title     = "Loihi: A Neuromorphic Manycore Processor with {On-Chip} Learning",
+  author    = "Davies, Mike and Srinivasa, Narayan and Lin, Tsung-Han and
+               Chinya, Gautham and Cao, Yongqiang and Choday, Sri Harsha and
+               Dimou, Georgios and Joshi, Prasad and Imam, Nabil and Jain,
+               Shweta and Liao, Yuyun and Lin, Chit-Kwan and Lines, Andrew and
+               Liu, Ruokun and Mathaikutty, Deepak and McCoy, Steven and Paul,
+               Arnab and Tse, Jonathan and Venkataramanan, Guruguhanathan and
+               Weng, Yi-Hsin and Wild, Andreas and Yang, Yoonseok and Wang,
+               Hong",
+  journal   = "IEEE Micro",
+  volume    =  38,
+  number    =  1,
+  pages     = "82--99",
+  month     =  jan,
+  year      =  2018,
+  doi       = "10.1109/MM.2018.112130359"
+}
+
+
+@ARTICLE{Moradi2018dynapse,
+  title    = "A Scalable Multicore Architecture With Heterogeneous Memory
+              Structures for Dynamic Neuromorphic Asynchronous Processors
+              ({DYNAPs})",
+  author   = "Moradi, Saber and Qiao, Ning and Stefanini, Fabio and Indiveri,
+              Giacomo",
+  journal  = "IEEE Trans. Biomed. Circuits Syst.",
+  volume   =  12,
+  number   =  1,
+  pages    = "106--122",
+  month    =  feb,
+  year     =  2018,
+  language = "en",
+  issn     = "1932-4545, 1940-9990",
+  pmid     = "29377800",
+  doi      = "10.1109/TBCAS.2017.2759700"
+}
+
+
+@inproceedings{Nguyen2020arxiv,
+  title={Model predictive control for micro aerial vehicles: A survey},
+  author={Nguyen, Huan and Kamel, Mina and Alexis, Kostas and Siegwart, Roland},
+  booktitle={2021 European Control Conference (ECC)},
+  pages={1556--1563},
+  year={2021},
+  organization={IEEE}
+}
+
+@ARTICLE{Oleynikova2020jfr,
+  title     = "An open‐source system for vision‐based micro‐aerial vehicle mapping, planning, and flight in cluttered environments",
+  author    = "Oleynikova, Helen and Lanegger, Christian and Taylor, Zachary and Pantic, Michael and Millane, Alexander and Siegwart, Roland and Nieto, Juan",
+  journal   = jfr,
+  publisher = "Wiley",
+  volume    =  37,
+  number    =  4,
+  pages     = "642--666",
+  month     =  jun,
+  year      =  2020,
+  doi       = "10.1002/rob.21950"
+}
+
+@inproceedings{zeng2019end,
+  title={End-to-end interpretable neural motion planner},
+  author={Zeng, Wenyuan and Luo, Wenjie and Suo, Simon and Sadat, Abbas and Yang, Bin and Casas, Sergio and Urtasun, Raquel},
+  booktitle=cvpr,
+  pages={8660--8669},
+  year={2019}
+}
+
+@inproceedings{Bansal19Corl,
+  author    = {Somil Bansal and
+               Varun Tolani and
+               Saurabh Gupta and
+               Jitendra Malik and
+               Claire J. Tomlin},
+  title     = {Combining Optimal Control and Learning for Visual Navigation in Novel
+               Environments},
+  booktitle = {Conference on Robot Learning, CoRL 2019},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {100},
+  pages     = {420--429},
+  publisher = {{PMLR}},
+  year      = {2019},
+  url       = {http://proceedings.mlr.press/v100/bansal20a.html}
+}
+
+@inproceedings{homayounfar2019cvpr,
+  title={Dagmapper: Learning to map by discovering lane topology},
+  author={Homayounfar, Namdar and Ma, Wei-Chiu and Liang, Justin and Wu, Xinyu and Fan, Jack and Urtasun, Raquel},
+  booktitle=cvpr,
+  pages={2911--2920},
+  year={2019}
+}
+
+@inproceedings{zeng2020dsdnet,
+  title={Dsdnet: Deep structured self-driving network},
+  author={Zeng, Wenyuan and Wang, Shenlong and Liao, Renjie and Chen, Yun and Yang, Bin and Urtasun, Raquel},
+  booktitle=eccv,
+  pages={156--172},
+  year={2020}
+}
+
+@Article{Hehn12ar,
+  author        = {M. Hehn and R. Ritz and R. D'Andrea},
+  title         = {Performance benchmarking of quadrotor systems using
+                  time-optimal control},
+  journal       = ar,
+  year          = 2012,
+  month         = mar,
+  doi           = {10.1007/s10514-012-9282-3}
+}
+
+@Article{Spedicato18tcst,
+  author        = {S. Spedicato and G. Notarstefano},
+  title         = {Minimum-Time Trajectory Generation for Quadrotors in Constrained Environments},
+  journal       = {IEEE Transactions on Control Systems Technology},
+  year          = {2018},
+  doi           = {10.1109/TCST.2017.2709268}
+}
+
+@INPROCEEDINGS{Loock13ecc,
+  author        = {W. Van Loock and G. Pipeleers and J. Swevers},
+  title         = {Time-optimal quadrotor flight},
+  booktitle     = ecc,
+  year          = {2013},
+  doi           = {10.23919/ECC.2013.6669253}
+ }
+
+@article{Ryou2020arxiv,
+  author        = {Ryou, G. and Tal, E. and Karaman, S.},
+  title         = {Multi-Fidelity Black-Box Optimization for Time-Optimal Quadrotor Maneuvers},
+  month         = jun,
+  year          = {2020},
+  journal       = {Robotics: Science and Systems}
+}
+
+
+@ARTICLE{Tranzatto2021jfr,
+  title    = "{CERBERUS}: Autonomous Legged and Aerial Robotic Exploration in
+              the Tunnel and Urban Circuits of the {DARPA} Subterranean
+              Challenge",
+  author   = "Tranzatto, Marco and Mascarich, Frank and Bernreiter, Lukas and
+              Godinho, Carolina and Camurri, Marco and Khattak, Shehryar Masaud
+              Khan and Dang, Tung and Reijgwart, Victor and Loeje, Johannes and
+              Wisth, David and Zimmermann, Samuel and Nguyen, Huan and Fehr,
+              Marius and Solanka, Lukas and Buchanan, Russell and Bjelonic,
+              Marko and Khedekar, Nikhil and Valceschini, Mathieu and Jenelten,
+              Fabian and Dharmadhikari, Mihir and Homberger, Timon and De
+              Petris, Paolo and Wellhausen, Lorenz and Kulkarni, Mihir and
+              Miki, Takahiro and Hirsch, Satchel and Montenegro, Markus and
+              Papachristos, Christos and Tresoldi, Fabian and Carius, Jan and
+              Valsecchi, Giorgio and Lee, Joonho and Meyer, Konrad and Wu,
+              Xiangyu and Nieto, Juan and Smith, Andy and Hutter, Marco and
+              Siegwart, Roland Y and Mueller, Mark and Fallon, Maurice and
+              Alexis, Kostas",
+  journal  = jfr,
+  year     =  2021,
+  doi      = {10.3929/ethz-b-000489726}
+}
+
+
+
+@MISC{AgileFlight,
+  title        = "{AgileFlight}",
+  author       = "{CORDIS - European Comission}",
+  howpublished = "\url{https://cordis.europa.eu/project/id/864042}",
+  note         = "Accessed: 2021-7-30"
+}
+
+@MISC{FLA,
+  title        = "Fast Lightweight Autonomy",
+  author       = "{DARPA}",
+  howpublished = "\url{https://www.darpa.mil/program/fast-lightweight-autonomy}",
+  note         = "Accessed: 2021-7-30"
+}
+
+@inproceedings{Falanga17ICRA,
+  author    = {Davide Falanga and
+               Elias Mueggler and
+               Matthias Faessler and
+               Davide Scaramuzza},
+  title     = {Aggressive quadrotor flight through narrow gaps with onboard sensing
+               and computing using active vision},
+  booktitle = icra,
+  pages     = {5774--5781},
+  publisher = {{IEEE}},
+  year      = {2017},
+  url       = {https://doi.org/10.1109/ICRA.2017.7989679},
+  doi       = {10.1109/ICRA.2017.7989679}
+}
+
+@article {Ajanic20sr,
+	author = {Ajanic, Enrico and Feroskhan, Mir and Mintchev, Stefano and Noca, Flavio and Floreano, Dario},
+	title = {Bioinspired wing and tail morphing extends drone flight capabilities},
+	volume = {5},
+	number = {47},
+	elocation-id = {eabc2897},
+	year = {2020},
+	doi = {10.1126/scirobotics.abc2897},
+	URL = {https://robotics.sciencemag.org/content/5/47/eabc2897},
+	eprint = {https://robotics.sciencemag.org/content/5/47/eabc2897.full.pdf},
+	journal = {Science Robotics}
+}
+
+@article {Chang20sr,
+	author = {Chang, Eric and Matloff, Laura Y. and Stowers, Amanda K. and Lentink, David},
+	title = {Soft biohybrid morphing wings with feathers underactuated by wrist and finger motion},
+	volume = {5},
+	number = {38},
+	elocation-id = {eaay1246},
+	year = {2020},
+	doi = {10.1126/scirobotics.aay1246},
+	URL = {https://robotics.sciencemag.org/content/5/38/eaay1246},
+	eprint = {https://robotics.sciencemag.org/content/5/38/eaay1246.full.pdf},
+	journal = {Science Robotics}
+}
+
+@ARTICLE{Falanga18foldable,
+author={Falanga, Davide and Kleber, Kevin and Mintchev, Stefano and Floreano, Dario and Scaramuzza, Davide},
+journal={IEEE Robotics and Automation Letters},
+title={The Foldable Drone: A Morphing Quadrotor That Can Squeeze and Fly},
+year={2019},
+volume={4},
+number={2},
+pages={209-216},
+doi={10.1109/LRA.2018.2885575}}
+
+@ARTICLE{Bauersfeld20VTOL,
+  author={Bauersfeld, L. and Spannagl, L. and Ducard, G. and Onder, C.},
+  journal={IEEE Transactions on Aerospace and Electronic Systems}, 
+  title={MPC Flight Control for a Tilt-rotor VTOL Aircraft}, 
+  year={2021},
+  volume={},
+  number={},
+  pages={1-13},
+  doi={10.1109/TAES.2021.3061819}}
+
+@INPROCEEDINGS{Dsa16icra,
+  author={D'Sa, Ruben and Jenson, Devon and Papanikolopoulos, Nikolaos},
+  booktitle={2016 IEEE International Conference on Robotics and Automation (ICRA)}, 
+  title={SUAV:Q - a hybrid approach to solar-powered flight}, 
+  year={2016},
+  pages={3288-3294},
+  doi={10.1109/ICRA.2016.7487501} 
+}
+
+
+
+@INPROCEEDINGS{ROS,
+  title      = "{ROS}: an open-source Robot Operating System",
+  booktitle  = "{ICRA} workshop on open source software",
+  author     = "Quigley, M and Faust, J and Foote, T and Leibs, J",
+  month      =  dec,
+  year       =  2009,
+  conference = icra
+}
+
+@InProceedings{Zhang18iros,
+  author = {Zhang, Zichao and Scaramuzza, Davide},
+  title = {A Tutorial on Quantitative Trajectory Evaluation for Visual(-Inertial) Odometry},
+  booktitle = iros,
+  year = {2018},
+  doi = {10.1109/IROS.2018.8593941}
+}
+
+@Article{Forster17troSVO,
+  author        = {Christian Forster and Zichao Zhang and Michael Gassner and
+                  Manuel Werlberger and Davide Scaramuzza},
+  title         = {{SVO}: Semidirect Visual Odometry for Monocular and
+                  Multicamera Systems},
+  journal       = tro,
+  year          = 2017,
+  volume        = 33,
+  number        = 2,
+  pages         = {249--265},
+  doi           = {10.1109/TRO.2016.2623335}
+}
+
+% VIO Software
+
+@MISC{ArtiSense,
+  title        = {ArtiSlam},
+  author       = {ArtiSense},
+  howpublished = {\url{https://www.artisense.ai/vinspro-2020}},
+  note         = {Accessed: 2021-11-30}
+}
+
+@MISC{AIincorporated,
+  title        = {SLAM System},
+  author       = {AIincorporated},
+  howpublished = {\url{https://www.aiincorporated.com/technology}},
+  note         = {Accessed: 2021-11-30}
+}
+
+@MISC{AugmentedPixels,
+  title        = {SLAM SDK},
+  author       = {Augmented Pixels},
+  howpublished = {\url{https://augmentedpixels.com/usecase/slam-sdk/}},
+  note         = {Accessed: 2021-11-30}
+}
+
+@MISC{SlamCore,
+  title        = {Spatial Intelligence SDK},
+  author       = {SLAMcore},
+  howpublished = {\url{https://www.slamcore.com/spatial-intelligence-sdk}},
+  note         = {Accessed: 2021-11-30}
+}
+
+@MISC{SVO,
+  title        = {SVO Pro},
+  author       = {Christian Forster and Zichao Zhang and Michael Gassner and
+                  Manuel Werlberger and Davide Scaramuzza},
+  howpublished = {\url{http://rpg.ifi.uzh.ch/svo_pro.html}},
+  note         = {Accessed: 2021-11-30}
+}
+
+% VIO Hardware
+    
+@MISC{SevenSense,
+  title        = {AlphaSense},
+  author       = {SevenSense},
+  howpublished = {\url{https://www.sevensense.ai/product/alphasense-position}},
+  note         = {Accessed: 2021-11-30}
+}
+
+@MISC{MyntEye,
+  title        = {S210},
+  author       = {MYNT EYE},
+  howpublished = {\url{https://www.mynteye.com/pages/s210}},
+  note         = {Accessed: 2021-11-30}
+}
+
+@MISC{BlueFox,
+  title        = {BlueFOX},
+  author       = {Matrix Vision},
+  howpublished = {\url{https://www.matrix-vision.com/en/products/areas/MA08}},
+  note         = {Accessed: 2021-11-30}
+}
+
+% VIO Full System
+    
+@MISC{Roboception,
+  title        = {rc\_visard},
+  author       = {Roboception},
+  howpublished = {\url{https://roboception.com/en/rc_visard-en/}}},
+  note         = {Accessed: 2021-11-30}
+}
+
+@MISC{ModalAI,
+  title        = {Voxl CAM Core Dev Kit},
+  author       = {ModalAI},
+  howpublished = {\url{https://www.modalai.com/pages/voxl-cam-perception-engine}},
+  note         = {Accessed: 2021-11-30}
+}
+
+@inproceedings{Geneva2020icra,
+author = {Geneva, Patrick and Eckenhoff, Kevin and Lee, Woosik and Yang, Yulin and Huang, Guoquan},
+year = {2020},
+month = {05},
+booktitle = icra,
+title = {OpenVINS: A Research Platform for Visual-Inertial Estimation},
+doi = {10.1109/ICRA40945.2020.9196524}
+}
+
+@article{Qin17tro,
+  title={VINS-Mono: A Robust and Versatile Monocular Visual-Inertial State Estimator},
+  author={Qin, Tong and Li, Peiliang and Shen, Shaojie},
+  journal=tro, 
+  year={2018}
+}
+
+@article{Romero2021arxiv,  
+  author={Angel Romero and Sihao Sun and Philipp Foehn and Davide Scaramuzza},
+  journal={IEEE Transactions on Robotics},   
+  title={Model Predictive Contouring Control for Time-Optimal Quadrotor Flight},   
+  year={2022}, 
+  pages={1-17},  
+  doi={10.1109/TRO.2022.3173711}
+}
+
+@INPROCEEDINGS{Rehder2016icra,
+  author={Rehder, Joern and Nikolic, Janosch and Schneider, Thomas and Hinzmann, Timo and Siegwart, Roland},
+  booktitle=icra, 
+  title={Extending kalibr: Calibrating the extrinsics of multiple IMUs and of individual axes}, 
+  year={2016},
+  doi={10.1109/ICRA.2016.7487628}
+}
+
+
+@article{Nan21arxiv,
+    title={Nonlinear MPC for Quadrotor Fault-Tolerant Control},
+    author={Nan, Fang and Sun, Sihao and Foehn, Philipp and Scaramuzza, Davide},
+    journal={IEEE Robotics and Automation Letters},
+    volume={7},
+    number={2},
+    pages={5047--5054},
+    year={2022},
+    publisher={IEEE}
+}
+
+@MISC{LoadCell,
+  title        = {ATI Mini40-SI-20-1},
+  author       = {ATI Industrial Automation},
+  howpublished = {\url{https://www.ati-ia.com/products/ft/ft_models.aspx?id=Mini40}},
+  note         = {Accessed: 2021-11-30}
+}
+
+@INPROCEEDINGS{Delmerico2018icra,
+  author={Delmerico, Jeffrey and Scaramuzza, Davide},
+  booktitle=icra, 
+  title={A Benchmark Comparison of Monocular Visual-Inertial Odometry Algorithms for Flying Robots}, 
+  year={2018},
+  pages={2502-2509},
+  doi={10.1109/ICRA.2018.8460664}
+}
+
+
+{"mode":"full","isActive":false}
+
+
+%%%%%%%%%%%%%%%%%%%% JUAN REFERENCES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{RamirezAtencia2018QGroundControl,
+  author  = {Ramirez-Atencia, Cristian and Camacho, David},
+  title   = {Extending QGroundControl for Automated Mission Planning of UAVs},
+  journal = {Sensors},
+  year    = {2018},
+  volume  = {18},
+  number  = {7},
+  pages   = {2339},
+  doi     = {10.3390/s18072339},
+  url     = {https://doi.org/10.3390/s18072339}
+}
+
+@article{DiGregorio2021HumanGCS,
+  author  = {Di Gregorio, Marianna and Romano, Marco and Sebillo, Maurizio and Vitiello, Genoveffa and Vozella, Antonio},
+  title   = {Improving Human Ground Control Performance in Unmanned Aerial Systems},
+  journal = {Future Internet},
+  year    = {2021},
+  volume  = {13},
+  number  = {8},
+  pages   = {188},
+  doi     = {10.3390/fi13080188},
+  url     = {https://doi.org/10.3390/fi13080188}
+}
+
+@article{Hu2021CloudStation,
+  author  = {Hu, Lian and Pathak, Oindrila and He, Zeyu and Lee, Hyeok and Bedwany, Mohamed and Mica, John and Burke, Peter J.},
+  title   = {CloudStation: A Cloud-Based Ground Control Station for Drones},
+  journal = {IEEE Journal on Miniaturization for Air and Space Systems},
+  year    = {2021},
+  volume  = {2},
+  number  = {1},
+  pages   = {36--42},
+  doi     = {10.1109/JMASS.2020.3027520}
+}
+
+@incollection{Dao2018UTMGCS,
+  author    = {Dao, Quan V. and Martin, Ludovic and Mohlenbrink, Colin and Bienert, Nicolas and Wolter, Christopher and Gomez, Angelina and Claudatos, Lisa and Mercer, John},
+  title     = {Evaluation of Early Ground Control Station Configurations for Interacting with a UAS Traffic Management (UTM) System},
+  booktitle = {Advances in Human Factors in Robots and Unmanned Systems},
+  series    = {Advances in Intelligent Systems and Computing},
+  volume    = {595},
+  publisher = {Springer},
+  address   = {Cham},
+  year      = {2018},
+  pages     = {75--86},
+  doi       = {10.1007/978-3-319-60384-1_8},
+  url       = {https://doi.org/10.1007/978-3-319-60384-1_8}
+}
+
+@article{Dixon2005MissionControl,
+  author  = {Dixon, Stephen R. and Wickens, Christopher D. and Chang, David},
+  title   = {Mission Control of Multiple Unmanned Aerial Vehicles: A Workload Analysis},
+  journal = {Human Factors},
+  year    = {2005},
+  volume  = {47},
+  number  = {3},
+  pages   = {479--487},
+  doi     = {10.1518/001872005774860005}
+}
+
+@article{Zhang2024InterfaceWorkload,
+  author  = {Zhang, Wenjuan and Liu, Yunmei and Kaber, David B.},
+  title   = {Effect of interface design on cognitive workload in unmanned aerial vehicle control},
+  journal = {International Journal of Human-Computer Studies},
+  year    = {2024},
+  volume  = {189},
+  pages   = {103287},
+  doi     = {10.1016/j.ijhcs.2024.103287},
+  url     = {https://doi.org/10.1016/j.ijhcs.2024.103287}
+}
+
+@inproceedings{GarciaCardenas2024CognitiveLoadTeleop,
+  author    = {Garc{\'i}a-C{\'a}rdenas, Hei and Tapus},
+  title     = {Exploring Cognitive Load Dynamics in Human-Machine Interaction for Teleoperation: A User-Centric Perspective on Remote Operation System Design},
+  booktitle = {2024 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)},
+  year      = {2024},
+  pages     = {12204--12211},
+  doi       = {10.1109/IROS58592.2024.10802226}
+}
+
+@inproceedings{savva_habitat_2019,
+    address = {Seoul, Korea (South)},
+    title = {Habitat: {A} {Platform} for {Embodied} {AI} {Research}},
+    isbn = {978-1-72814-803-8},
+    shorttitle = {Habitat},
+    url = {https://ieeexplore.ieee.org/document/9010745/},
+    doi = {10.1109/ICCV.2019.00943},
+    abstract = {We present Habitat, a platform for research in embodied artiﬁcial intelligence (AI). Habitat enables training embodied agents (virtual robots) in highly efﬁcient photorealistic 3D simulation. Speciﬁcally, Habitat consists of: (i) Habitat-Sim: a ﬂexible, high-performance 3D simulator with conﬁgurable agents, sensors, and generic 3D dataset handling. Habitat-Sim is fast – when rendering a scene from Matterport3D, it achieves several thousand frames per second (fps) running single-threaded, and can reach over 10,000 fps multi-process on a single GPU.},
+    language = {en},
+    urldate = {2022-05-26},
+    booktitle = {2019 {IEEE}/{CVF} {International} {Conference} on {Computer} {Vision} ({ICCV})},
+    publisher = {IEEE},
+    author = {Savva, Manolis and Kadian, Abhishek and Maksymets, Oleksandr and Zhao, Yili and Wijmans, Erik and Jain, Bhavana and Straub, Julian and Liu, Jia and Koltun, Vladlen and Malik, Jitendra and Parikh, Devi and Batra, Dhruv},
+    month = oct,
+    year = {2019},
+    pages = {9338--9346},
 }

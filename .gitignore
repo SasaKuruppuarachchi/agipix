@@ -27,3 +27,4 @@ vendor/
 *.toc
 .vscode/
 assets/etc
+/images/
