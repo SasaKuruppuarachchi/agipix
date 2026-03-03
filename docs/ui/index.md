@@ -6,8 +6,7 @@ layout: doc
 
 Use this page to navigate AgiUI workflows for teleoperation, supervision, and autonomy handover.
 
-![UI overview](../../assets/images/diag/ui_overview.png)
-![AgiUI interface](../../assets/images/ui/agiui_v2.png)
+![AgiUI interface](../../assets/images/ui/agiui.png)
 
 ## Teleoperation
 
