@@ -643,6 +643,15 @@ a:not(.btn):not(.nav-link):hover {
   border-radius: 8px;
   padding: 2rem;
   margin: 2rem 0;
+  line-height: 1.8;
+}
+
+.doc-content p,
+.doc-content li,
+.doc-content blockquote,
+.doc-content td,
+.doc-content th {
+  line-height: 1.8;
 }
 
 /* Docs layout with sidebar */
