@@ -443,7 +443,7 @@ html { scroll-padding-top: 72px; }
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding: 6px;
+  padding: 0;
 }
 
 .swiper-wrapper::-webkit-scrollbar {
@@ -457,7 +457,7 @@ html { scroll-padding-top: 72px; }
 
 .emotions-slider__slide {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   min-height: 560px;
   height: 560px;
   flex: 0 0 auto;
@@ -556,27 +556,31 @@ html { scroll-padding-top: 72px; }
 
 .emotions-slider-item__image img {
   width: 100%;
-  max-height: calc(100% - 92px);
   height: auto;
   object-fit: contain;
   object-position: top center;
   display: block;
+  flex: 0 0 auto;
 }
 
 .emotions-slider-item__caption {
   margin-top: auto;
+  margin-inline: 8px;
+  width: calc(100% - 16px);
+  display: flex;
+  align-items: flex-end;
   color: #ffffff;
   font-size: 0.9rem;
   line-height: 1.35;
   background: linear-gradient(
     180deg,
-    rgba(170, 170, 170, 0.0) 0%,
-    rgba(125, 125, 125, 0.28) 42%,
-    rgba(68, 68, 68, 0.72) 100%
+    rgba(22, 27, 34, 0.0) 0%,
+    rgba(22, 27, 34, 0.45) 40%,
+    rgba(22, 27, 34, 0.92) 100%
   );
-  padding: 14px 12px 12px;
-  min-height: 92px;
-  width: 100%;
+  padding: 12px 10px 10px;
+  min-height: 0;
+  border-radius: 6px 6px 0 0;
 }
 
 .gallery-strip {
@@ -1100,6 +1104,12 @@ a:not(.btn):not(.nav-link):hover {
     min-height: auto;
     height: 420px;
     width: min(90vw, 980px);
+  }
+
+  .emotions-slider-item__caption {
+    margin-inline: 6px;
+    width: calc(100% - 12px);
+    padding: 10px 8px 8px;
   }
 
   /* Mobile nav: show hamburger, collapse links by default */
