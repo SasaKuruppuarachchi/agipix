@@ -545,16 +545,33 @@ html { scroll-padding-top: 72px; }
 }
 
 .emotions-slider-item__image {
-  aspect-ratio: 16 / 9;
+  position: relative;
   overflow: hidden;
 }
 
 .emotions-slider-item__image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   object-position: center;
   display: block;
+}
+
+.emotions-slider-item__caption {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  color: #ffffff;
+  font-size: 0.92rem;
+  line-height: 1.35;
+  background: rgba(0, 0, 0, 0.28);
+  padding: 6px 10px;
+  border-radius: 6px;
+  max-width: calc(100% - 24px);
+}
+
+.gallery-strip {
+  margin: 1rem 0 2rem;
 }
 
 /* Quick Start Section */
