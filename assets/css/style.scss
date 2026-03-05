@@ -443,7 +443,7 @@ html { scroll-padding-top: 72px; }
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-  padding: 0;
+  padding: 6px;
 }
 
 .swiper-wrapper::-webkit-scrollbar {
@@ -580,7 +580,7 @@ html { scroll-padding-top: 72px; }
   );
   padding: 12px 10px 10px;
   min-height: 0;
-  border-radius: 6px 6px 0 0;
+  border-radius: 12px 12px 0 0;
 }
 
 .gallery-strip {
