@@ -49,7 +49,7 @@ layout: default
   <main class="docs-main">
     <article class="doc-content">
       <div class="doc-search" data-index-url="{{ '/search-docs.json' | relative_url }}" data-doc-scope="{{ scope | default: '' }}">
-        <label class="doc-search-label" for="docSearchInput">Search Docs</label>
+        <!-- <label class="doc-search-label" for="docSearchInput">Search Docs</label> -->
         <input class="doc-search-input" id="docSearchInput" type="search" placeholder="Search by keyword, command, or topic..." autocomplete="off">
         <div class="doc-search-results" hidden></div>
       </div>
@@ -128,7 +128,7 @@ layout: default
 {%- else -%}
   <article class="doc-content">
     <div class="doc-search" data-index-url="{{ '/search-docs.json' | relative_url }}" data-doc-scope="">
-      <label class="doc-search-label" for="docSearchInput">Search Docs</label>
+      <!-- <label class="doc-search-label" for="docSearchInput">Search Docs</label> -->
       <input class="doc-search-input" id="docSearchInput" type="search" placeholder="Search by keyword, command, or topic..." autocomplete="off">
       <div class="doc-search-results" hidden></div>
     </div>

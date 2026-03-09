@@ -4,6 +4,33 @@
 
   const currentPath = window.location.pathname;
   const loadedIndexes = {};
+  const urlParams = new URLSearchParams(window.location.search);
+
+  function findAndScrollToMatch(query) {
+    const q = normalizeText(query).trim();
+    if (!q) return;
+
+    const contentRoot = document.querySelector('.doc-content');
+    if (!contentRoot) return;
+
+    const candidates = contentRoot.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li, td, th, blockquote, pre');
+    let target = null;
+
+    candidates.forEach(function (el) {
+      if (target) return;
+      const text = normalizeText(el.textContent || '');
+      if (text.includes(q)) {
+        target = el;
+      }
+    });
+
+    if (!target) return;
+    target.classList.add('doc-search-hit');
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function () {
+      target.classList.remove('doc-search-hit');
+    }, 2400);
+  }
 
   function normalizeText(value) {
     return (value || '').toLowerCase();
@@ -79,7 +106,8 @@
       li.className = 'doc-search-item';
 
       const a = document.createElement('a');
-      a.href = item.url;
+      const withQuery = item.url + (item.url.includes('?') ? '&' : '?') + 'q=' + encodeURIComponent(query);
+      a.href = withQuery;
       a.className = 'doc-search-link';
 
       const title = document.createElement('div');
@@ -106,6 +134,14 @@
     const indexUrl = root.getAttribute('data-index-url');
     const scope = root.getAttribute('data-doc-scope') || '';
     if (!input || !resultsContainer || !indexUrl) return;
+
+    const initialQuery = (urlParams.get('q') || '').trim();
+    if (initialQuery) {
+      input.value = initialQuery;
+      setTimeout(function () {
+        findAndScrollToMatch(initialQuery);
+      }, 120);
+    }
 
     async function getIndex() {
       if (!loadedIndexes[indexUrl]) {
