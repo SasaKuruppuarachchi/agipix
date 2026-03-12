@@ -56,7 +56,6 @@
     const tokens = q.split(/\s+/).filter(Boolean);
     const filtered = items.filter(function (item) {
       if (scope && item.scope !== scope) return false;
-      if (item.url === currentPath || item.url === currentPath + '/') return false;
       const title = normalizeText(item.title);
       const content = normalizeText(item.content);
       return tokens.every(function (t) {
@@ -104,11 +103,15 @@
     results.forEach(function (item) {
       const li = document.createElement('li');
       li.className = 'doc-search-item';
+      const samePage = item.url === currentPath || item.url === currentPath + '/';
 
       const a = document.createElement('a');
       const withQuery = item.url + (item.url.includes('?') ? '&' : '?') + 'q=' + encodeURIComponent(query);
       a.href = withQuery;
       a.className = 'doc-search-link';
+      if (samePage) {
+        a.setAttribute('data-same-page', 'true');
+      }
 
       const title = document.createElement('div');
       title.className = 'doc-search-item-title';
@@ -120,6 +123,18 @@
 
       a.appendChild(title);
       a.appendChild(snippet);
+
+      if (samePage) {
+        a.addEventListener('click', function (event) {
+          event.preventDefault();
+          const nextUrl = new URL(window.location.href);
+          nextUrl.searchParams.set('q', query);
+          window.history.replaceState({}, '', nextUrl.toString());
+          findAndScrollToMatch(query);
+          container.hidden = true;
+        });
+      }
+
       li.appendChild(a);
       list.appendChild(li);
     });

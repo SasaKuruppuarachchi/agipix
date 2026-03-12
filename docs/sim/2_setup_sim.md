@@ -198,6 +198,24 @@ make px4_sitl_default none
 if PX4 launched properly you can exit out of it.
 &emsp; For further information [visit here](https://docs.px4.io/main/en/dev_setup/building_px4.html)
 
+##### (Optional) If an `externally-managed-environment` Use an venv
+```bash
+sudo apt install python3-venv python3-pip python3-full
+cd PX4-Autopilot
+# setup and activate venv
+python3 -m venv .venv
+source .venv/bin/activate
+pip install --upgrade pip
+pip install empy jinja2 numpy toml pyyaml packaging
+# install and fix python deps
+pip install kconfiglib jinja2 empy jsonschema pyros-genmsg packaging toml numpy future
+pip uninstall empy
+pip install empy==3.3.4
+# Build Px4 
+make clean
+make px4_sitl_default none
+```
+
 To synchronise the time stamps with the simulator we need to set the parameter [UXRCE_DDS_SYNCT](https://docs.px4.io/main/en/advanced_config/parameter_reference.html#UXRCE_DDS_SYNCT) to `false`. To do that,
 1. Open the rcS file at `/PX4-Autopilot/ROMFS/px4fmu_common/init.d-posix/rcS`
 2. Paste the following line before ´#Autostart ID´
@@ -224,14 +242,8 @@ git clone https://github.com/SasaKuruppuarachchi/isaac_envs.git
 &emsp; Installing the extension as a library
 
 ```bash
-# Go to the repository of the pegasus simulator
-cd PegasusSimulator
-
-# Go into the extensions directory
-cd extensions
-
-# Run the pip command using the built-in python interpreter
-ISAACSIM_PYTHON -m pip install --editable pegasus.simulator
+cd ~/isaacsim
+./python.sh -m pip install --editable  /home/sasa/PegasusSimulator/extensions/pegasus.simulator
 ```
 
 > [!NOTE]
@@ -240,7 +252,7 @@ ISAACSIM_PYTHON -m pip install --editable pegasus.simulator
 
 ### Enabling Pegasus Simulator in Isaacsim (First Operation)
 
-1. Launch ``ISAACSIM`` application.
+1. Launch ``isaac_run`` application.
 
 2. Open the Window->extensions on the top menubar inside Isaac Sim.
    ![alt text](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/extensions_menu_bar.png?raw=1)
