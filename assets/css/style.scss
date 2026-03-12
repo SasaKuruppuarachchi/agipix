@@ -836,7 +836,7 @@ a:not(.btn):not(.nav-link):hover {
 .doc-search {
   margin-bottom: 1rem;
   position: sticky;
-  top: 72px;
+  top: 65px;
   z-index: 12;
   background: var(--secondary-bg);
   padding: 0 0 0.45rem;
@@ -920,7 +920,7 @@ a:not(.btn):not(.nav-link):hover {
 
 @media (max-width: 768px) {
   .doc-search {
-    top: 60px;
+    top: 50px;
   }
 }
 
