@@ -169,7 +169,11 @@ title: Home
         dot.classList.toggle('active', i === activeIndex);
       });
 
-      slides[activeIndex].scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', inline: 'center', block: 'nearest' });
+      // Keep page scroll position stable; only move the horizontal slider track.
+      track.scrollTo({
+        left: slides[activeIndex].offsetLeft,
+        behavior: smooth ? 'smooth' : 'auto'
+      });
     }
 
     function detectActiveFromScroll() {
