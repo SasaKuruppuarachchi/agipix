@@ -64,17 +64,17 @@ Below is the composite performance evaluation for the first 10 systems evaluated
 
 ```text
 Composite performance example (first 10 systems):
-         Platform  CPU_PassMark  Compute_TOPS  Composite_Score      Composite_Label
-         DJI M400          2418    100.000000         0.411383 Balanced / Mid-range
-       SkyDio X10          2418    117.000000         0.454695 Balanced / Mid-range
-Flyability Elios3          1343     21.000000         0.140485          Entry-level
-        Crazyflie            10      0.000336         0.000649          Entry-level
-         FLA-Quad          3383      0.050000         0.219234          Entry-level
-           Bornot          6190      0.134000         0.401248 Balanced / Mid-range
-          MRS UAV          9264      0.226000         0.600576 Balanced / Mid-range
-       Agilicious          1343     13.300000         0.120867          Entry-level
-          OmniNxt          2418    117.000000         0.454695 Balanced / Mid-range
-    AgiPIX (Ours)          2418    157.000000         0.556606 Balanced / Mid-range
+         Platform  CPU_PassMark  Compute_TOPS  Composite_Score
+         DJI M400          2418    100.000000         0.411383
+       SkyDio X10          2418    117.000000         0.454695
+Flyability Elios3          1343     21.000000         0.140485
+        Crazyflie            10      0.000336         0.000649
+         FLA-Quad          3383      0.050000         0.219234
+           Bornot          6190      0.134000         0.401248
+          MRS UAV          9264      0.226000         0.600576
+       Agilicious          1343     13.300000         0.120867
+          OmniNxt          2418    117.000000         0.454695
+    AgiPIX (Ours)          2418    157.000000         0.556606
 ```
 
 ## Source Code
