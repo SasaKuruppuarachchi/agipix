@@ -5,27 +5,27 @@ layout: default
 {%- assign url_parts = page.url | split: '/' -%}
 {%- assign docs_index = nil -%}
 {%- for p in url_parts -%}
-  {%- if p == 'docs' and docs_index == nil -%}
-    {%- assign docs_index = forloop.index0 -%}
-  {%- endif -%}
+{%- if p == 'docs' and docs_index == nil -%}
+{%- assign docs_index = forloop.index0 -%}
+{%- endif -%}
 {%- endfor -%}
 {%- assign scope = nil -%}
 {%- assign in_scoped_section = false -%}
 {%- if docs_index != nil -%}
-  {%- assign next_index = docs_index | plus: 1 -%}
-  {%- assign scope = url_parts[next_index] -%}
-  {%- if scope == 'real' or scope == 'sim' or scope == 'autonomy' or scope == 'ui' -%}
-    {%- assign in_scoped_section = true -%}
-  {%- endif -%}
+{%- assign next_index = docs_index | plus: 1 -%}
+{%- assign scope = url_parts[next_index] -%}
+{%- if scope == 'real' or scope == 'sim' or scope == 'autonomy' or scope == 'ui' -%}
+{%- assign in_scoped_section = true -%}
+{%- endif -%}
 {%- endif -%}
 
 {%- comment -%}
-  Build a scope-aware list of docs within the same folder (real, sim, autonomy)
+Build a scope-aware list of docs within the same folder (real, sim, autonomy)
 {%- endcomment -%}
 {%- if in_scoped_section -%}
-  {%- capture scope_url_prefix -%}/docs/{{ scope }}/{%- endcapture -%}
-  {%- assign all_docs = site.pages | concat: site.docs -%}
-  {%- assign scoped_docs = all_docs | where_exp: 'd', 'd.url contains scope_url_prefix' | sort: 'url' -%}
+{%- capture scope_url_prefix -%}/docs/{{ scope }}/{%- endcapture -%}
+{%- assign all_docs = site.pages | concat: site.docs -%}
+{%- assign scoped_docs = all_docs | where_exp: 'd', 'd.url contains scope_url_prefix' | sort: 'url' -%}
 {%- endif -%}
 
 {%- if in_scoped_section -%}
@@ -33,29 +33,42 @@ layout: default
   <aside class="docs-sidebar">
     <div class="docs-sidebar-inner">
       <div class="docs-sidebar-topbar">
-        <button class="docs-sidebar-toggle" id="docsSidebarToggle" type="button" aria-label="Collapse sidebar" aria-expanded="true">&laquo;</button>
+        <button class="docs-sidebar-toggle" id="docsSidebarToggle" type="button" aria-label="Collapse sidebar"
+          aria-expanded="true">&laquo;</button>
       </div>
       <p class="docs-back"><a href="{{ '/docs/' | relative_url }}" class="btn btn-secondary">← Back</a></p>
       <div class="docs-sidebar-title">{{ scope | capitalize }}</div>
       <ul class="docs-nav">
         {%- for d in scoped_docs -%}
-          <li class="docs-nav-item{%- if d.url == page.url -%} active{%- endif -%}">
-            <a href="{{ d.url | relative_url }}">{{ d.nav_title | default: d.title | default: d.slug | default: d.url }}</a>
-          </li>
+        <li class="docs-nav-item{%- if d.url == page.url -%} active{%- endif -%}">
+          <a href="{{ d.url | relative_url }}">{{ d.nav_title | default: d.title | default: d.slug | default: d.url
+            }}</a>
+        </li>
         {%- endfor -%}
       </ul>
     </div>
   </aside>
   <main class="docs-main">
     <article class="doc-content">
-      <div class="doc-search" data-index-url="{{ '/search-docs.json' | relative_url }}" data-doc-scope="{{ scope | default: '' }}">
+      <div class="doc-search" data-index-url="{{ '/search-docs.json' | relative_url }}"
+        data-doc-scope="{{ scope | default: '' }}">
         <!-- <label class="doc-search-label" for="docSearchInput">Search Docs</label> -->
-        <input class="doc-search-input" id="docSearchInput" type="search" placeholder="Search by keyword, command, or topic..." autocomplete="off">
+        <input class="doc-search-input" id="docSearchInput" type="search"
+          placeholder="Search by keyword, command, or topic..." autocomplete="off">
         <div class="doc-search-results" hidden></div>
       </div>
       {% if page.show_doc_title %}
       <h1>{{ page.title }}</h1>
       {% endif %}
+
+      {% if page.wip %}
+      <div class="doc-banner"
+        style="background-color: rgba(255, 165, 0, 0.1); border-left: 4px solid orange; padding: 1rem; margin-bottom: 2rem; border-radius: 4px; color: var(--text-secondary, #b3b3b3);">
+        🚧 <strong>Notice:</strong> In development. Updates available on the <a href="{{ '/' | relative_url }}"
+          style="color: orange; text-decoration: underline;">home page</a>.
+      </div>
+      {% endif %}
+
       {{ content }}
 
       <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
@@ -126,24 +139,34 @@ layout: default
   })();
 </script>
 {%- else -%}
-  <article class="doc-content">
-    <div class="doc-search" data-index-url="{{ '/search-docs.json' | relative_url }}" data-doc-scope="">
-      <!-- <label class="doc-search-label" for="docSearchInput">Search Docs</label> -->
-      <input class="doc-search-input" id="docSearchInput" type="search" placeholder="Search by keyword, command, or topic..." autocomplete="off">
-      <div class="doc-search-results" hidden></div>
-    </div>
-    {% if page.show_doc_title %}
-    <h1>{{ page.title }}</h1>
-    {% endif %}
-    {{ content }}
-    
-    <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
-      <p style="text-align: center;">
-        <a href="{{ '' | relative_url }}" class="btn btn-secondary">← Back to Home</a>
-        <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
-      </p>
-    </div>
-  </article>
+<article class="doc-content">
+  <div class="doc-search" data-index-url="{{ '/search-docs.json' | relative_url }}" data-doc-scope="">
+    <!-- <label class="doc-search-label" for="docSearchInput">Search Docs</label> -->
+    <input class="doc-search-input" id="docSearchInput" type="search"
+      placeholder="Search by keyword, command, or topic..." autocomplete="off">
+    <div class="doc-search-results" hidden></div>
+  </div>
+  {% if page.show_doc_title %}
+  <h1>{{ page.title }}</h1>
+  {% endif %}
+
+  {% if page.wip %}
+  <div class="doc-banner"
+    style="background-color: rgba(255, 165, 0, 0.1); border-left: 4px solid orange; padding: 1rem; margin-bottom: 2rem; border-radius: 4px; color: var(--text-secondary, #b3b3b3);">
+    🚧 <strong>Notice:</strong> In development. Updates available on the <a href="{{ '/' | relative_url }}"
+      style="color: orange; text-decoration: underline;">home page</a>.
+  </div>
+  {% endif %}
+
+  {{ content }}
+
+  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
+    <p style="text-align: center;">
+      <a href="{{ '' | relative_url }}" class="btn btn-secondary">← Back to Home</a>
+      <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
+    </p>
+  </div>
+</article>
 {%- endif -%}
 
 <script src="{{ '/assets/js/doc-search.js' | relative_url }}"></script>

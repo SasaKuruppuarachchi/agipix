@@ -1,6 +1,7 @@
 ---
 title: Software Setup
 layout: doc
+wip: true
 ---
 # Software Setup for Agipix
 Prerequisit for this setup is [setting up the Docker](./3_docker_build.Md))

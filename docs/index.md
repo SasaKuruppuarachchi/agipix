@@ -3,6 +3,7 @@ title: Agipix Documentation
 layout: doc
 permalink: /docs/
 description: Start here to assemble the hardware, flash the Jetson, set up software, or run the simulation.
+wip: true
 ---
 
 # Documentation Hub

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,14 +13,16 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5VYH61SR2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
     gtag('config', 'G-J5VYH61SR2');
   </script>
 </head>
+
 <body>
-  <header class="site-header"{% if page.title_bottom_gap %} style="--title-bottom-gap: {{ page.title_bottom_gap }}"{% endif %}>
+  <header class="site-header" {% if page.title_bottom_gap %} style="--title-bottom-gap: {{ page.title_bottom_gap }}" {%
+    endif %}>
     <div class="container">
       <!-- <h1 class="site-title glow-text"><a href="{{ '' | relative_url }}" style="color: inherit; text-decoration: none;">AGIPIX</a></h1> -->
       <!-- <p class="site-subtitle">{{ site.description }}</p> -->
@@ -31,13 +34,14 @@
 
   <nav class="site-nav">
     <div class="nav-container">
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-navigation" aria-expanded="false">
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-navigation"
+        aria-expanded="false">
         <span class="nav-toggle-bar"></span>
         <span class="nav-toggle-bar"></span>
         <span class="nav-toggle-bar"></span>
       </button>
       <div class="nav-links" id="primary-navigation">
-        <a href="{{ '' | relative_url }}" class="nav-link">Home</a>
+        <a href="{{ '/' | relative_url }}" class="nav-link">Home</a>
         <a href="{{ '/docs' | relative_url }}" class="nav-link">Docs Hub</a>
         <a href="{{ '/docs/sim/index' | relative_url }}" class="nav-link">Sim</a>
         <a href="{{ '/docs/real/index' | relative_url }}" class="nav-link">Real</a>
@@ -50,7 +54,7 @@
   </nav>
 
   <script>
-    (function(){
+    (function () {
       const siteNav = document.querySelector('.site-nav');
       const toggle = document.querySelector('.nav-toggle');
       const links = document.getElementById('primary-navigation');
@@ -71,18 +75,21 @@
     <div class="footer-content">
       <div class="footer-section">
         <h3>Contact Authors</h3>
-        <p><a href="https://sasakuruppuarachchi.github.io/" target="_blank" rel="noopener">Sasanka Kuruppu Arachchige</a> — sasa.kuruppuarachchi@gmail.com</p>
-        <p><a href="https://webpages.tuni.fi/vision/public_pages/JoniKamarainen/" target="_blank" rel="noopener">Joni Kämäräinen</a> — joni.kamarainen@tuni.fi</p>
+        <p><a href="https://sasakuruppuarachchi.github.io/" target="_blank" rel="noopener">Sasanka Kuruppu
+            Arachchige</a> — sasa.kuruppuarachchi@gmail.com</p>
+        <p><a href="https://webpages.tuni.fi/vision/public_pages/JoniKamarainen/" target="_blank" rel="noopener">Joni
+            Kämäräinen</a> — joni.kamarainen@tuni.fi</p>
       </div>
       <div class="footer-section">
         <h3>Acknowledgment</h3>
         <p>Agipix is supported by RAICAM, MSCA HORIZON EU.</p>
       </div>
-      
+
       <div class="footer-section">
         <p>© 2025 Agipix Project | <a href="{{ site.github.repository_url }}/blob/main/LICENSE">License</a></p>
       </div>
     </div>
   </footer>
 </body>
+
 </html>

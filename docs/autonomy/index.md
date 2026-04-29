@@ -1,6 +1,7 @@
 ---
 title: Overview
 layout: doc
+wip: true
 ---
 # Agipix (Autonomy) — Quick Guide
 

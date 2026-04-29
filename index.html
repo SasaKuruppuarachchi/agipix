@@ -5,19 +5,21 @@ title: Home
 
 <section class="hero">
   <img src="{{ '/assets/images/exploded.gif' | relative_url }}" alt="Agipix Exploded View" class="hero-banner">
-  
+
   <h2 class="hero-title">Bridging Simulation and Reality in Indoor Aerial Inspection</h2>
-  
+
   <p class="hero-description">
-    Agipix is an open, compact, actively sensed aerial robotics platform for indoor autonomy and critical-asset inspection. The same ROS 2 containerized autonomy stack runs in Isaac Sim and on real hardware, enabling fast and reproducible sim-to-real transfer.
+    Agipix is an open, compact, actively sensed aerial robotics platform for indoor autonomy and critical-asset
+    inspection. The same ROS 2 containerized autonomy stack runs in Isaac Sim and on real hardware, enabling fast and
+    reproducible sim-to-real transfer.
   </p>
 
   <div>
-  <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
-  <a href="{{ '/docs' | relative_url }}" class="btn btn-secondary">Get Started</a>
-  <!-- <a href="{{ '/assets/paper/ICUAS_26_Agipix_Bridging_Simulation_and_Reality_in_Indoor_Aerial_Inspection.pdf' | relative_url }}" class="btn" target="_blank" rel="noopener">arXiv.org</a> -->
-  <a href="https://arxiv.org/abs/2604.08009" class="btn btn-secondary" target="_blank">arXiv.org</a>
-  <!-- <a href="{{ '/docs/sim/index' | relative_url }}" class="btn btn-secondary">Get Started</a> -->
+    <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
+    <a href="{{ '/docs' | relative_url }}" class="btn btn-secondary">Get Started</a>
+    <!-- <a href="{{ '/assets/paper/ICUAS_26_Agipix_Bridging_Simulation_and_Reality_in_Indoor_Aerial_Inspection.pdf' | relative_url }}" class="btn" target="_blank" rel="noopener">arXiv.org</a> -->
+    <a href="https://arxiv.org/abs/2604.08009" class="btn btn-secondary" target="_blank">arXiv.org</a>
+    <!-- <a href="{{ '/docs/sim/index' | relative_url }}" class="btn btn-secondary">Get Started</a> -->
   </div>
 </section>
 
@@ -37,46 +39,49 @@ title: Home
     <h3>Simulation</h3>
     <img src="{{ '/assets/images/sim.png' | relative_url }}" alt="Agipix Simulation">
     <p>Digital Twin in Isaac Sim with full sensor fidelity and physics simulation</p>
-  <a href="{{ '/docs/sim/index' | relative_url }}" class="btn btn-secondary">Setup Simulation →</a>
+    <a href="{{ '/docs/sim/index' | relative_url }}" class="btn btn-secondary">Setup Simulation →</a>
   </div>
-  
+
   <div class="real-box">
     <h3>Real Hardware</h3>
     <img src="{{ '/assets/images/real.jpg' | relative_url }}" alt="Agipix Real Hardware">
     <p>Physical platform ready for deployment with identical autonomy stack</p>
-  <a href="{{ '/docs/real/index' | relative_url }}" class="btn btn-secondary">Build Hardware →</a>
+    <a href="{{ '/docs/real/index' | relative_url }}" class="btn btn-secondary">Build Hardware →</a>
   </div>
 </section>
 
 <section class="highlights">
   <h2>Key Highlights</h2>
-  
+
   <div class="highlight-grid">
     <div class="highlight-item">
       <h3>1. Sim-to-Real Deployability</h3>
-      <p>Identical ROS 2 containers and configs run in Isaac Sim and on hardware; <strong>zero code changes</strong> between environments.</p>
+      <p>Identical ROS 2 containers and configs run in Isaac Sim and on hardware; <strong>zero code changes</strong>
+        between environments.</p>
     </div>
-    
+
     <div class="highlight-item">
       <h3>2. Open-Source Platform</h3>
       <p>Full BOM, CAD, simulation assets, and the containerized ROS 2 stack are released in this repository.</p>
     </div>
-    
+
     <div class="highlight-item">
       <h3>3. Modular Autonomy Stack</h3>
-      <p>ROS 2–based perception, state estimation, mapping, planning, PX4 interface, and logging run as decoupled nodes.</p>
+      <p>ROS 2–based perception, state estimation, mapping, planning, PX4 interface, and logging run as decoupled nodes.
+      </p>
     </div>
-    
+
     <div class="highlight-item">
       <h3>4. Small Form Factor</h3>
       <p>Compact 438×372 mm frame with protected sensing and agile indoor operation in narrow industrial spaces.</p>
     </div>
-    
+
     <div class="highlight-item">
       <h3>5. Extensive Sensor Suite</h3>
-      <p>3D LiDAR, RGB camera, and IMU integrated into a LiDAR–inertial–visual stack for robust mapping and exploration.</p>
+      <p>3D LiDAR, RGB camera, and IMU integrated into a LiDAR–inertial–visual stack for robust mapping and exploration.
+      </p>
     </div>
-    
+
     <div class="highlight-item">
       <h3>6. Modular Hardware Design</h3>
       <p>Layered decks and accessible power/data breakouts simplify sensor or compute upgrades without redesign.</p>
@@ -89,13 +94,15 @@ title: Home
     <div class="emotions-slider swiper" id="homeEmotionsSlider" aria-label="Agipix image slider">
       <div class="slider-nav">
         <button class="slider-nav__item" id="homeSliderPrev" type="button" aria-label="Previous image">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
         <button class="slider-nav__item" id="homeSliderNext" type="button" aria-label="Next image">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M9 6L15 12L9 18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+            aria-hidden="true">
+            <path d="M9 6L15 12L9 18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
       </div>
@@ -105,7 +112,8 @@ title: Home
           <div class="emotions-slider-item">
             <div class="emotions-slider-item__image">
               <img src="{{ '/assets/images/banner_paper.png' | relative_url }}" alt="AgiPIX paper banner">
-              <div class="emotions-slider-item__caption">AgiPIX platform overview across simulation and real deployment.</div>
+              <div class="emotions-slider-item__caption">AgiPIX platform overview across simulation and real deployment.
+              </div>
             </div>
           </div>
         </article>
@@ -114,7 +122,8 @@ title: Home
           <div class="emotions-slider-item">
             <div class="emotions-slider-item__image">
               <img src="{{ '/assets/images/diag/compare.jpg' | relative_url }}" alt="Platform comparison figure">
-              <div class="emotions-slider-item__caption">Comparison with representative industrial and research aerial platforms.</div>
+              <div class="emotions-slider-item__caption">Comparison with representative industrial and research aerial
+                platforms.</div>
             </div>
           </div>
         </article>
@@ -123,7 +132,8 @@ title: Home
           <div class="emotions-slider-item">
             <div class="emotions-slider-item__image">
               <img src="{{ '/assets/images/result/map.png' | relative_url }}" alt="Mapping result">
-              <div class="emotions-slider-item__caption">Indoor mapping and exploration output from field validation runs.</div>
+              <div class="emotions-slider-item__caption">Indoor mapping and exploration output from field validation
+                runs.</div>
             </div>
           </div>
         </article>
@@ -220,33 +230,33 @@ title: Home
 
 <section class="quick-start">
   <h2>Quick Start</h2>
-  
+
   <div class="quick-start-grid">
     <div class="quick-start-card">
       <h3>🖥️ Simulation</h3>
       <ul>
-  <li><a href="{{ '/docs/sim/2_setup_sim' | relative_url }}">Simulation Setup Guide</a></li>
+        <li><a href="{{ '/docs/sim/2_setup_sim' | relative_url }}">Simulation Setup Guide</a></li>
         <li>Isaac Sim Integration</li>
         <li>ROS 2 Docker Containers</li>
         <li>Digital Twin Environment</li>
       </ul>
     </div>
-    
+
     <div class="quick-start-card">
       <h3>🔧 Hardware</h3>
       <ul>
-  <li><a href="{{ '/docs/real/1_hardware_assembly' | relative_url }}">Hardware Assembly</a></li>
-  <li><a href="{{ '/docs/real/2_flashing_hardware' | relative_url }}">Flashing Firmware</a></li>
-  <li><a href="{{ '/docs/real/6_software_setup' | relative_url }}">Software Setup</a></li>
+        <li><a href="{{ '/docs/real/1_hardware_assembly' | relative_url }}">Hardware Assembly</a></li>
+        <li><a href="{{ '/docs/real/2_flashing_hardware' | relative_url }}">Flashing Firmware</a></li>
+        <li><a href="{{ '/docs/real/6_software_setup' | relative_url }}">Software Setup</a></li>
         <li><a href="{{ '/bom.html' | relative_url }}">Bill of Materials</a></li>
       </ul>
     </div>
-    
+
     <div class="quick-start-card">
       <h3>🤖 Autonomy</h3>
       <ul>
-  <li><a href="{{ '/docs/autonomy/1_perception' | relative_url }}">Navigation & Mapping</a></li>
-  <li><a href="{{ '/docs/autonomy/2_planning_control' | relative_url }}">Planning & Control</a></li>
+        <li><a href="{{ '/docs/autonomy/1_perception' | relative_url }}">Navigation & Mapping</a></li>
+        <li><a href="{{ '/docs/autonomy/2_planning_control' | relative_url }}">Planning & Control</a></li>
         <li>Exploration Algorithms</li>
         <li>PX4 Integration</li>
       </ul>
@@ -255,6 +265,253 @@ title: Home
 </section>
 
 <section class="highlights">
+  <h2>Release Schedule</h2>
+  <div class="doc-content" style="background: rgba(10, 10, 10, 0.5); border-radius: 12px; padding: 2rem;">
+    <style>
+      .timeline {
+        position: relative;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+
+      .timeline::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        background-color: var(--secondary-bg, #1a1a1a);
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+        border-radius: 2px;
+      }
+
+      .timeline-container {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+      }
+
+      .timeline-container::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: var(--primary-bg, #0a0a0a);
+        border: 4px solid var(--accent-red, #8b1a1a);
+        top: 15px;
+        border-radius: 50%;
+        z-index: 1;
+      }
+
+      .timeline-left {
+        left: 0;
+      }
+
+      .timeline-right {
+        left: 50%;
+      }
+
+      .timeline-left::after {
+        right: -14px;
+      }
+
+      .timeline-right::after {
+        left: -14px;
+      }
+
+      .timeline-content {
+        padding: 20px 30px;
+        background-color: var(--secondary-bg, #1a1a1a);
+        position: relative;
+        border-radius: 8px;
+        border: 1px solid var(--border-color, #333);
+      }
+
+      .timeline-date {
+        font-weight: bold;
+        color: var(--text-primary, #e0e0e0);
+        margin-bottom: 10px;
+        font-size: 1.1em;
+      }
+
+      .timeline-status {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .status-released {
+        background-color: rgba(0, 128, 0, 0.2);
+        color: #4ade80;
+      }
+
+      .status-progress {
+        background-color: rgba(255, 165, 0, 0.2);
+        color: orange;
+      }
+
+      .status-scheduled {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--text-secondary, #a0a0a0);
+      }
+
+      .status-planned {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--text-secondary, #a0a0a0);
+      }
+
+      @media screen and (max-width: 768px) {
+        .timeline::after {
+          left: 31px;
+        }
+
+        .timeline-container {
+          width: 100%;
+          padding-left: 70px;
+          padding-right: 0px;
+        }
+
+        .timeline-container::after {
+          left: 17px;
+        }
+
+        .timeline-right {
+          left: 0;
+        }
+      }
+    </style>
+
+    <div class="timeline">
+      <div class="timeline-container timeline-left">
+        <div class="timeline-content">
+          <div class="timeline-date">15th March</div>
+          <p style="color: var(--text-primary);"><strong>Public Release</strong></p>
+          <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0; color: var(--text-secondary); line-height: 1.5;">
+            <li>Documentation: System Overview, Hardware & Sim Setup, Software/Autonomy</li>
+          </ul>
+          <span class="timeline-status status-released">Released</span>
+        </div>
+      </div>
+      <div class="timeline-container timeline-right">
+        <div class="timeline-content">
+          <div class="timeline-date">09th April</div>
+          <p style="color: var(--text-primary);"><strong>Preprint published on Arxiv</strong></p>
+          <span class="timeline-status status-released">Released</span>
+        </div>
+      </div>
+      <div class="timeline-container timeline-left">
+        <div class="timeline-content">
+          <div class="timeline-date">20th April</div>
+          <p style="color: var(--text-primary);"><strong>Paper accepted at ICUAS 2026</strong></p>
+          <span class="timeline-status status-released">Released</span>
+        </div>
+      </div>
+      <div class="timeline-container timeline-right">
+        <div class="timeline-content">
+          <div class="timeline-date">Before 15th June</div>
+          <p style="color: var(--text-primary);"><strong>Documentation & OS Upgrades</strong></p>
+          <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0; color: var(--text-secondary); line-height: 1.5;">
+            <li>Documentation: Data-driven Autonomy Setup, UI Setup</li>
+            <li>Real-time OS support with scheduler</li>
+            <li>Release of CAD files</li>
+            <li>Video and quick start guides</li>
+            <li>Preflight checklist and platform manual</li>
+          </ul>
+          <span class="timeline-status status-progress">In Progress</span>
+        </div>
+      </div>
+      <div class="timeline-container timeline-left">
+        <div class="timeline-content">
+          <div class="timeline-date">15th June</div>
+          <p style="color: var(--text-primary);"><strong>Presentation</strong></p>
+          <p style="margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.5;">Official presentation at ICUAS
+            2026.</p>
+          <span class="timeline-status status-scheduled">Scheduled</span>
+        </div>
+      </div>
+      <div class="timeline-container timeline-right">
+        <div class="timeline-content">
+          <div class="timeline-date">Future</div>
+          <p style="color: var(--text-primary);"><strong>Long-term Enhancements</strong></p>
+          <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0; color: var(--text-secondary); line-height: 1.5;">
+            <li>MANET mesh networking integration</li>
+            <li>Compliant crash structure update</li>
+          </ul>
+          <span class="timeline-status status-planned">Planned</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="highlights">
+  <h2>Collaborate with Us</h2>
+  <div class="doc-content" style="background: rgba(10, 10, 10, 0.5); border-radius: 12px; padding: 2rem;">
+    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Interested in joining the AgiPIX project? Fill out
+      the form below to send an email request to the project maintainers with your details.</p>
+    <form id="collabForm" style="display: flex; flex-direction: column; gap: 1rem; max-width: 600px;">
+      <div style="display: flex; flex-direction: column;">
+        <label for="collabName"
+          style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: bold;">Name:</label>
+        <input type="text" id="collabName" required
+          style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color);">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label for="collabEmail" style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: bold;">Email
+          Address:</label>
+        <input type="email" id="collabEmail" required
+          style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color);">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label for="collabAffiliation"
+          style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: bold;">Affiliation
+          (University/Company):</label>
+        <input type="text" id="collabAffiliation" required
+          style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color);">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label for="collabGithub" style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: bold;">GitHub
+          Username:</label>
+        <input type="text" id="collabGithub" required
+          style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color);">
+      </div>
+      <div style="display: flex; flex-direction: column;">
+        <label for="collabInterest"
+          style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: bold;">Reason for Joining / Area of
+          Interest:</label>
+        <textarea id="collabInterest" rows="4" required
+          style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color);"></textarea>
+      </div>
+      <button type="submit" class="btn btn-secondary"
+        style="align-self: flex-start; margin-top: 1rem; cursor: pointer; border: 1px solid var(--border-color); font-size: 1rem;">Send
+        Request via Email</button>
+    </form>
+  </div>
+  <script>
+    document.getElementById('collabForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('collabName').value;
+      var email = document.getElementById('collabEmail').value;
+      var affiliation = document.getElementById('collabAffiliation').value;
+      var github = document.getElementById('collabGithub').value;
+      var interest = document.getElementById('collabInterest').value;
+
+      var subject = encodeURIComponent("Joining AgiPIX Project");
+      var body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\nAffiliation: " + affiliation + "\nGitHub Username: " + github + "\n\nReason for Joining / Interest:\n" + interest);
+      var mailtoUrl = "mailto:sasa.kuruppuarachchi@tuni.fi?cc=joni.kamarainen@tuni.fi&subject=" + subject + "&body=" + body;
+
+      window.location.href = mailtoUrl;
+    });
+  </script>
+</section>
+
+<!-- <section class="highlights">
   <h2>Repository Layout</h2>
   <div class="doc-content" style="background: rgba(10, 10, 10, 0.5);">
     <ul style="color: var(--text-secondary); line-height: 2;">
@@ -266,7 +523,7 @@ title: Home
       <li><code>assets/</code> — Images, videos, and datasheets used in docs</li>
     </ul>
   </div>
-</section>
+</section> -->
 
 <section class="highlights">
   <h2>Cite this work</h2>

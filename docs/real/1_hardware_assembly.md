@@ -1,6 +1,7 @@
 ---
 title: Hardware Assembly
 layout: doc
+wip: true
 ---
 
 # Complete Guide for Building the Agipix Hardware Platform

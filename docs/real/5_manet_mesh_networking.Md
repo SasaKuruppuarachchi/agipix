@@ -2,6 +2,7 @@
 title: MANET mesh networking upgrade (WIP)
 layout: doc
 nav_title: MANET mesh
+wip: true
 ---
 
 # MANET mesh networking upgrade (WIP)
