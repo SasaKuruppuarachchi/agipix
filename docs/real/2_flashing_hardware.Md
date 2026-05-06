@@ -120,6 +120,11 @@ sudo ./cti-flash.sh
 ```
 Follow the menu to select your module and board configuration. Flashing will begin.
 
+> `Vision Components IMX296` [camera option](https://www.mouser.fi/ProductDetail/Vision-Components/MIPI-IMX296?qs=Znm5pLBrcALfpja0UWCKMw%3D%3D&srsltid=AfmBOooejJiY736adzckLOY5EduNJY7mhwZwMJE9wkoOaHObOD_PtxvC) for Orin NX is recommended for direct connection to the board.
+
+[This](https://connecttech.com/supported-cameras/) shows all the commpatible cameras.
+[This](https://wdl.ai/connect-tech-allied-vision-mipi-csi-2) shows how to connect Allied vision cameras.
+
 ### Option B: Manual NVMe flash
 
 Do not include the `.conf` extension in `<config>`.
