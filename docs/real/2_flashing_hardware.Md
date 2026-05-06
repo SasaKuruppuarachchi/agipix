@@ -69,17 +69,21 @@ If you used NVIDIA SDK Manager, BSP_ROOT is typically:
 
 If you manually downloaded from the Embedded Download Center, use the folder you created as BSP_ROOT.
 
+Download the CTI BSP from [CTI BSP Downloads](https://connecttech.com/product/super-hadron-dm-carrier-for-nvidia-jetson-orin-nx/).
+
+For the firmware with real time kernel RT_PREEMPT download the `JetPack 6.2.1 – L4T r36.4.4 (RealTime OS)` package instead of the base package.
+
 1) Copy the CTI package to Linux_for_Tegra:
 
 ```bash
-cp CTI-L4T-ORIN-NX-NANO-36.4.4-V002.tgz BSP_ROOT/Linux_for_Tegra
+cp CTI-L4T-ORIN-NX-NANO-RT-36.4.4-V005.tgz BSP_ROOT/Linux_for_Tegra
 ```
 
 2) Extract it and run the installer:
 
 ```bash
 cd <BSP_ROOT>/Linux_for_Tegra
-sudo tar -xzf CTI-L4T-ORIN-NX-NANO-36.4.4-V002.tgz
+sudo tar -xzf CTI-L4T-ORIN-NX-NANO-RT-36.4.4-V005.tgz
 cd CTI-L4T
 sudo ./install.sh
 cd .. # back to Linux_for_Tegra
@@ -93,9 +97,11 @@ cd .. # back to Linux_for_Tegra
 
 1) Connect the carrier to your host via USB per the carrier manual.
 2) Ensure an NVMe M.2 SSD is installed.
-3) Follow the carrier instructions to enter recovery (button/strap sequence).
+3) Follow the carrier instructions to enter recovery (button/strap sequence). 
+> For NGX027 to put the Jetson module into Force Recovery mode, install a jumper and then power on the platform. After 10 seconds remove the jumper shunt and the device will now be in Force Recovery mode.
 
-> Tip: You can verify via `lsusb` for an NVIDIA device in recovery.
+
+Tip: You can verify via `lsusb` for an NVIDIA device in recovery.
 ```shell
 Bus 001 Device 024: ID 0955:7323 NVIDIA Corp. APX
 ```
@@ -195,7 +201,11 @@ sudo ufw disable
 ## 5) First boot and basic setup
 
 ### Connect via serial console (recommended)
-- Guide: https://jetsonhacks.com/2019/04/19/jetson-nano-serial-console/
+- Connect to the **Serial debug port** of the Carrier using a TTL to USB adapter. (ex: FTDI)
+- Guide: https://jetsonhacks.com/2019/04/19/jetson-nano-serial-console/ 
+```bash
+`sudo minicom -D /dev/ttyUSB0 -b 115200`
+```
 - Complete the initial setup prompts. You can skip network here and do it below.
 ```bash
 System Configuration
@@ -233,9 +243,30 @@ git config --global user.email johndoe@example.com
 You may need to increase swap depending on he RAM of your Jetson module
 Follow [This Guide](https://www.forecr.io/blogs/programming/how-to-increase-swap-space-on-jetson-modules?srsltid=AfmBOoqQdjadGieWKvqNFyLf5XFb0XoVjQ_sH9gjZORudTmtEU1wo2yX) to upgrade swap memeory.
 
+```bash
+free -h # Check current memory usage
+df -h # Check current disk usage
+
+# start from here to increase swap size to 16G
+sudo fallocate -l 16G /swapfile # Allocate 16G of space for swap file
+ls -lh /swapfile # Verify the swap file is created
+sudo chmod 600 /swapfile # Set the correct permissions for the swap file
+sudo mkswap /swapfile 
+sudo swapon /swapfile
+free -h # Check current memory usage   
+
+# to make the change persistent across reboots, add the swap file to /etc/fstab:
+sudo cp /etc/fstab /etc/fstab.bak
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+```
+
 ### Install Jetpack extras and Jtop
 ```bash
 sudo apt install nvidia-jetpack
+
+# Setup jtop
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3-pip -y
 sudo pip3 install -U jetson-stats
 mkdir hacks && cd hacks
 git clone https://github.com/jetsonhacks/jetson-jtop-patch.git
@@ -251,8 +282,8 @@ After rebooting, to run jtop open a Terminal and execute: `jtop`
 To setup remote desktop to the headless system for debugging follow [this guide](https://kb.nomachine.com/AR02R01074)
 
 ```bash
-wget https://web9001.nomachine.com/download/9.2/Arm/
-sudo dpkg -i nomachine_9.2.18_3_arm64.deb 
+wget https://web9001.nomachine.com/download/9.4/Arm/nomachine_9.4.14_1_arm64.deb
+sudo dpkg -i nomachine_9.4.14_1_arm64.deb 
 sudo systemctl disable gdm3 --now
 sudo /usr/NX/bin/nxserver --restart
 ```
