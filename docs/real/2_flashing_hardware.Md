@@ -208,7 +208,7 @@ sudo ufw disable
 - Connect to the **Serial debug port** of the Carrier using a TTL to USB adapter. (ex: FTDI)
 - Guide: https://jetsonhacks.com/2019/04/19/jetson-nano-serial-console/ 
 ```bash
-`sudo minicom -D /dev/ttyUSB0 -b 115200`
+sudo minicom -D /dev/ttyUSB0 -b 115200
 ```
 - Complete the initial setup prompts. You can skip network here and do it below.
 ```bash
