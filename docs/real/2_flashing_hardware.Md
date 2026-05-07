@@ -224,8 +224,8 @@ System Configuration
 
 ### Join Wi‑Fi via nmcli
 ```bash
-nmcli dev wifi rescan
-nmcli dev wifi connect <SSID> password <PASSWORD>
+sudo nmcli dev wifi rescan
+sudo nmcli dev wifi connect <SSID> password <PASSWORD>
 ```
 
 ### SSH in
