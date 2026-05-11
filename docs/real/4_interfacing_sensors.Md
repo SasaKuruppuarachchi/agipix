@@ -135,10 +135,9 @@ Implement this if you need safe switiching between wifi APs
 cd ~/workspace/dds
 git clone https://github.com/alireza787b/smart-wifi-manager.git
 cd smart-wifi-manager
-nano known_networks.conf # add networks list and psk
-nano smart-wifi-manager.service # update /path/to/smart-wifi-manage
 sudo bash install.sh
 sudo systemctl status smart-wifi-manager.service
+sudo ./configure_smart_wifi_manager.sh
 ```
 
 #### [NetBird VPN](https://netbird.io/)
@@ -189,11 +188,10 @@ After the physical connection is made using the Lovix connecter to the Ethernet 
 > **Note:** We advice [modifying the static IP](https://github.com/Livox-SDK/livox_ros_driver2/issues/135) of the Livox lidar from 192.168.1.1XX to 172.16.0.XX to avoid issues assessing the local(Wifi) network when connected.
 
 
-Add the static wired connection using the GUI or CLI as follows,
+Add the static wired connection using the GUI or CLI as follows, Following command assumes the ethernet interface is **enP8p1s0** and lidar ip is **172.16.0.50**.
 ```bash
-nmcli connection add type ethernet ifname eth0 con-name eth0-static ipv4.method manual ipv4.addresses 172.16.0.50/24 ipv4.gateway 255.255.255.0 ipv4.dns 8.8.8.8
-nmcli connection up eth0-static
-
+sudo nmcli connection add type ethernet ifname enP8p1s0 con-name static-link ipv4.method manual ipv4.addresses 172.16.0.50/24 ipv4.gateway 172.16.0.1 ipv4.dns 8.8.8.8
+sudo nmcli connection up static-link
 ```
 
 After the hardware connection is made the [livox_viewer2](https://www.livoxtech.com/downloads) can be used to verify connection and **firmware Update**.
@@ -226,7 +224,7 @@ Clone the [livox_ros_driver2](https://github.com/atinfinity/livox_ros_driver2) a
 agidocker
 # Inside agidocker
 cd /workspaces/lidar_ws/src
-git clone https://github.com/atinfinity/livox_ros_driver2.git
+git clone https://github.com/SasaKuruppuarachchi/livox_ros_driver2.git
 cd ..
 rosdep update
 rosdep install -y -i --from-paths src/livox_ros_driver2
@@ -305,8 +303,28 @@ export RMW_FASTRTPS_USE_QOS_FROM_XML=1
 Connect the camera to the USB interface and verify TODO
 
 ### Realsense Cameras
+Install libraries on the host side for realsense cameras. This also installs udev rules for the camera
+
+```bash
+# Ensure the directory exists
+sudo mkdir -p /etc/apt/keyrings
+
+# Download and dearmor
+curl -sSf https://librealsense.realsenseai.com/Debian/librealsenseai.asc | \
+gpg --dearmor | sudo tee /etc/apt/keyrings/librealsenseai.gpg > /dev/null
+
+echo "deb [signed-by=/etc/apt/keyrings/librealsenseai.gpg] https://librealsense.realsenseai.com/Debian/apt-repo `lsb_release -cs` main" | \
+sudo tee /etc/apt/sources.list.d/librealsense.list
+sudo apt-get update
+
+sudo apt-get install librealsense2-utils
+sudo apt-get install librealsense2-dev
+```
+
 Connect the camera to the USB interface and verify 
 ```bash
+agidocker 
+# Inside agidocker use this commnad
 realsense-viewer
 ```
 If the connection is stable you can move on to launching `realsense2_camera` ROS2 package

@@ -270,7 +270,7 @@ sudo apt install nvidia-jetpack
 
 # Setup jtop
 sudo apt update && sudo apt upgrade -y
-sudo apt install python3-pip -y
+sudo apt install python3-pip -y && sudo apt install curl -y
 sudo pip3 install -U jetson-stats
 mkdir hacks && cd hacks
 git clone https://github.com/jetsonhacks/jetson-jtop-patch.git

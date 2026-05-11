@@ -30,7 +30,7 @@ git clone https://github.com/Auterion/px4-ros2-interface-lib -b release/1.16
 Verify versions
 ```bash
 ## to verify compatibility
-cd cd ~/workspace/agipix_control/src/px4-ros2-interface-lib 
+cd ~/workspace/agipix_control/src/px4-ros2-interface-lib 
 ./scripts/check-message-compatibility.py -v path/to/px4_msgs/ path/to/PX4-Autopilot/
 ```
 build
