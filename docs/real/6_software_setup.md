@@ -42,7 +42,15 @@ colcon build --packages-select px4_msgs
 colcon build --packages-select px4_ros2_cpp
 
 ```
-
+### Install [Agi-Logger](https://github.com/SasaKuruppuarachchi/agi_logger)
+```bash
+cd ~/workspace/logging/src
+git clone https://github.com/SasaKuruppuarachchi/agi_logger.git
+agidocker
+# *** Inside agidocker
+cd /workspaces/logging/src/agi_logger
+pip install -e .
+```
 
 ## Sim setup
 

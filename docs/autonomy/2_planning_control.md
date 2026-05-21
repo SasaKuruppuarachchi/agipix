@@ -73,44 +73,24 @@ This repository is the **AgiAUTO** autonomy module of **Agipix** for PX4-based U
 
 ---
 
-## PX4 ROS 2 interface setup
+## Setup
 
 Validated against **PX4 v1.16.1** message definitions.
 
+Prerequiste : PX4 ROS 2 interface setup (see [PX4 ROS 2 interface](../real/4_interfacing_sensors.Md))
+
+Build: 
+
 ```bash
-mkdir -p ~/workspace/agipix_control/src
 cd ~/workspace/agipix_control/src
+git clone https://github.com/SasaKuruppuarachchi/agipix_autonomy.git -b dds
+git clone https://github.com/SasaKuruppuarachchi/agipix_user_interfaces.git
+agidocker
+# inside the container
 
-# PX4 messages + autopilot source (for message sync)
-git clone https://github.com/PX4/px4_msgs.git
-git clone https://github.com/PX4/PX4-Autopilot.git -b v1.16.1
-
-# Sync message/service definitions
-rm -f px4_msgs/msg/*.msg px4_msgs/srv/*.srv
-cp PX4-Autopilot/msg/*.msg px4_msgs/msg/
-cp PX4-Autopilot/msg/versioned/*.msg px4_msgs/msg/
-cp PX4-Autopilot/srv/*.srv px4_msgs/srv/
-touch px4_version_synced_v1_16_1
-rm -rf PX4-Autopilot
-
-# PX4 ROS 2 interface library
-git clone https://github.com/Auterion/px4-ros2-interface-lib -b release/1.16
-```
-
-Compatibility check:
-
-```bash
-cd ~/workspace/agipix_control/src/px4-ros2-interface-lib
-./scripts/check-message-compatibility.py -v path/to/px4_msgs/ path/to/PX4-Autopilot/
-```
-
-Build:
-
-```bash
-cd ~/workspace/agipix_control
-colcon build --packages-select px4_msgs
-colcon build --packages-select px4_ros2_cpp
+cd /workspaces/agipix_control
 colcon build # builds the autonomy stack
+source install/setup.bash
 ```
 
 ---

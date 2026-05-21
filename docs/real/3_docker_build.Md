@@ -57,7 +57,7 @@ sudo systemctl restart docker
 ```bash
 cd $HOME
 mkdir workspace && cd workspace
-mkdir -p agipix_control/src dds lidar_ws/src raicam-ros/src logging/bags logging/flogs logging/crashreports
+mkdir -p agipix_control/src dds lidar_ws/src raicam-ros/src logging/src logging/bags logging/flogs logging/crashreports
 cd raicam-ros/src
 git clone https://github.com/SasaKuruppuarachchi/isaac_ros_common.git # TODO
 
