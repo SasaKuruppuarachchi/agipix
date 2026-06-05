@@ -8,7 +8,7 @@ nav_title: HW Sync
 
 The default timesync method for Livox Lidars are PTP. But unfortunatly Jetson NX does not support PTP. The alternative in the official documentation is to use PPS syncronisation with GPS. As indoor focused robots do not have GPS, we designed the following solution to provide GPRMC and PPS signals to the Livox LiDAR and Px4 via a ESP32.
 
-Firmware for the DFRobot FireBeetle 2 ESP32-S3 that replaces the STM32F103 timing board in a LiDAR–camera sensor stack. The ESP32 generates three hardware-synchronised outputs and disciplines its clock to the PX4 flight controller via MAVLink over UART.
+The ESP32 generates three hardware-synchronised outputs and disciplines its clock to the PX4 flight controller via MAVLink over UART.
 
 ![PPS sync wiring](../../assets/images/real/wiring/hw_sync.png)
 ---
