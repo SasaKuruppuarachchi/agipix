@@ -10,7 +10,7 @@ The default timesync method for Livox Lidars are PTP. But unfortunatly Jetson NX
 
 The ESP32 generates three hardware-synchronised outputs and disciplines its clock to the PX4 flight controller via MAVLink over UART.
 
-The code can be found at [TimerSyncBridge](https://github.com/SasaKuruppuarachchi/esp32_timersync-open.git)
+The ESP32 firmware code can be found at [TimerSyncBridge](https://github.com/SasaKuruppuarachchi/esp32_timersync-open.git)
 
 ![PPS sync wiring](../../assets/images/real/wiring/hw_sync.png)
 ---
