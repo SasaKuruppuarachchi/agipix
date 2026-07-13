@@ -25,3 +25,7 @@ vendor/
 *.fls
 *.synctex.gz
 *.toc
+.vscode/
+assets/etc
+/images/
+assets/videos/dlio.mov

@@ -2,6 +2,7 @@
 title: Tepeoperatoion
 layout: doc
 nav_title: Teleoperation
+wip: true
 ---
 
 # Modes of Teleoperation

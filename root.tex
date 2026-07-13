@@ -1,4 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %2345678901234567890123456789012345678901234567890123456789012345678901234567890
 %        1         2         3         4         5         6         7         8
 
@@ -11,297 +10,447 @@
 
 \overrideIEEEmargins                                      % Needed to meet printer requirements.
 
-%In case you encounter the following error:
-%Error 1010 The PDF file may be corrupt (unable to open PDF file) OR
-%Error 1000 An error occurred while parsing a contents stream. Unable to analyze the PDF file.
-%This is a known problem with pdfLaTeX conversion filter. The file cannot be opened with acrobat reader
-%Please use one of the alternatives below to circumvent this error by uncommenting one or the other
-%\pdfobjcompresslevel=0
-%\pdfminorversion=4
-
-% See the \addtolength command later in the file to balance the column lengths
-% on the last page of the document
-
-% The following packages can be found on http:\\www.ctan.org
-%\usepackage{graphics} % for pdf, bitmapped graphics files
-%\usepackage{epsfig} % for postscript graphics files
-%\usepackage{mathptmx} % assumes new font selection scheme installed
-%\usepackage{times} % assumes new font selection scheme installed
-%\usepackage{amsmath} % assumes amsmath package installed
-%\usepackage{amssymb}  % assumes amsmath package installed
 
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
+\usepackage{etoolbox}
 \usepackage{graphicx}
+\usepackage{subcaption}
 \usepackage{textcomp}
-% \usepackage{flushend}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
 \usepackage{dsfont}
 \usepackage{paralist}
-\usepackage[font=footnotesize]{subcaption}
-% \usepackage{cite} % duplicate, removed
+\usepackage{capt-of}
 \usepackage{tabularx}
 \usepackage{cancel}
 \usepackage{bm}
 \usepackage{url}
 \usepackage{mathtools}
-% \usepackage{textcomp} % duplicate, removed
 \usepackage{nccmath}
 \usepackage{xcolor}
 \usepackage{multirow}
 \usepackage{hhline}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{pifont}
+\usepackage{comment}
+% Paper-local helpers
+\newcommand{\Agipix}{AgiPIX}
+\newcommand{\Agiautonomy}{AgiAUTO}
+\newcommand{\Agisim}{AgiSIM}
+\newcommand{\Agiui}{AgiUI}
+\newcommand{\Agihw}{AgiREAL}
+\newcommand{\Agipixs}{AgiPIX }
+\newcommand{\Agiautonomys}{AgiAUTO }
+\newcommand{\Agisims}{AgiSIM }
+\newcommand{\Agiuis}{AgiUI }
+\newcommand{\Agihws}{AgiREAL }
+\newcommand{\TODO}[1]{\textcolor{red}{#1}}
+\newcommand{\CHANGDA}[1]{\textcolor{green}{#1}}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
 
 \title{\LARGE \bf
-Agipix: A Comprehensive Aerial Robotics Platform \\ Bridging Simulation and Reality
+\Agipix: Bridging Simulation and Reality in Indoor Aerial Inspection
 }
 
-
-\author{Sasanka Kuruppu Arachchige$^{1}$ and Joni Kämäräinen$^{2}$% <-this % stops a space
-\thanks{*This work was supported by RAICAM, MSCA HORAIZON EU}% <-this % stops a space
-\thanks{$^{1}$Sasanka Kuruppu Arachchige is with is with the Computing Sciences department at Tampere University, Finland
-        {\tt\small sasa.kuruppuarachchi@gmail.com}}%
-\thanks{$^{2}$Joni Kämäräinen is with the the Computing Sciences department at Tampere University, Finland
-        {\tt\small joni.kamarainen@tuni.fi}}%
-}
+\author{Undisclosed Authors}
+% \author{Sasanka Kuruppu Arachchige$^{1}$, Juan Jose Garcia$^{2}$, Changda Tian$^{3}$, Lauri Suomela$^{1}$, \\ Panos Trahanias$^{3}$ , Adriana Tapus$^{2}$ and Joni Kämäräinen$^{1}$% <-this % stops a space
+% \thanks{*This work was supported by RAICAM, MSCA HORIZON EU}% <-this % stops a space
+% \thanks{$^{1}$Sasanka Kuruppu Arachchige, Lauri Suomela and Joni Kämäräinen are with the Computing Sciences department at Tampere University, Finland
+%         {\tt\small sasa.kuruppuarachchi@gmail.com, joni.kamarainen@tuni.fi}}%
+% \thanks{$^{2}$Juan Jose Garcia and Adriana Tapus are with U2IS at ENSTA, Paris
+%         {\tt\small juan-jose.garcia@ensta.fr, adriana.tapus@ensta.fr}}%
+% \thanks{$^{3}$Changda Tian and Panos Trahanias is with Institute of Computer Science, Foundation for Research and Technology - Hellas (FORTH), Heraklion, Greece.
+%         {\tt\small dada@ics.forth.gr, trahania@ics.forth.gr}}%
+% }
 
 
 \begin{document}
+% Reduce layout warnings from tight two-column formatting.
+\raggedbottom
+\setlength{\emergencystretch}{2em}
+\sloppy
+\hbadness=10000
+\vbadness=10000
 
 % Graphics path for figures used across the paper
-\graphicspath{{assets/images/}}
+\graphicspath{{images/}}
+
+\newcommand{\insertfig}{\includegraphics[width=\textwidth]{images/banner_paper.png}\captionof{figure}{\Agipix{} is an open platform for indoor aerial autonomy and critical asset inspection. Left: Mapping result and a PoV view of a simulated drone (\Agisim). Center: \Agipixs \Agihw::UAV hardware prototype used in field experiments. Right: Mapping result and a PoV view of a real \Agihw::UAV surveying the AKW Zwentendorf nuclear power plant, Austria.}}\label{fig:coverfig}%
+
+
+\makeatletter
+\apptocmd{\@maketitle}{\centering\insertfig}{}{}% insert the figure after authors
+\makeatother
+%*************************************
 
 \maketitle
+\setcounter{figure}{1}
 \thispagestyle{empty}
 \pagestyle{empty}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-Agile indoor autonomy still lacks a small 3D LiDAR–equipped research platform with a reproducible, simulation-aligned software stack. We present Agipix: an open hardware and software platform combining a 438~\(\times\)~372~mm footprint (TWR 2.98:1 fully equipped) with a multi-modal sensor suite (3D LiDAR, IMU, RGB camera) and a ROS~2, containerized autonomy stack. A photorealistic Isaac Sim digital twin reproduces dynamics and sensor noise; the same ROS~2 containers (Jetson Orin NX companion + PX4 FCU via native DDS over serial) run unchanged in simulation and on real hardware, enabling zero-shot deployment. We describe the co-design of hardware, LiDAR-inertial-visual mapping and exploration, and the sim-to-real synchronization pipeline, and we outline evaluation protocols for pose drift, map fidelity, and exploration efficiency. All CAD models, simulation assets, and containers are released to lower the entry barrier for aerial robotics research by bridging simulation and reality.
+Autonomous indoor flight for critical asset inspection presents fundamental challenges in perception, planning, control, and learning. Despite rapid progress, there is still a lack of a compact, active-sensing, open-source platform that is reproducible across simulation and real-world operation. To address this gap, we present \Agipix, a co-designed open hardware and software platform for indoor aerial autonomy and critical asset inspection. \Agipixs features a compact, hardware-synchronized active-sensing platform with onboard GPU-accelerated compute that is capable of agile flight; a containerized ROS~2-based modular autonomy stack; and a photorealistic digital twin of the hardware platform together with a reliable UI. These elements enable rapid iteration via zero-shot transfer of containerized autonomy components between simulation and real flights. We demonstrate trajectory tracking and exploration performance using onboard sensing in industrial indoor environments. All hardware designs, simulation assets, and containerized software are released openly together with documentation.\\
 \end{abstract}
-{\bfseries\textit{Multimedial Material}}--- For code and assets \url{https://github.com/SasaKuruppuarachchi/agipix} \relax
+\urlstyle{same}
+{\bfseries\textit{Multimedia Material}}--- \\ 
+For complete documentation, code, and assets, \\ \url{https://sasakuruppuarachchi.github.io/agipix/} \relax
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{INTRODUCTION}
-Agile indoor aerial autonomy benefits from simultaneous advances in sensing, simulation fidelity, and software infrastructure. While recent open platforms (e.g. agile flight and vision-centric quadrotor stacks) emphasize high dynamic performance, a gap remains for a sub-0.45~m span research platform—small among 3D LiDAR–enabled aerial robots—that: (i) fits through standard interior passages; (ii) exposes a multi-modal perception suite including 3D LiDAR for geometry, camera for semantics, and IMU for high-rate state propagation; (iii) offers a photorealistic digital twin enabling dataset generation and policy validation; and (iv) guarantees bit-identical sim-to-real deployment through containerization. Agipix addresses this gap with a co-designed hardware and software system targeting exploration, mapping, and embodied AI in constrained built environments, explicitly lowering the entry barrier to aerial robotics research.
+\section{INTRODUCTION}\label{sec:introduction}
 
-Inspired by design principles in prior agile platforms, we focus on: size-to-capability ratio, modular sensing, and reproducibility. The name Agipix reflects pixel-accurate perception coupling and agility. An overview of hardware layout and sensor fields of view is provided in Fig.~\ref{fig:platform_overview}. The simulation-to-deployment workflow is outlined in Fig.~\ref{fig:sim_pipeline}.
+Critical asset inspection is a key application domain for autonomous aerial robots, with growing demand across industrial facilities, energy plants, warehouses, tunnels, and other confined indoor environments. Traditional inspection is labor-intensive, costly, time-consuming, and can expose operators to safety risks in hard-to-reach or hazardous areas \cite{sanchez2024toward}. Recent advances in aerial robotics improve inspection efficiency, coverage, and safety through remote, automated data collection with onboard sensing. Commercial systems perform well outdoors, but indoor aerial inspection remains more challenging due to limited space, lack of global positioning, poor lighting, and the need for reliable close-proximity operation around obstacles and assets.
 
-\subsection{Contributions}
+To advance the field, several research sprints have been organized, including the DARPA Subterranean Challenge \cite{tranzatto2022cerberus} for autonomous exploration in complex indoor environments and the European Robotics Hackathon (ENRICH) \cite{europeanroboticsENRICH2025} for critical asset inspection. These events enable real-world testing inside a decommissioned nuclear power plant under authentic radiological conditions. As a result, only a few research groups \cite{tranzatto2022cerberus, Foehn2022Agilicious, microswarm2022fast} have gained the expertise and resources needed to develop aerial robotic platforms, given the significant hardware and software engineering overhead.
+
+
+This work aims to bridge this gap by providing an open, compact, actively sensed aerial robotics platform for indoor inspection and mapping, with a focus on reproducibility and sim-to-real transfer.
+
+
 The main contributions of this paper are:
 \begin{itemize}
-        \item An open hardware design achieving a 438~\(\times\)~372~mm footprint with protected rotor envelope and a measured TWR of 2.98:1, enabling traversal of standard 800~mm office doorways while preserving maneuver authority.
-        \item A unified, Docker-based software stack (ROS2 + Isaac Sim bridges + SLAM + exploration) supporting zero code changes between simulation and real flights.
-        \item A photorealistic Isaac Sim environment generation pipeline with asset parameterization, physics synchronization, synthetic LiDAR/RGB/IMU noise modeling, and automatic multi-sensor bagging.
-        \item A multi-modal perception stack: tightly coupled LiDAR-inertial odometry (LIO) fused with visual semantics for map enrichment and frontier-based exploration.
-        \item Quantitative sim-to-real consistency metrics (pose drift, occupancy IoU, exploration coverage efficiency) and guidelines for reproducible benchmarking.
-        \item Open release: CAD, URDF, Isaac scene assets, calibration targets, container recipes, and evaluation scripts.
+        \item \textbf{\Agihw: Open source hardware for indoor inspection:} We present a compact, high-performance aerial platform with hardware-synchronized 3D LiDAR for precise mapping and robust navigation.
+        \item \textbf{\Agiautonomy: Open source modular software:} We implement a ROS~2-based modular autonomy stack in a dockerized environment for rapid deployment.
+        \item \textbf{\Agisim: Digital twin:} We provide a photorealistic Isaac Sim based digital twin~\cite{nvidiaIsaacSim2026}.
+        \item \textbf{\Agiui: User interface:} We implement a low-bandwidth operator interface for mission control.
+        \item \textbf{Experiments:} We report results from simulation and real-world experiments.
 \end{itemize}
 
-\subsection{System Overview}
-\begin{figure*}[t]
-        \centering
-        \includegraphics[width=0.96\textwidth]{images/diag/autonomy_heuristcs.png}
-        \caption{Integrated hardware and software architecture of Agipix. The PX4 FCU handles low-level control while the Jetson Orin NX runs ROS~2 containers for perception, mapping, planning, and mission management. Native DDS over serial (micro XRCE-DDS) provides direct topic bridging without protocol translation.}
-        \label{fig:arch_overview}
+The paper is organized as follows: Section~\ref{sec:related} reviews related work; Section~\ref{sec:platform} presents the \Agipixs platform; Section~\ref{sec:results} reports results; Section~\ref{sec:discussion} discusses limitations and future directions; and Section~\ref{sec:conclusion} concludes.
+
+\section{RELATED WORK} \label{sec:related}
+Related work covers open aerial platforms, perception, planning, and control, simulation and digital twins, and UI.
+
+\begin{figure*}[!ht]
+    \centering
+    % 	\centering
+    \vspace*{-12pt}
+    \includegraphics[width=1\linewidth]{diag/plat_comparison_1.jpg}
+    \vspace*{-10pt}
+    
+    \def\arraystretch{1.1}
+	\resizebox{\textwidth}{!}{%
+        \begin{tabular}{@{}l|c|c|c|c|c|r|c|c|c|r|r}
+        	\toprule
+        	framework & open-source & ROS~2 & simulation & \parbox{1.5cm}{\centering user interface} & \parbox{2.0cm}{\centering low-level controller} & \parbox{1.8cm}{\centering CPU Mark \\ (higher is better)} & GPU & \parbox{1.15cm}{\centering 3D LiDAR} & \parbox{1.6cm}{\centering Collision guard} & \parbox{1.3cm}{\centering thrust / weight} & \parbox{1.6cm}{\centering Diagonal span (mm)}\\
+        	\midrule
+        	DJI M400~\cite{djiMatrice400Specs2026} & - & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} & \textcolor{green}{\cmark}  & proprietary & - & \textcolor{green}{\cmark} & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} &  - & $\approx1240$\\
+        	%
+        	Skydio X10~\cite{skydioX102026} & - & \textcolor{red}{\xmark}  & \textcolor{red}{\xmark} & \textcolor{green}{\cmark}  & proprietary &  - & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} & \textcolor{red}{\xmark} & -  & $\approx1023$\\
+            %
+            Flyability~\cite{flyabilityElios32022} & - & \textcolor{red}{\xmark} & \textcolor{green}{\cmark} & \textcolor{green}{\cmark} & proprietary & - & \textcolor{green}{\cmark} & \textcolor{green}{\cmark}& \textcolor{green}{\cmark}& - & $\approx480$ \\
+        	%
+        	Crazyflie~\cite{GiernackiCrazy} & SW and HW & \textcolor{green}{\cmark} & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} & custom & - & \textcolor{red}{\xmark} & \textcolor{red}{\xmark} & \textcolor{red}{\xmark} & $\approx2.26$  & $\approx92$\\
+        	%
+        	FLA-Quad~\cite{Mohta18jfr} & SW and HW & \textcolor{red}{\xmark} & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} & PX4 & $3{,}383$ & \textcolor{red}{\xmark} & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} & $\approx2.38$ & -   \\
+        	Borinot~\cite{marti2023borinot} & SW and HW & \textcolor{green}{\cmark} & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} & PX4 & $6{,}190$ & \textcolor{red}{\xmark} & \textcolor{red}{\xmark} & \textcolor{red}{\xmark} & $\approx3.50$  &  $\approx516$ \\
+        	%
+        	MRS UAV~\cite{Baca2021jirs} & SW and HW & \textcolor{green}{\cmark} & \textcolor{green}{\cmark} & \textcolor{green}{\cmark} & PX4 & $9{,}264$ & \textcolor{red}{\xmark} & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} & $\approx2.50$ & $\approx792$  \\
+        	%
+        	Agilicious~\cite{Foehn2022Agilicious} & SW and HW* & \textcolor{red}{\xmark} & \textcolor{green}{\cmark}\textcolor{green}{\cmark} & \textcolor{green}{\cmark} & custom & $1{,}343$ & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} & \textcolor{red}{\xmark} & $\approx5.00$ & $\approx382$  \\
+            %
+            OmniNxt~\cite{liu2024omninxt} & SW and HW & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} & \textcolor{green}{\cmark} & PX4 & $2{,}418$ & \textcolor{green}{\cmark} & \textcolor{red}{\xmark} & \textcolor{green}{\cmark} & $\approx4.24$  & $\approx250$  \\
+
+                \midrule
+        	\textbf{\Agipixs(Ours)} & SW and HW & \textcolor{green}{\cmark} & \textcolor{green}{\cmark}\textcolor{green}{\cmark} & \textcolor{green}{\cmark} & PX4 & $2{,}418$ & \textcolor{green}{\cmark} & \textcolor{green}{\cmark} & \textcolor{green}{\cmark}& $\approx3.50$ & $\approx495$ \\
+        	\bottomrule
+        \end{tabular}
+        }
+    \caption{
+    Comparison of consumer and research platforms by onboard compute, agility, and sensing. Criteria include openness, ROS~2 support, simulation (double ticks denote photorealism), UI, CPU~performance ({\small\protect\url{https://www.cpubenchmark.net}}), and GPU availability. Agility is measured by thrust-to-weight; diagonal span is in flight configuration. (*conditionally open-source)
+    }
+    \label{fig:comparison}
+    \vspace*{-12pt}
 \end{figure*}
-Agipix integrates: (1) an embedded NVIDIA Jetson Orin NX companion computer running perception, mapping, planning, and mission management under ROS~2; (2) a PX4-based flight control unit (FCU) handling low-level attitude/thrust loops; (3) a 3D LiDAR (placeholder: 32/16 channel mid-range) mounted top-front; (4) a global-shutter RGB camera front-facing; and (5) a 6-axis IMU synchronized to both LiDAR and camera via software time compensation inside containers. High-rate state, actuator, and health data are exchanged between PX4 and the companion through native DDS (micro XRCE-DDS) over a robust serial (UART) link, eliminating intermediate protocol translation layers. All high-level processes run inside coordinated Docker containers sharing a common ROS~2 domain for zero-copy intra-host transport where feasible.
 
-\section{RELATED WORK}
-We group related work into open aerial platforms, perception and state estimation, learning and model-based control, simulation and digital twins, and onboard compute acceleration. Agipix complements these efforts by focusing on a small-footprint 3D LiDAR--equipped platform with a photorealistic Isaac Sim pipeline and containerized parity intended to reduce entry barriers. A high-level qualitative comparison (footprint, sensing modality, TWR, simulation support, reproducibility) is reserved for Fig.~\ref{fig:platform_comparison} (placeholder) and Table~\ref{tab:comparison_placeholder}.
+%
+%
+\subsection{Available Platforms}\label{subsec:related.platforms}
+Figure~\ref{fig:comparison} summarizes the key features of \Agipixs and compares it with representative research and industrial platforms.
 
-\begin{figure*}[t]
+Commercial platforms such as DJI Matrice 400 \cite{djiMatrice400Specs2026} and Skydio X10 \cite{skydioX102026} offer mature sensing and autonomy but are large and better suited for outdoor missions. The Flyability Elios~3 \cite{flyabilityElios32022} targets confined inspection with protective structures and 3D LiDAR, yet all remain proprietary, limiting research extensibility and algorithm validation.
+
+Open research platforms are more extensible. FLA Quad \cite{Mohta18jfr} and MRS-UAV \cite{Baca2021jirs} target GPS-denied navigation and mapping with PX4 \cite{meier2015px4}, CPU-only compute, cameras, and LiDAR, but the added payload increases size and weight, reducing thrust-to-weight ratio (TWR) and limiting close-proximity operation.
+
+Agilicious \cite{Foehn2022Agilicious} prioritizes compactness and high TWR for aggressive flight, but its tight integration limits sensor expansion. OmniNxt \cite{liu2024omninxt} is smaller with omnidirectional perception, yet lacks 3D LiDAR, reducing mapping precision.
+
+Across most open platforms, limited onboard GPU capability restricts real-time learning-based inspection and perception. \Agipixs combines 3D LiDAR, redundant depth and inertial sensing, and a capable GPU in a compact form factor, enabling robust indoor mapping and exploration with reproducible containerized deployment.
+%
+\subsection{Perception, State Estimation, and Mapping}\label{subsec:related.perception}
+Fast, reliable state estimation underpins precise mapping. Prior work spans tightly-coupled factor-graph fusion (LIO-SAM \cite{shan2020lio}), direct point-to-map registration with efficient incremental data structures (FAST-LIO2 \cite{xu2022fast}), continuous-time trajectory estimation with higher-order motion models and observer-based stability (DLIO \cite{chen2022dlio}), and environment-adaptive LiDAR--inertial mapping with observability-aware segmentation and multi-resolution voxelization (Adaptive-LIO \cite{zhao2024adaptive}). Robustness improves with redundant perception pipelines and filtering when multiple sensors are available \cite{kuruppu2024robust}.
+
+\subsection{Planning and Control}\label{subsec:related.planning}
+\textbf{Planning:} Early quadrotor planning pipelines often relied on differential flatness and polynomial trajectory optimization (e.g., minimum-snap), which enabled smooth, dynamically feasible trajectories at high update rates \cite{mellinger2011minsnap}. Recent work expanded these foundations toward time-optimal, perception-aware local planning in clutter. In this direction, ViGO and EGO-Planner introduce ESDF-free, gradient-based local planners for agile flight in cluttered environments \cite{xuVigoPlanner2026, zhou2021egoplanner}. 
+
+\textbf{Control:} Most real platforms still rely on a cascaded architecture with a PID-based attitude-rate inner loop for robustness and ease of tuning \cite{meier2015px4}. On top of this, advanced control approaches improve performance under constraints and disturbances, including MPC formulations \cite{lu2022onmpc} for time-optimal flight.
+
+\textbf{Data-driven navigation policies:} Learning-based policies are increasingly used to augment or replace classical pipelines, enabling perception-aware, minimum-time flight and improved safety in cluttered scenes, with evidence of sim-to-real transfer at scale \cite{song2023perceptionaware,xu2025navrl}. Data-centric studies further quantify how synthetic vs. real data and scale impact navigation performance in unknown environments \cite{suomela2025synthetic,suomela2026data}. The modular \Agiautonomys lets \Agipixs adopt, validate, and deploy these methods in relevant scenarios.
+
+\subsection{Simulation}\label{subsec:related.sim}
+Photorealistic and physics-aligned simulators reduce development cost and risk. The aerial simulation landscape highlights that a large fraction of aerial robotics simulators are built around Gazebo, which is generally sufficient for dynamics and ROS integration but is not photorealistic \cite{furrer2016rotors}. In contrast, several simulators target higher-fidelity visuals by leveraging game engines. AirSim \cite{shah2017airsim} uses Unreal Engine, while Flightmare \cite{song2021flightmare} uses Unity to enable photorealistic rendering for perception-driven research in custom-built pipelines but lacks ROS~2 support.
+
+The Isaac Sim ecosystem provides physics-based rendering and GPU-accelerated physics, while Pegasus enables PX4 SITL integration inside Isaac Sim \cite{jacinto2024pegasus}. \Agisims builds on this capability by implementing a digital twin of \Agipixs in Isaac Sim and sharing the same containerized autonomy stack in simulated and real flights.
+
+
+\subsection{User interface}\label{subsec:related.ui}
+Operator-facing UIs are typically delivered through ground control stations (GCS) that combine mission specification, real-time telemetry/health monitoring, and safety-critical handover between autonomy levels. Modern GCSs are largely map-centric, increasingly include decision-support tools, and must manage workload as supervision scales to multiple vehicles \cite{Zhang2024InterfaceWorkload}. Trends toward collaborative control, cloud-enabled thin clients, and UTM integration emphasize clear communication of automation state, intent, and constraints \cite{DiGregorio2021HumanGCS}.
+
+In critical-asset inspection, UIs are vital for validating coverage, assessing map quality, and intervening when sensing degrades. Human-drone interaction work highlights the need to expose autonomy and safety boundaries to reduce workload and improve trust \cite{Hayat2016SurveyHDI}. These findings motivate \Agiuis as a lightweight, integrated mission-control and monitoring interface that aligns autonomy state with operator actions.
+
+
+\section{\Agipixs PLATFORM}\label{sec:platform}
+\subsection{System Overview} \label{sec:platform.overview}
+\begin{figure*}[!ht]
         \centering
-        \framebox{\parbox{0.97\textwidth}{Platform comparison placeholder: rows = prior platforms (Agilicious, MRS UAV, Sa et al., etc.); columns = Footprint, Sensors (VIO / LiDAR), TWR, Sim/Digital Twin, ROS~2 / Containerization, Release Status.}}
-        \caption{Placeholder comparison of representative open / partially open aerial robotics platforms versus Agipix. Will be replaced with a properly typeset figure summarizing size, sensing, agility (TWR), simulation fidelity, and reproducibility features.}
-        \label{fig:platform_comparison}
+        \includegraphics[width=0.99\textwidth]{diag/sys_overview_2.png}
+        \caption{System overview of the \Agipixs stack. \Agiautonomys runs modular ROS~2 components on the companion computer. Flight-state and setpoint topics are bridged to PX4 via native DDS in both simulation and real flights. An external ROS~2 logger records system telemetry. \Agiuis provides operator interaction, logging, and mission commands over a MQTT \cite{holmqvist1994visually}.}
+        \label{fig:sys_overview}
+        \vspace*{-12pt}
 \end{figure*}
+\Agipixs is organized into four interacting subsystems (Fig.~\ref{fig:sys_overview}). The \Agihws hardware platform and \Agisims simulation platform share \Agiautonomys, the ROS~2 autonomy pipeline comprising estimation, a map manager, a planner, and a controller. The controller publishes setpoints and receives flight-state feedback from PX4 via native DDS. In simulation, \Agisims couples PX4 SITL with a photorealistic Isaac Sim digital twin, while in real flights PX4 runs on the \Agihw. \Agiuis provides operator interaction (GUI), backend services, and logging, and interfaces with \Agiautonomys through an MQTT bridge \cite{ika_mqtt_client2026} that carries mission commands and returns status products (state, map, and POV imagery). Finally, a logger records ROS~2 topics and telemetry for offline analysis and reproducibility.
 
-\subsection{Open and Reproducible Aerial Platforms}
-Several open or partially open quadrotor platforms target reproducible research. Agilicious \cite{Foehn2022Agilicious} co-designs high thrust-to-weight hardware with a modular software stack for agile, vision-based flight. The MRS UAV system \cite{Baca2021jirs} emphasizes reproducibility, field deployment, and education with a rich perception stack. Sa et al. \cite{Sa2018ram} present a cost-effective visual-inertial drone blueprint lowering financial barriers for autonomous operation. These platforms primarily focus on vision (monocular or stereo) and motion capture for evaluation; Agipix instead integrates 3D LiDAR in a comparatively small geometry to support robust indoor mapping and exploration while retaining reproducible deployment through containers.
 
-\subsection{Perception, State Estimation, and Mapping}
-Visual-inertial odometry and mapping underpin agile autonomy. Classical and modern VIO pipelines (surveyed indirectly through the adoption in \cite{Sa2018ram,Foehn2022Agilicious}) enable accurate state propagation; hardware acceleration efforts such as Navion \cite{Suleiman2019jssc} illustrate opportunities for specialized low-power VIO computation relevant to future Agipix extensions. Time-optimal waypoint planning \cite{Foehn2021science} and reliable attitude control frameworks (e.g., adaptive INDI \cite{smeur2016jgcd}) demonstrate the importance of precise modeling and disturbance rejection—capabilities that benefit from accurate 3D structure when navigating cluttered interiors. While prior open platforms largely rely on camera-only sensing indoors, Agipix adds LiDAR-inertial fusion to improve robustness under texture-poor or lighting-degraded conditions, aligning with broader trends toward multi-modal mapping.
+\subsection{\Agihw \ Hardware Design} \label{sec:platform.hw}
 
-\subsection{Planning and Control (Model-Based and Learning-Based)}
-High-performance trajectory generation and control have advanced via differential flatness formulations and time-optimal planners \cite{Foehn2021science}, incremental nonlinear dynamic inversion variants \cite{tal2020tcst,smeur2016jgcd}, and data-driven or learning-enhanced MPC \cite{torrente2021ral}. Vision-based agile navigation and drone racing strategies \cite{croonRAS20,Foehn2022Agilicious} highlight the interplay between perception latency and control bandwidth. Agipix inherits insights from these works but targets exploration-oriented autonomy (coverage, mapping fidelity) rather than peak dynamic envelopes, leveraging LiDAR-informed frontier planning within the same reproducible infrastructure.
+\subsubsection{Mechanical Architecture}
+The \Agipixs hardware platform is designed for safe operation near structures and within narrow passages while retaining 3D LiDAR capability. The frame constrains the diagonal motor-to-motor span to \SI{438}{\milli\meter}, with a maximum width of \SI{372}{\milli\meter} and a \SI{495}{\milli\meter} diagonal including guards. This enables passage through typical \SI{800}{\milli\meter} doors with a maneuvering margin. Propulsion is sized to yield a static thrust-to-weight ratio of 3.5:1 at full payload. The LiDAR is mounted at a 45-degree angle and protected within the carbon-fiber shell with minimal occlusion and vibration damping. Secondary sensors can be swapped between missions depending on task requirements. An overview of the components is given in Table~\ref{tab:hw_components}.
+\begin{table}[!ht]
+    \centering
+    \footnotesize
+    \def\arraystretch{1.2}
+    \begin{tabularx}{\linewidth}{l|l|X}
+        \toprule
+        Component & \parbox{1.8cm}{Product} & Specification \\
+        \midrule
+        Frame & Custom open-source & \SI{4}{\milli\meter} carbon fiber \\
+        Motor & T-Motor Slatts 2306 & 23$\times$\SI{6}{\milli\meter} stator, \SI{2400}{\kilo\volt}, \SI{758}{\watt}  \\
+        Propeller & \parbox{1.8cm}{Azure Power SFP5148} & \SI{5.1} inch length and \SI{4.8} inch pitch \\
+        Battery & Tattoo G-Tech 4500 & 6$\times$ \SI{3.7}{\volt}, \SI{4500}{\milli\ampere\hour} \\
+        Flight Controller & Pixhawk Orange & Built in redundancy \\
+        Motor Controller & F55A Pro II 3-6S & DShot protocol, 4$\times$ \SI{60}{\ampere} \\
+        Compute Unit & \parbox{2.0cm}{nVidia Jetson Orin Nx (Super)} & 8$\times$ A78 \SI{2.0}{\giga\hertz}, \SI{16}{\giga\byte}, 157 TOPS \\  
+        \midrule
+        LiDAR & Livox MID 360 & \SI{50}{\meter} at 360°$\times$59° FOV \\
+        IMU & Pixhawk Orange & Isolated and triple redundant\\
+        Optical flow & HereFlow PX4 & Redundant velocity measurement \\
+        Depth (Opt.) & RealSense D455 & \SI{6}{\meter} m at 87°$\times$58° FOV \\
+        RGB (Opt.) & Arducam OG02B10 & Global Shutter \\
+        Radiation (Opt.) & DFrobot Gravity & Ionizing Radiation Detector \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Overview of the components of the flight hardware design.}
+    \label{tab:hw_components}
+    \vspace*{-15pt}
+\end{table}
+\subsubsection{Sensors and Hardware Synchronization}
+The primary sensors of the platform are the LiDAR and IMU, which are used for LiDAR--inertial odometry (LIO) state estimation. Accurate synchronization between these sensors is critical for reliable estimation. We achieve this using the pulse-per-second (PPS) synchronization capability of the Livox Mid-360 LiDAR. The Pixhawk, which houses the IMU, acts as the master clock, and both the companion computer and LiDAR are synchronized to it. An ESP32 connected to the Pixhawk via MAVLink generates the timing signal required by the LiDAR. An overview of the method is shown in Fig.~\ref{fig:hw_sync}. USB~3.0, CAN, UART, RS-232, and SPI interfaces are available for optional secondary sensors.
 
-\subsection{Simulation, Photorealism, and Hardware-in-the-Loop}
-Photorealistic and physics-aligned simulators reduce development cost and risk. FlightGoggles \cite{guerra2019flightgoggles} introduced photogrammetry-based rendering for perception-driven research; Agilicious demonstrated hardware-in-the-loop and VR environments \cite{doi:10.1126/scirobotics.abl6259}. Agipix builds on this trajectory by adopting Isaac Sim for physically based rendering and sensor noise injection, while enforcing configuration identity (containers + YAML parity) between simulated and real deployments to minimize sim-to-real divergence and reduce researcher setup overhead.
 
-\subsection{Form Factor, Energetics, and Future Directions}
-Miniaturization impacts energetics and agility \cite{Floreano2015nature,Karydis2017if}. Existing 3D LiDAR aerial systems tend to increase size due to payload mass and field-of-view requirements; Agipix shows that a relatively small (<0.45~m span) configuration can host a LiDAR + camera + IMU suite suitable for indoor exploration, offering a different point in the design space than camera-only small platforms or larger mapping UAVs. Compute specialization \cite{Suleiman2019jssc} and data-driven aerodynamic modeling \cite{torrente2021ral} suggest further opportunities for integrating accelerators and learned models inside the same containerized pipeline released with Agipix.
+\begin{figure}[!ht]
+        \centering
+        \includegraphics[width=0.99\linewidth]{diag/hw_sync.png}
+        \caption{Hardware time synchronization pipeline. The Pixhawk (IMU) provides the master clock; the LiDAR is synchronized via PPS, with an ESP32 generating the required timing signal.}
+        \label{fig:hw_sync}
+        \vspace*{-12pt}
+\end{figure}
 
-In summary, prior work established agile control, vision-based state estimation, open hardware, and photorealistic simulation. Agipix combines these strands around a LiDAR-inclusive, small-footprint platform with strict sim-to-real configuration parity to lower the barrier for indoor exploration research.
+\subsection{\Agiautonomy: Modular Software Framework} \label{sec:platform.sw}
+\Agiautonomys is organized as a set of ROS 2 packages and runtime services that communicate over ROS 2. To enable reproducible deployment, \Agiautonomys lives in a container image and is launched through a unified orchestration. This isolates dependencies, makes experiments portable across compute targets, and allows switching between sim and hardware by changing only the configuration
 
-\section{HARDWARE DESIGN}
-\subsection{Mechanical Architecture}
-The frame (placeholder: carbon fiber monocoque + modular sensor deck) constrains diagonal span to 438~mm (motor-to-motor) and maximum width 372~mm including guards. This enables passage through typical 800~mm doors with maneuver margin. The low profile lowers sensor parallax and improves LiDAR occlusion handling. Propulsion is dimensioned to yield a static thrust-to-weight ratio of 2.98:1 with the full LiDAR/camera payload and exploration battery, balancing agility (for rapid attitude/position corrections in clutter) against endurance and mass constraints typical of indoor mapping missions.
-\subsection{Avionics and Power}
-Describe ESC selection, voltage bus segmentation (5V logic vs HV propulsion), power module monitoring, and EMI mitigation. (To be expanded.)
-\subsection{Sensors}
-Provide model numbers (placeholder) and key specs: LiDAR range, vertical FoV, camera resolution/frame rate, IMU noise density. Include planned calibration procedure referencing AprilTag or checkerboard targets.
-\subsection{Compute and Networking}
-The Jetson Orin NX provides heterogeneous GPU/CPU acceleration for deep perception and planning kernels. A high-speed internal Ethernet (or USB3) link connects LiDAR and camera to the companion, while a dedicated UART (or USB CDC) provides the PX4 serial transport used by micro XRCE-DDS for native ROS~2 topic bridging. Time synchronization uses a chrony daemon referencing the FCU time pulses (or PPS if available) to bound inter-sensor skew; IMU and LiDAR timestamps are aligned via per-message interpolation. Container CPU affinity and cgroup limits isolate real-time critical ROS~2 executors (e.g., state estimation) from best-effort nodes.
+\noindent\textbf{Middleware and interfaces:} We use Micro XRCE-DDS \cite{PX4_ROS2_bridge} to interface directly with PX4 uORB topics. Safety-critical primitives remain in PX4, while higher-level autonomy runs onboard the companion computer. A thin interface layer \cite{PX4_ROS2_Control_Interface} translates between ROS~2 messages and validated PX4 setpoint streams.
+
+\subsubsection{Perception: State Estimation and Mapping}
+\Agiautonomys provides a LiDAR--inertial state-estimation and mapping pipeline for GPS-denied indoor environments. The default configuration uses a modified Adaptive-LIO \cite{zhao2024adaptive} with an EKF that fuses the IMU to improve robustness and update rate.
+
+For navigation in cluttered industrial sites, the perception stack flags dynamic obstacles using LV-DOT \cite{LV-DOT}. The local environment is maintained as a 3D occupancy structure and the global map as a voxel grid. These feed the planner and \Agiui, while higher-resolution maps are recorded for offline inspection.
+
+\subsubsection{Planning and Control} \label{sec:platform.sw.plan_ctrl}
+\Agiautonomys exposes multiple flight modes that separate operator intent, autonomy level, and safety constraints, enabling staged bring-up while reusing PX4 safeguards. Beyond PX4's standard modes, the stack provides four autonomy modes: \emph{Twist control} (direct velocity commands from \Agiui), \emph{Goal control} (\Agiuis controlled goal pose with obstacle avoidance), \emph{Navigation control} (global waypoint/trajectory following), and \emph{Exploration control} (closest-frontier autonomy).
+
+Trajectory generation uses a local ViGO planner \cite{xuVigoPlanner2026} that produces dynamically feasible polynomial trajectories in the current occupancy map. The resulting trajectory is tracked by an on-manifold MPC \cite{lu2022onmpc}, which outputs smooth attitude/thrust references streamed to PX4 as trajectory setpoints at a fixed rate.
+
+\textbf{Data-driven navigation policies:} The modular design and separated control modes of \Agiautonomys enable learning-based navigation. Following Section~\ref{subsec:related.planning}, we evaluate a learned policy by deploying the Fast Appearance-Invariant Navigation Transformer (FAINT) \cite{suomela2025synthetic} onboard \Agihw. The policy, trained in simulation, transfers zero-shot to the platform, illustrating the adaptability enabled by \Agiautonomy.
+
+\subsubsection{Data Logging}
+Reliable data logging is mission-critical for inspection tasks. ROS~2 bags can grow quickly, become corrupted, and consume system memory. We provide \textit{agi\_logger} \cite{Kuruppuarachchi2026agi_logger}, an open-source package for reliable logging and TCP file transfer that uses \texttt{.mcap} storage with autostart, memory/time limits, and lossless segmented recording. \texttt{.mcap} log files enable offline inspection using tools such as Foxglove \cite{foxglove2026}.
+
+
+\subsection{\Agisim: Digital Twin} \label{sec:platform.sim}
+
+\subsubsection{Simulation Environment and Workflow}
+\Agisims provides a photorealistic digital twin if the \Agihw. As summarized in Fig.~\ref{fig:sys_overview}, Isaac Sim renders the environment and simulates the onboard sensors with time-stamped outputs. PX4 software-in-the-loop (SITL) is handled through the Pegasus interface \cite{jacinto2024pegasus} communicates via DDS, so that the same ROS~2 topics are available to \Agiautonomys as in real flight.
+
+\noindent\textbf{Workflow.} A typical experiment proceeds as follows: (i) launch Isaac Sim with the scene, robot, sensor configuration and PX4 SITL, (ii) start the ROS~2 bridge, (iii) launch the \Agiautonomys containers, and (iv) visualize and supervise the run via \Agiui/Foxglove. The same mission definitions are used across sim and real flights, which supports rapid iteration while keeping deployment consistent.
+
+\subsubsection{Reproducibility and Configuration Parity}
+To reduce sim-to-real drift, \Agisims enforces configuration parity at three levels. 
+\emph{Sensor parity} is maintained by matching calibration and noice parameters frames and topic conventions with the hardware setup. 
+\emph{Timing parity} is achieved by propagating simulation time consistently to ROS~2. 
+\emph{Software parity} is ensured by running the exact same container images and launch files in both environments.
+
+% \begin{figure*}[t]
+%   \centering
+%   \includegraphics[width=\textwidth]{images/agiui.png}
+%   \caption{This is the complete overview of the AgiUI where the user can see different perspectives of the robots it is controlling, including a top view, a side view, and a third-person view.}
+%   \label{fig:ui_complete_agiu}
+% \end{figure*}
+
+\subsection{AgiUI: User Interface}\label{sec:platform.ui}
+
+\Agiuis is the operator-facing interface that closes the loop between mission intent and the onboard autonomy stack (Fig.~\ref{fig:sys_overview}). We implement \Agiuis as a lightweight web application that bridges commands and status through a low-bandwidth MQTT channel \cite{Hu2021CloudStation}. The UI server receives state, map updates, POV imagery, and payload readings over the MQTT channel. User commands and motion bounds are sent back to be received by the robot-side UI backend, which translates them back to ROS~2 topics.
+
+The GUI is organized around (i) a fleet overview and (ii) synchronized spatial products. The fleet panel lists all active robots under supervision using a common abstraction of connection state, autonomy mode, and basic health indicators. A 3D mapping view provides a shared, joint reconstruction from the different robots, enabling operators to inspect explored regions, verify coverage, and contextualize robot poses and trajectories. For radiological inspection, \Agiuis additionally renders a radiation map aligned with the shared environment representation, supporting rapid identification of hotspots and informing viewpoint replanning. Per-robot control tabs expose mission specification (geofences, waypoints, and inspection tasks) and teleoperation primitives, with explicit mode switching (manual/assisted/autonomous) to support safe handover procedures. 
+
+
+%Beyond robot control, \Agiuis includes a Human-Robot Interaction (HRI) monitoring panel to support user-centric supervision. Building on our prior work on cognitive-load dynamics in teleoperation \cite{GarciaCardenas2024CognitiveLoadTeleop}, this panel can ingest physiological streams (e.g., heart-rate variability, electrodermal activity/GSR, and eye-based measures) and display online indicators of cognitive load and trust alongside mission context. These signals are logged with the rest of the system telemetry, enabling post-hoc analysis and future closed-loop policies that adapt autonomy level and information presentation to the operator's state.
+
+
+
+
+
+
+
+\section{RESULTS}\label{sec:results}
+This section summarizes inspection- and mapping-focused experiments conducted in both simulation (\Agisim) and real-world flights and outlines the evaluation protocol used during ENRICH~2025.
+
+\begin{table}[!ht]
+    \centering
+    \footnotesize
+    \def\arraystretch{1.2}
+    \begin{tabularx}{\linewidth}{l|r|r}
+        \toprule
+        \parbox{3.3cm}{\textbf{Trajectory}} 
+        & \parbox{2cm}{\centering\textbf{AgiSIM ATE (m)}} 
+        & \parbox{2cm}{\centering\textbf{AgiREAL ATE (m)}}\\
+        \midrule
+        Lemniscate  & 0.0637 & 0.1404 \\
+        Up Down Spiral  & 0.0368 & 0.1049 \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Trajectory-tracking performance comparison between AgiSIM and AgiREAL across different trajectories.}
+    \label{tab:rmse_results}
+    \vspace*{-12pt}
+\end{table}
 
 
 \begin{figure}[t]
         \centering
-        \includegraphics[width=0.95\linewidth]{images/real.jpg}
-        \caption{Agipix hardware prototype. Annotated sensor positions and dimensions (438~\(\times\)~372~mm envelope).}
-        \label{fig:platform_overview}
+        \includegraphics[width=0.98\linewidth]{images/plots/traj_tracking.png}
+        \caption{Trajectory-tracking comparison of Ground Truth, \Agisim, and \Agihws in two trajectories at 6 m/s maximum velocity; Up down spiral and lemniscate: (1) spiral in the $x$--$y$ plane, (2) spiral in the $y$--$z$ plane, and (3) lemniscate in the $x$--$y$ plane.}
+        \label{fig:result_tracking}
+        \vspace*{-13pt}
 \end{figure}
+\subsection{Trajectory tracking performance}\label{subsec:results_trajectory}
+We evaluate trajectory-tracking accuracy in both \Agisim{} and \Agihw{} using two representative paths: a lemniscate and an up--down spiral (Fig.~\ref{fig:result_tracking}). As described in Sec.~\ref{sec:platform.sw.plan_ctrl}, the predefined polynomial trajectories are tracked by an on-manifold MPC \cite{lu2022onmpc} that produces attitude setpoints for the low-level controller. Real-world poses are measured by a VICON system. Each run is executed at a maximum linear speed of \SI{6}{\meter\per\second} and a maximum linear acceleration of \SI{5}{\meter\per\second}, and tracking performance is reported as ATE RMSE with respect to the ground-truth trajectory (Table~\ref{tab:rmse_results}).
 
-\section{SOFTWARE STACK}
-\subsection{Containerized Architecture}
-Each major subsystem (perception, mapping, planning, PX4 interface, logging, simulation bridge) resides in an isolated Docker image derived from a minimal base. All containers share a single ROS~2 middleware layer (Fast DDS or Cyclone DDS configurable) to exploit QoS tuning (e.g., BEST\_EFFORT + KEEP\_LAST for high-rate IMU, RELIABLE + TRANSIENT\_LOCAL for map data). Advantages include reproducibility, dependency pinning, multi-architecture builds (desktop vs Jetson), and deterministic launch via a compose file. The PX4 interface container embeds a micro XRCE-DDS client/server stack, exposing FCU topics directly as ROS~2 messages without MAVLink/MAVROS translation.
-\subsection{Middleware and Interfaces}
-ROS~2 (DDS) underpins all inter-process communication. On the companion computer, a Micro XRCE-DDS Agent runs alongside the autonomy containers and exposes the PX4 autopilot topics natively in ROS~2 over a UART transport. The PX4 autopilot publishes actuator status, odometry, battery, and IMU streams as ROS~2 topics; command topics (trajectory setpoints, attitude/thrust targets) flow in the reverse direction with bounded latency. This direct DDS integration eliminates MAVLink/MAVROS translation and reduces serialization overhead. QoS is tuned per stream (e.g., IMU: BEST\_EFFORT/KEEP\_LAST, LiDAR: RELIABLE, maps: TRANSIENT\_LOCAL). A simulation bridge in Isaac Sim mirrors the exact interface (topic names and QoS), publishing synthetic LiDAR, camera, and IMU with noise models (Table~\ref{tab:noise_models}), enabling identical launch descriptions in simulation and hardware.
-\subsection{Perception and State Estimation}
-We employ Direct LiDAR-Inertial Odometry (DLIO) as the baseline LIO backend, featuring a coarse-to-fine continuous-time trajectory for motion correction and lightweight computation \cite{chen2022dlio}. Inputs are a deskewed LiDAR point cloud and a 6-axis IMU; strict LiDAR–IMU time synchronization is enforced. When visual texture permits, camera constraints can be fused for map enrichment; otherwise the pipeline falls back to LiDAR-only. The LIO publishes odometry for downstream mapping and planning and supports on-demand map export to PCD for evaluation reproducibility.
-\subsection{Mapping and Exploration}
-Online mapping maintains voxel TSDF and occupancy layers derived from LIO poses and LiDAR depth. Frontier detection operates on the occupancy layer to identify candidate exploration goals. An information-gain objective selects the next-best-view subject to clearance, flight envelope, and battery constraints. The mapping module exposes persistent map topics (TRANSIENT\_LOCAL) for late-joining consumers and supports semantic overlays as an optional future extension.
-\subsection{Planning and Control}
-The autonomy stack comprises modular packages: a global planner for waypoint/frontier selection, a trajectory planner (time-parameterized polynomials or sampling-based) with a time optimizer, and a tracking controller. Plans are generated against the online map (clearance and dynamic updates) and respect thrust and body-rate limits. The controller publishes position/velocity or attitude/thrust setpoints as ROS~2 topics consumed directly by PX4 via the Micro XRCE-DDS Agent, matching the same interface in simulation and on the real platform.
+Across both trajectories, \Agipix{} maintains sub-decimeter tracking error in simulation and low-decimeter error on hardware. In \Agisim{}, RMSE is \SI{0.0637}{\meter} (lemniscate) and \SI{0.0368}{\meter} (up--down spiral); on \Agihw{}, RMSE is \SI{0.1404}{\meter} and \SI{0.1049}{\meter}, respectively. Despite the expected sim-to-real gap from unmodeled disturbances and sensing/actuation effects, tracking remains stable under fast direction changes and altitude variations.
 
-\subsection{Operator Interface}
-Three operator workflows are supported: (i) Safety RC as the primary manual failsafe, (ii) manual flight via UDP-MAVLink from a ground station with a USB joystick, and (iii) ROS~2 velocity teleoperation over DDS using a joystick. During autonomous exploration, the UI visualizes live point clouds/maps, robot state, and mission progress, and exposes pause/resume and goal selection. Human-in-the-loop autonomy allows high-level intents (waypoints/regions) to be converted into trajectories with explainable overlays and smooth handover between autonomy and manual control.
+\begin{figure}[ht!]
+        \centering
+        \includegraphics[width=0.99\linewidth]{images/result/enrich_dep_all.png}
+        \caption{Left: AKW Zwentendorf, Right: \Agipix during the various stages of the trial.}
+        \label{fig:enrich_team}
+\end{figure}
 \begin{figure}[t]
         \centering
-        \includegraphics[width=0.95\linewidth]{images/diag/sim_overview.png}
-        \caption{Simulation-to-reality workflow: Isaac Sim digital twin generates synchronized sensor streams passed through the ROS~2 bridge; identical perception and planning containers run in sim and real flights for zero-shot transfer.}
-        \label{fig:sim_pipeline}
+        \includegraphics[width=0.98\linewidth]{images/result/maps.png}
+        \caption{Representative ENRICH~2025 mapping output.}
+        \label{fig:enrich_mapping}
+\end{figure}
+\begin{figure}[t]
+        \centering
+        \includegraphics[width=0.98\linewidth]{images/plots/Coverage.png}
+        \caption{Percentage of free, occupied, and unmapped volume over the total exploration time for the exploration mode using the closest-frontier method for the given map}
+        \label{fig:result_explore}
+        \vspace*{-6pt}
 \end{figure}
 
-\section{SIMULATION AND DIGITAL TWIN}
-\subsection{Simulation Environment and Workflow}
-Host requirements are Ubuntu 20.04/22.04 with an NVIDIA GPU; Isaac Sim (ROS~2 bridge autoload) provides photorealistic rendering and sensor simulation. Optional Nucleus enables asset sharing. Pegasus can be enabled as an Isaac Sim extension for flight scenario tooling. The typical workflow is: (i) launch Isaac Sim with the ROS~2 bridge, (ii) start the Micro XRCE-DDS Agent and autonomy containers (tmux layout), (iii) run PX4 SITL when applicable with \texttt{UXRCE\_DDS\_SYNCT=false} to align timestamps, and (iv) set \texttt{use\_sim\_time=true} in ROS~2 nodes. Visualization and introspection use Foxglove via \texttt{ws://localhost:8765}.
-\subsection{Isaac Sim Asset Pipeline}
-CAD imports, material assignment, lighting variation, and domain randomization parameters (texture, illumination, clutter). Automated dataset capture (RGB, depth, LiDAR, segmentation) for training and benchmarking.
-\subsection{Dynamics and Sensor Fidelity}
-Rotor dynamics modeled via plugin (placeholder) with thrust/drag coefficients tuned from static stand tests. Sensor noise (Table~\ref{tab:noise_models}) matched to Allan variance (IMU) and manufacturer LiDAR specs. Rolling-shutter and motion distortion emulation for camera \& LiDAR respectively.
-\subsection{Zero-Shot Deployment Strategy}
-Identical container images; configuration parity files (YAML) describing sensor topics and noise seeds; deterministic seeds for reproducibility. Only change: transport URL (sim vs hardware). No code rebuild.
+\subsection{Mapping Results}\label{subsec:results.mapping}
+We report mapping fidelity (IoU) and exploration coverage over time (Fig.~\ref{fig:result_explore}) in a representative indoor environment. The experiment uses a modified Adaptive-LIO \cite{zhao2024adaptive} with Closest Frontier planning \cite{xu2021CFExplore}. We achieved an IoU of 0.96 between the occupancy grid and the ground-truth map over the explored region.
 
-\subsection{Reproducibility and Configuration Parity}
-We enforce sim-to-real parity via: (i) pinned container images (reporting image digests), (ii) shared launch/compose files and QoS YAML across sim and hardware branches, (iii) a deterministic tmux orchestration, and (iv) strict time synchronization (PX4 parameterization and ROS~2 \texttt{use\_sim\_time}). These constraints reduce drift between environments and make experiments repeatable.
+We validated \Agipixs at ENRICH~2025~\cite{europeanroboticsENRICH2025} on a large-scale indoor mapping task (Fig.~\ref{fig:enrich_team}). The \Agihw::UAV runs were complemented by a \Agihw::UGV for extended floor-level coverage. The mission reached 72\% of the planned flight distance before a communication failure; Fig.~\ref{fig:enrich_mapping} shows the resulting map.
 
-\section{EVALUATION}
-\subsection{Metrics}
-\begin{itemize}
-        \item Sim-to-real pose drift alignment (ATE over shared trajectories).
-        \item Map fidelity: IoU of occupied voxels vs ground-truth floorplan (sim) / manual scan (real).
-        \item Exploration efficiency: coverage (%) vs flight time and energy.
-        \item Latency: end-to-end sensor timestamp to control output.
-        \item Reproducibility: container image digest checks and launch determinism (hash and QoS parity).
-\end{itemize}
-\subsection{Experimental Protocol}
-Define scenario classes aligned with indoor exploration: narrow corridor traversal, multi-room exploration, and mixed lighting. Execute each in simulation first, then on the real platform using identical mission scripts and configuration files. Record drift, coverage, latency (with Foxglove timelines), and CPU/GPU utilization.
-\subsection{Preliminary Results (Placeholder)}
-We expect <5\% degradation in ATE from sim to real and >90\% exploration coverage within mission budget in office-scale testbed. Tables and plots to be inserted (Figures~\ref{fig:results_mapping}--\ref{fig:results_exploration}).
 
-\section{DISCUSSION AND LIMITATIONS}
-Discuss trade-offs: footprint vs payload capacity, LiDAR vertical FoV limitations in tight stairwells, photorealistic rendering cost vs real-time rate, and domain randomization coverage. Outline future inclusion of semantic segmentation models, multi-agent coordination, event cameras.
 
-\section{CONCLUSION}
-We introduced Agipix, an open, small-footprint aerial platform unifying photorealistic simulation and real deployment through containerized parity. By releasing hardware designs, digital twin assets, and software stack we aim to lower the entry barrier and accelerate reproducible research in indoor aerial exploration and mapping. Future work will extend semantic reasoning, adaptive exploration policies, and collaborative multi-robot deployment.
+\begin{figure}[!ht]
+    % \centering
+    % \includegraphics[
+    % trim={3cm 5cm 3cm 3cm}, clip,
+    % width=\linewidth]{images/motion_trails/drone_fixed.png}
+    \centering
+    \includegraphics[
+    trim={0cm 0.3cm 0cm -0.4cm}, clip,
+    width=1.0\linewidth]{images/plots/faint_trajectories.png}
+    
+    \caption{ Drone trajectory relative to the mapping trajectory when controlled by FAINT \cite{suomela2025synthetic}, a learning-based visual navigation method. The drone successfully reached the goal on the left trajectory, but missed it on the right.}
+    \label{fig:drone_trajectories}
+    \vspace*{-12pt}
+\end{figure}
+
+\subsection{Learning-Based Navigation Results}\label{subsec:results.learning}
+We evaluated a learned visual navigation policy on the \Agipixs drone without retraining. The FAINT model \cite{suomela2025synthetic} was deployed onboard to control forward velocity and yaw rate at fixed altitude. In real-wprld experiments (Fig.~\ref{fig:drone_trajectories}), the policy transferred across embodiment, achieving \SI{1.07}{\meter} RMSE on a successful run and \SI{1.42}{\meter} RMSE on a more challenging route, with \SI{120}{\milli\second} inference latency on the Jetson Orin NX.
+
+These results show \Agipix's ability to run state-of-the-art learning-based methods that require fast visual feature computation, and to serve as a validation platform for learning-based navigation.
+
+\subsection{System Utilisation on the Onboard Compute Unit}
+
+Table \ref{tab:utilization_table} reports the average CPU and GPU utilisation of \Agiautonomy\ on the Jetson Orin NX Super 16 GB. The system uses 41\% of the CPU and 37\% of the GPU, leaving 59\% and 63\% free resources, respectively.
+
+
+Overall, the results indicate substantial computational headroom, supporting real-time operation and future scalability.
+
+\begin{table}[!ht]
+    \centering
+    \footnotesize
+    \def\arraystretch{1.2}
+    \begin{tabularx}{\linewidth}{l|r|r}
+        \toprule
+        \parbox{3.3cm}{\textbf{Software Component}} & \parbox{2cm}{\centering\textbf{CPU Utilisation (\%)}} & \parbox{2cm}{\centering\textbf{GPU Utilisation (\%)}}\\
+        \midrule
+        AdaptiveLIO & 13 & 5 \\
+        Livox Driver & 9 & 2 \\
+        Map Manager & 4 & 20 \\
+        Ego planner & 1 & 10 \\
+        Autonomous flight & 10 & 0 \\
+        Controller & 1 & 0 \\
+        PX4 ROS~2 Interface & 1 & 0 \\
+        uXREC-DDS & 1 & 0 \\
+        \midrule
+        \textbf{Free Resources} & \textbf{59} & \textbf{63} \\
+        \bottomrule
+    \end{tabularx}
+    \caption{Average system utilisation on Jetson Orin NX Super 16 GB by \Agiautonomy.}
+    \label{tab:utilization_table}
+    \vspace*{-12pt}
+\end{table}
+
+
+\subsection{Adaptation of \Agipix}
+\begin{figure}[ht!]
+        \centering
+        \includegraphics[width=0.98\linewidth]{images/agipix_adaptations.png}
+        \caption{\Agipixs supports heterogeneous hardware deployments. \Agihw::UAV and \Agihw::UGV, shown here, were deployed in ENRICH~2025~\cite{enrich2025raicam}.}
+        \label{fig:adaptations}
+        \vspace*{-12pt}
+\end{figure}
+\Agihws hardware design supports interchangeable platform configurations. We provide two variants \Agihw::UAV and \Agihw::UGV as shown in Fig.~\ref{fig:adaptations}, both validated in real-world experiments during ENRICH~2025~\cite{enrich2025raicam}. The architecture shares \Agiautonomys, differing only at the vehicle dynamics and actuation interface, thereby extending the framework beyond a single morphology while maintaining consistent mission and logging workflows.
+
+\section{DISCUSSION}\label{sec:discussion}
+\Agipix is designed around a co-design principle: sensing, compute, and autonomy are specified jointly so that the same pipeline can run in both a photorealistic digital twin (\Agisim) and on the real vehicle. The ENRICH~2025 mapping task highlights the practical value of this approach for inspection scenarios, where rapid iteration, reproducible deployment, and robust state estimation are as important as raw flight agility.
+
+\noindent\textbf{Trade-offs.} The compact airframe and protective shell improve close-proximity operation, but the rigid structure increases the risk of frame damage in the event of a hard collision. The compact integration also limits the size and placement of additional sensor modules.\\
+\noindent\textbf{Limitations.} The current hardware platform supports connectivity over Wi-Fi~6 and LTE, which can be limiting in extreme environments (e.g., subterranean tunnels or nuclear power plants). Swarm and collaborative mapping capabilities are not yet released.\\
+\noindent\textbf{Next steps.} Future work will (i) improve the hardware design by introducing a more compliant impact structure, (ii) expand the digital-twin asset pipeline and sensor-noise models to better match real sites, (iii) improve connectivity by introducing local node-based mesh networking, (iv) introduce cognitive, measurement-induced motion bounds in \Agiuis to improve operator trust and HRI, and (v) add swarm and collaborative mapping capabilities to \Agiautonomy.\\
+
+\section{CONCLUSION}\label{sec:conclusion}
+We presented \Agipixs, an open, compact aerial robotics platform for indoor mapping and inspection that bridges simulation and reality through a hardware-synchronized active sensing platform (\Agihw), a containerized ROS~2 autonomy stack (\Agiautonomy), a photorealistic Isaac Sim digital twin (\Agisim), and an operator-facing interface (\Agiui). The platform combines powerful onboard GPU compute with low-level PX4 control to support reproducible deployment and rapid sim-to-real iteration. We report performance focusing on trajectory tracking accuracy, mapping fidelity, and inspection coverage, and we report field validation on the ENRICH~2025 mapping task. By open sourcing all hardware, software, and documentation, we aim to lower financial and engineering barriers and accelerate reproducible research in indoor aerial robotics.
 
 \section*{ACKNOWLEDGMENT}
-We acknowledge RAICAM, MSCA HORIZON EU funding. We thank contributors to the open-source ecosystem leveraged by Agipix.
-
-% ---------------------- PLACEHOLDER TABLES & FIGURES ----------------------
-\begin{table}[t]
-        \centering
-        \caption{Placeholder: Platform comparison summary (to be populated).}
-        \label{tab:comparison_placeholder}
-        \begin{tabular}{lccc}
-                \hline
-                Platform & Footprint & LiDAR & Containerized \\
-                \hline
-                Agipix & 438\(\times\)372 & Yes & Yes \\
-                (Others) & -- & -- & -- \\
-                \hline
-        \end{tabular}
-\end{table}
-
-\begin{table}[t]
-        \centering
-        \caption{Placeholder: Sensor noise \& timing models used in sim.}
-        \label{tab:noise_models}
-        \begin{tabular}{lcc}
-                \hline
-                Sensor & Noise Param & Rate \\
-                \hline
-                IMU gyro & $\sigma_g$ (placeholder) & 200 Hz \\
-                IMU accel & $\sigma_a$ (placeholder) & 200 Hz \\
-                LiDAR & Range std (pl.) & 10 Hz \\
-                Camera & Read noise (pl.) & 30 Hz \\
-                \hline
-        \end{tabular}
-\end{table}
-
-\begin{figure}[t]
-        \centering
-        \includegraphics[width=0.9\linewidth]{images/diag/ui_overview.png}
-        \caption{Operator-facing UI overview used during teleoperation and exploration.}
-        \label{fig:system_schematic}
-\end{figure}
-
-% Additional result figures placeholders
-\begin{figure}[t]
-        \centering
-        % Placeholder mapping results
-        \framebox{\parbox{0.9\linewidth}{Mapping results placeholder (occupancy vs ground truth).}}
-        \caption{Placeholder: Mapping fidelity results.}
-        \label{fig:results_mapping}
-\end{figure}
-
-\begin{figure}[t]
-        \centering
-        % Placeholder exploration results
-        \framebox{\parbox{0.9\linewidth}{Exploration coverage vs time placeholder plot.}}
-        \caption{Placeholder: Exploration efficiency.}
-        \label{fig:results_exploration}
-\end{figure}
-
-% -------------------------------------------------------------------------
-
-\addtolength{\textheight}{-12cm}
-
-
-
-% \begin{thebibliography}{99}
-
-% \bibitem{c1} G. O. Young, ÒSynthetic structure of industrial plastics (Book style with paper title and editor),Ó 	in Plastics, 2nd ed. vol. 3, J. Peters, Ed.  New York: McGraw-Hill, 1964, pp. 15Ð64.
-% \bibitem{c2} W.-K. Chen, Linear Networks and Systems (Book style).	Belmont, CA: Wadsworth, 1993, pp. 123Ð135.
-% \bibitem{c3} H. Poor, An Introduction to Signal Detection and Estimation.   New York: Springer-Verlag, 1985, ch. 4.
-% \bibitem{c4} B. Smith, ÒAn approach to graphs of linear forms (Unpublished work style),Ó unpublished.
-% \bibitem{c5} E. H. Miller, ÒA note on reflector arrays (Periodical styleÑAccepted for publication),Ó IEEE Trans. Antennas Propagat., to be publised.
-% \bibitem{c6} J. Wang, ÒFundamentals of erbium-doped fiber amplifiers arrays (Periodical styleÑSubmitted for publication),Ó IEEE J. Quantum Electron., submitted for publication.
-% \bibitem{c7} C. J. Kaufman, Rocky Mountain Research Lab., Boulder, CO, private communication, May 1995.
-% \bibitem{c8} Y. Yorozu, M. Hirano, K. Oka, and Y. Tagawa, ÒElectron spectroscopy studies on magneto-optical media and plastic substrate interfaces(Translation Journals style),Ó IEEE Transl. J. Magn.Jpn., vol. 2, Aug. 1987, pp. 740Ð741 [Dig. 9th Annu. Conf. Magnetics Japan, 1982, p. 301].
-% \bibitem{c9} M. Young, The Techincal Writers Handbook.  Mill Valley, CA: University Science, 1989.
-% \bibitem{c10} J. U. Duncombe, ÒInfrared navigationÑPart I: An assessment of feasibility (Periodical style),Ó IEEE Trans. Electron Devices, vol. ED-11, pp. 34Ð39, Jan. 1959.
-% \bibitem{c11} S. Chen, B. Mulgrew, and P. M. Grant, ÒA clustering technique for digital communications channel equalization using radial basis function networks,Ó IEEE Trans. Neural Networks, vol. 4, pp. 570Ð578, July 1993.
-% \bibitem{c12} R. W. Lucky, ÒAutomatic equalization for digital communication,Ó Bell Syst. Tech. J., vol. 44, no. 4, pp. 547Ð588, Apr. 1965.
-% \bibitem{c13} S. P. Bingulac, ÒOn the compatibility of adaptive controllers (Published Conference Proceedings style),Ó in Proc. 4th Annu. Allerton Conf. Circuits and Systems Theory, New York, 1994, pp. 8Ð16.
-% \bibitem{c14} G. R. Faulhaber, ÒDesign of service systems with priority reservation,Ó in Conf. Rec. 1995 IEEE Int. Conf. Communications, pp. 3Ð8.
-% \bibitem{c15} W. D. Doyle, ÒMagnetization reversal in films with biaxial anisotropy,Ó in 1987 Proc. INTERMAG Conf., pp. 2.2-1Ð2.2-6.
-% \bibitem{c16} G. W. Juette and L. E. Zeffanella, ÒRadio noise currents n short sections on bundle conductors (Presented Conference Paper style),Ó presented at the IEEE Summer power Meeting, Dallas, TX, June 22Ð27, 1990, Paper 90 SM 690-0 PWRS.
-% \bibitem{c17} J. G. Kreifeldt, ÒAn analysis of surface-detected EMG as an amplitude-modulated noise,Ó presented at the 1989 Int. Conf. Medicine and Biological Engineering, Chicago, IL.
-% \bibitem{c18} J. Williams, ÒNarrow-band analyzer (Thesis or Dissertation style),Ó Ph.D. dissertation, Dept. Elect. Eng., Harvard Univ., Cambridge, MA, 1993. 
-% \bibitem{c19} N. Kawasaki, ÒParametric study of thermal and chemical nonequilibrium nozzle flow,Ó M.S. thesis, Dept. Electron. Eng., Osaka Univ., Osaka, Japan, 1993.
-% \bibitem{c20} J. P. Wilkinson, ÒNonlinear resonant circuit devices (Patent style),Ó U.S. Patent 3 624 12, July 16, 1990. 
-
-
-
-
-
-
-% \end{thebibliography}
-
+We acknowledge RAICAM, MSCA HORIZON EU funding. We thank contributors to the open-source ecosystem leveraged by \Agipix.
 
 \bibliographystyle{ieeetr}
 \bibliography{ref}

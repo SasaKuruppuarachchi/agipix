@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+
+    <!-- ========================================================= -->
+    <!--   DEFAULT FAST DDS PROFILE                                -->
+    <!-- ========================================================= -->
+    <participant_profile name="default_participant_profile" is_default_profile="true">
+        <rtps>
+            <!-- Domain ID -->
+            <domainId>0</domainId>
+
+            <!-- Use SHM for local communication -->
+            <shm>
+                <enable>true</enable>
+                <logLevel>info</logLevel>
+            </shm>
+
+            <!-- Discovery settings -->
+            <builtin>
+                <discovery_config>
+                    <!-- Lower announcements for low bandwidth -->
+                    <leaseDuration>20</leaseDuration>
+                    <leaseDuration_announcement_period>5</leaseDuration_announcement_period>
+                </discovery_config>
+
+                <!-- Avoid huge multicast storms -->
+                <ignoreParticipantFlags>NO_FILTER</ignoreParticipantFlags>
+            </builtin>
+
+            <!-- Avoid excessive memory usage -->
+            <participant_id>-1</participant_id>
+
+            <!-- Transport settings -->
+            <useBuiltinTransports>false</useBuiltinTransports>
+
+            <!-- Enable only UDPv4 for safety -->
+            <userTransports>
+                <transport_id>udp_transport</transport_id>
+            </userTransports>
+        </rtps>
+    </participant_profile>
+
+    <!-- ========================================================= -->
+    <!--           UDP Transport Profile                           -->
+    <!-- ========================================================= -->
+    <transport_descriptors>
+        <transport_descriptor>
+            <transport_id>udp_transport</transport_id>
+            <type>UDPv4</type>
+
+            <!-- Buffers (match sysctl tuning) -->
+            <sendBufferSize>2147483647</sendBufferSize>
+            <receiveBufferSize>2147483647</receiveBufferSize>
+
+            <!-- Optional: reduce fragmentation -->
+            <non_blocking_send>true</non_blocking_send>
+
+        </transport_descriptor>
+    </transport_descriptors>
+
+    <!-- ========================================================= -->
+    <!--     DEFAULT WRITER / READER PROFILES                      -->
+    <!-- ========================================================= -->
+    <publisher profile_name="default_publisher_profile" is_default_profile="true">
+        <qos>
+            <reliability>
+                <kind>RELIABLE</kind>
+            </reliability>
+            <durability>
+                <kind>VOLATILE</kind>
+            </durability>
+            <historyQos>
+                <kind>KEEP_LAST</kind>
+                <depth>10</depth>
+            </historyQos>
+        </qos>
+    </publisher>
+
+    <subscriber profile_name="default_subscriber_profile" is_default_profile="true">
+        <qos>
+            <reliability>
+                <kind>RELIABLE</kind>
+            </reliability>
+            <durability>
+                <kind>VOLATILE</kind>
+            </durability>
+            <historyQos>
+                <kind>KEEP_LAST</kind>
+                <depth>10</depth>
+            </historyQos>
+        </qos>
+    </subscriber>
+
+</profiles>

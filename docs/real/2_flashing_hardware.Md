@@ -6,7 +6,29 @@ nav_title: Flashing Hardware
 
 # Flashing the NVIDIA Jetson (JetPack 6.x)
 
-> Note: These steps target Jetson Orin NX/Nano on Connect Tech carriers (Hadron, etc.), Jetson Linux R36.3. Adjust versions as needed.
+Refer to the [Datasheets](../../assets/datasheets/CTIM-00088.pdf) and install the Jetson Orin NX module, wiring and power to the Hadron carrier. 
+Refer the [Official Page](https://connecttech.com/product/hadron-carrier-for-nvidia-jetson-orin-nx/) For the download of the latest official BSP (Board Support Package) and release notes which contains the firmware install instructions.
+
+> Note: These steps target Jetson Orin NX/Nano on Connect Tech carriers (Hadron, etc.), Jetson Linux R36.3. Adjust versions as needed. 
+**Tested for CT Hadron NGX027 with the Jetpack 6.2.1 - L4T r36.4.4 (BSP Version: ORIN-NX-NANO-36.4.4 V002)**
+
+Prerequisities:
+- x86/x64 based host machine running Ubuntu 20.04 or 22.04
+- JetPack 6.2.1 / L4T 36.4.4 installed (Intstructions follows)
+- Orin™ NX or Orin™ NX module
+- Connect Tech Orin™ NX/Orin™ NX Carrier
+- USB A - USB A Cable for flashing
+
+## Install Wifi and SSD
+
+Install the [wifi](https://www.intel.com/content/www/us/en/products/sku/230078/intel-wifi-7-be200/specifications.html) and [ssd](https://www.verkkokauppa.com/fi/product/906691/WD-Black-SN770M-1-Tt-M-2-NVMe-SSD-kovalevy) cards to the PCI mini E and M slots respectively.
+
+## Powering up the carrier
+The 6S Lipo can be used to power up the board directly. Install a 60V capacitor between the terminals of the main power.
+Alternatively a AC DC adapter with min 40 W (10-60V) can be used.
+ Get the board ready to be powered up for he flashing of firmware.
+
+![Hadron Carrier](../../assets/images/real/wiring/NGX027.png)
 
 ## What you’ll do
 - Prepare a host machine and download JetPack BSP + sample rootfs
@@ -14,30 +36,25 @@ nav_title: Flashing Hardware
 - Put the Jetson in recovery mode and flash (auto or manual)
 - Perform first boot steps and basic post-setup
 
-## Prerequisites
-- Host: Ubuntu 20.04 (x86_64)
-- USB cable for recovery/flash
-- NVMe M.2 SSD installed on the carrier
-
 ---
 
 ## 1) Get JetPack (Driver Package + RootFS)
 
 1) Create a working directory, referred to as BSP_ROOT below.
 
-2) Open the Jetson Linux R36.3 downloads and notes:
-   - Driver page: https://developer.nvidia.com/embedded/jetson-linux-r363
+2) Open the Jetson Linux R36.4.4 downloads and notes:
+   - Driver page: https://developer.nvidia.com/embedded/jetson-linux-r3644
 
-3) Download both for Orin (t234):
-   - Driver Package (BSP): Jetson_Linux_R36.3.0_aarch64.tbz2
-   - Sample Root Filesystem: Tegra_Linux_Sample-Root-Filesystem_R36.3.0_aarch64.tbz2
+3) Download both for Orin (LT4):
+   - Driver Package (BSP): Jetson_Linux_R36.4.4_aarch64.tbz2
+   - Sample Root Filesystem: Tegra_Linux_Sample-Root-Filesystem_R36.4.4_aarch64.tbz2
 
 4) Place both files under BSP_ROOT, then extract them:
 
 ```bash
 cd <BSP_ROOT>
-sudo tar -jxf Jetson_Linux_R36.3.0_aarch64.tbz2
-sudo tar -C Linux_for_Tegra/rootfs/ -xjf Tegra_Linux_Sample-Root-Filesystem_R36.3.0_aarch64.tbz2
+sudo tar -jxf Jetson_Linux_R36.4.4_aarch64.tbz2
+sudo tar -C Linux_for_Tegra/rootfs/ -xjf Tegra_Linux_Sample-Root-Filesystem_R36.4.4_aarch64.tbz2
 ```
 
 After extraction, you should have `<BSP_ROOT>/Linux_for_Tegra` populated.
@@ -52,17 +69,21 @@ If you used NVIDIA SDK Manager, BSP_ROOT is typically:
 
 If you manually downloaded from the Embedded Download Center, use the folder you created as BSP_ROOT.
 
+Download the CTI BSP from [CTI BSP Downloads](https://connecttech.com/product/super-hadron-dm-carrier-for-nvidia-jetson-orin-nx/).
+
+For the firmware with real time kernel RT_PREEMPT download the `JetPack 6.2.1 – L4T r36.4.4 (RealTime OS)` package instead of the base package.
+
 1) Copy the CTI package to Linux_for_Tegra:
 
 ```bash
-cp CTI-L4T-ORIN-NX-NANO-36.3.0-V###.tgz <BSP_ROOT>/Linux_for_Tegra
+cp CTI-L4T-ORIN-NX-NANO-RT-36.4.4-V005.tgz BSP_ROOT/Linux_for_Tegra
 ```
 
 2) Extract it and run the installer:
 
 ```bash
 cd <BSP_ROOT>/Linux_for_Tegra
-sudo tar -xzf CTI-L4T-ORIN-NX-NANO-36.3.0-V###.tgz
+sudo tar -xzf CTI-L4T-ORIN-NX-NANO-RT-36.4.4-V005.tgz
 cd CTI-L4T
 sudo ./install.sh
 cd .. # back to Linux_for_Tegra
@@ -76,9 +97,14 @@ cd .. # back to Linux_for_Tegra
 
 1) Connect the carrier to your host via USB per the carrier manual.
 2) Ensure an NVMe M.2 SSD is installed.
-3) Follow the carrier instructions to enter recovery (button/strap sequence).
+3) Follow the carrier instructions to enter recovery (button/strap sequence). 
+> For NGX027 to put the Jetson module into Force Recovery mode, install a jumper and then power on the platform. After 10 seconds remove the jumper shunt and the device will now be in Force Recovery mode.
 
-> Tip: You can verify via `lsusb` for an NVIDIA device in recovery.
+
+Tip: You can verify via `lsusb` for an NVIDIA device in recovery.
+```shell
+Bus 001 Device 024: ID 0955:7323 NVIDIA Corp. APX
+```
 
 ---
 
@@ -94,6 +120,10 @@ sudo ./cti-flash.sh
 ```
 Follow the menu to select your module and board configuration. Flashing will begin.
 
+> `Vision Components IMX296` [camera option](https://www.mouser.fi/ProductDetail/Vision-Components/MIPI-IMX296?qs=Znm5pLBrcALfpja0UWCKMw%3D%3D&srsltid=AfmBOooejJiY736adzckLOY5EduNJY7mhwZwMJE9wkoOaHObOD_PtxvC) for Orin NX is recommended for direct connection to the board.
+[This](https://connecttech.com/supported-cameras/) Lists all the commpatible cameras.
+[This](https://wdl.ai/connect-tech-allied-vision-mipi-csi-2) shows how to connect Allied vision cameras using adapter.
+
 ### Option B: Manual NVMe flash
 
 Do not include the `.conf` extension in `<config>`.
@@ -105,42 +135,162 @@ sudo ./cti-nvme-flash.sh cti/<module>/<boardname>/<config>
 ```
 Examples:
 ```bash
-sudo ./cti-nvme-flash.sh cti/orin-nx/boson/base
-sudo ./cti-nvme-flash.sh cti/orin-nano/boson/base
+./cti-nvme-flash.sh cti/orin-nx/boson/base
+./cti-nvme-flash.sh cti/orin-nano/boson/base
+SUPER_MODE=1 ./cti-nvme-flash.sh cti/orin-nx/hadron/base
 ```
 
 When flashing completes, the device will reboot.
-
+```bash
+Flash is successful
+Reboot device
+Cleaning up...
+Log is saved to
+```
 ---
 
+### 5.1) Troubleshoot Flashing
+#### ISSUE1 : A USB timeout error may occur during flashing. The following error indicates that your flash host’s USB port is not enabled:
+
+```bash
+[ 0.1172 ] Sending bct_br
+[ 0.1603 ] ERROR: might be timeout in USB write.
+Error: Return value
+```
+##### 1. First try changing the USB port:
+
+- Move to a different USB port, if available.
+
+- **Remove any USB-C docks if connected**
+
+- Power cycle the board and retry flashing.
+
+##### 2. If that doesn’t work, try disabling autosuspend:
+
+To disable autosuspend on your host’s USB ports, run the following command.
+```bash
+sudo bash -c 'echo -1 > /sys/module/usbcore/parameters/autosuspend'
+```
+Power cycle the board and retry flashing.
+
+#### ISSUE2 : Cnnot mount the NFS server
+
+```bash
+12:52:45.297 - Error: Flash failure. 
+12:52:45.300 - Error: Either the device cannot mount the NFS server on the host or a flash command has failed. Check your network setting (VPN, firewall,...) to make sure the device can mount NFS server. Debug log saved to /tmp/tmp.2HZma7rFSi. You can access the target's terminal through "sshpass -p root ssh root@fc00:1:1:0::2"
+```
+
+##### 1. Disable VPN completely
+
+CTI initrd flashing fails 100% if a VPN is on.
+
+##### 2. Restart NFS and RPC services
+```bash
+sudo systemctl stop rpcbind rpcbind.socket nfs-kernel-server
+sudo systemctl start rpcbind rpcbind.socket nfs-kernel-server
+```
+
+Check status:
+
+```bash
+systemctl status nfs-kernel-server
+```
+##### 3. Ensure firewall isn't blocking NFS (especially IPv6)
+
+Temporarily disable ufw (if running):
+
+```bash
+sudo ufw disable
+```
 ## 5) First boot and basic setup
 
 ### Connect via serial console (recommended)
-- Guide: https://jetsonhacks.com/2019/04/19/jetson-nano-serial-console/
+- Connect to the **Serial debug port** of the Carrier using a TTL to USB adapter. (ex: FTDI)
+- Guide: https://jetsonhacks.com/2019/04/19/jetson-nano-serial-console/ 
+```bash
+sudo minicom -D /dev/ttyUSB0 -b 115200
+```
 - Complete the initial setup prompts. You can skip network here and do it below.
+```bash
+System Configuration
+           ┌────┤ License For Customer Use of NVIDIA Software ├─────┐
+           │                                                        │
+           │ Welcome to Jetson Initial Configuration                │
+           │                                                        │
+           │                         <Ok>                           │
+           │                                                        │
+           └────────────────────────────────────────────────────────┘
+```
 
 ### Join Wi‑Fi via nmcli
 ```bash
-nmcli dev wifi rescan
-nmcli d wifi connect <SSID> password <PASSWORD>
+sudo nmcli dev wifi rescan
+sudo nmcli dev wifi connect <SSID> password <PASSWORD>
 ```
 
 ### SSH in
 ```bash
 ssh <user>@<device-ip>
 ```
-### Depth AI setup for OAK-D cameras (Optional)
-
-```bash
-curl -fL https://docs.luxonis.com/install_dependencies.sh | bash
-```
 
 ---
 
 ## 6) Useful post-setup
 
+### Setup Git
+```bash
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+```
+
+### Increase Swap 
+You may need to increase swap depending on he RAM of your Jetson module
+Follow [This Guide](https://www.forecr.io/blogs/programming/how-to-increase-swap-space-on-jetson-modules?srsltid=AfmBOoqQdjadGieWKvqNFyLf5XFb0XoVjQ_sH9gjZORudTmtEU1wo2yX) to upgrade swap memeory.
+
+```bash
+free -h # Check current memory usage
+df -h # Check current disk usage
+
+# start from here to increase swap size to 16G
+sudo fallocate -l 16G /swapfile # Allocate 16G of space for swap file
+ls -lh /swapfile # Verify the swap file is created
+sudo chmod 600 /swapfile # Set the correct permissions for the swap file
+sudo mkswap /swapfile 
+sudo swapon /swapfile
+free -h # Check current memory usage   
+
+# to make the change persistent across reboots, add the swap file to /etc/fstab:
+sudo cp /etc/fstab /etc/fstab.bak
+echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+```
+
+### Install Jetpack extras and Jtop
+```bash
+sudo apt install nvidia-jetpack
+
+# Setup jtop
+sudo apt update && sudo apt upgrade -y
+sudo apt install python3-pip -y && sudo apt install curl -y
+sudo pip3 install -U jetson-stats
+mkdir hacks && cd hacks
+git clone https://github.com/jetsonhacks/jetson-jtop-patch.git
+cd jetson-jtop-patch
+chmod +x apply_jtop_fix.sh
+./apply_jtop_fix.sh
+```
+Once pip installs the jetson-stats package, you will need to logout/login or reboot the Jetson.
+
+After rebooting, to run jtop open a Terminal and execute: `jtop`
+
 ### NoMachine (remote desktop)
-- https://kb.nomachine.com/AR02R01074
+To setup remote desktop to the headless system for debugging follow [this guide](https://kb.nomachine.com/AR02R01074)
+
+```bash
+wget https://web9001.nomachine.com/download/9.4/Arm/nomachine_9.4.14_1_arm64.deb
+sudo dpkg -i nomachine_9.4.14_1_arm64.deb 
+sudo systemctl disable gdm3 --now
+sudo /usr/NX/bin/nxserver --restart
+```
 
 ### Change power mode
 ```bash
@@ -148,21 +298,97 @@ sudo nvpmodel -m <mode-number>
 ```
 - Reference: https://forums.developer.nvidia.com/t/power-mode-in-terminal/287224
 
-### Install Docker + NVIDIA Container Toolkit + Git LFS
-- Docker: https://docs.docker.com/engine/install/ubuntu/
-- NVIDIA Container Toolkit: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
-- Git LFS: https://git-lfs.com/
-
-### Build torchvision from source (matches NVIDIA PyTorch)
+### Install VSCode
 ```bash
-export FORCE_CUDA=1
-git clone -b v0.17.2 https://github.com/pytorch/vision.git
-cd vision
-sudo -E python setup.py develop  # use 'install' if you don't need editable mode
+cd hacks
+git clone https://github.com/JetsonHacksNano/installVSCode.git
+cd installVSCode
+./installVSCodeWithPython.sh
+```
+
+### Cuda and cudnn
+If cuda packages are not installed. ```ls /usr/local | grep cuda``` returns nothing
+```bash
+sudo apt install cuda-toolkit-12-6
+```
+
+if cudnn not installed. ```dpkg -l | grep cudnn``` returns nothing, [Get Cudnn](https://developer.nvidia.com/cudnn-downloads?target_os=Linux&target_arch=aarch64-jetson&Compilation=Native&Distribution=Ubuntu&target_version=22.04&target_type=deb_local)
+```bash
+wget https://developer.download.nvidia.com/compute/cudnn/9.16.0/local_installers/cudnn-local-tegra-repo-ubuntu2204-9.16.0_1.0-1_arm64.deb
+sudo dpkg -i cudnn-local-tegra-repo-ubuntu2204-9.16.0_1.0-1_arm64.deb
+sudo cp /var/cudnn-local-tegra-repo-ubuntu2204-9.16.0/cudnn-*-keyring.gpg /usr/share/keyrings/
+sudo apt-get update
+sudo apt-get -y install cudnn9-cuda-12
+```
+
+### Setup ```.bashrc```
+
+
+
+Add following lines to your ```.bashrc``` to link important cuda libraries
+```bash
+export CUDA=12.6
+export PATH=/usr/local/cuda-$CUDA/bin${PATH:+:${PATH}}
+export CUDA_PATH=/usr/local/cuda-$CUDA
+export CUDA_HOME=/usr/local/cuda-$CUDA
+export LIBRARY_PATH=$CUDA_HOME/lib64:$LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/cuda-$CUDA/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+export NVCC=/usr/local/cuda-$CUDA/bin/nvcc
+export CFLAGS="-I$CUDA_HOME/include $CFLAGS"
+export LD_LIBRARY_PATH=/usr/local/cuda-$CUDA/targets/aarch64-linux/lib:$LD_LIBRARY_PATH
+export CPATH=/usr/local/cuda-$CUDA/targets/aarch64-linux/include:$CPATH
+```
+Source your ```.bshrc```
+
+#### Verify Cuda and CUDNN
+```bash
+echo '#include <cuda_runtime.h>
+#include <cudnn.h>
+#include <iostream>
+int main() {
+    int cudaVersion;
+    cudaRuntimeGetVersion(&cudaVersion);
+    std::cout << "CUDA runtime version: " << cudaVersion/1000 << "." << (cudaVersion%1000)/10 << std::endl;
+    std::cout << "cuDNN version: " << CUDNN_MAJOR << "." << CUDNN_MINOR << "." << CUDNN_PATCHLEVEL << std::endl;
+    return 0;
+}' > verify_cuda_cudnn.cpp && \
+g++ verify_cuda_cudnn.cpp \
+    -I/usr/local/cuda-12.6/targets/aarch64-linux/include \
+    -L/usr/local/cuda-12.6/targets/aarch64-linux/lib \
+    -lcudart -lcudnn -o verify_cuda_cudnn && \
+./verify_cuda_cudnn
+```
+
+### Fix Snap apps
+If Snap apps like Chromium is not working, [ref](https://jetsonhacks.com/2025/07/12/why-chromium-suddenly-broke-on-jetson-orin-and-how-to-bring-it-back/)
+```bash
+snap download snapd --revision=24724
+sudo snap ack snapd_24724.assert
+sudo snap install snapd_24724.snap
+sudo snap refresh --hold snapd
 ```
 
 ### Mount a USB drive
 - https://linuxconfig.org/howto-mount-usb-drive-in-linux
+
+### Wezterm and Superfile
+Install wezterm
+```bash
+curl -fsSL https://apt.fury.io/wez/gpg.key | sudo gpg --yes --dearmor -o /usr/share/keyrings/wezterm-fury.gpg
+echo 'deb [signed-by=/usr/share/keyrings/wezterm-fury.gpg] https://apt.fury.io/wez/ * *' | sudo tee /etc/apt/sources.list.d/wezterm.list
+sudo chmod 644 /usr/share/keyrings/wezterm-fury.gpg
+
+sudo apt update
+
+sudo apt install wezterm
+
+sudo update-alternatives --config x-terminal-emulator # set to wezterm
+```
+Install Superfile
+```bash
+bash -c "$(curl -sLo- https://superfile.dev/install.sh)"
+```
 
 ---
 

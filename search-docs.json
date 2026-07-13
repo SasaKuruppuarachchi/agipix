@@ -1,0 +1,16 @@
+---
+layout: null
+permalink: /search-docs.json
+---
+[
+{%- assign all_docs = site.pages | concat: site.docs -%}
+{%- assign docs_pages = all_docs | where_exp: 'd', 'd.url contains "/docs/"' -%}
+{%- for d in docs_pages -%}
+{
+  "title": {{ d.title | default: d.nav_title | default: d.url | jsonify }},
+  "url": {{ d.url | relative_url | jsonify }},
+  "scope": {{ d.url | split: '/' | slice: 2, 1 | first | jsonify }},
+  "content": {{ d.content | markdownify | strip_html | strip_newlines | replace: '  ', ' ' | jsonify }}
+}{% unless forloop.last %},{% endunless %}
+{%- endfor -%}
+]
