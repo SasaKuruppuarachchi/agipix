@@ -12,6 +12,7 @@ Use this page to jump into the full real-platform bring-up flow, from mechanical
 
 ## 1) Hardware Assembly
 
+- Refer to the [Interactive 3D CAD Model on Autodesk A360](https://a360.co/4gY1h8M) for an interactive 3d view of the assembly.
 - Cut CF plates from the provided DXF patterns and post‑process as needed.
 - Print TPU parts from the STL set (recommended: 0.2 mm layers, 40% infill; higher for bushings).
 - Assemble frame, power, ESCs, motors, radio/telemetry, and flight controller.

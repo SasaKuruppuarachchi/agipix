@@ -60,7 +60,7 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 
 ## CAD and Simulation Assets
 
-- Mechanical CAD and fabrication files live in `cad/`.
+- Mechanical CAD and fabrication files live in `cad/`. An interactive 3D model is also viewable online via [Autodesk A360](https://a360.co/4gY1h8M).
 - Exported meshes and scene assets are in `model_exports/`.
 
 ## Paper and citation

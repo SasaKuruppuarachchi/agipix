@@ -8,7 +8,8 @@ wip: true
 
 ## Material checklist
 
- [Bill of Materials (BOM)](https://sasakuruppuarachchi.github.io/agipix/bom.html)
+- [Bill of Materials (BOM)](https://sasakuruppuarachchi.github.io/agipix/bom.html)
+- [Interactive 3D CAD Model (Autodesk A360)](https://a360.co/4gY1h8M)
 
 ## Carbon fibre cuts
 
