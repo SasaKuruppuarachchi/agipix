@@ -1,7 +1,7 @@
 ---
 title: Hardware & Communication Optimizations
 layout: doc
-nav_title: Hardware Optimizations
+nav_title: HW Optimizations
 ---
 
 # Jetson & PX4 Hardware & Communication Optimizations
