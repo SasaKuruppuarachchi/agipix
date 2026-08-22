@@ -106,7 +106,12 @@ Available missions:
 
 - [PLACEHOLDER] Takeoff + hover demo video
 - [PLACEHOLDER] Dynamic navigation demo video
-- [PLACEHOLDER] Dynamic exploration demo video
+- Dynamic exploration demo video:
+
+<div class="quick-start-video" style="max-width: 720px; margin: 1rem 0;">
+  <iframe src="https://www.youtube.com/embed/__Awe89ndag" title="Dynamic Exploration Demo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div>
+
 - [PLACEHOLDER] Dynamic inspection demo video
 
 ---
