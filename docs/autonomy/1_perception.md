@@ -4,269 +4,250 @@ layout: doc
 nav_title: Perception
 ---
 # Agipix Autonomy: Perception
-[![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) 
-[![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/22.04/)
-[![Linux platform](https://img.shields.io/badge/platform-linux--arm-brown.svg)](https://releases.ubuntu.com/22.04/)
+<div align="center">
+  <h1><strong>AGIptive-LIOM</strong></h1>
+  <h3><strong>Degradation-Resilient Continuous-Time LiDAR-Inertial Odometry and Mapping</strong></h3>
 
-There are currently preception algorithems validated on the platform
-1. GLIM
-2. DLIO
+  <p>
+    <a href="https://sasakuruppuarachchi.github.io/" target='_blank'><strong>Sasanka Kuruppu Arachchige</strong></a><sup>1,*†</sup>
+    <a href="https://webpages.tuni.fi/vision/public_pages/JoniKamarainen/" target='_blank'>Joni-Kristian Kämäräinen</a><sup>1</sup>&nbsp;&nbsp;&nbsp;
+  </p>
+  <p>
+    <sup>1</sup>Computer Vision Group, Tampere University, Finland<br>
+    <em>(* Principal Developer, † Corresponding Author)</em>
+  </p>
 
-## 1. GLIM: 3D Range-Inertial Localization and Mapping with GPU-Accelerated Scan Matching Factors
+  <p>
+    <a href="https://github.com/SasaKuruppuarachchi/AGIptive-LIOM"><img src="https://img.shields.io/badge/ROS_2-Humble-3498DB?logo=ros" alt="ROS 2 Humble"/></a>
+    <a href="https://github.com/SasaKuruppuarachchi/AGIptive-LIOM"><img src="https://img.shields.io/badge/Ubuntu-22.04%20%7C%2020.04-E95420?logo=ubuntu&logoColor=white" alt="Ubuntu"/></a>
+    <a href="https://github.com/SasaKuruppuarachchi/AGIptive-LIOM"><img src="https://img.shields.io/badge/Hardware-NVIDIA_Jetson_Orin_NX-76B900?logo=nvidia" alt="Jetson Orin NX"/></a>
+    <a href="https://github.com/SasaKuruppuarachchi/AGIptive-LIOM"><img src="https://img.shields.io/badge/LiDAR-Livox_Mid--360-blue" alt="Livox Mid-360"/></a>
+    <a href="https://github.com/SasaKuruppuarachchi/AGIptive-LIOM"><img src="https://img.shields.io/badge/Language-C++17-00599C?logo=c%2B%2B" alt="C++17"/></a>
+  </p>
+</div>
 
-![Perception overview](../../assets/images/diag/perception_glim_overview.png)
+---
+<p align="center">
+  <img src="../../assets/images/result/result_liom.png" width="47.2%">
+  <img src="../../assets/images/result/result_liom_1.png" width="50.8%">
+  <br><em>The mapping result of AGIptive-LIOM at Hervanta rock.</em>
+</p>
 
-GLIM is tested on Ubuntu 22.04 / 24.04 with CUDA 12.2 / 12.5 / 12.6, and NVIDIA Jetson Orin (JetPack 6.1). You can build and install GLIM from source code, or install pre-built binaries from PPA.
+## 📖 Overview
 
-## Install from source
+**AGIptive-LIOM** is an advanced, degradation-resilient Continuous-Time LiDAR-Inertial Odometry and Mapping (LIOM) framework engineered for resource-constrained Unmanned Aerial Vehicles (UAVs) operating in complex, unstructured, and GPS-denied environments (such as dense forest canopies, subterranean caverns, and cluttered industrial facilities).
 
-### Common dependencies
+Conventional aerial LIO systems experience catastrophic divergence in dense foliage due to geometric degeneracy ($\lambda_1 \approx \lambda_2 \approx \lambda_3$), unconstrained ESKF gravity drift during double integration, and place recognition failures when solid-state LiDARs are mounted obliquely (e.g., $45^\circ$ downward pitch). **AGIptive-LIOM** introduces a complete mathematical and architectural solution:
+
+1. **Gravity-Aligned Local Horizontal Transformation ($T_{\text{horiz}}$)**: Restores true $360^\circ$ yaw invariance for 2D polar bird's-eye place recognition descriptors under arbitrary sensor tilt.
+2. **Degeneracy-Aware Kinematic Prior Fallback**: Physical velocity/acceleration envelopes in continuous-time Ceres optimization prevent single-frame solver divergence jumps in unstructured vegetation.
+3. **ESKF Gravity Vector State Invariant**: Anchors the world vertical axis permanently to true physical gravity, eliminating fictitious acceleration integration and vertical drift.
+4. **6-Stage Cascaded Loop Verification Gate & Asynchronous SE(3) Ceres PGO**: High-precision place recognition with submap Point-to-Plane ICP and background 6-DoF graph optimization.
+
+---
+
+## 🏗️ System Architecture
+
+<p align="center">
+  <img src="../../assets/images/result/overview.png" width="95%" alt="AGIptive-LIOM System Architecture"/>
+  <br><em>Figure 1: Complete pipeline architecture of AGIptive-LIOM showing sensor synchronization, frontend continuous-time odometry, and asynchronous backend mapping & pose graph optimization.</em>
+</p>
+
+The system operates across three decoupled, high-performance pipelines:
+- **Data Ingestion & Hardware Time Sync**: Synchronizes Livox Mid-360 LiDAR point clouds and high-rate IMU telemetry over microsecond-accurate hardware clocks.
+- **Frontend Continuous-Time LIO (200 Hz)**: Evaluates point-to-plane residuals along continuous trajectory splines with multi-resolution hash maps (`MultipleResolutionVoxelMap` via `tsl::robin_map`), protected by the kinematic step-limiter guardrail.
+- **Asynchronous Backend Mapping & Loop Closure (Background Worker)**: Extracts gravity-leveled Scan Context descriptors, validates loop closures through 6 cascaded gates, and solves 6-DoF Ceres SE(3) pose graphs without interrupting real-time flight control odometry.
+
+---
+
+## 🔬 Core Innovations & Mathematical Formulations
+
+### 1. Gravity-Aligned Local Horizontal Coordinate Frame ($T_{\text{horiz}}$)
+When a LiDAR is mounted at a $45^\circ$ downward pitch, projecting point clouds into the sensor frame destroys polar descriptor consistency across changing heading angles. AGIptive-LIOM levels descriptors into a gravity-aligned horizontal frame:
+
+1. Extract the current world pose $T_{W} = \begin{bmatrix} R_{W} & \mathbf{t}_{W} \\ \mathbf{0}^T & 1 \end{bmatrix}$ and horizontal yaw angle $\psi = \text{atan2}(R_{W(1,0)}, R_{W(0,0)})$.
+2. Construct the horizontal body frame:
+   $$T_{\text{horiz}} = \begin{bmatrix} \text{RotZ}(\psi) & \mathbf{t}_{W} \\ \mathbf{0}^T & 1 \end{bmatrix}$$
+3. Transform point clouds prior to Scan Context extraction:
+   $$P_{\text{horiz}} = T_{\text{horiz}}^{-1} \cdot P_{\text{world}} = \text{RotZ}(\psi)^T (P_{\text{world}} - \mathbf{t}_{W})$$
+4. Elevation $Z_{\text{horiz}}$ is strictly parallel to true gravity, restoring exact rotation invariance across $360^\circ$ loops regardless of sensor tilt.
+
+```
+       Oblique Body Frame (45° Tilt)           Gravity-Aligned Frame (T_horiz)
+             ▲ z_lidar                                    ▲ z_world (Gravity)
+             │   /                                        │
+             │  /                                         │   ▲ x_horiz (Forward)
+             │ / 45°                                      │  /
+             └──────► x_lidar                             └─/────► y_horiz (Left)
+     [Distorted Polar Slices]                     [True Level BEV Polar Slices]
+```
+
+### 2. Degeneracy-Aware Kinematic Prior Fallback
+In unstructured foliage and open skies, point normal distributions lack geometric planar structure ($\lambda_1 \approx \lambda_2 \approx \lambda_3$), causing the Ceres CT-ICP Hessian matrix to become ill-conditioned. AGIptive-LIOM enforces a physical motion guardrail:
+- If the iterative optimization step violates the physical envelope:
+  $$\|\mathbf{t}_{\text{opt}} - \mathbf{t}_{\text{prior}}\| > 1.2\text{ m} \quad (\approx 12\text{ m/s}) \quad \text{or} \quad \Delta \theta > 25^\circ$$
+- The solver step is rejected, and the system automatically falls back to the continuous IMU state propagation prior, guaranteeing zero catastrophic divergence jumps.
+
+### 3. ESKF Gravity Vector State Invariant
+Updating the 3D gravity error state via unconstrained LiDAR residuals in vegetation introduces fictitious tilt, triggering quadratic vertical velocity divergence. AGIptive-LIOM fixes the world vertical axis to physical gravity:
+- Sets `options_.update_gravity_ = false` and initial gravity covariance $\Sigma_g = \mathbf{0}_{3 \times 3}$.
+- Keeps $\mathbf{g}_{\text{world}} = [0, 0, -9.805]^T\text{ m/s}^2$ locked, eliminating altitude runaway during long flights.
+
+### 4. 6-Stage Cascaded Loop Verification Gate
+To eliminate false loop closures in repetitive tree trunks and canopy foliage:
+- **Gate 1 (Proximity)**: KD-Tree search radius $\le 15.0\text{ m}$, keyframe interval $\ge 25$ frames.
+- **Gate 2 (Descriptor Distance)**: Scan Context cosine distance $D_{SC} \le 0.28$.
+- **Gate 3 (Submap ICP)**: 9-keyframe target submap Point-to-Plane ICP alignment ($RMS \le 0.30\text{ m}$).
+- **Gate 4 (Inlier Ratio)**: Minimum $60\%$ inlier overlap ratio with nearest neighbor threshold $\le 0.25\text{ m}$.
+- **Gate 5 (Kinematic Deviation)**: Odometry consistency bound ($\|\Delta \mathbf{t}\| \le 0.8\text{ m}, |\Delta z| \le 0.40\text{ m}, |\Delta \text{yaw}| \le 20^\circ$) preventing graph distortion.
+- **Gate 6 (Asynchronous Ceres SE3 PGO)**: Solves 6-DoF pose graph on a low-priority background thread with locked roll/pitch variance ($10^{-4}$), ensuring zero latency impact on 200 Hz odometry.
+
+---
+
+## 📊 Experimental Verification & Benchmarks
+
+### 1. Extra-Long Outdoor Forest Canopy Loop Benchmark
+Evaluated on real-world UAV flight log `agi_log_20260821_172847_forrest_test_1` (NVIDIA Jetson Orin NX, Livox Mid-360 @ $45^\circ$, 298.88 s duration, 2,948 LiDAR frames, ~300 m loop):
+
+| Metric | Baseline Open-Loop CT-ICP | Initial Fix (Angle Unit Bug) | **AGIptive-LIOM (Ours)** |
+|---|---|---|---|
+| **Loop Closures Confirmed** | 0 (Disabled) | Halted at Frame 268 (Z drift) | **9 Confirmed Closures** (Frames 255, 264, 269, 274, 279, 284, 307, 312, 319) |
+| **Optimized Trajectory Output** | N/A | Frozen at ~80% trajectory | **Continuous streaming to final touchdown** |
+| **Solver Step Rejections** | N/A | Thousands ($>4.5^\circ/\text{s}$) | **Only 3 genuine physical boundary rejections** |
+| **End-to-End Drift** | 10,834.70 m (Diverged) | ~5.4 m upward Z drift | **< 0.05 m residual drift after PGO** |
+| **Average Frontend Compute** | ~22.0 ms / frame | ~18.9 ms / frame | **15.49 ms / frame** (>60 Hz real-time capacity) |
+
+### 2. Standard Benchmark Datasets (End-to-End Error in meters)
+
+| Dataset | DLIO | LIO-SAM | Point-LIO | FAST-LIO2 | IG-LIO | **AGIptive-LIOM** |
+|---|---|---|---|---|---|---|
+| **industrial1** | 4.485 | 13.935 | N/A | 11.778 | 21.815 | **2.482** |
+| **industrial2** | 0.185 | 2.467 | 1.778 | 9.547 | 1.737 | **0.107** |
+| **parking1** | 1.810 | 2.270 | 3.164 | 5.530 | 1.770 | **0.492** |
+
+---
+
+## 🕹️ Quick Start & Installation
+
+### 1. Prerequisites & Dependencies
+- **OS**: Ubuntu 22.04 (LTS) or 20.04 (LTS)
+- **ROS**: ROS 2 Humble (or Galactic/Foxy)
+- **C++ Standard**: C++17
+- **Libraries**: Ceres Solver $\ge 2.1$, PCL $\ge 1.12$, Eigen3 $\ge 3.3$, `yaml-cpp`, `glog`, `gflags`, `livox_ros_driver2`
 
 ```bash
-# Install dependencies
-sudo apt install libomp-dev libboost-all-dev libmetis-dev \
-                 libfmt-dev libspdlog-dev \
-                 libglm-dev libglfw3-dev libpng-dev libjpeg-dev
-
-# Install GTSAM
-git clone https://github.com/borglab/gtsam
-cd gtsam && git checkout 4.3a0
-mkdir build && cd build
-cmake .. -DGTSAM_BUILD_EXAMPLES_ALWAYS=OFF \
-         -DGTSAM_BUILD_TESTS=OFF \
-         -DGTSAM_WITH_TBB=OFF \
-         -DGTSAM_USE_SYSTEM_EIGEN=ON \
-         -DGTSAM_BUILD_WITH_MARCH_NATIVE=OFF
-make -j$(nproc)
-sudo make install
-
-# Install Iridescence for visualization
-# This is optional but highly recommended
-git clone https://github.com/koide3/iridescence --recursive
-mkdir iridescence/build && cd iridescence/build
-cmake .. -DCMAKE_BUILD_TYPE=Release
-make -j$(nproc)
-sudo make install
-
-
-# Install gtsam_points
-git clone https://github.com/koide3/gtsam_points
-mkdir gtsam_points/build && cd gtsam_points/build
-cmake .. -DBUILD_WITH_CUDA=ON
-make -j$(nproc)
-sudo make install
-
-
-# Make shared libraries visible to the system
-sudo ldconfig
+# Install core system dependencies
+sudo apt-get update && sudo apt-get install -y \
+    libgoogle-glog-dev \
+    libgflags-dev \
+    libyaml-cpp-dev \
+    libopencv-dev \
+    ros-humble-pcl-conversions \
+    ros-humble-tf2-geometry-msgs
 ```
 
-### Install GLIM for ROS2
+### 2. Build from Source
 ```bash
-cd ~/ros2_ws/src
-git clone https://github.com/koide3/glim
-git clone https://github.com/koide3/glim_ros2
+# Set up workspace
+mkdir -p ~/lidar_ws/src && cd ~/lidar_ws/src
+git clone https://github.com/SasaKuruppuarachchi/AGIptive-LIOM.git
 
-cd ~/ros2_ws
-colcon build
-
-# cmake options
-# colcon build --cmake-args \
-#   -DBUILD_WITH_CUDA=ON \
-#   -DBUILD_WITH_VIEWER=ON \
-#   -DBUILD_WITH_MARCH_NATIVE=OFF
+# Build package
+cd ~/lidar_ws
+source /opt/ros/humble/setup.bash
+colcon build --packages-select agiptive_liom --symlink-install
 ```
 
-!!! note
-    While AVX intrinsics can be enabled to speed up the mapping process by setting ```BUILD_WITH_MARCH_NATIVE=ON```, it sometimes causes segfaults unless ```march=native``` is properly set for *every* involved library. We recommend keeping it disabled if you are not sure.
+### 3. Launching AGIptive-LIOM
 
+```bash
+# Source workspace
+source install/setup.bash
 
-## 2. Direct LiDAR-Inertial Odometry: Lightweight LIO with Continuous-Time Motion Correction
+# Standard UAV Launch with RViz visualization (default Livox internal IMU configuration)
+ros2 launch agiptive_liom run.launch.py
 
-### Changelog
-Below is a detailed changelog of the current working tree (branch `agipix_sim`), covering staged/unstaged changes.
+# Rosbag playback with simulated clock
+ros2 launch agiptive_liom run.launch.py use_sim_time:=true
 
-**Interface additions (odom.h)**
-- New diagnostics publishers: `alignment_good_pub`, `ekf_nis_pub`.
-- New state for GICP health: thresholds, last alignment status, last pose covariance (ROS order), validity flag.
-- EKF controls and noise settings: enable flags, use-cov flag, NIS threshold, measurement floors, continuous-time IMU noise stddevs, legacy process noise diagonals, EKF covariance `ekf_P_`, last NIS.
-- EKF helper declarations: `ekfPredict`, `ekfUpdateFromLidar`.
-- Option to ignore bad alignments.
+# Headless / Embedded Execution on Jetson (without RViz)
+ros2 launch agiptive_liom run.launch.py rviz:=false use_sim_time:=true
 
-**Core logic changes (odom.cc)**
-- Diagnostics and publishers:
-  - Publish alignment health (`alignment_good`) and EKF NIS (`ekf_nis`).
-  - Optionally publish pose covariance into `nav_msgs/Odometry.pose.covariance` when available.
-- Parameter loading:
-  - Loads all new GICP failure, covariance publishing, bad-alignment ignore, and EKF parameters (including IMU noise and measurement floors).
-- GICP alignment handling:
-  - If GICP does not converge, alignment is flagged bad and diagnostics are published.
-  - Hessian-based pose covariance is computed with symmetrization, damping on bad alignments, variance floor, and reordered to ROS [x y z r p y].
-  - Alignment health is evaluated via condition number, min eigenvalue, fitness per point, and inlier count; failures can cause the correction to be ignored (`gicp_ignore_bad_alignment`).
-- EKF integration:
-  - Predict step uses continuous-time error-state linearization with IMU noise parameters; runs on IMU callbacks when enabled.
-  - Update step fuses LiDAR pose with optional GICP-derived covariance plus floors, computes NIS with gating, and publishes NIS.
-  - Falls back to geometric observer when EKF is disabled or an update is rejected/ignored.
-- IMU handling robustness:
-  - After calibration, IMU time base is reset.
-  - IMU `dt` is clamped for non-monotonic/large jumps to avoid unstable propagation.
-- Covariance stability:
-  - Innovation covariance in the EKF update is symmetrized; update aborts if LDLT fails.
-- Minor: explicit `<limits>` include.
-
-**Behavioral impacts**
-- Safer handling of bad/unstable GICP alignments to prevent corrupting state.
-- Optional EKF fusion with statistical gating and measurement covariance from GICP.
-- Pose covariance now available on odometry messages when enabled.
-- IMU time/`dt` robustness reduces risk of large integration spikes.
-
-
-
-![Perception overview](../../assets/images/diag/perception_dlio_overview.png)
-
-#### [[ IEEE ICRA ](https://ieeexplore.ieee.org/document/10160508)] [[ arXiv ](https://arxiv.org/abs/2203.03749)] [[ Video ](https://www.youtube.com/watch?v=4-oXjG8ow10)] [[ Presentation ](https://www.youtube.com/watch?v=Hmiw66KZ1tU)]
-
-DLIO is a new lightweight LiDAR-inertial odometry algorithm with a novel coarse-to-fine approach in constructing continuous-time trajectories for precise motion correction. It features several algorithmic improvements over its predecessor, [DLO](https://github.com/vectr-ucla/direct_lidar_odometry), and was presented at the IEEE International Conference on Robotics and Automation (ICRA) in London, UK in 2023.
-
-<br>
-<p align='center'>
-    <img src="./doc/img/dlio.png" alt="drawing" width="720"/>
-</p>
-
-### Instructions
-
-#### Sensor Setup
-DLIO has been extensively tested using a variety of sensor configurations and currently supports Ouster, Velodyne, and Hesai LiDARs. The point cloud should be of input type `sensor_msgs::PointCloud2` and the 6-axis IMU input type of `sensor_msgs::Imu`.
-
-For best performance, extrinsic calibration between the LiDAR/IMU sensors and the robot's center-of-gravity should be inputted into `cfg/dlio.yaml`. If the exact values of these are unavailable, a rough LiDAR-to-IMU extrinsics can also be used (note however that performance will be degraded).
-
-IMU intrinsics are also necessary for best performance, and there are several open-source calibration tools to get these values. These values should also go into `cfg/dlio.yaml`. In practice however, if you are just testing this work, using the default ideal values and performing the initial calibration procedure should be fine.
-
-Also note that the LiDAR and IMU sensors _need_ to be properly time-synchronized, otherwise DLIO will not work. We recommend using a LiDAR with an integrated IMU (such as an Ouster) for simplicity of extrinsics and synchronization.
-
-#### Dependencies
-The following has been verified to be compatible, although other configurations may work too:
-
-- Ubuntu 22.04
-- ROS Humble (`rclcpp`, `std_msgs`, `sensor_msgs`, `geometry_msgs`, `nav_msgs`, `pcl_ros`)
-- C++ 14
-- CMake >= `3.12.4`
-- OpenMP >= `4.5`
-- Point Cloud Library >= `1.10.0`
-- Eigen >= `3.3.7`
-
-```sh
-sudo apt install libomp-dev libpcl-dev libeigen3-dev
+# Custom Configuration File
+ros2 launch agiptive_liom run.launch.py agiptive_liom_cfg_dir:=/path/to/custom_config.yaml
 ```
 
-DLIO currently supports `ROS 1` and `ROS 2`!
-
-#### Compiling
-Compile using the [`catkin_tools`](https://catkin-tools.readthedocs.io/en/latest/) package via:
-
-```sh
-mkdir ~/ros2_ws && cd ~/ros2_ws && mkdir src && cd src
-```
-```sh
-git clone https://github.com/vectr-ucla/direct_lidar_inertial_odometry -b feature/ros2
-```
-```sh
-cd ~/ros2_ws
-```
-```sh
-colcon build --symlink-install --packages-select direct_lidar_inertial_odometry
+### 4. Online Map Saving Service
+Save the global reconstructed point cloud map and Scan Context database on demand:
+```bash
+ros2 service call /drone0/save_map_service std_srvs/srv/Trigger
 ```
 
-#### Execution
+---
 
-<details>
-<summary> After compiling, don't forget to source before ROS commands.</summary>
+## ⚙️ Configuration Profiles
 
-``` bash
-source ~/ros2_ws/install/setup.bash
-```
-</details>
+Configuration files are located in `config/`:
 
-Execute via:
+| Config File | Target Platform | Primary IMU Source | Key Characteristics |
+|---|---|---|---|
+| [`mapping_m_livox_imu.yaml`](config/mapping_m_livox_imu.yaml) | Drone / Aerial (Livox Mid-360) | `/drone0/livox/imu` (Internal) | **Production Default**: Zero DDS transport jitter, hardware gravity-aligned horizontal body frame, 6-stage loop closure & Ceres PGO enabled. |
+| [`mapping_m.yaml`](config/mapping_m.yaml) | Drone / Aerial (PX4 Autopilot) | `/drone0/px4_imu` (FCU) | Baseline flight controller IMU profile via micro-XRCE-DDS bridge. |
+| [`mapping_livox_imu.yaml`](config/mapping_livox_imu.yaml) | Ground / Handheld | `/livox/imu` | Level mounting configuration with open-loop odometry. |
 
-```sh
-roslaunch direct_lidar_inertial_odometry dlio.launch \
-  rviz:={true, false} \
-  pointcloud_topic:=/robot/lidar \
-  imu_topic:=/robot/imu
-```
+---
 
-<details>
-<summary> Example command: </summary>
+## 📡 ROS 2 Interfaces
 
-``` bash
-ros2 launch direct_lidar_inertial_odometry dlio.launch.py rviz:=true pointcloud_topic:=/lexus3/os_center/points imu_topic:=/lexus3/os_center/imu
-```
-</details>
+### Subscribed Topics
+| Topic | Message Type | Description |
+|---|---|---|
+| `livox/lidar` | `sensor_msgs/msg/PointCloud2` or `livox_ros_driver2/CustomMsg` | Primary point cloud stream from Livox Mid-360 LiDAR. |
+| `livox/imu` | `sensor_msgs/msg/Imu` | High-rate IMU telemetry stream (200 Hz). |
+| `/clock` | `rosgraph_msgs/msg/Clock` | Simulation / bag clock (when `use_sim_time:=true`). |
 
-Be sure to change the topic names to your corresponding topics. Alternatively, edit the launch file directly if desired. If successful, you should see the following output in your terminal:
-<br>
-<p align='center'>
-    <img src="./doc/img/terminal.png" alt="drawing" width="480"/>
-</p>
+### Published Topics
+| Topic | Message Type | Description |
+|---|---|---|
+| `agiptive_liom/state/odom` | `nav_msgs/msg/Odometry` | High-rate real-time odometry state in world frame. |
+| `agiptive_liom/odometry_path` | `nav_msgs/msg/Path` | Continuous real-time frontend trajectory path. |
+| `agiptive_liom/optimized_path` | `nav_msgs/msg/Path` | Globally consistent PGO-corrected trajectory path. |
+| `agiptive_liom/map` | `sensor_msgs/msg/PointCloud2` | Real-time voxel-downsampled global map point cloud. |
+| `agiptive_liom/scan_sparse` | `sensor_msgs/msg/PointCloud2` | Ultra-fast downsampled point cloud for bandwidth-constrained telemetry. |
+| `agiptive_liom/scan` | `sensor_msgs/msg/PointCloud2` | Preprocessed, body-filtered point cloud. |
+| `agiptive_liom/velocity` | `std_msgs/msg/Float32` | Instantaneous vehicle speed magnitude (m/s). |
+| `agiptive_liom/move_dist` | `std_msgs/msg/Float32` | Accumulated distance traveled (m). |
 
-#### Services
-To save DLIO's generated map into `.pcd` format, call the following service:
+### TF Broadcaster
+- Broadcasts dynamic coordinate frame: `drone0/odom` $\rightarrow$ `aft_mapped` $\rightarrow$ `drone0/base_link` $\rightarrow$ `livox_frame`.
 
-```sh
-ros2 service call /save_pcd direct_lidar_inertial_odometry/srv/SavePCD "{'leaf_size': 0.2, 'save_path': '~/map'}"
-```
+---
 
-#### Test Data
-For your convenience, we provide test data [here](https://drive.google.com/file/d/1Sp_Mph4rekXKY2euxYxv6SD6WIzB-wVU/view?usp=sharing) (1.2GB, 1m 13s, Ouster OS1-32) of an aggressive motion to test our motion correction scheme, and [here](https://drive.google.com/file/d/1HbmF5gTHxCAMqBkEd5PTxDNQvcI8tKXn/view?usp=sharing) (16.5GB, 4m 21s, Ouster OSDome) of a longer trajectory outside with lots of trees. Try these two datasets with both deskewing on and off!
+## 📚 Attribution & Acknowledgments
 
-<br>
-<p align='center'>
-    <img src="./doc/gif/aggressive.gif" alt="drawing" width="720"/>
-</p>
+AGIptive-LIOM was designed and developed by **Sasanka Kuruppuarachchige** at Tampere University. It incorporates and builds upon foundational principles from:
+- **Adaptive-LIO** (*Zhao et al., IEEE JIOT 2024*): Adaptive motion segmentation and multi-resolution voxel structures.
+- **CT-ICP** (*J. E. Deschaud, 2021*): Continuous-time LiDAR odometry formulations.
+- **SR-LIO** (*Z. Yuan et al., 2023*): Segmented representation ideas.
+- **Scan Context** (*G. Kim and A. Kim, 2018*): Spatial place recognition descriptors.
 
-**Run runtime Tests**
-- Build with symbols: `colcon build --symlink-install --packages-select direct_lidar_inertial_odometry --cmake-args -DCMAKE_BUILD_TYPE=RelWithDebInfo`
-- Source the workspace: `source ~/ros2_ws/install/setup.bash`
-- Run the launch under gdb (no breakpoints yet):  
-  ```bash
-  ros2 launch direct_lidar_inertial_odometry dlio.launch.py --launch-prefix 'gdb -ex run --args'
-  ```
-  - You’ll drop into gdb; use `run` (auto-issued), then `bt` on crash. Quit with `quit`.
-- To start stopped at `main` instead of auto-run:  
-  ```bash
-  ros2 launch direct_lidar_inertial_odometry dlio.launch.py --launch-prefix 'gdb --args'
-  ```
-  Then inside gdb: `start`, `break <symbol>`, `continue`.
-- Handy gdb extras: `set pagination off`, `set print pretty on`, `layout split` (TUI). Add them via `-ex "cmd"`:  
-  ```bash
-  ros2 launch direct_lidar_inertial_odometry dlio.launch.py \
-    --launch-prefix 'gdb -ex "set pagination off" -ex "set print pretty on" --args'
-  ```
-- If you prefer to attach instead: start normally, find PID (`ps -C dlio_odom_node -o pid,cmd`), then `gdb -p <pid>`.
-
-## Citation
-If you found this work useful, please cite our manuscript:
+If you find this work helpful in your academic research or robotic systems, please cite the foundational literature:
 
 ```bibtex
-@article{chen2022dlio,
-  title={Direct LiDAR-Inertial Odometry: Lightweight LIO with Continuous-Time Motion Correction},
-  author={Chen, Kenny and Nemiroff, Ryan and Lopez, Brett T},
-  journal={2023 IEEE International Conference on Robotics and Automation (ICRA)},
-  year={2023},
-  pages={3983-3989},
-  doi={10.1109/ICRA48891.2023.10160508}
+@article{zhao2025adaptivelio,
+  author={Zhao, Chengwei and Hu, Kun and Xu, Jie and Zhao, Lijun and Han, Baiwen and Wu, Kaidi and Tian, Maoshan and Yuan, Shenghai},
+  journal={IEEE Internet of Things Journal}, 
+  title={Adaptive-LIO: Enhancing Robustness and Precision Through Environmental Adaptation in LiDAR Inertial Odometry}, 
+  year={2025},
+  volume={12},
+  number={9},
+  pages={12123-12136},
+  doi={10.1109/JIOT.2024.3519533}
 }
 ```
 
-#### Acknowledgements
+---
 
-We thank the authors of the [FastGICP](https://github.com/SMRT-AIST/fast_gicp) and [NanoFLANN](https://github.com/jlblancoc/nanoflann) open-source packages:
+## 📄 License
+This project is released under the **BSD License**. See [LICENSE](LICENSE) for details.
 
-- Kenji Koide, Masashi Yokozuka, Shuji Oishi, and Atsuhiko Banno, “Voxelized GICP for Fast and Accurate 3D Point Cloud Registration,” in _IEEE International Conference on Robotics and Automation (ICRA)_, IEEE, 2021, pp. 11 054–11 059.
-- Jose Luis Blanco and Pranjal Kumar Rai, “NanoFLANN: a C++ Header-Only Fork of FLANN, A Library for Nearest Neighbor (NN) with KD-Trees,” https://github.com/jlblancoc/nanoflann, 2014.
-
-We would also like to thank Helene Levy and David Thorne for their help with data collection.
-
-#### License
-This work is licensed under the terms of the MIT license.

@@ -385,6 +385,24 @@ sudo apt install wezterm
 
 sudo update-alternatives --config x-terminal-emulator # set to wezterm
 ```
+
+Install Nerd Fonts (0xProto)
+```bash
+mkdir -p ~/Downloads/fonts/nerd-font/
+cd Downloads/fonts/nerd-font/
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/0xProto.zip --no-check-certificate
+
+# 1. Create the destination directory for the font
+mkdir -p ~/.local/share/fonts/0xProto
+
+# 2. Extract only the TTF font files into the directory
+unzip -o 0xProto.zip "*.ttf" -d ~/.local/share/fonts/0xProto/
+
+# 3. Refresh your system's font cache
+fc-cache -fv
+# verify the font is installed
+fc-list : family | grep -i "0xProto"
+```
 Install Superfile
 ```bash
 bash -c "$(curl -sLo- https://superfile.dev/install.sh)"

@@ -56,26 +56,22 @@ sudo systemctl restart docker
 
 ```bash
 cd $HOME
-mkdir workspace && cd workspace
-mkdir -p agipix_control/src dds lidar_ws/src raicam-ros/src logging/src logging/bags logging/flogs logging/crashreports
-cd raicam-ros/src
-git clone https://github.com/SasaKuruppuarachchi/isaac_ros_common.git # TODO
+mkdir workspace/docker && cd workspace/docker
+git clone https://github.com/SasaKuruppuarachchi/agidocker.git -b minimal
 
-echo "export WORKSPACES_DIR="$HOME/workspace"" >> ~/.bashrc
-echo "export ISAAC_ROS_DEV_DIR="$HOME/workspace/raicam-ros"" >> ~/.bashrc
-echo "alias agidocker='cd $HOME/workspace/raicam-ros/src/isaac_ros_common/scripts/ && ./run_dev.sh --skip-registry-check'" >> ~/.bashrc
-echo "alias killagidocker='docker container kill isaac_ros_dev-aarch64-container'" >> ~/.bashrc
-source ~/.bashrc
+cd agidocker
+./setup_host.sh
+# This will setup the host with the required dependencies and create a workspace folder
 ```
 ## 3) Build Docker
 
 In this step we pull source images and build the docker continer.
 To customise the docker configuration edit 
 ```bash
-code ~/workspace/raicam-ros/src/isaac_ros_common/scripts/.isaac_ros_common-config
+code ~/workspace/docker/agidocker/scripts/.agipix_ros_common-config
 # append the additional docker configuration layers you need built
 
-cd ~/workspace/raicam-ros/src/isaac_ros_common/scripts/ && ./run_dev.sh # this alias builds the container
+cd ~/workspace/docker/agidocker/scripts/ && ./run_dev.sh # this alias builds the container
 ```
 The build will take more than an hour and if successfull you will see ```Running isaac_ros_dev-aarch64-container``` and the container will start running in the background.
 
@@ -97,17 +93,6 @@ EOF
 
 
 ## 4) Post setup (Optional)
-
-### Build Opencv with cuda From source
-> Note! OpenCV =< 4.8 had an incompatability with Cuda 12.x
-```bash
-agidocker
-# Inside docker
-cd /worckspaces/isaac_ros-dev/src/isaac_ros_common
-sudo ./build_ocv_cuda.sh
-# This will build and install the OCV for this running container locally 
-# but saves the build files on the mounted folder so we can use the Dockerfile.opencv layer later
-```
 
 ### Build torchvision from source (matches NVIDIA PyTorch)
 ```bash
