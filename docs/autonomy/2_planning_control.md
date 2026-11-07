@@ -1,14 +1,14 @@
 ---
-title: Autonomy-planning-control
+title: "Planning & control: heuristic autonomy"
 layout: doc
-nav_title: Huristic autonomy
+nav_title: Heuristic autonomy
 ---
 # Agipix Autonomy: Planning and Control
 [![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) 
 [![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/20.04/)
 [![Linux platform](https://img.shields.io/badge/platform-linux--arm-brown.svg)](https://releases.ubuntu.com/20.04/)
 
-![Autonomy overview](../../assets/images/diag/autonomy_heuristcs.png)
+![Heuristic autonomy pipeline overview](../../assets/images/diag/autonomy_heuristcs.png)
 
 
 ## AgiAUTO (ROS 2) — Agipix PX4 Autonomy Stack
@@ -17,7 +17,7 @@ This repository is the **AgiAUTO** autonomy module of **Agipix** for PX4-based U
 
 - HW and SIM Platform Repository: https://github.com/SasaKuruppuarachchi/agipix.git
 - Platform docs: https://sasakuruppuarachchi.github.io/agipix/
-- Publication (ICUAS 2026 submission): *"Agipix: A Comprehensive Aerial Robotics Platform Bridging Simulation and Reality"*
+- Publication: *"AgiPIX: Bridging Simulation and Reality in Indoor Aerial Inspection"*, International Conference on Unmanned Aircraft Systems (ICUAS) 2026, pp. 844–852. [DOI: 10.1109/ICUAS69441.2026.11598625](https://doi.org/10.1109/ICUAS69441.2026.11598625) · [arXiv:2604.08009](https://arxiv.org/abs/2604.08009)
 
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: Overview
+title: User interface overview
+nav_title: Overview
 layout: doc
 wip: true
 ---

@@ -1,0 +1,32 @@
+{%- assign _url = page.url -%}
+<header class="site-header"{% if page.title_bottom_gap %} style="--title-bottom-gap: {{ page.title_bottom_gap }}"{% endif %}>
+  {%- if page.url == "/" %}
+  <h1 class="site-brand"><a href="{{ '/' | relative_url }}"><span class="sr-only">{{ site.data.paper.title }}</span></a></h1>
+  {%- else %}
+  <p class="site-brand"><a href="{{ '/' | relative_url }}"><span class="sr-only">Agipix home</span></a></p>
+  {%- endif %}
+  <!-- Banner layers: background image and glowing wordmark -->
+  <div class="banner-image" aria-hidden="true"></div>
+  <div class="banner-text" aria-hidden="true"></div>
+</header>
+
+<nav class="site-nav" id="site-nav" aria-label="Main">
+  <div class="nav-container">
+    <button class="nav-toggle" type="button" aria-label="Menu" aria-controls="primary-navigation" aria-expanded="false">
+      <span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span>
+    </button>
+    <div class="nav-links" id="primary-navigation">
+      <a href="{{ '/' | relative_url }}" class="nav-link"{% if _url == "/" %} aria-current="page"{% endif %}>Home</a>
+      <a href="{{ '/docs/' | relative_url }}" class="nav-link"{% if _url == "/docs/" or _url == "/docs/all/" %} aria-current="page"{% endif %}>Docs Hub</a>
+      {%- for s in site.data.docs.sections %}
+      {%- capture _p %}/docs/{{ s.key }}/{% endcapture %}
+      <a href="{{ _p | relative_url }}" class="nav-link"{% if _url contains _p %} aria-current="page"{% endif %}>{% case s.key %}{% when "sim" %}Sim{% when "real" %}Real{% when "ui" %}UI{% else %}{{ s.title }}{% endcase %}</a>
+      {%- endfor %}
+      <a href="{{ '/bom.html' | relative_url }}" class="nav-link"{% if _url == "/bom.html" %} aria-current="page"{% endif %}>BOM</a>
+      <a href="{{ site.code_repo }}" class="nav-link" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="nav-search" type="button" data-cmdk-open aria-label="Search the docs (Ctrl+K)" aria-keyshortcuts="Control+K Meta+K">
+      {% include icon.html name="search" %}<span class="nav-search__label">Search</span><kbd class="nav-search__kbd" data-kbd-mod>Ctrl K</kbd>
+    </button>
+  </div>
+</nav>

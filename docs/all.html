@@ -1,0 +1,90 @@
+---
+layout: default
+title: Agipix manual (all docs)
+nav_title: All docs
+permalink: /docs/all/
+docs_viewer: true
+body_class: page-all-docs
+description: "Every Agipix guide on one page, in reading order, ready to print or save as a single PDF."
+---
+{%- include docs-order.html -%}
+{%- assign P = site.data.paper -%}
+<div class="all-docs" data-all-docs>
+  <div class="all-docs__bar no-print">
+    <nav class="breadcrumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="{{ '/' | relative_url }}">Home</a></li>
+        <li><a href="{{ '/docs/' | relative_url }}">Docs</a></li>
+        <li><span aria-current="page">All docs</span></li>
+      </ol>
+    </nav>
+    <div class="doc-toolbar" role="toolbar" aria-label="Manual tools">
+      <button class="tool tool--primary" type="button" data-print>{% include icon.html name="download" %}<span>Save the manual as PDF</span></button>
+      <button class="tool" type="button" data-cmdk-open>{% include icon.html name="search" %}<span>Search</span><kbd data-kbd-mod>Ctrl K</kbd></button>
+    </div>
+  </div>
+
+  <header class="manual-cover">
+    <div class="manual-cover__art" aria-hidden="true">
+      <img src="{{ '/assets/images/banner.web.webp' | relative_url }}" alt="" width="2000" height="800" class="manual-cover__drone">
+      <img src="{{ '/assets/images/banner_text.png' | relative_url }}" alt="" width="2000" height="800" class="manual-cover__word">
+    </div>
+    <p class="manual-cover__kicker">Agipix documentation</p>
+    <h1 class="manual-cover__title">The Agipix manual</h1>
+    <p class="manual-cover__sub">Simulation, real hardware, autonomy and operator UI for the open sim-to-real aerial inspection platform.</p>
+    <dl class="manual-cover__facts">
+      <div><dt>Paper</dt><dd>{{ P.title }}, {{ P.venue_short }}, pp. {{ P.pages }}. DOI {{ P.doi }}</dd></div>
+      <div><dt>Online</dt><dd><a href="{{ '/docs/' | absolute_url }}">{{ '/docs/' | absolute_url }}</a></dd></div>
+      <div><dt>Generated</dt><dd><time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: "%-d %B %Y" }}</time> · {{ docs_ordered.size }} guides · the online version is always the latest</dd></div>
+    </dl>
+  </header>
+
+  <nav class="manual-toc" aria-labelledby="manual-toc-title">
+    <h2 id="manual-toc-title">Contents</h2>
+    <ol class="manual-toc__sections">
+      {%- for s in site.data.docs.sections %}
+      {%- capture _prefix -%}docs/{{ s.key }}/{%- endcapture -%}
+      {%- assign _pages = docs_ordered | where_exp: "p", "p.path contains _prefix" %}
+      <li>
+        <span class="manual-toc__section">{{ s.title }}</span>
+        <ol>
+          {%- for p in _pages %}
+          {%- assign _slug = p.path | remove_first: "docs/" | remove: ".md" | remove: ".Md" | replace: "/", "-" %}
+          <li><a href="#doc-{{ _slug }}">{{ p.nav_title | default: p.title | strip }}</a></li>
+          {%- endfor %}
+        </ol>
+      </li>
+      {%- endfor %}
+    </ol>
+  </nav>
+
+  <div class="doc-body all-docs__body" id="doc-body">
+  {%- for p in docs_ordered %}
+    {%- assign _slug = p.path | remove_first: "docs/" | remove: ".md" | remove: ".Md" | replace: "/", "-" -%}
+    {%- assign _skey = p.path | split: "/" -%}
+    {%- assign _section = site.data.docs.sections | where: "key", _skey[1] | first -%}
+    {%- comment -%} Pages render before this one (subfolders are read first), so p.content is HTML; fall back to Markdown otherwise. {%- endcomment -%}
+    {%- if p.content contains '<h1 id="' or p.content contains '<h2 id="' -%}
+      {%- assign _html = p.content -%}
+    {%- else -%}
+      {%- assign _html = p.content | markdownify -%}
+    {%- endif -%}
+    {%- capture _anchor -%}{{ _slug }}--{%- endcapture -%}
+    {%- capture _idfix %} id="{{ _anchor }}{% endcapture -%}
+    {%- capture _hreffix -%}href="#{{ _anchor }}{%- endcapture -%}
+    {%- assign _html = _html | replace: ' id="', _idfix | replace: 'href="#', _hreffix -%}
+    {%- for q in docs_ordered -%}
+      {%- assign _qs = q.path | remove_first: "docs/" | remove: ".md" | remove: ".Md" | replace: "/", "-" -%}
+      {%- capture _from1 -%}href="{{ q.url | relative_url }}#{%- endcapture -%}
+      {%- capture _to1 -%}href="#{{ _qs }}--{%- endcapture -%}
+      {%- capture _from2 -%}href="{{ q.url | relative_url }}"{%- endcapture -%}
+      {%- capture _to2 -%}href="#doc-{{ _qs }}"{%- endcapture -%}
+      {%- assign _html = _html | replace: _from1, _to1 | replace: _from2, _to2 -%}
+    {%- endfor %}
+    <section class="manual-doc" id="doc-{{ _slug }}" aria-label="{{ p.nav_title | default: p.title | strip }}">
+      <p class="manual-doc__where"><span>{{ _section.title }}</span> · <a href="{{ p.url | relative_url }}">{{ p.url | absolute_url }}</a></p>
+      {% include media.html html=_html %}
+    </section>
+  {%- endfor %}
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0a0a">
+  {%- comment -%} Readable <title>: section overviews get the section name {%- endcomment -%}
+  {%- assign _segs = page.url | split: "/" -%}
+  {%- assign _title = page.title -%}
+  {%- if _segs[1] == "docs" and _segs.size > 2 -%}
+    {%- assign _sec = site.data.docs.sections | where: "key", _segs[2] | first -%}
+    {%- if _sec and page.title == "Overview" -%}{%- capture _title -%}{{ _sec.title }} overview{%- endcapture -%}{%- endif -%}
+  {%- endif -%}
+  {%- if page.url == "/" -%}
+    {%- capture seo_title -%}{{ site.title }}: {{ site.data.paper.title | remove: "AgiPIX: " }}{%- endcapture -%}
+  {%- elsif _title -%}
+    {%- capture seo_title -%}{{ _title | strip_html }} · {{ site.title }}{%- endcapture -%}
+  {%- else -%}
+    {%- assign seo_title = site.title -%}
+  {%- endif -%}
+  <title>{{ seo_title }}</title>
+  {% seo title=false %}
+
+  <link rel="icon" href="{{ '/assets/icons/favicon-32.png' | relative_url }}" type="image/png" sizes="32x32">
+  <link rel="icon" href="{{ '/assets/icons/icon-192.png' | relative_url }}" type="image/png" sizes="192x192">
+  <link rel="icon" href="{{ '/assets/favicon.ico' | relative_url }}" sizes="48x48">
+  <link rel="apple-touch-icon" href="{{ '/assets/icons/apple-touch-icon.png' | relative_url }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  {%- if page.url == "/" %}
+  <link rel="preload" as="image" href="{{ '/assets/videos/exploded.poster.webp' | relative_url }}" type="image/webp">
+  {%- endif %}
+
+  <script>
+    /* The only inline script: mark JS + restore docs reading mode before first paint (no flash), analytics queue. */
+    (function (d) {
+      d.className += ' js';
+      try { if (localStorage.getItem('agipix.focus') === '1') d.className += ' docs-focus'; } catch (e) {}
+    })(document.documentElement);
+    {%- if site.google_analytics and jekyll.environment == "production" %}
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', '{{ site.google_analytics }}');
+    {%- endif %}
+  </script>
+  {%- if site.google_analytics and jekyll.environment == "production" %}
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ site.google_analytics }}"></script>
+  {%- endif %}
+  <script src="{{ '/assets/js/site.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  <script src="{{ '/assets/js/doc-search.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  {%- if page.layout == "doc" or page.docs_viewer %}
+  <script src="{{ '/assets/js/docs.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
+  {%- endif %}
+  {%- if page.math %}
+  <script id="MathJax-script" defer src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+  {%- endif %}
+
+  <!-- Instant navigation: prerender same-site pages on hover (Chromium); cross-document view transitions (CSS). -->
+  <script type="speculationrules">
+    {"prerender": [{"where": {"and": [
+      {"href_matches": "{{ '/*' | relative_url }}"},
+      {"not": {"href_matches": "{{ '/assets/*' | relative_url }}"}},
+      {"not": {"href_matches": "/*.pdf"}},
+      {"not": {"href_matches": "/*.json"}},
+      {"not": {"href_matches": "/*.xml"}},
+      {"not": {"selector_matches": "[target], [download], [rel~=nofollow]"}}
+    ]}, "eagerness": "moderate"}]}
+  </script>
+
+</head>

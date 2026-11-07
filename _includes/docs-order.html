@@ -1,0 +1,30 @@
+{%- comment -%}
+  Builds `docs_ordered`: every page under docs/<section>/ in reading order
+  (sections as listed in _data/docs.yml; inside a section: index.md first, then by
+  `nav_order` front matter if set, else by the number prefix of the file name, so
+  10_x sorts after 9_x). Outputs nothing.
+{%- endcomment -%}
+{%- assign docs_ordered = "" | split: "" -%}
+{%- for s in site.data.docs.sections -%}
+  {%- capture _prefix -%}docs/{{ s.key }}/{%- endcapture -%}
+  {%- assign _sec = site.pages | where_exp: "p", "p.path contains _prefix" -%}
+  {%- assign _keys = "" | split: "" -%}
+  {%- for p in _sec -%}
+    {%- if p.name == "index.md" or p.name == "index.html" -%}
+      {%- assign _n = 0 -%}
+    {%- elsif p.nav_order -%}
+      {%- assign _n = p.nav_order | plus: 0 -%}
+    {%- else -%}
+      {%- assign _n = p.name | split: "_" | first | plus: 0 -%}
+      {%- if _n == 0 -%}{%- assign _n = 900 -%}{%- endif -%}
+    {%- endif -%}
+    {%- capture _k -%}{{ _n | plus: 1000 }}|{{ p.path }}{%- endcapture -%}
+    {%- assign _keys = _keys | push: _k -%}
+  {%- endfor -%}
+  {%- assign _keys = _keys | sort -%}
+  {%- for k in _keys -%}
+    {%- assign _path = k | split: "|" | last -%}
+    {%- assign _p = _sec | where: "path", _path | first -%}
+    {%- assign docs_ordered = docs_ordered | push: _p -%}
+  {%- endfor -%}
+{%- endfor -%}

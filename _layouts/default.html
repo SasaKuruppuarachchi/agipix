@@ -1,96 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+{% include head.html %}
+<body class="layout-{{ page.layout | default: 'default' }}{% if page.url == '/' %} page-home{% endif %}{% if page.body_class %} {{ page.body_class }}{% endif %}">
+  <a class="skip-link" href="#main">Skip to content</a>
+  {% include site-header.html %}
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="{{ site.description }}">
-  <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  <link rel="icon" type="image/x-icon" href="{{ '/assets/favicon.ico' | relative_url }}">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-J5VYH61SR2"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'G-J5VYH61SR2');
-  </script>
-</head>
-
-<body>
-  <header class="site-header" {% if page.title_bottom_gap %} style="--title-bottom-gap: {{ page.title_bottom_gap }}" {%
-    endif %}>
-    <div class="container">
-      <!-- <h1 class="site-title glow-text"><a href="{{ '' | relative_url }}" style="color: inherit; text-decoration: none;">AGIPIX</a></h1> -->
-      <!-- <p class="site-subtitle">{{ site.description }}</p> -->
-    </div>
-    <!-- Banner layers: background image and glowing text -->
-    <div class="banner-image" aria-hidden="true"></div>
-    <div class="banner-text" aria-hidden="true"></div>
-  </header>
-
-  <nav class="site-nav">
-    <div class="nav-container">
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-controls="primary-navigation"
-        aria-expanded="false">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
-      <div class="nav-links" id="primary-navigation">
-        <a href="{{ '/' | relative_url }}" class="nav-link">Home</a>
-        <a href="{{ '/docs' | relative_url }}" class="nav-link">Docs Hub</a>
-        <a href="{{ '/docs/sim/index' | relative_url }}" class="nav-link">Sim</a>
-        <a href="{{ '/docs/real/index' | relative_url }}" class="nav-link">Real</a>
-        <a href="{{ '/docs/autonomy/index' | relative_url }}" class="nav-link">Autonomy</a>
-        <a href="{{ '/docs/ui/index' | relative_url }}" class="nav-link">UI</a>
-        <a href="{{ '/bom.html' | relative_url }}" class="nav-link">BOM</a>
-        <a href="{{ site.github.repository_url }}" class="nav-link" target="_blank">GitHub</a>
-      </div>
-    </div>
-  </nav>
-
-  <script>
-    (function () {
-      const siteNav = document.querySelector('.site-nav');
-      const toggle = document.querySelector('.nav-toggle');
-      const links = document.getElementById('primary-navigation');
-      if (!siteNav || !toggle || !links) return;
-      toggle.addEventListener('click', () => {
-        const isOpen = siteNav.getAttribute('data-open') === 'true';
-        siteNav.setAttribute('data-open', String(!isOpen));
-        toggle.setAttribute('aria-expanded', String(!isOpen));
-      });
-    })();
-  </script>
-
-  <main class="container">
+  <main class="container{% if page.layout == 'doc' or page.docs_viewer %} container--docs{% endif %}" id="main" tabindex="-1">
     {{ content }}
   </main>
 
-  <footer class="site-footer">
-    <div class="footer-content">
-      <div class="footer-section">
-        <h3>Contact Authors</h3>
-        <p><a href="https://sasakuruppuarachchi.github.io/" target="_blank" rel="noopener">Sasanka Kuruppu
-            Arachchige</a> — sasa.kuruppuarachchi@gmail.com</p>
-        <p><a href="https://webpages.tuni.fi/vision/public_pages/JoniKamarainen/" target="_blank" rel="noopener">Joni
-            Kämäräinen</a> — joni.kamarainen@tuni.fi</p>
-      </div>
-      <div class="footer-section">
-        <h3>Acknowledgment</h3>
-        <p>Agipix is supported by RAICAM, MSCA HORIZON EU.</p>
-      </div>
-
-      <div class="footer-section">
-        <p>© 2025 Agipix Project | <a href="{{ site.github.repository_url }}/blob/main/LICENSE">License</a></p>
-      </div>
-    </div>
-  </footer>
+  {% include footer.html %}
+  {% include lightbox.html %}
+  {% include cmdk.html %}
+  <div class="toast" role="status" aria-live="polite" hidden></div>
 </body>
-
 </html>

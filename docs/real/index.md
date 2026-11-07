@@ -1,5 +1,6 @@
 ---
-title: Overview
+title: Real hardware overview
+nav_title: Overview
 layout: doc
 wip: true
 ---
@@ -7,8 +8,10 @@ wip: true
 
 Use this page to jump into the full real-platform bring-up flow, from mechanical assembly to preflight checks.
 
-<img src="../../assets/images/diag/hard_overview.png" alt="HW overview" style="width:50%; max-width:50%; height:auto;">
-<img src="../../assets/images/real.jpg" alt="HW overview" style="width:50%; max-width:50%; height:auto;">
+<figure class="two-up">
+  <img src="../../assets/images/diag/hard_overview.png" alt="AgiREAL hardware overview diagram">
+  <img src="../../assets/images/real.jpg" alt="The assembled Agipix quadrotor">
+</figure>
 
 ## 1) Hardware Assembly
 
@@ -19,7 +22,7 @@ Use this page to jump into the full real-platform bring-up flow, from mechanical
 - Complete low‑level checks and a brief manual flight validation.
 - Mount compute (Jetson Orin NX 16 GB + Hadron), antennas, wiring, and sensor cage (Livox Mid‑360, optional RGB/RGB‑D).
 
-Current onboard hardware (full list with prices in the [BOM](https://sasakuruppuarachchi.github.io/agipix/bom.html)):
+Current onboard hardware (full list with prices in the [BOM](../../bom.md)):
 
 | Subsystem | Device |
 |---|---|
@@ -33,7 +36,7 @@ Current onboard hardware (full list with prices in the [BOM](https://sasakuruppu
 | Radio | FrSky Archer Plus SR12+ RC receiver; telemetry over Wi-Fi (no telemetry radio) |
 | Cameras | USB webcam; optional Arducam OG02B10 (RGB) and Intel RealSense D455 (RGB‑D) |
 
-![Autonomy overview](../../assets/images/exploded_labled.jpg)
+![Exploded view of the Agipix airframe with labelled components](../../assets/images/exploded_labled.jpg)
 
 Read: [Hardware Assembly](./1_hardware_assembly.md)
 
@@ -77,8 +80,6 @@ File: `hadron_cfg.txt`
 - Workspace layout hints for control, DDS agent, LiDAR drivers, and vision.
 - Useful bash aliases and Docker entry helper.
 - Sample nmcli snippet for a static wired IP.
-
-.
 
 ---
 

@@ -1,0 +1,20 @@
+# Documentation sections, in reading order. Pages are picked up automatically
+# from docs/<key>/: the section's index.md comes first, then the other pages
+# sorted by file name (so keep the 1_, 2_, ... prefixes).
+# `nav_title` in a page's front matter sets its label in the sidebar.
+sections:
+  - key: sim
+    title: Simulation
+  - key: real
+    title: Real hardware
+  - key: autonomy
+    title: Autonomy
+  - key: ui
+    title: User interface
+
+# Extra pages listed under "Resources" in the docs sidebar (not in prev/next).
+resources:
+  - title: Bill of Materials
+    url: /bom.html
+  - title: Platform benchmark
+    url: /benchmark.html

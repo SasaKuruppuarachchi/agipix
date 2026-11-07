@@ -1,7 +1,7 @@
 ---
-title: UI Autonomous exploration
+title: UI for autonomous exploration
 layout: doc
-nav_title: UI for Autonomous exploration    
+nav_title: UI for autonomous exploration
 wip: true
 ---
 

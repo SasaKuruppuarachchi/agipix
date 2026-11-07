@@ -1,10 +1,10 @@
 ---
-title: Hardware Syncronisation
+title: Hardware Synchronisation
 layout: doc
 nav_title: HW Sync
 ---
 
-# Hardware Syncronisation with ESP32 TimerSync Bridge
+# Hardware Synchronisation with ESP32 TimerSync Bridge
 
 The default timesync method for Livox Lidars are PTP. But unfortunatly Jetson NX does not support PTP. The alternative in the official documentation is to use PPS syncronisation with GPS. As indoor focused robots do not have GPS, we designed the following solution to provide GPRMC and PPS signals to the Livox LiDAR and Px4 via a ESP32.
 

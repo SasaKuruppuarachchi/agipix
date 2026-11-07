@@ -1,0 +1,10 @@
+<dialog class="lightbox" id="lightbox" aria-label="Image viewer">
+  <button class="lightbox__btn lightbox__close" type="button" aria-label="Close (Esc)" data-close>{% include icon.html name="close" %}</button>
+  <button class="lightbox__btn lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous image" data-step="-1">{% include icon.html name="arrow-left" %}</button>
+  <button class="lightbox__btn lightbox__nav lightbox__nav--next" type="button" aria-label="Next image" data-step="1">{% include icon.html name="arrow-right" %}</button>
+  <div class="lightbox__stage"></div>
+  <div class="lightbox__bar">
+    <p class="lightbox__caption"></p>
+    <p class="lightbox__meta"><span class="lightbox__count"></span><a class="lightbox__full" href="#" target="_blank" rel="noopener">Full resolution {% include icon.html name="external" %}</a></p>
+  </div>
+</dialog>

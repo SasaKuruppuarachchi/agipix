@@ -1,0 +1,15 @@
+{%- comment -%}
+  Responsive image from the media manifest (scripts/optimize_media.py).
+  {% include picture.html src="assets/images/real.jpg" alt="..." sizes="(min-width: 900px) 480px, 100vw" class="" eager=false zoom=true %}
+  Falls back to the original file if it has no derivatives.
+{%- endcomment -%}
+{%- assign m = site.data.media | where: "src", include.src | first -%}
+{%- assign _sizes = include.sizes | default: "100vw" -%}
+{%- if m -%}
+<picture>
+  <source type="image/webp" srcset="{% if m.sm != '' %}{{ m.sm | prepend: '/' | relative_url }} {{ m.sm_w }}w, {% endif %}{{ m.webp | prepend: '/' | relative_url }} {{ m.w }}w" sizes="{{ _sizes }}">
+  <img src="{{ m.fallback | prepend: '/' | relative_url }}" width="{{ m.w }}" height="{{ m.h }}" alt="{{ include.alt | escape }}"{% if include.class %} class="{{ include.class }}"{% endif %}{% unless include.eager %} loading="lazy"{% endunless %} decoding="async"{% if include.zoom %} data-zoom data-large="{{ m.webp | prepend: '/' | relative_url }}" data-full="{{ include.src | prepend: '/' | relative_url }}"{% endif %}>
+</picture>
+{%- else -%}
+<img src="{{ include.src | prepend: '/' | relative_url }}" alt="{{ include.alt | escape }}"{% if include.class %} class="{{ include.class }}"{% endif %}{% unless include.eager %} loading="lazy"{% endunless %} decoding="async">
+{%- endif -%}

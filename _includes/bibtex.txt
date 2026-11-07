@@ -1,0 +1,12 @@
+{%- assign P = site.data.paper -%}
+{%- assign a0 = P.authors | first -%}
+{%- capture key -%}{{ a0.last | split: " " | last | downcase }}{{ P.year }}{{ P.title | split: ":" | first | split: " " | first | downcase }}{%- endcapture -%}
+{%- capture authors -%}{%- for a in P.authors -%}{{ a.last }}, {{ a.first }}{% unless forloop.last %} and {% endunless %}{%- endfor -%}{%- endcapture -%}
+@inproceedings{ {{- key }},
+  title     = { {{- P.title -}} },
+  author    = { {{- authors -}} },
+  booktitle = { {{- P.year }} {{ P.venue -}} },
+  year      = { {{- P.year -}} },
+  pages     = { {{- P.pages | replace: "–", "--" -}} },
+  doi       = { {{- P.doi -}} }
+}

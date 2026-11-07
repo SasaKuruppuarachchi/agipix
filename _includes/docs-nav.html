@@ -1,0 +1,31 @@
+{%- comment -%} Left navigation tree. Needs docs_ordered (docs-order.html). {%- endcomment -%}
+<aside class="docs-nav" id="docs-nav" aria-label="Documentation">
+  <div class="docs-nav__inner">
+    <div class="docs-nav__head">
+      <a class="docs-nav__home{% if page.url == '/docs/' %} is-current{% endif %}" href="{{ '/docs/' | relative_url }}"{% if page.url == '/docs/' %} aria-current="page"{% endif %}>{% include icon.html name="book" %}Docs hub</a>
+      <a class="docs-nav__all{% if page.url == '/docs/all/' %} is-current{% endif %}" href="{{ '/docs/all/' | relative_url }}" title="Every page on one page, for printing or saving as PDF"{% if page.url == '/docs/all/' %} aria-current="page"{% endif %}>{% include icon.html name="print" %}All docs</a>
+    </div>
+    {%- for s in site.data.docs.sections %}
+    {%- capture _prefix -%}docs/{{ s.key }}/{%- endcapture -%}
+    {%- assign _pages = docs_ordered | where_exp: "p", "p.path contains _prefix" -%}
+    {%- assign _here = false -%}{%- if page.path contains _prefix -%}{%- assign _here = true -%}{%- endif %}
+    <details class="nav-group" data-key="{{ s.key }}" open{% if _here %} data-current{% endif %}>
+      <summary class="nav-group__title">{% include icon.html name="chevron" %}<span>{{ s.title }}</span><span class="nav-group__count">{{ _pages.size }}</span></summary>
+      <ul class="nav-group__list">
+        {%- for p in _pages %}
+        <li><a href="{{ p.url | relative_url }}"{% if p.url == page.url %} aria-current="page"{% endif %}>{{ p.nav_title | default: p.title | strip }}</a></li>
+        {%- endfor %}
+      </ul>
+    </details>
+    {%- endfor %}
+    <details class="nav-group" data-key="resources" open>
+      <summary class="nav-group__title">{% include icon.html name="chevron" %}<span>Resources</span></summary>
+      <ul class="nav-group__list">
+        {%- for r in site.data.docs.resources %}
+        <li><a href="{{ r.url | relative_url }}"{% if r.url == page.url %} aria-current="page"{% endif %}>{{ r.title }}</a></li>
+        {%- endfor %}
+        <li><a href="{{ site.code_repo }}" target="_blank" rel="noopener">Autonomy code {% include icon.html name="external" %}</a></li>
+      </ul>
+    </details>
+  </div>
+</aside>

@@ -104,4 +104,4 @@ The totals leave out:
 
 ---
 
-**Canonical source:** [bom/BOM.md]({{ site.github.repository_url }}/blob/main/bom/BOM.md)
+**Canonical source:** [bom/BOM.md]({{ site.site_repo }}/blob/{{ site.site_branch }}/bom/BOM.md)

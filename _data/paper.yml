@@ -1,0 +1,23 @@
+# Single source of truth for the paper. The hero buttons, the "Cite" block,
+# the auto-generated BibTeX entry and the "All docs" cover all read this file.
+title: "AgiPIX: Bridging Simulation and Reality in Indoor Aerial Inspection"
+# `last` is the BibTeX family name (multi-word surnames stay together).
+authors:
+  - { first: "Sasanka", last: "Kuruppu Arachchige" }
+  - { first: "Juan Jose", last: "Garcia" }
+  - { first: "Changda", last: "Tian" }
+  - { first: "Lauri", last: "Suomela" }
+  - { first: "Panos", last: "Trahanias" }
+  - { first: "Adriana", last: "Tapus" }
+  - { first: "Joni-Kristian", last: "Kämäräinen" }
+venue: "International Conference on Unmanned Aircraft Systems (ICUAS)"
+venue_short: "ICUAS 2026"
+year: 2026
+pages: "844–852"
+doi: "10.1109/ICUAS69441.2026.11598625"
+arxiv: "2604.08009"
+code: "https://github.com/SasaKuruppuarachchi/agipix_autonomy"
+# Local copy of the paper PDF. Its size is shown next to the link;
+# update it if you replace the file.
+pdf: "/assets/paper/ICUAS_26_Agipix_Bridging_Simulation_and_Reality_in_Indoor_Aerial_Inspection.pdf"
+pdf_size: "37.5 MB"

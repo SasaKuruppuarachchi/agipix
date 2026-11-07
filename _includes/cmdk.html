@@ -1,0 +1,12 @@
+<dialog class="cmdk" id="cmdk" aria-label="Search documentation" data-index-url="{{ '/search-docs.json' | relative_url }}?v={{ site.time | date: '%s' }}">
+  <div class="cmdk__box">
+    <div class="cmdk__field">
+      {% include icon.html name="search" %}
+      <input class="cmdk__input" id="cmdk-input" type="search" placeholder="Search docs: commands, topics, parts…" autocomplete="off" spellcheck="false"
+        role="combobox" aria-expanded="true" aria-controls="cmdk-list" aria-autocomplete="list">
+      <kbd class="cmdk__esc">Esc</kbd>
+    </div>
+    <ul class="cmdk__list" id="cmdk-list" role="listbox" aria-label="Results"></ul>
+    <p class="cmdk__foot"><span><kbd>↑</kbd><kbd>↓</kbd> to move</span><span><kbd>↵</kbd> to open</span><span><kbd>Esc</kbd> to close</span></p>
+  </div>
+</dialog>

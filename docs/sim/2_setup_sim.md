@@ -257,21 +257,21 @@ cd ~/isaacsim
 1. Launch ``isaac_run`` application.
 
 2. Open the Window->extensions on the top menubar inside Isaac Sim.
-   ![alt text](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/extensions_menu_bar.png?raw=1)
+   ![Isaac Sim Window menu with the Extensions entry](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/extensions_menu_bar.png?raw=1)
 
 3. On the Extensions manager menu, we can enable or disable extensions. By pressing the settings button, we can 
 add a path to the Pegasus-Simulator repository.
 
-   ![alt text](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/extensions_widget.png?raw=1)
+   ![Isaac Sim Extensions manager with the settings button](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/extensions_widget.png?raw=1)
 
 4. The path inserted should be the path to the repository followed by ``/extensions``.
 
-   ![alt text](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/ading_extension_path.png?raw=1)
+   ![Adding the Pegasus Simulator extensions path](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/ading_extension_path.png?raw=1)
 
 
 5. After adding the path to the extension, we can enable the Pegasus Simulator extension on the third-party tab.
 
-   ![alt text](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/pegasus_inside_extensions_menu.png?raw=1)
+   ![Pegasus Simulator listed under third-party extensions](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/pegasus_inside_extensions_menu.png?raw=1)
 
 
 When enabling the extension for the first time, the python requirements should be install automatically for the build in 
@@ -279,7 +279,7 @@ When enabling the extension for the first time, the python requirements should b
 
 6. The Pegasus Simulator window should appear docked to the bottom-right section of the screen.
 
-   ![alt text](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/pegasus_gui_example.png?raw=1)
+   ![Pegasus Simulator window docked in Isaac Sim](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/pegasus_gui_example.png?raw=1)
 
 ## Post setups
 The helper script will do following tasks:

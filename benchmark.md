@@ -2,14 +2,13 @@
 title: Platform Benchmark Methodology
 layout: doc
 permalink: /benchmark.html
+math: true
 ---
 
 # Benchmark Methodology for Aerial Platforms
 
-<img src="{{ '/assets/images/diag/compare.jpg' | relative_url }}" alt="Platform comparison figure" style="width:100%; border-radius:12px; margin: 2rem 0;">
+![Comparison of Agipix with representative industrial and research aerial platforms](assets/images/diag/compare.jpg)
 
-<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
 ## Evaluating Platform Intelligence and Agility
 

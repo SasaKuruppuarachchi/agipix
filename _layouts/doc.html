@@ -1,172 +1,124 @@
 ---
 layout: default
 ---
+{%- include docs-order.html -%}
+{%- assign _segs = page.url | split: "/" -%}
+{%- assign section = nil -%}
+{%- if _segs[1] == "docs" and _segs.size > 2 -%}{%- assign section = site.data.docs.sections | where: "key", _segs[2] | first -%}{%- endif -%}
+{%- assign is_index = false -%}{%- if page.name == "index.md" -%}{%- assign is_index = true -%}{%- endif -%}
 
-{%- assign url_parts = page.url | split: '/' -%}
-{%- assign docs_index = nil -%}
-{%- for p in url_parts -%}
-{%- if p == 'docs' and docs_index == nil -%}
-{%- assign docs_index = forloop.index0 -%}
-{%- endif -%}
+{%- comment -%} prev / next within the reading order {%- endcomment -%}
+{%- assign prev_doc = nil -%}{%- assign next_doc = nil -%}
+{%- for p in docs_ordered -%}
+  {%- if p.url == page.url -%}
+    {%- assign _i = forloop.index0 -%}
+    {%- if _i > 0 -%}{%- assign _j = _i | minus: 1 -%}{%- assign prev_doc = docs_ordered[_j] -%}{%- endif -%}
+    {%- assign _j = _i | plus: 1 -%}{%- assign next_doc = docs_ordered[_j] -%}
+  {%- endif -%}
 {%- endfor -%}
-{%- assign scope = nil -%}
-{%- assign in_scoped_section = false -%}
-{%- if docs_index != nil -%}
-{%- assign next_index = docs_index | plus: 1 -%}
-{%- assign scope = url_parts[next_index] -%}
-{%- if scope == 'real' or scope == 'sim' or scope == 'autonomy' or scope == 'ui' -%}
-{%- assign in_scoped_section = true -%}
-{%- endif -%}
-{%- endif -%}
+{%- if page.url == "/docs/" -%}{%- assign next_doc = docs_ordered | first -%}{%- endif -%}
 
-{%- comment -%}
-Build a scope-aware list of docs within the same folder (real, sim, autonomy)
-{%- endcomment -%}
-{%- if in_scoped_section -%}
-{%- capture scope_url_prefix -%}/docs/{{ scope }}/{%- endcapture -%}
-{%- assign all_docs = site.pages | concat: site.docs -%}
-{%- assign scoped_docs = all_docs | where_exp: 'd', 'd.url contains scope_url_prefix' | sort: 'url' -%}
-{%- endif -%}
+{%- comment -%} meta {%- endcomment -%}
+{%- assign _words = content | strip_html | number_of_words -%}
+{%- assign minutes = _words | plus: 199 | divided_by: 200 -%}{%- if minutes < 1 -%}{%- assign minutes = 1 -%}{%- endif -%}
+{%- assign updated = page.last_modified_at | default: page.last_updated | default: page.date | default: site.time -%}
+{%- assign raw_base = site.site_repo | replace: "https://github.com/", "https://raw.githubusercontent.com/" -%}
+{%- capture raw_url -%}{{ raw_base }}/{{ site.site_branch }}/{{ page.path }}{%- endcapture -%}
+{%- capture edit_url -%}{{ site.site_repo }}/edit/{{ site.site_branch }}/{{ page.path }}{%- endcapture -%}
+{%- capture source_url -%}{{ site.site_repo }}/blob/{{ site.site_branch }}/{{ page.path }}{%- endcapture -%}
+{%- assign page_label = page.nav_title | default: page.title | strip -%}
 
-{%- if in_scoped_section -%}
-<div class="docs-layout">
-  <aside class="docs-sidebar">
-    <div class="docs-sidebar-inner">
-      <div class="docs-sidebar-topbar">
-        <button class="docs-sidebar-toggle" id="docsSidebarToggle" type="button" aria-label="Collapse sidebar"
-          aria-expanded="true">&laquo;</button>
+<div class="docs-layout" data-docs>
+  <div class="read-progress" aria-hidden="true"><span></span></div>
+  <button class="docs-menu-btn" type="button" aria-controls="docs-nav" aria-expanded="false">{% include icon.html name="menu" %}<span>Browse docs</span></button>
+  {% include docs-nav.html %}
+
+  <div class="docs-main">
+    <article class="doc-content doc">
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <ol>
+          <li><a href="{{ '/' | relative_url }}">Home</a></li>
+          {%- if page.url != "/docs/" %}
+          <li><a href="{{ '/docs/' | relative_url }}">Docs</a></li>
+          {%- endif %}
+          {%- if section %}
+          {%- if is_index %}
+          <li><span aria-current="page">{{ section.title }}</span></li>
+          {%- else %}
+          <li><a href="{{ '/docs/' | append: section.key | append: '/' | relative_url }}">{{ section.title }}</a></li>
+          <li><span aria-current="page">{{ page_label }}</span></li>
+          {%- endif %}
+          {%- else %}
+          <li><span aria-current="page">{% if page.url == "/docs/" %}Docs{% else %}{{ page_label }}{% endif %}</span></li>
+          {%- endif %}
+        </ol>
+      </nav>
+
+      <div class="doc-meta">
+        <span title="About {{ _words }} words">{% include icon.html name="clock" %}{{ minutes }} min read</span>
+        <span>{% include icon.html name="calendar" %}Updated <time datetime="{{ updated | date_to_xmlschema }}">{{ updated | date: "%-d %b %Y" }}</time></span>
+        <a href="{{ edit_url }}" target="_blank" rel="noopener">{% include icon.html name="edit" %}Edit this page on GitHub</a>
       </div>
-      <p class="docs-back"><a href="{{ '/docs/' | relative_url }}" class="btn btn-secondary">← Back</a></p>
-      <div class="docs-sidebar-title">{{ scope | capitalize }}</div>
-      <ul class="docs-nav">
-        {%- for d in scoped_docs -%}
-        <li class="docs-nav-item{%- if d.url == page.url -%} active{%- endif -%}">
-          <a href="{{ d.url | relative_url }}">{{ d.nav_title | default: d.title | default: d.slug | default: d.url
-            }}</a>
-        </li>
-        {%- endfor -%}
-      </ul>
-    </div>
-  </aside>
-  <main class="docs-main">
-    <article class="doc-content">
-      <div class="doc-search" data-index-url="{{ '/search-docs.json' | relative_url }}"
-        data-doc-scope="{{ scope | default: '' }}">
-        <!-- <label class="doc-search-label" for="docSearchInput">Search Docs</label> -->
-        <input class="doc-search-input" id="docSearchInput" type="search"
-          placeholder="Search by keyword, command, or topic..." autocomplete="off">
-        <div class="doc-search-results" hidden></div>
+
+      <div class="doc-toolbar" role="toolbar" aria-label="Page tools">
+        <button class="tool" type="button" data-cmdk-open>{% include icon.html name="search" %}<span>Search</span><kbd data-kbd-mod>Ctrl K</kbd></button>
+        <button class="tool" type="button" data-copy-md data-raw="{{ raw_url }}" data-source="{{ source_url }}">{% include icon.html name="markdown" %}<span>Copy as Markdown</span></button>
+        <button class="tool" type="button" data-print>{% include icon.html name="download" %}<span>Download as PDF</span></button>
+        <button class="tool" type="button" data-expand-all hidden aria-pressed="false">{% include icon.html name="expand" %}<span>Expand all</span></button>
+        <button class="tool tool--focus" type="button" data-focus-toggle aria-pressed="false" title="Hide the sidebars (F)">{% include icon.html name="focus" %}<span>Focus mode</span></button>
       </div>
-      {% if page.show_doc_title %}
+
+      {%- if page.wip %}
+      <div class="callout callout--wip" role="note">
+        <p class="callout__title">In development</p>
+        <p>This page is still being written. Updates are announced on the <a href="{{ '/' | relative_url }}#release-schedule">home page</a>.</p>
+      </div>
+      {%- endif %}
+
+      <details class="toc-mobile" hidden>
+        <summary>On this page</summary>
+        <ol class="toc-mobile__list"></ol>
+      </details>
+
+      {%- if page.show_doc_title %}
       <h1>{{ page.title }}</h1>
-      {% endif %}
+      {%- endif %}
 
-      {% if page.wip %}
-      <div class="doc-banner"
-        style="background-color: rgba(255, 165, 0, 0.1); border-left: 4px solid orange; padding: 1rem; margin-bottom: 2rem; border-radius: 4px; color: var(--text-secondary, #b3b3b3);">
-        🚧 <strong>Notice:</strong> In development. Updates available on the <a href="{{ '/' | relative_url }}"
-          style="color: orange; text-decoration: underline;">home page</a>.
+      <div class="doc-body" id="doc-body">
+        {% include media.html html=content %}
       </div>
-      {% endif %}
 
-      {{ content }}
+      {%- if prev_doc or next_doc %}
+      <nav class="pager" aria-label="Previous and next page">
+        {%- if prev_doc %}
+        {%- assign _ps = prev_doc.path | split: "/" -%}
+        {%- assign _psec = site.data.docs.sections | where: "key", _ps[1] | first %}
+        <a class="pager__prev" href="{{ prev_doc.url | relative_url }}" rel="prev">
+          <span class="pager__k">{% include icon.html name="arrow-left" %} Previous · {{ _psec.title }}</span>
+          <span class="pager__t">{{ prev_doc.nav_title | default: prev_doc.title | strip }}</span>
+        </a>
+        {%- endif %}
+        {%- if next_doc %}
+        {%- assign _ns = next_doc.path | split: "/" -%}
+        {%- assign _nsec = site.data.docs.sections | where: "key", _ns[1] | first %}
+        <a class="pager__next" href="{{ next_doc.url | relative_url }}" rel="next">
+          <span class="pager__k">Next · {{ _nsec.title }} {% include icon.html name="arrow-right" %}</span>
+          <span class="pager__t">{{ next_doc.nav_title | default: next_doc.title | strip }}</span>
+        </a>
+        {%- endif %}
+      </nav>
+      {%- endif %}
 
-      <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
-        <p style="text-align: center;">
-          <a href="{{ '' | relative_url }}" class="btn btn-secondary">← Back to Home</a>
-          <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
-        </p>
-      </div>
+      <p class="doc-foot">
+        <a href="{{ '/' | relative_url }}" class="btn btn-secondary">← Back to Home</a>
+        <a href="{{ site.code_repo }}" class="btn" target="_blank" rel="noopener">View on GitHub</a>
+      </p>
     </article>
-  </main>
+  </div>
+
+  <aside class="doc-toc" aria-label="On this page" hidden>
+    <p class="doc-toc__label">On this page</p>
+    <ol class="toc__list"></ol>
+    <p class="doc-toc__top"><a href="#main">Back to top ↑</a></p>
+  </aside>
 </div>
-<script>
-  (function () {
-    const layout = document.querySelector('.docs-layout');
-    const toggleBtn = document.getElementById('docsSidebarToggle');
-    const storageKey = 'docsSidebarCollapsed';
-
-    function setSidebarCollapsed(isCollapsed) {
-      if (!layout || !toggleBtn) return;
-      layout.classList.toggle('sidebar-collapsed', isCollapsed);
-      toggleBtn.innerHTML = isCollapsed ? '&raquo;' : '&laquo;';
-      toggleBtn.setAttribute('aria-label', isCollapsed ? 'Expand sidebar' : 'Collapse sidebar');
-      toggleBtn.setAttribute('aria-expanded', String(!isCollapsed));
-    }
-
-    if (layout && toggleBtn && window.matchMedia('(min-width: 769px)').matches) {
-      const saved = localStorage.getItem(storageKey) === 'true';
-      setSidebarCollapsed(saved);
-      toggleBtn.addEventListener('click', function () {
-        const collapsed = !layout.classList.contains('sidebar-collapsed');
-        setSidebarCollapsed(collapsed);
-        localStorage.setItem(storageKey, String(collapsed));
-      });
-    }
-
-    const codeBlocks = document.querySelectorAll('.doc-content pre');
-    codeBlocks.forEach(function (pre) {
-      if (pre.closest('.code-block-wrap')) return;
-
-      const wrapper = document.createElement('div');
-      wrapper.className = 'code-block-wrap';
-      pre.parentNode.insertBefore(wrapper, pre);
-      wrapper.appendChild(pre);
-
-      const copyButton = document.createElement('button');
-      copyButton.type = 'button';
-      copyButton.className = 'code-copy-btn';
-      copyButton.textContent = 'Copy';
-      copyButton.setAttribute('aria-label', 'Copy code block');
-      wrapper.appendChild(copyButton);
-
-      copyButton.addEventListener('click', async function () {
-        const code = pre.innerText;
-        try {
-          await navigator.clipboard.writeText(code);
-          copyButton.textContent = 'Copied';
-          setTimeout(function () {
-            copyButton.textContent = 'Copy';
-          }, 1200);
-        } catch (e) {
-          copyButton.textContent = 'Failed';
-          setTimeout(function () {
-            copyButton.textContent = 'Copy';
-          }, 1200);
-        }
-      });
-    });
-  })();
-</script>
-{%- else -%}
-<article class="doc-content">
-  <div class="doc-search" data-index-url="{{ '/search-docs.json' | relative_url }}" data-doc-scope="">
-    <!-- <label class="doc-search-label" for="docSearchInput">Search Docs</label> -->
-    <input class="doc-search-input" id="docSearchInput" type="search"
-      placeholder="Search by keyword, command, or topic..." autocomplete="off">
-    <div class="doc-search-results" hidden></div>
-  </div>
-  {% if page.show_doc_title %}
-  <h1>{{ page.title }}</h1>
-  {% endif %}
-
-  {% if page.wip %}
-  <div class="doc-banner"
-    style="background-color: rgba(255, 165, 0, 0.1); border-left: 4px solid orange; padding: 1rem; margin-bottom: 2rem; border-radius: 4px; color: var(--text-secondary, #b3b3b3);">
-    🚧 <strong>Notice:</strong> In development. Updates available on the <a href="{{ '/' | relative_url }}"
-      style="color: orange; text-decoration: underline;">home page</a>.
-  </div>
-  {% endif %}
-
-  {{ content }}
-
-  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color);">
-    <p style="text-align: center;">
-      <a href="{{ '' | relative_url }}" class="btn btn-secondary">← Back to Home</a>
-      <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
-    </p>
-  </div>
-</article>
-{%- endif -%}
-
-<script src="{{ '/assets/js/doc-search.js' | relative_url }}"></script>

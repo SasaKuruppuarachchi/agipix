@@ -64,7 +64,22 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 
 ## Paper and citation
 
-- Main manuscript: [root.tex](root.tex) (IEEE conference format). If you use Agipix in academic work, please cite the paper once available. Until then, you may reference this repository.
+**AgiPIX: Bridging Simulation and Reality in Indoor Aerial Inspection.** Sasanka Kuruppu Arachchige, Juan Jose Garcia, Changda Tian, Lauri Suomela, Panos Trahanias, Adriana Tapus, Joni-Kristian Kämäräinen. International Conference on Unmanned Aircraft Systems (ICUAS) 2026, pp. 844–852. [DOI: 10.1109/ICUAS69441.2026.11598625](https://doi.org/10.1109/ICUAS69441.2026.11598625) · [arXiv:2604.08009](https://arxiv.org/abs/2604.08009) · [Code](https://github.com/SasaKuruppuarachchi/agipix_autonomy)
+
+If you use Agipix in academic work, please cite:
+
+```bibtex
+@inproceedings{arachchige2026agipix,
+  title     = {AgiPIX: Bridging Simulation and Reality in Indoor Aerial Inspection},
+  author    = {Kuruppu Arachchige, Sasanka and Garcia, Juan Jose and Tian, Changda and Suomela, Lauri and Trahanias, Panos and Tapus, Adriana and Kämäräinen, Joni-Kristian},
+  booktitle = {2026 International Conference on Unmanned Aircraft Systems (ICUAS)},
+  year      = {2026},
+  pages     = {844--852},
+  doi       = {10.1109/ICUAS69441.2026.11598625}
+}
+```
+
+The LaTeX source of the manuscript is in [root.tex](root.tex).
 
 ## License
 

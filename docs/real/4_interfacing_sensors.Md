@@ -6,7 +6,7 @@ nav_title: PX4 and Sensors
 
 # Interfacing PX4 and Sensors
 
-## 1)Wiring up PX4
+## 1) Wiring up PX4
 Wire the Pixhawk up as shown in the diagram. Refer to the [official guide](https://docs.px4.io/main/en/assembly/quick_start_pixhawk4)
 ![px4 wiring](../../assets/images/real/wiring/px4_wiring.png)
 

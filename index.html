@@ -1,23 +1,28 @@
 ---
 layout: default
-title: Home
+title: "AgiPIX: Bridging Simulation and Reality in Indoor Aerial Inspection"
+nav_title: Home
+description: "AgiPIX (ICUAS 2026): an open, compact, actively sensed aerial robot whose ROS 2 autonomy stack runs unchanged in Isaac Sim and on real hardware. Hardware, docs, BOM and code."
 ---
+{%- assign P = site.data.paper -%}
+{%- capture arxiv_abs -%}https://arxiv.org/abs/{{ P.arxiv }}{%- endcapture -%}
+{%- capture arxiv_pdf -%}https://arxiv.org/pdf/{{ P.arxiv }}{%- endcapture -%}
+{%- capture doi_url -%}https://doi.org/{{ P.doi }}{%- endcapture -%}
 
 <section class="hero">
-  <div class="hero-banner-container"
-    style="position: relative; display: inline-block; max-width: 100%; margin-bottom: 2rem;">
+  <div class="hero-banner-container">
     <a href="https://a360.co/4gY1h8M" target="_blank" rel="noopener" class="hero-banner-link"
-      style="display: block; position: relative; text-decoration: none !important; border-radius: 8px; overflow: hidden; cursor: pointer; color: inherit !important;"
-      title="Open Interactive 3D CAD Model (Autodesk A360)">
-      <img src="{{ '/assets/images/exploded.gif' | relative_url }}" alt="Agipix Exploded View" class="hero-banner"
-        style="display: block; max-width: 100%; height: auto; border-radius: 8px; border: 2px solid var(--accent-red-dark); box-shadow: 0 0 30px rgba(139, 26, 26, 0.3);">
-      <div class="hero-banner-hint"
-        style="position: absolute; bottom: 12px; right: 12px; background: rgba(10, 10, 10, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.15); color: rgba(255, 255, 255, 0.85) !important; padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; display: flex; align-items: center; gap: 6px; pointer-events: none; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); text-decoration: none !important; transition: all 0.3s ease;">
-        <span style="font-size: 0.8rem;">📦</span> 3D CAD ↗
-      </div>
+      title="Open the interactive 3D CAD model (Autodesk A360)">
+      <video class="hero-banner" width="1280" height="720" muted loop playsinline preload="none"
+        poster="{{ '/assets/videos/exploded.poster.webp' | relative_url }}" data-lazy data-autoplay
+        aria-label="Animated exploded view of the Agipix airframe">
+        <source data-src="{{ '/assets/videos/exploded.web.mp4' | relative_url }}" type="video/mp4">
+      </video>
+      <span class="hero-banner-hint"><span aria-hidden="true">📦</span> 3D CAD <span aria-hidden="true">↗</span></span>
     </a>
   </div>
 
+  <p class="hero-kicker"><a href="{{ doi_url }}" target="_blank" rel="noopener">{{ P.venue_short }} · pp. {{ P.pages }}</a></p>
   <h2 class="hero-title">Bridging Simulation and Reality in Indoor Aerial Inspection</h2>
 
   <p class="hero-description">
@@ -26,43 +31,36 @@ title: Home
     reproducible sim-to-real transfer.
   </p>
 
-  <div>
-    <a href="{{ site.github.repository_url }}" class="btn" target="_blank">View on GitHub</a>
-    <a href="{{ '/docs' | relative_url }}" class="btn btn-secondary">Get Started</a>
-    <!-- <a href="{{ '/assets/paper/ICUAS_26_Agipix_Bridging_Simulation_and_Reality_in_Indoor_Aerial_Inspection.pdf' | relative_url }}" class="btn" target="_blank" rel="noopener">arXiv.org</a> -->
-    <a href="https://arxiv.org/abs/2604.08009" class="btn btn-secondary" target="_blank">arXiv.org</a>
-    <!-- <a href="{{ '/docs/sim/index' | relative_url }}" class="btn btn-secondary">Get Started</a> -->
+  <div class="hero-actions">
+    <a href="{{ site.code_repo }}" class="btn" target="_blank" rel="noopener">View on GitHub</a>
+    <a href="{{ '/docs/' | relative_url }}" class="btn btn-secondary">Get Started</a>
+    <a href="{{ arxiv_pdf }}" class="btn btn-secondary" target="_blank" rel="noopener">Read paper</a>
+    <a href="{{ doi_url }}" class="btn btn-secondary" target="_blank" rel="noopener">DOI</a>
+    <a href="{{ arxiv_abs }}" class="btn btn-secondary" target="_blank" rel="noopener">arXiv</a>
   </div>
+  <p class="hero-note">
+    <a href="{{ P.pdf | relative_url }}" target="_blank" rel="noopener">Paper PDF on this site</a> <span class="filesize">({{ P.pdf_size }})</span>
+    <span aria-hidden="true">·</span> <a href="#cite">Cite this work</a>
+  </p>
 </section>
 
-<!-- <section class="highlights">
-  <h2>System Architecture</h2>
-  <div class="doc-content" style="background: rgba(10, 10, 10, 0.5);">
-    <p style="color: var(--text-secondary);">
-      Agipix is co-designed as four connected subsystems: <strong>AgiREAL</strong> hardware, <strong>AgiAUTO</strong> ROS 2 autonomy,
-      <strong>AgiSIM</strong> digital twin, and <strong>AgiUI</strong> operator interface.
-    </p>
-    <img src="{{ '/assets/images/diag/sys_overview.png' | relative_url }}" alt="Agipix system architecture" style="width:100%; max-width:1100px; border-radius: 12px; display:block; margin: 1rem auto;">
-  </div>
-</section> -->
-
-<section class="sim-real-section">
+<section class="sim-real-section reveal">
   <div class="sim-box">
     <h3>Simulation</h3>
-    <img src="{{ '/assets/images/sim.png' | relative_url }}" alt="Agipix Simulation">
+    {% include picture.html src="assets/images/sim.png" alt="Agipix digital twin rendered in Isaac Sim" sizes="(min-width: 1200px) 500px, (min-width: 769px) 44vw, 90vw" zoom=true %}
     <p>Digital Twin in Isaac Sim with full sensor fidelity and physics simulation</p>
-    <a href="{{ '/docs/sim/index' | relative_url }}" class="btn btn-secondary">Setup Simulation →</a>
+    <a href="{{ '/docs/sim/' | relative_url }}" class="btn btn-secondary">Setup Simulation →</a>
   </div>
 
   <div class="real-box">
     <h3>Real Hardware</h3>
-    <img src="{{ '/assets/images/real.jpg' | relative_url }}" alt="Agipix Real Hardware">
+    {% include picture.html src="assets/images/real.jpg" alt="The Agipix quadrotor on the lab floor" sizes="(min-width: 1200px) 500px, (min-width: 769px) 44vw, 90vw" zoom=true %}
     <p>Physical platform ready for deployment with identical autonomy stack</p>
-    <a href="{{ '/docs/real/index' | relative_url }}" class="btn btn-secondary">Build Hardware →</a>
+    <a href="{{ '/docs/real/' | relative_url }}" class="btn btn-secondary">Build Hardware →</a>
   </div>
 </section>
 
-<section class="highlights">
+<section class="highlights reveal">
   <h2>Key Highlights</h2>
 
   <div class="highlight-grid">
@@ -79,8 +77,7 @@ title: Home
 
     <div class="highlight-item">
       <h3>3. Modular Autonomy Stack</h3>
-      <p>ROS 2–based perception, state estimation, mapping, planning, PX4 interface, and logging run as decoupled nodes.
-      </p>
+      <p>ROS 2–based perception, state estimation, mapping, planning, PX4 interface, and logging run as decoupled nodes.</p>
     </div>
 
     <div class="highlight-item">
@@ -90,8 +87,7 @@ title: Home
 
     <div class="highlight-item">
       <h3>5. Extensive Sensor Suite</h3>
-      <p>3D LiDAR, RGB camera, and IMU integrated into a LiDAR–inertial–visual stack for robust mapping and exploration.
-      </p>
+      <p>3D LiDAR, RGB camera, and IMU integrated into a LiDAR–inertial–visual stack for robust mapping and exploration.</p>
     </div>
 
     <div class="highlight-item">
@@ -101,32 +97,24 @@ title: Home
   </div>
 </section>
 
-<section class="gallery-strip">
+<section class="gallery-strip reveal" aria-label="Gallery">
   <div class="base-template__wrapper">
-    <div class="emotions-slider swiper" id="homeEmotionsSlider" aria-label="Agipix image slider">
+    <div class="emotions-slider" id="homeEmotionsSlider" aria-roledescription="carousel" aria-label="Agipix image slider">
       <div class="slider-nav">
         <button class="slider-nav__item" id="homeSliderPrev" type="button" aria-label="Previous image">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true">
-            <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
         </button>
         <button class="slider-nav__item" id="homeSliderNext" type="button" aria-label="Next image">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true">
-            <path d="M9 6L15 12L9 18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 6L15 12L9 18" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
         </button>
       </div>
 
-      <div class="swiper-wrapper" id="homeSliderTrack">
-
-        <article class="swiper-slide emotions-slider__slide">
+      <div class="swiper-wrapper" id="homeSliderTrack" tabindex="0" aria-label="Slides (scroll horizontally)">
+        <article class="emotions-slider__slide" aria-roledescription="slide" aria-label="1 of 3">
           <div class="emotions-slider-item">
-            <a href="{{ '/benchmark.html' | relative_url }}"
-              style="text-decoration: none; color: inherit; display: block;">
+            <a class="emotions-slider-item__link" href="{{ '/benchmark.html' | relative_url }}">
               <div class="emotions-slider-item__image">
-                <img src="{{ '/assets/images/diag/compare.jpg' | relative_url }}" alt="Platform comparison figure">
+                {% include picture.html src="assets/images/diag/compare.jpg" alt="Comparison of Agipix with representative industrial and research aerial platforms" sizes="(min-width: 1290px) 980px, 90vw" %}
                 <div class="emotions-slider-item__caption">Comparison with representative industrial and research aerial
                   platforms. <strong>Click to view benchmark methodology.</strong></div>
               </div>
@@ -134,153 +122,65 @@ title: Home
           </div>
         </article>
 
-        <article class="swiper-slide emotions-slider__slide">
+        <article class="emotions-slider__slide" aria-roledescription="slide" aria-label="2 of 3">
           <div class="emotions-slider-item">
             <div class="emotions-slider-item__image">
-              <img src="{{ '/assets/images/banner_paper.png' | relative_url }}" alt="AgiPIX paper banner">
-              <div class="emotions-slider-item__caption">AgiPIX platform overview across simulation and real deployment.
-              </div>
+              {% include picture.html src="assets/images/banner_paper.png" alt="AgiPIX overview: AgiSIM digital twin and AgiREAL deployment around the drone" sizes="(min-width: 1290px) 980px, 90vw" zoom=true %}
+              <div class="emotions-slider-item__caption">AgiPIX platform overview across simulation and real deployment.</div>
             </div>
           </div>
         </article>
 
-
-
-        <article class="swiper-slide emotions-slider__slide">
+        <article class="emotions-slider__slide" aria-roledescription="slide" aria-label="3 of 3">
           <div class="emotions-slider-item">
             <div class="emotions-slider-item__image">
-              <img src="{{ '/assets/images/result/map.png' | relative_url }}" alt="Mapping result">
-              <div class="emotions-slider-item__caption">Indoor mapping and exploration output from field validation
-                runs.</div>
+              {% include picture.html src="assets/images/result/map.png" alt="Indoor map produced during a field validation run" sizes="(min-width: 1290px) 980px, 90vw" zoom=true %}
+              <div class="emotions-slider-item__caption">Indoor mapping and exploration output from field validation runs.</div>
             </div>
           </div>
         </article>
       </div>
 
-      <div class="slider-pagination" id="homeSliderPagination" aria-label="Slider pagination"></div>
+      <div class="slider-pagination" id="homeSliderPagination" aria-label="Choose a slide"></div>
     </div>
   </div>
 </section>
 
-<script>
-  (function () {
-    const slider = document.getElementById('homeEmotionsSlider');
-    const track = document.getElementById('homeSliderTrack');
-    const prevBtn = document.getElementById('homeSliderPrev');
-    const nextBtn = document.getElementById('homeSliderNext');
-    const pagination = document.getElementById('homeSliderPagination');
-    if (!slider || !track || !prevBtn || !nextBtn || !pagination) return;
-
-    const slides = Array.from(track.querySelectorAll('.emotions-slider__slide'));
-    if (!slides.length) return;
-
-    let activeIndex = 0;
-
-    slides.forEach(function (_, i) {
-      const dot = document.createElement('button');
-      dot.type = 'button';
-      dot.className = 'slider-pagination__item';
-      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
-      dot.addEventListener('click', function () {
-        setActive(i, true);
-      });
-      pagination.appendChild(dot);
-    });
-
-    const dots = Array.from(pagination.querySelectorAll('.slider-pagination__item'));
-
-    function setActive(index, smooth) {
-      activeIndex = Math.max(0, Math.min(index, slides.length - 1));
-
-      prevBtn.classList.toggle('disabled', activeIndex === 0);
-      nextBtn.classList.toggle('disabled', activeIndex === slides.length - 1);
-
-      dots.forEach(function (dot, i) {
-        dot.classList.toggle('active', i === activeIndex);
-      });
-
-      // Keep page scroll position stable; only move the horizontal slider track.
-      track.scrollTo({
-        left: slides[activeIndex].offsetLeft,
-        behavior: smooth ? 'smooth' : 'auto'
-      });
-    }
-
-    function detectActiveFromScroll() {
-      const center = track.scrollLeft + track.clientWidth / 2;
-      let best = 0;
-      let min = Infinity;
-
-      slides.forEach(function (slide, i) {
-        const slideCenter = slide.offsetLeft + slide.clientWidth / 2;
-        const dist = Math.abs(slideCenter - center);
-        if (dist < min) {
-          min = dist;
-          best = i;
-        }
-      });
-
-      if (best !== activeIndex) {
-        activeIndex = best;
-        prevBtn.classList.toggle('disabled', activeIndex === 0);
-        nextBtn.classList.toggle('disabled', activeIndex === slides.length - 1);
-        dots.forEach(function (dot, i) {
-          dot.classList.toggle('active', i === activeIndex);
-        });
-      }
-    }
-
-    prevBtn.addEventListener('click', function () {
-      if (activeIndex > 0) setActive(activeIndex - 1, true);
-    });
-
-    nextBtn.addEventListener('click', function () {
-      if (activeIndex < slides.length - 1) setActive(activeIndex + 1, true);
-    });
-
-    track.addEventListener('scroll', function () {
-      window.requestAnimationFrame(detectActiveFromScroll);
-    }, { passive: true });
-
-    setActive(0, false);
-  })();
-</script>
-
-<section class="quick-start">
+<section class="quick-start reveal">
   <h2>Quick Start</h2>
 
   <div class="quick-start-video">
-    <iframe src="https://www.youtube.com/embed/__Awe89ndag" title="Agipix Video Presentation" frameborder="0"
+    <iframe loading="lazy" src="https://www.youtube.com/embed/__Awe89ndag" title="Agipix video presentation"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen></iframe>
+      referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
 
   <div class="quick-start-grid">
     <div class="quick-start-card">
-      <h3>🖥️ Simulation</h3>
+      <h3><span aria-hidden="true">🖥️</span> Simulation</h3>
       <ul>
-        <li><a href="{{ '/docs/sim/2_setup_sim' | relative_url }}">Simulation Setup Guide</a></li>
+        <li><a href="{{ '/docs/sim/2_setup_sim.html' | relative_url }}">Simulation Setup Guide</a></li>
         <li>Isaac Sim Integration</li>
-        <li>ROS 2 Docker Containers</li>
+        <li><a href="{{ '/docs/sim/1_docker_build.html' | relative_url }}">ROS 2 Docker Containers</a></li>
         <li>Digital Twin Environment</li>
       </ul>
     </div>
 
     <div class="quick-start-card">
-      <h3>🔧 Hardware</h3>
+      <h3><span aria-hidden="true">🔧</span> Hardware</h3>
       <ul>
-        <li><a href="{{ '/docs/real/1_hardware_assembly' | relative_url }}">Hardware Assembly</a></li>
-        <li><a href="{{ '/docs/real/2_flashing_hardware' | relative_url }}">Flashing Firmware</a></li>
-        <li><a href="{{ '/docs/real/9_software_setup' | relative_url }}">Software Setup</a></li>
+        <li><a href="{{ '/docs/real/1_hardware_assembly.html' | relative_url }}">Hardware Assembly</a></li>
+        <li><a href="{{ '/docs/real/2_flashing_hardware.html' | relative_url }}">Flashing Firmware</a></li>
+        <li><a href="{{ '/docs/real/9_software_setup.html' | relative_url }}">Software Setup</a></li>
         <li><a href="{{ '/bom.html' | relative_url }}">Bill of Materials</a></li>
       </ul>
     </div>
 
     <div class="quick-start-card">
-      <h3>🤖 Autonomy</h3>
+      <h3><span aria-hidden="true">🤖</span> Autonomy</h3>
       <ul>
-        <li><a href="{{ '/docs/autonomy/1_perception' | relative_url }}">Navigation & Mapping</a></li>
-        <li><a href="{{ '/docs/autonomy/2_planning_control' | relative_url }}">Planning & Control</a></li>
+        <li><a href="{{ '/docs/autonomy/1_perception.html' | relative_url }}">Navigation &amp; Mapping</a></li>
+        <li><a href="{{ '/docs/autonomy/2_planning_control.html' | relative_url }}">Planning &amp; Control</a></li>
         <li>Exploration Algorithms</li>
         <li>PX4 Integration</li>
       </ul>
@@ -288,190 +188,69 @@ title: Home
   </div>
 </section>
 
-<section class="highlights">
+<section class="highlights reveal" id="release-schedule">
   <h2>Release Schedule</h2>
-  <div class="doc-content" style="background: rgba(10, 10, 10, 0.5); border-radius: 12px; padding: 2rem;">
-    <style>
-      .timeline {
-        position: relative;
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 20px 0;
-      }
-
-      .timeline::after {
-        content: '';
-        position: absolute;
-        width: 4px;
-        background-color: var(--secondary-bg, #1a1a1a);
-        top: 0;
-        bottom: 0;
-        left: 50%;
-        margin-left: -2px;
-        border-radius: 2px;
-      }
-
-      .timeline-container {
-        padding: 10px 40px;
-        position: relative;
-        width: 50%;
-        box-sizing: border-box;
-      }
-
-      .timeline-container::after {
-        content: '';
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        background-color: var(--primary-bg, #0a0a0a);
-        border: 4px solid var(--accent-red, #8b1a1a);
-        top: 15px;
-        border-radius: 50%;
-        z-index: 1;
-      }
-
-      .timeline-left {
-        left: 0;
-      }
-
-      .timeline-right {
-        left: 50%;
-      }
-
-      .timeline-left::after {
-        right: -14px;
-      }
-
-      .timeline-right::after {
-        left: -14px;
-      }
-
-      .timeline-content {
-        padding: 20px 30px;
-        background-color: var(--secondary-bg, #1a1a1a);
-        position: relative;
-        border-radius: 8px;
-        border: 1px solid var(--border-color, #333);
-      }
-
-      .timeline-date {
-        font-weight: bold;
-        color: var(--text-primary, #e0e0e0);
-        margin-bottom: 10px;
-        font-size: 1.1em;
-      }
-
-      .timeline-status {
-        display: inline-block;
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-        font-size: 0.85rem;
-        font-weight: bold;
-        margin-top: 10px;
-      }
-
-      .status-released {
-        background-color: rgba(0, 128, 0, 0.2);
-        color: #4ade80;
-      }
-
-      .status-progress {
-        background-color: rgba(255, 165, 0, 0.2);
-        color: orange;
-      }
-
-      .status-scheduled {
-        background-color: rgba(255, 255, 255, 0.1);
-        color: var(--text-secondary, #a0a0a0);
-      }
-
-      .status-planned {
-        background-color: rgba(255, 255, 255, 0.1);
-        color: var(--text-secondary, #a0a0a0);
-      }
-
-      @media screen and (max-width: 768px) {
-        .timeline::after {
-          left: 31px;
-        }
-
-        .timeline-container {
-          width: 100%;
-          padding-left: 70px;
-          padding-right: 0px;
-        }
-
-        .timeline-container::after {
-          left: 17px;
-        }
-
-        .timeline-right {
-          left: 0;
-        }
-      }
-    </style>
-
-    <div class="timeline">
-      <div class="timeline-container timeline-left">
+  <div class="panel">
+    <ol class="timeline">
+      <li class="timeline-container timeline-left">
         <div class="timeline-content">
-          <div class="timeline-date">15th March</div>
-          <p style="color: var(--text-primary);"><strong>Public Release</strong></p>
-          <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0; color: var(--text-secondary); line-height: 1.5;">
-            <li>Documentation: System Overview, Hardware & Sim Setup, Software/Autonomy</li>
+          <p class="timeline-date">15th March</p>
+          <p class="timeline-name">Public Release</p>
+          <ul class="timeline-list">
+            <li>Documentation: System Overview, Hardware &amp; Sim Setup, Software/Autonomy</li>
           </ul>
           <span class="timeline-status status-released">Released</span>
         </div>
-      </div>
-      <div class="timeline-container timeline-left">
+      </li>
+      <li class="timeline-container timeline-left">
         <div class="timeline-content">
-          <div class="timeline-date">09th April</div>
-          <p style="color: var(--text-primary);"><strong>Preprint published on Arxiv</strong></p>
+          <p class="timeline-date">09th April</p>
+          <p class="timeline-name">Preprint published on <a href="{{ arxiv_abs }}" target="_blank" rel="noopener">arXiv</a></p>
           <span class="timeline-status status-released">Released</span>
         </div>
-      </div>
-      <div class="timeline-container timeline-left">
+      </li>
+      <li class="timeline-container timeline-left">
         <div class="timeline-content">
-          <div class="timeline-date">20th April</div>
-          <p style="color: var(--text-primary);"><strong>Paper accepted at ICUAS 2026</strong></p>
+          <p class="timeline-date">20th April</p>
+          <p class="timeline-name">Paper selected for {{ P.venue_short }}</p>
           <span class="timeline-status status-released">Released</span>
         </div>
-      </div>
-      <div class="timeline-container timeline-left">
+      </li>
+      <li class="timeline-container timeline-left">
         <div class="timeline-content">
-          <div class="timeline-date">12th May</div>
-          <p style="color: var(--text-primary);"><strong>Real-time OS support with scheduler</strong></p>
+          <p class="timeline-date">12th May</p>
+          <p class="timeline-name">Real-time OS support with scheduler</p>
           <span class="timeline-status status-released">Released</span>
         </div>
-      </div>
-      <div class="timeline-container timeline-left">
+      </li>
+      <li class="timeline-container timeline-left">
         <div class="timeline-content">
-          <div class="timeline-date">05th June</div>
-          <p style="color: var(--text-primary);"><strong>Hardware Syncronisation with ESP32 TimerSync Bridge</strong>
-          </p>
+          <p class="timeline-date">05th June</p>
+          <p class="timeline-name">Hardware Synchronisation with ESP32 TimerSync Bridge</p>
           <span class="timeline-status status-released">Released</span>
         </div>
-      </div>
-      <div class="timeline-container timeline-right">
+      </li>
+      <li class="timeline-container timeline-right">
         <div class="timeline-content">
-          <div class="timeline-date">15th June</div>
-          <p style="color: var(--text-primary);"><strong>Presentation</strong></p>
-          <p style="margin-top: 0.5rem; color: var(--text-secondary); line-height: 1.5;">Official presentation at ICUAS
-            2026.</p>
+          <p class="timeline-date">15th June</p>
+          <p class="timeline-name">Presentation</p>
+          <p class="timeline-text">Official presentation at {{ P.venue_short }}. Published in the proceedings, pp. {{ P.pages }}
+            (<a href="{{ doi_url }}" target="_blank" rel="noopener">DOI</a>).</p>
           <span class="timeline-status status-released">Presented</span>
         </div>
-      </div>
-      <div class="timeline-container timeline-left">
+      </li>
+      <li class="timeline-container timeline-left">
         <div class="timeline-content">
-          <div class="timeline-date">10th July</div>
-          <p style="color: var(--text-primary);"><strong>CAD files release</strong></p>
+          <p class="timeline-date">10th July</p>
+          <p class="timeline-name">CAD files release</p>
           <span class="timeline-status status-released">Released</span>
         </div>
-      </div>
-      <div class="timeline-container timeline-right">
+      </li>
+      <li class="timeline-container timeline-right">
         <div class="timeline-content">
-          <div class="timeline-date">After 15th July</div>
-          <p style="color: var(--text-primary);"><strong>Documentation & OS Upgrades</strong></p>
-          <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0; color: var(--text-secondary); line-height: 1.5;">
+          <p class="timeline-date">After 15th July</p>
+          <p class="timeline-name">Documentation &amp; OS Upgrades</p>
+          <ul class="timeline-list">
             <li>Documentation: Data-driven Autonomy Setup, UI Setup</li>
             <li>3D Gaussian Splat for GUI rendering in RVIZ side</li>
             <li>Video and quick start guides</li>
@@ -479,119 +258,81 @@ title: Home
           </ul>
           <span class="timeline-status status-progress">In Progress</span>
         </div>
-      </div>
-      <div class="timeline-container timeline-right">
+      </li>
+      <li class="timeline-container timeline-right">
         <div class="timeline-content">
-          <div class="timeline-date">Next 2 months</div>
-          <p style="color: var(--text-primary);"><strong>FORREST Dataset Release</strong></p>
-          <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0; color: var(--text-secondary); line-height: 1.5;">
+          <p class="timeline-date">Next 2 months</p>
+          <p class="timeline-name">FORREST Dataset Release</p>
+          <ul class="timeline-list">
             <li>FORest Reconstruction for Exploration by Sub-canopy Terrestrial-mapping</li>
             <li>Accompanying annotated dataset</li>
           </ul>
           <span class="timeline-status status-planned">Planned</span>
         </div>
-      </div>
-      <div class="timeline-container timeline-right">
+      </li>
+      <li class="timeline-container timeline-right">
         <div class="timeline-content">
-          <div class="timeline-date">Future</div>
-          <p style="color: var(--text-primary);"><strong>Long-term Enhancements</strong></p>
-          <ul style="margin: 0.5rem 0 0 1.5rem; padding: 0; color: var(--text-secondary); line-height: 1.5;">
+          <p class="timeline-date">Future</p>
+          <p class="timeline-name">Long-term Enhancements</p>
+          <ul class="timeline-list">
             <li>MANET mesh networking integration</li>
             <li>Compliant crash structure update</li>
           </ul>
           <span class="timeline-status status-planned">Planned</span>
         </div>
-      </div>
-    </div>
+      </li>
+    </ol>
   </div>
 </section>
 
-<section class="highlights">
+<section class="highlights reveal" id="collaborate">
   <h2>Collaborate with Us</h2>
-  <div class="doc-content" style="background: rgba(10, 10, 10, 0.5); border-radius: 12px; padding: 2rem;">
-    <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Interested in joining the AgiPIX project? Fill out
-      the form below to send an email request to the project maintainers with your details.</p>
-    <form id="collabForm" style="display: flex; flex-direction: column; gap: 1rem; max-width: 600px;">
-      <div style="display: flex; flex-direction: column;">
-        <label for="collabName"
-          style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: bold;">Name:</label>
-        <input type="text" id="collabName" required
-          style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color);">
+  <div class="panel">
+    <p class="panel-intro">Interested in joining the AgiPIX project? Fill out the form below to send an email request to
+      the project maintainers with your details.</p>
+    <form id="collabForm" class="collab-form" data-mailto="sasa.kuruppuarachchi@tuni.fi" data-cc="joni.kamarainen@tuni.fi">
+      <div class="field">
+        <label for="collabName">Name</label>
+        <input type="text" id="collabName" name="name" autocomplete="name" required>
       </div>
-      <div style="display: flex; flex-direction: column;">
-        <label for="collabEmail" style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: bold;">Email
-          Address:</label>
-        <input type="email" id="collabEmail" required
-          style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color);">
+      <div class="field">
+        <label for="collabEmail">Email Address</label>
+        <input type="email" id="collabEmail" name="email" autocomplete="email" required>
       </div>
-      <div style="display: flex; flex-direction: column;">
-        <label for="collabAffiliation"
-          style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: bold;">Affiliation
-          (University/Company):</label>
-        <input type="text" id="collabAffiliation" required
-          style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color);">
+      <div class="field">
+        <label for="collabAffiliation">Affiliation (University/Company)</label>
+        <input type="text" id="collabAffiliation" name="affiliation" autocomplete="organization" required>
       </div>
-      <div style="display: flex; flex-direction: column;">
-        <label for="collabGithub" style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: bold;">GitHub
-          Username:</label>
-        <input type="text" id="collabGithub" required
-          style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color);">
+      <div class="field">
+        <label for="collabGithub">GitHub Username</label>
+        <input type="text" id="collabGithub" name="github" autocomplete="username" required>
       </div>
-      <div style="display: flex; flex-direction: column;">
-        <label for="collabInterest"
-          style="color: var(--text-secondary); margin-bottom: 0.5rem; font-weight: bold;">Reason for Joining / Area of
-          Interest:</label>
-        <textarea id="collabInterest" rows="4" required
-          style="padding: 0.75rem; border-radius: 6px; border: 1px solid var(--border-color); background: rgba(255,255,255,0.05); color: var(--text-color);"></textarea>
+      <div class="field">
+        <label for="collabInterest">Reason for Joining / Area of Interest</label>
+        <textarea id="collabInterest" name="interest" rows="4" required></textarea>
       </div>
-      <button type="submit" class="btn btn-secondary"
-        style="align-self: flex-start; margin-top: 1rem; cursor: pointer; border: 1px solid var(--border-color); font-size: 1rem;">Send
-        Request via Email</button>
+      <button type="submit" class="btn btn-secondary">Send Request via Email</button>
     </form>
   </div>
-  <script>
-    document.getElementById('collabForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      var name = document.getElementById('collabName').value;
-      var email = document.getElementById('collabEmail').value;
-      var affiliation = document.getElementById('collabAffiliation').value;
-      var github = document.getElementById('collabGithub').value;
-      var interest = document.getElementById('collabInterest').value;
-
-      var subject = encodeURIComponent("Joining AgiPIX Project");
-      var body = encodeURIComponent("Name: " + name + "\nEmail: " + email + "\nAffiliation: " + affiliation + "\nGitHub Username: " + github + "\n\nReason for Joining / Interest:\n" + interest);
-      var mailtoUrl = "mailto:sasa.kuruppuarachchi@tuni.fi?cc=joni.kamarainen@tuni.fi&subject=" + subject + "&body=" + body;
-
-      window.location.href = mailtoUrl;
-    });
-  </script>
 </section>
 
-<!-- <section class="highlights">
-  <h2>Repository Layout</h2>
-  <div class="doc-content" style="background: rgba(10, 10, 10, 0.5);">
-    <ul style="color: var(--text-secondary); line-height: 2;">
-      <li><code>docs/</code> — Setup and usage guides</li>
-      <li><code>bom/</code> — <a href="{{ '/bom.html' | relative_url }}">Bill of Materials</a></li>
-      <li><code>cad/</code> — Mechanical CAD (designs and fabrication)</li>
-      <li><code>model_exports/</code> — Exported models (STL/USD) for sim and docs</li>
-      <li><code>calibration/</code> — Calibration assets (real and sim)</li>
-      <li><code>assets/</code> — Images, videos, and datasheets used in docs</li>
-    </ul>
-  </div>
-</section> -->
-
-<section class="highlights">
+<section class="highlights reveal" id="cite">
   <h2>Cite this work</h2>
-  <div class="doc-content" style="background: rgba(10, 10, 10, 0.5);">
-    <pre style="color: var(--text-secondary); overflow-x: auto; padding: 1rem;">@misc{arachchige2026agipixbridgingsimulationreality,
-      title={AgiPIX: Bridging Simulation and Reality in Indoor Aerial Inspection}, 
-      author={Sasanka Kuruppu Arachchige and Juan Jose Garcia and Changda Tian and Lauri Suomela and Panos Trahanias and Adriana Tapus and Joni-Kristian Kämäräinen},
-      year={2026},
-      eprint={2604.08009},
-      archivePrefix={arXiv},
-      primaryClass={cs.RO},
-      url={https://arxiv.org/abs/2604.08009}, 
-}</pre>
+  <div class="panel paper-card">
+    <p class="paper-card__venue">{{ P.venue }} {{ P.year }}, pp. {{ P.pages }}</p>
+    <h3 class="paper-card__title">{{ P.title }}</h3>
+    <p class="paper-card__authors">{% for a in P.authors %}{{ a.first }} {{ a.last }}{% unless forloop.last %}, {% endunless %}{% endfor %}</p>
+    <p class="paper-card__links">
+      <a class="pill" href="{{ arxiv_pdf }}" target="_blank" rel="noopener">Read paper (arXiv PDF)</a>
+      <a class="pill" href="{{ doi_url }}" target="_blank" rel="noopener">DOI: {{ P.doi }}</a>
+      <a class="pill" href="{{ arxiv_abs }}" target="_blank" rel="noopener">arXiv:{{ P.arxiv }}</a>
+      <a class="pill" href="{{ P.code }}" target="_blank" rel="noopener">Code</a>
+      <a class="pill" href="{{ P.pdf | relative_url }}" target="_blank" rel="noopener">PDF on this site <span class="filesize">({{ P.pdf_size }})</span></a>
+    </p>
+    {%- capture bib %}{% include bibtex.txt %}{% endcapture %}
+    <div class="bibtex">
+      <div class="bibtex__bar"><span>BibTeX</span><button class="tool" type="button" data-copy="{{ bib | strip | escape }}">{% include icon.html name="copy" %}<span>Copy</span></button></div>
+      <pre><code>{{ bib | strip | escape }}</code></pre>
+    </div>
   </div>
 </section>

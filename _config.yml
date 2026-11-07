@@ -1,8 +1,31 @@
 # Agipix GitHub Pages Configuration
+# Built by GitHub Pages itself (github-pages gem, Jekyll 3.10, whitelisted plugins only).
 title: Agipix
-description: "An Open Sourced Aerial Autonomy from Sim-to-Real"
+description: "An open aerial autonomy platform from simulation to reality: hardware, ROS 2 autonomy stack and Isaac Sim digital twin for indoor inspection."
 url: "https://sasakuruppuarachchi.github.io"
 baseurl: "/agipix"
+lang: en
+locale: en_US
+author: Sasanka Kuruppu Arachchige
+google_analytics: G-J5VYH61SR2
+
+# Where this site's sources live (edit links, "Copy as Markdown", license)
+site_repo: "https://github.com/SasaKuruppuarachchi/agipix"
+site_branch: main
+# The autonomy code repository ("View on GitHub" buttons)
+code_repo: "https://github.com/SasaKuruppuarachchi/agipix_autonomy"
+
+# Social preview (jekyll-seo-tag)
+twitter:
+  card: summary_large_image
+social:
+  name: Agipix
+  links:
+    - https://github.com/SasaKuruppuarachchi/agipix
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 # Build settings
 markdown: kramdown
@@ -19,6 +42,7 @@ exclude:
   - todo/
   - root.tex
   - flashing_hardware.Md
+  - scripts/
   - .git/
   - .gitignore
   - .vscode/
@@ -49,6 +73,18 @@ defaults:
       path: ""
     values:
       layout: "default"
+      image: /assets/images/social-card.jpg
+  # Internal notes: still published at their old URLs, but kept out of the sitemap
+  - scope: { path: "SITE_SUMMARY.md" }
+    values: { sitemap: false }
+  - scope: { path: "DEPLOYMENT_GUIDE.md" }
+    values: { sitemap: false }
+  - scope: { path: "GITHUB_PAGES_README.md" }
+    values: { sitemap: false }
+  - scope: { path: "PROJECT_COMPLETION_SUMMARY.md" }
+    values: { sitemap: false }
+  - scope: { path: "assets" }
+    values: { sitemap: false }
 
 # GitHub repository
 github:

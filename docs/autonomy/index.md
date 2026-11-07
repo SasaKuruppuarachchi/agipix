@@ -1,5 +1,6 @@
 ---
-title: Overview
+title: Autonomy overview
+nav_title: Overview
 layout: doc
 wip: true
 ---
@@ -7,7 +8,7 @@ wip: true
 
 Use this page to navigate the AgiAUTO stack used identically in simulation and real flights.
 
-![Autonomy overview](../../assets/images/diag/auto_overview.png)
+![AgiAUTO autonomy stack overview](../../assets/images/diag/auto_overview.png)
 
 ## Perception
 

@@ -1,0 +1,18 @@
+---
+layout: default
+title: Page not found
+permalink: /404.html
+sitemap: false
+description: "This page does not exist. Search the Agipix documentation or start from the docs hub."
+---
+<section class="hero notfound">
+  <p class="notfound__code" aria-hidden="true">404</p>
+  <h2 class="hero-title">Signal lost</h2>
+  <p class="hero-description">This page doesn't exist, or it moved. The documentation is searchable, and every guide is listed in the docs hub.</p>
+  <div class="hero-actions">
+    <button class="btn" type="button" data-cmdk-open>Search the docs</button>
+    <a class="btn btn-secondary" href="{{ '/docs/' | relative_url }}">Docs hub</a>
+    <a class="btn btn-secondary" href="{{ '/' | relative_url }}">Home</a>
+  </div>
+  <p class="hero-note notfound__path" hidden>You asked for <code></code></p>
+</section>

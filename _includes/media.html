@@ -1,0 +1,21 @@
+{%- comment -%}
+  Post-processes rendered HTML (include.html):
+  - swaps images listed in _data/media.yml for their web derivatives, adding
+    width/height (no layout shift), a srcset, and data-full (the original, for the lightbox)
+  - lazy-loads images and iframes, wraps tables in a scroll container
+{%- endcomment -%}
+{%- assign _html = include.html -%}
+{%- for m in site.data.media -%}
+  {%- if m.webp != m.src -%}
+    {%- capture _from -%}{{ m.src }}"{%- endcapture -%}
+    {%- if _html contains _from -%}
+      {%- capture _to -%}{{ m.webp }}" width="{{ m.w }}" height="{{ m.h }}"{% if m.sm != "" %} srcset="{{ m.sm | prepend: '/' | relative_url }} {{ m.sm_w }}w, {{ m.webp | prepend: '/' | relative_url }} {{ m.w }}w" sizes="(min-width: 1180px) 760px, 94vw"{% endif %} data-large="{{ m.webp | prepend: '/' | relative_url }}" data-full="{{ m.src | prepend: '/' | relative_url }}"{%- endcapture -%}
+      {%- assign _html = _html | replace: _from, _to -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{{- _html
+  | replace: '<img ', '<img loading="lazy" decoding="async" '
+  | replace: '<iframe', '<iframe loading="lazy"'
+  | replace: '<table', '<div class="table-wrap" tabindex="0" role="region" aria-label="Table (scrolls horizontally)"><table'
+  | replace: '</table>', '</table></div>' -}}

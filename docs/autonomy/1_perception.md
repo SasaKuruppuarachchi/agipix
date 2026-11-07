@@ -1,12 +1,13 @@
 ---
-title: Autonomy-Perception
+title: "Perception: AGIptive-LIOM"
 layout: doc
 nav_title: Perception
+math: true
 ---
 # Agipix Autonomy: Perception
 <div align="center">
-  <h1><strong>AGIptive-LIOM</strong></h1>
-  <h3><strong>Degradation-Resilient Continuous-Time LiDAR-Inertial Odometry and Mapping</strong></h3>
+  <p class="lede-title"><strong>AGIptive-LIOM</strong></p>
+  <p class="lede-sub"><strong>Degradation-Resilient Continuous-Time LiDAR-Inertial Odometry and Mapping</strong></p>
 
   <p>
     <a href="https://sasakuruppuarachchi.github.io/" target='_blank'><strong>Sasanka Kuruppu Arachchige</strong></a><sup>1,*†</sup>
@@ -27,19 +28,19 @@ nav_title: Perception
 </div>
 
 ---
-<p align="center">
-  <img src="../../assets/images/result/result_liom.png" width="47.2%">
-  <img src="../../assets/images/result/result_liom_1.png" width="50.8%">
-  <br><em>The mapping result of AGIptive-LIOM at Hervanta rock.</em>
-</p>
+<figure class="two-up">
+  <img src="../../assets/images/result/result_liom.png" alt="AGIptive-LIOM point-cloud map of Hervanta rock, view 1">
+  <img src="../../assets/images/result/result_liom_1.png" alt="AGIptive-LIOM point-cloud map of Hervanta rock, view 2">
+  <figcaption>The mapping result of AGIptive-LIOM at Hervanta rock.</figcaption>
+</figure>
 
 ## 📖 Overview
 
 **AGIptive-LIOM** is an advanced, degradation-resilient Continuous-Time LiDAR-Inertial Odometry and Mapping (LIOM) framework engineered for resource-constrained Unmanned Aerial Vehicles (UAVs) operating in complex, unstructured, and GPS-denied environments (such as dense forest canopies, subterranean caverns, and cluttered industrial facilities).
 
-Conventional aerial LIO systems experience catastrophic divergence in dense foliage due to geometric degeneracy ($\lambda_1 \approx \lambda_2 \approx \lambda_3$), unconstrained ESKF gravity drift during double integration, and place recognition failures when solid-state LiDARs are mounted obliquely (e.g., $45^\circ$ downward pitch). **AGIptive-LIOM** introduces a complete mathematical and architectural solution:
+Conventional aerial LIO systems experience catastrophic divergence in dense foliage due to geometric degeneracy ($$\lambda_1 \approx \lambda_2 \approx \lambda_3$$), unconstrained ESKF gravity drift during double integration, and place recognition failures when solid-state LiDARs are mounted obliquely (e.g., $$45^\circ$$ downward pitch). **AGIptive-LIOM** introduces a complete mathematical and architectural solution:
 
-1. **Gravity-Aligned Local Horizontal Transformation ($T_{\text{horiz}}$)**: Restores true $360^\circ$ yaw invariance for 2D polar bird's-eye place recognition descriptors under arbitrary sensor tilt.
+1. **Gravity-Aligned Local Horizontal Transformation ($$T_{\text{horiz}}$$)**: Restores true $$360^\circ$$ yaw invariance for 2D polar bird's-eye place recognition descriptors under arbitrary sensor tilt.
 2. **Degeneracy-Aware Kinematic Prior Fallback**: Physical velocity/acceleration envelopes in continuous-time Ceres optimization prevent single-frame solver divergence jumps in unstructured vegetation.
 3. **ESKF Gravity Vector State Invariant**: Anchors the world vertical axis permanently to true physical gravity, eliminating fictitious acceleration integration and vertical drift.
 4. **6-Stage Cascaded Loop Verification Gate & Asynchronous SE(3) Ceres PGO**: High-precision place recognition with submap Point-to-Plane ICP and background 6-DoF graph optimization.
@@ -48,10 +49,10 @@ Conventional aerial LIO systems experience catastrophic divergence in dense foli
 
 ## 🏗️ System Architecture
 
-<p align="center">
-  <img src="../../assets/images/result/overview.png" width="95%" alt="AGIptive-LIOM System Architecture"/>
-  <br><em>Figure 1: Complete pipeline architecture of AGIptive-LIOM showing sensor synchronization, frontend continuous-time odometry, and asynchronous backend mapping & pose graph optimization.</em>
-</p>
+<figure>
+  <img src="../../assets/images/result/overview.png" alt="AGIptive-LIOM System Architecture"/>
+  <figcaption>Figure 1: Complete pipeline architecture of AGIptive-LIOM showing sensor synchronization, frontend continuous-time odometry, and asynchronous backend mapping &amp; pose graph optimization.</figcaption>
+</figure>
 
 The system operates across three decoupled, high-performance pipelines:
 - **Data Ingestion & Hardware Time Sync**: Synchronizes Livox Mid-360 LiDAR point clouds and high-rate IMU telemetry over microsecond-accurate hardware clocks.
@@ -62,15 +63,15 @@ The system operates across three decoupled, high-performance pipelines:
 
 ## 🔬 Core Innovations & Mathematical Formulations
 
-### 1. Gravity-Aligned Local Horizontal Coordinate Frame ($T_{\text{horiz}}$)
-When a LiDAR is mounted at a $45^\circ$ downward pitch, projecting point clouds into the sensor frame destroys polar descriptor consistency across changing heading angles. AGIptive-LIOM levels descriptors into a gravity-aligned horizontal frame:
+### 1. Gravity-Aligned Local Horizontal Coordinate Frame ($$T_{\text{horiz}}$$)
+When a LiDAR is mounted at a $$45^\circ$$ downward pitch, projecting point clouds into the sensor frame destroys polar descriptor consistency across changing heading angles. AGIptive-LIOM levels descriptors into a gravity-aligned horizontal frame:
 
-1. Extract the current world pose $T_{W} = \begin{bmatrix} R_{W} & \mathbf{t}_{W} \\ \mathbf{0}^T & 1 \end{bmatrix}$ and horizontal yaw angle $\psi = \text{atan2}(R_{W(1,0)}, R_{W(0,0)})$.
+1. Extract the current world pose $$T_{W} = \begin{bmatrix} R_{W} & \mathbf{t}_{W} \\ \mathbf{0}^T & 1 \end{bmatrix}$$ and horizontal yaw angle $$\psi = \text{atan2}(R_{W(1,0)}, R_{W(0,0)})$$.
 2. Construct the horizontal body frame:
    $$T_{\text{horiz}} = \begin{bmatrix} \text{RotZ}(\psi) & \mathbf{t}_{W} \\ \mathbf{0}^T & 1 \end{bmatrix}$$
 3. Transform point clouds prior to Scan Context extraction:
    $$P_{\text{horiz}} = T_{\text{horiz}}^{-1} \cdot P_{\text{world}} = \text{RotZ}(\psi)^T (P_{\text{world}} - \mathbf{t}_{W})$$
-4. Elevation $Z_{\text{horiz}}$ is strictly parallel to true gravity, restoring exact rotation invariance across $360^\circ$ loops regardless of sensor tilt.
+4. Elevation $$Z_{\text{horiz}}$$ is strictly parallel to true gravity, restoring exact rotation invariance across $$360^\circ$$ loops regardless of sensor tilt.
 
 ```
        Oblique Body Frame (45° Tilt)           Gravity-Aligned Frame (T_horiz)
@@ -83,37 +84,37 @@ When a LiDAR is mounted at a $45^\circ$ downward pitch, projecting point clouds 
 ```
 
 ### 2. Degeneracy-Aware Kinematic Prior Fallback
-In unstructured foliage and open skies, point normal distributions lack geometric planar structure ($\lambda_1 \approx \lambda_2 \approx \lambda_3$), causing the Ceres CT-ICP Hessian matrix to become ill-conditioned. AGIptive-LIOM enforces a physical motion guardrail:
+In unstructured foliage and open skies, point normal distributions lack geometric planar structure ($$\lambda_1 \approx \lambda_2 \approx \lambda_3$$), causing the Ceres CT-ICP Hessian matrix to become ill-conditioned. AGIptive-LIOM enforces a physical motion guardrail:
 - If the iterative optimization step violates the physical envelope:
   $$\|\mathbf{t}_{\text{opt}} - \mathbf{t}_{\text{prior}}\| > 1.2\text{ m} \quad (\approx 12\text{ m/s}) \quad \text{or} \quad \Delta \theta > 25^\circ$$
 - The solver step is rejected, and the system automatically falls back to the continuous IMU state propagation prior, guaranteeing zero catastrophic divergence jumps.
 
 ### 3. ESKF Gravity Vector State Invariant
 Updating the 3D gravity error state via unconstrained LiDAR residuals in vegetation introduces fictitious tilt, triggering quadratic vertical velocity divergence. AGIptive-LIOM fixes the world vertical axis to physical gravity:
-- Sets `options_.update_gravity_ = false` and initial gravity covariance $\Sigma_g = \mathbf{0}_{3 \times 3}$.
-- Keeps $\mathbf{g}_{\text{world}} = [0, 0, -9.805]^T\text{ m/s}^2$ locked, eliminating altitude runaway during long flights.
+- Sets `options_.update_gravity_ = false` and initial gravity covariance $$\Sigma_g = \mathbf{0}_{3 \times 3}$$.
+- Keeps $$\mathbf{g}_{\text{world}} = [0, 0, -9.805]^T\text{ m/s}^2$$ locked, eliminating altitude runaway during long flights.
 
 ### 4. 6-Stage Cascaded Loop Verification Gate
 To eliminate false loop closures in repetitive tree trunks and canopy foliage:
-- **Gate 1 (Proximity)**: KD-Tree search radius $\le 15.0\text{ m}$, keyframe interval $\ge 25$ frames.
-- **Gate 2 (Descriptor Distance)**: Scan Context cosine distance $D_{SC} \le 0.28$.
-- **Gate 3 (Submap ICP)**: 9-keyframe target submap Point-to-Plane ICP alignment ($RMS \le 0.30\text{ m}$).
-- **Gate 4 (Inlier Ratio)**: Minimum $60\%$ inlier overlap ratio with nearest neighbor threshold $\le 0.25\text{ m}$.
-- **Gate 5 (Kinematic Deviation)**: Odometry consistency bound ($\|\Delta \mathbf{t}\| \le 0.8\text{ m}, |\Delta z| \le 0.40\text{ m}, |\Delta \text{yaw}| \le 20^\circ$) preventing graph distortion.
-- **Gate 6 (Asynchronous Ceres SE3 PGO)**: Solves 6-DoF pose graph on a low-priority background thread with locked roll/pitch variance ($10^{-4}$), ensuring zero latency impact on 200 Hz odometry.
+- **Gate 1 (Proximity)**: KD-Tree search radius $$\le 15.0\text{ m}$$, keyframe interval $$\ge 25$$ frames.
+- **Gate 2 (Descriptor Distance)**: Scan Context cosine distance $$D_{SC} \le 0.28$$.
+- **Gate 3 (Submap ICP)**: 9-keyframe target submap Point-to-Plane ICP alignment ($$RMS \le 0.30\text{ m}$$).
+- **Gate 4 (Inlier Ratio)**: Minimum $$60\%$$ inlier overlap ratio with nearest neighbor threshold $$\le 0.25\text{ m}$$.
+- **Gate 5 (Kinematic Deviation)**: Odometry consistency bound ($$\Vert \Delta \mathbf{t}\Vert  \le 0.8\text{ m}, \vert \Delta z\vert  \le 0.40\text{ m}, \vert \Delta \text{yaw}\vert  \le 20^\circ$$) preventing graph distortion.
+- **Gate 6 (Asynchronous Ceres SE3 PGO)**: Solves 6-DoF pose graph on a low-priority background thread with locked roll/pitch variance ($$10^{-4}$$), ensuring zero latency impact on 200 Hz odometry.
 
 ---
 
 ## 📊 Experimental Verification & Benchmarks
 
 ### 1. Extra-Long Outdoor Forest Canopy Loop Benchmark
-Evaluated on real-world UAV flight log `agi_log_20260821_172847_forrest_test_1` (NVIDIA Jetson Orin NX, Livox Mid-360 @ $45^\circ$, 298.88 s duration, 2,948 LiDAR frames, ~300 m loop):
+Evaluated on real-world UAV flight log `agi_log_20260821_172847_forrest_test_1` (NVIDIA Jetson Orin NX, Livox Mid-360 @ $$45^\circ$$, 298.88 s duration, 2,948 LiDAR frames, ~300 m loop):
 
 | Metric | Baseline Open-Loop CT-ICP | Initial Fix (Angle Unit Bug) | **AGIptive-LIOM (Ours)** |
 |---|---|---|---|
 | **Loop Closures Confirmed** | 0 (Disabled) | Halted at Frame 268 (Z drift) | **9 Confirmed Closures** (Frames 255, 264, 269, 274, 279, 284, 307, 312, 319) |
 | **Optimized Trajectory Output** | N/A | Frozen at ~80% trajectory | **Continuous streaming to final touchdown** |
-| **Solver Step Rejections** | N/A | Thousands ($>4.5^\circ/\text{s}$) | **Only 3 genuine physical boundary rejections** |
+| **Solver Step Rejections** | N/A | Thousands ($$>4.5^\circ/\text{s}$$) | **Only 3 genuine physical boundary rejections** |
 | **End-to-End Drift** | 10,834.70 m (Diverged) | ~5.4 m upward Z drift | **< 0.05 m residual drift after PGO** |
 | **Average Frontend Compute** | ~22.0 ms / frame | ~18.9 ms / frame | **15.49 ms / frame** (>60 Hz real-time capacity) |
 
@@ -133,7 +134,7 @@ Evaluated on real-world UAV flight log `agi_log_20260821_172847_forrest_test_1` 
 - **OS**: Ubuntu 22.04 (LTS) or 20.04 (LTS)
 - **ROS**: ROS 2 Humble (or Galactic/Foxy)
 - **C++ Standard**: C++17
-- **Libraries**: Ceres Solver $\ge 2.1$, PCL $\ge 1.12$, Eigen3 $\ge 3.3$, `yaml-cpp`, `glog`, `gflags`, `livox_ros_driver2`
+- **Libraries**: Ceres Solver $$\ge 2.1$$, PCL $$\ge 1.12$$, Eigen3 $$\ge 3.3$$, `yaml-cpp`, `glog`, `gflags`, `livox_ros_driver2`
 
 ```bash
 # Install core system dependencies
@@ -187,13 +188,13 @@ ros2 service call /drone0/save_map_service std_srvs/srv/Trigger
 
 ## ⚙️ Configuration Profiles
 
-Configuration files are located in `config/`:
+Configuration files are located in `config/` of the AGIptive-LIOM repository:
 
 | Config File | Target Platform | Primary IMU Source | Key Characteristics |
 |---|---|---|---|
-| [`mapping_m_livox_imu.yaml`](config/mapping_m_livox_imu.yaml) | Drone / Aerial (Livox Mid-360) | `/drone0/livox/imu` (Internal) | **Production Default**: Zero DDS transport jitter, hardware gravity-aligned horizontal body frame, 6-stage loop closure & Ceres PGO enabled. |
-| [`mapping_m.yaml`](config/mapping_m.yaml) | Drone / Aerial (PX4 Autopilot) | `/drone0/px4_imu` (FCU) | Baseline flight controller IMU profile via micro-XRCE-DDS bridge. |
-| [`mapping_livox_imu.yaml`](config/mapping_livox_imu.yaml) | Ground / Handheld | `/livox/imu` | Level mounting configuration with open-loop odometry. |
+| `mapping_m_livox_imu.yaml` | Drone / Aerial (Livox Mid-360) | `/drone0/livox/imu` (Internal) | **Production Default**: Zero DDS transport jitter, hardware gravity-aligned horizontal body frame, 6-stage loop closure & Ceres PGO enabled. |
+| `mapping_m.yaml` | Drone / Aerial (PX4 Autopilot) | `/drone0/px4_imu` (FCU) | Baseline flight controller IMU profile via micro-XRCE-DDS bridge. |
+| `mapping_livox_imu.yaml` | Ground / Handheld | `/livox/imu` | Level mounting configuration with open-loop odometry. |
 
 ---
 
@@ -219,7 +220,7 @@ Configuration files are located in `config/`:
 | `agiptive_liom/move_dist` | `std_msgs/msg/Float32` | Accumulated distance traveled (m). |
 
 ### TF Broadcaster
-- Broadcasts dynamic coordinate frame: `drone0/odom` $\rightarrow$ `aft_mapped` $\rightarrow$ `drone0/base_link` $\rightarrow$ `livox_frame`.
+- Broadcasts dynamic coordinate frame: `drone0/odom` $$\rightarrow$$ `aft_mapped` $$\rightarrow$$ `drone0/base_link` $$\rightarrow$$ `livox_frame`.
 
 ---
 
@@ -249,5 +250,5 @@ If you find this work helpful in your academic research or robotic systems, plea
 ---
 
 ## 📄 License
-This project is released under the **BSD License**. See [LICENSE](LICENSE) for details.
+This project is released under the **BSD License**. See the `LICENSE` file in the AGIptive-LIOM repository for details.
 

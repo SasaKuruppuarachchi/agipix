@@ -1,5 +1,6 @@
 ---
-title: Overview
+title: Simulation overview
+nav_title: Overview
 layout: doc
 ---
 # Agipix (Simulation) — Quick Guide
