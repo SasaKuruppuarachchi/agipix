@@ -54,7 +54,7 @@ pip install -e .
 
 ## Sim setup
 
-See [Instructions](../sim/1_setup_sim.md) to continue.
+See [Instructions](../sim/2_setup_sim.md) to continue.
 
 ## Agipix Autonomy stack setup
 

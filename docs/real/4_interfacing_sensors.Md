@@ -15,7 +15,7 @@ Wire the Pixhawk up as shown in the diagram. Refer to the [official guide](https
 ## 2) Connecting Px4
 ### PX4 Parameter setup
 
-Flash the Pixhawk with the latest stable branch branch using QGroundControl. Branch `1.16.0` is tested.
+Flash the Pixhawk with the latest stable branch branch using QGroundControl. PX4 `v1.17.0` is tested on the drone (Cube Orange+, `cubepilot_cubeorangeplus_default`).
 
 List of all the updated parmeters
 TODO
@@ -44,7 +44,7 @@ sudo apt install git make cmake python3-pip
 pip install kconfiglib jinja2 empy jsonschema pyros-genmsg packaging toml numpy future
 
 cd $HOME
-git clone https://github.com/PX4/PX4-Autopilot.git -b v1.16.1 --recursive
+git clone https://github.com/PX4/PX4-Autopilot.git -b v1.17.0 --recursive
 cd PX4-Autopilot
 
 # 1. Run the official PX4 Ubuntu setup script (it handles apt packages and toolchains)

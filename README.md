@@ -28,15 +28,14 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 ## Repository layout
 
 - `doc/` — Setup and usage guides
-	- `sim/1_setup_sim.md` — Simulation setup
+	- `sim/2_setup_sim.md` — Simulation setup
 	- `real/1_hardware_assembly.md` — Hardware assembly
 	- `real/2_flashing_hardware.Md` — Flashing and firmware
-	- `real/3_software_setup.md` — Software setup on the robot
+	- `real/9_software_setup.md` — Software setup on the robot
 	- `autonomy/1_perception` - Perception side of the Agipix Autonomy
 	- `autonomy/2_planning_control` - Planning and control side of the Agipix Autonomy
 - `bom/` — Bill of Materials
 	- `BOM.md` — Human-readable BOM
-	- `bom.csv` — Source BOM (CSV)
 - `cad/` — Mechanical CAD (designs and fabrication)
 - `model_exports/` — Exported models (STL/USD) for sim and docs
 - `calibration/` — Calibration assets (real and sim)
@@ -46,17 +45,17 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 ## Quick start
 
 ### Simulation
-- Follow the steps in [Simulation setup](docs/sim/1_setup_sim.md) to bring up Isaac Sim and the ROS 2 containers.
+- Follow the steps in [Simulation setup](docs/sim/2_setup_sim.md) to bring up Isaac Sim and the ROS 2 containers.
 
 ### Real hardware
 - Start with [Hardware assembly](docs/real/1_hardware_assembly.md) for assembly.
 - Then [Flashing and firmware](docs/real/2_flashing_hardware.Md).
-- Finally [Software setup](docs/real/3_software_setup.md) to deploy the containerized stack.
+- Finally [Software setup](docs/real/9_software_setup.md) to deploy the containerized stack.
 
 ## Bill of Materials (BOM)
 
 - Browse the human-friendly BOM: [bom/BOM.md](bom/BOM.md)
-- Source CSV for spreadsheets/scripts: [bom/bom.csv](bom/bom.csv)
+- Per-part prices (EUR), purchase links and estimated total: [bom/BOM.md](bom/BOM.md)
 
 ## CAD and Simulation Assets
 

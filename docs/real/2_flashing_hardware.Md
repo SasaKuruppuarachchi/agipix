@@ -21,7 +21,7 @@ Prerequisities:
 
 ## Install Wifi and SSD
 
-Install the [wifi](https://www.intel.com/content/www/us/en/products/sku/230078/intel-wifi-7-be200/specifications.html) and [ssd](https://www.verkkokauppa.com/fi/product/906691/WD-Black-SN770M-1-Tt-M-2-NVMe-SSD-kovalevy) cards to the PCI mini E and M slots respectively.
+Install the [wifi](https://www.intel.com/content/www/us/en/products/sku/99445/intel-wirelessac-9260/specifications.html) (Intel Wireless-AC 9260; discontinued, current successor [Intel AX210](https://www.intel.com/content/www/us/en/products/sku/204836/intel-wifi-6e-ax210-gig/specifications.html)) and [ssd](https://www.verkkokauppa.com/fi/product/906691/WD-Black-SN770M-1-Tt-M-2-NVMe-SSD-kovalevy) cards to the PCI mini E and M slots respectively.
 
 ## Powering up the carrier
 The 6S Lipo can be used to power up the board directly. Install a 60V capacitor between the terminals of the main power.
@@ -420,5 +420,5 @@ bash -c "$(curl -sLo- https://superfile.dev/install.sh)"
 
 ### Continue
 - ← Back: [Hardware Assembly](./1_hardware_assembly.md)
-- Next → [Software Setup](./3_software_setup.md)
+- Next → [Software Setup](./9_software_setup.md)
 

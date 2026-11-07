@@ -63,13 +63,14 @@ Use the supplied 3D printable stl files available at cad/Fab/3D_prints and use f
 ### Low level assembly and test
 
 In this step we setup following componenets before the low level test
-- Frame
-- Power, Bttery
-- ESC
-- Motors
-- Radio reciever
-- Telemetry radio
-- Flight Controller
+- Frame (CF plates and TPU parts)
+- Power: Tattu G-Tech 4500 mAh 6S 25C LiPo and the Power Brick Mini (part of the Cube Orange+ Mini set)
+- ESC: T-Motor F55A Pro II 4-in-1
+- Motors: T-Motor Slatts 2306.3 1700KV
+- Radio receiver: FrSky Archer Plus SR12+
+- Telemetry: over Wi-Fi from the Jetson (no telemetry radio)
+- Flight controller: CubePilot Cube Orange+ Mini set (PX4 v1.17.0)
+- Optical flow: CubePilot HereFlow on DroneCAN
 
 Finally we do a seris of manual flight tests to verify
 
@@ -79,22 +80,24 @@ Finally we do a seris of manual flight tests to verify
 
 In this step we setup following componenets before attempting high level controls
 - Top plate
-- USB to TTL or RS323-USB converter
-- Jetson Orin NX with Hadron carrier
-- Wifi antenna
+- RS-232 to TTL converter (MAX3232) for the Jetson–PX4 DDS serial link
+- Jetson Orin NX 16 GB with ConnectTech Hadron (Dual MIPI) carrier, WD_BLACK SN770M 1 TB NVMe and Intel Wireless-AC 9260 Wi-Fi card
+- Wifi antennas (x2)
+- ESP32 time-sync board (DFRobot FireBeetle 2 ESP32-S3)
 - Wiring and Complient frame stiffner 
 
 > **Note:** TODO: Detailed steps with images
 
-Now we are ready to Firmware setup. See [Instructions](./2_flashing_hardware.md) to continue.
+Now we are ready to Firmware setup. See [Instructions](./2_flashing_hardware.Md) to continue.
 
 ### Sensor Assembly
 
 In this step we setup following componenets before attempting high level controls
 - Carbon Fibre Sensor Cage
 - Livox Mid-360 Lidar
-- (Optional) RGB camera
-- (Optional) RGBD camera
+- USB webcam (currently fitted)
+- (Optional) Arducam OG02B10 global-shutter RGB camera
+- (Optional) Intel RealSense D455 RGBD camera
 
 > **Note:** TODO: Detailed steps with images
 
@@ -102,13 +105,14 @@ In this step we setup following componenets before attempting high level control
 
 In this step we setup following componenets before attempting high level controls
 - Top plate
-- USB to TTL or RS323-USB converter
-- Jetson Orin NX with Hadron carrier
-- Wifi antenna
+- RS-232 to TTL converter (MAX3232) for the Jetson–PX4 DDS serial link
+- Jetson Orin NX 16 GB with ConnectTech Hadron (Dual MIPI) carrier, WD_BLACK SN770M 1 TB NVMe and Intel Wireless-AC 9260 Wi-Fi card
+- Wifi antennas (x2)
+- ESP32 time-sync board (DFRobot FireBeetle 2 ESP32-S3)
 - Wiring
 
 > **Note:** TODO: Detailed steps with images
 
-Now we are ready for software setup. See [Instructions](./3_software_setup.md) to continue.
+Now we are ready for software setup. See [Instructions](./9_software_setup.md) to continue.
 
 
