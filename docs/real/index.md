@@ -32,7 +32,7 @@ Current onboard hardware (full list with prices in the [BOM](../../bom.md)):
 | Optical flow | CubePilot HereFlow (flow + short-range ToF lidar) on DroneCAN |
 | LiDAR | Livox Mid-360 |
 | PX4 link | RS-232 to TTL converter (MAX3232) on the Jetson–PX4 DDS serial link |
-| Time sync | DFRobot FireBeetle 2 ESP32-S3 (PPS + GPRMC to the LiDAR) |
+| Time sync | Software PTP (`ptp4l`) from the Jetson to the LiDAR; DFRobot FireBeetle 2 ESP32-S3 as fallback (PPS + GPRMC) and 10 Hz camera trigger |
 | Radio | FrSky Archer Plus SR12+ RC receiver; telemetry over Wi-Fi (no telemetry radio) |
 | Cameras | USB webcam; optional Arducam OG02B10 (RGB) and Intel RealSense D455 (RGB‑D) |
 

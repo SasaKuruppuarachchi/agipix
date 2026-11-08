@@ -16,6 +16,13 @@ sudo systemctl status mavlink-router
 sudo journalctl -u mavlink-router -f
 ```
 
+### Time sync
+- [ ] PTP service active: `systemctl is-active ptp4l-livox` returns `active` (port state `MASTER` in `journalctl -u ptp4l-livox`).
+- [ ] In the terminal viewer (`agipix_viewer`) or the Foxglove diagnostics panel: `<ns>/time_sync` is OK and `<ns>/time_sync/lidar` shows source PTP, `synced=true`.
+- [ ] The LIO (LiDAR-inertial odometry) has started, not held at `wait_time_sync`. If the LiDAR synced after the LIO started, restart the LIO.
+
+See [Hardware Syncronisation](./5_hardware_syncronisation.Md).
+
 ### Todos:
 HW
 - PPS Sync

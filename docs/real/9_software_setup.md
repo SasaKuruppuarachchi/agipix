@@ -52,6 +52,18 @@ cd /workspaces/logging/src/agi_logger
 pip install -e .
 ```
 
+## Host time sync: PTP for the LiDAR
+
+On the Jetson **host** (not in the container), install the software PTP master that puts the Livox Mid-360 on the Jetson clock. Save the unit file from [Hardware Syncronisation](./5_hardware_syncronisation.Md#install) as `ptp4l-livox.service`, then:
+
+```bash
+sudo apt install linuxptp
+sudo install -m 644 ptp4l-livox.service /etc/systemd/system/
+sudo systemctl daemon-reload && sudo systemctl enable --now ptp4l-livox.service
+```
+
+Check with `journalctl -u ptp4l-livox` (port state `LISTENING` → `MASTER`); the Livox driver then reports `timestamp_type` 1 (PTP).
+
 ## Sim setup
 
 See [Instructions](../sim/2_setup_sim.md) to continue.

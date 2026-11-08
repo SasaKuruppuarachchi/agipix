@@ -12,6 +12,8 @@ Refer the [Official Page](https://connecttech.com/product/hadron-carrier-for-nvi
 > Note: These steps target Jetson Orin NX/Nano on Connect Tech carriers (Hadron, etc.), Jetson Linux R36.3. Adjust versions as needed. 
 **Tested for CT Hadron NGX027 with the Jetpack 6.2.1 - L4T r36.4.4 (BSP Version: ORIN-NX-NANO-36.4.4 V002)**
 
+> **PX4 flight controller:** this page covers the Jetson only. The PX4 firmware (custom v1.17.0 build for the Cube Orange+: 400 Hz `sensor_combined`, `SYSTEM_TIME` in Jetson time, `pps_capture` over DDS), its parameters (`PPS_CAP_ENABLE=1`, `PWM_AUX_FUNC5=2064`) and the GPS-denied EKF2 setup (`EKF2_MAG_TYPE=5`) are in [Interfacing PX4 and Sensors](./4_interfacing_sensors.Md#custom-px4-firmware-v1170--patches).
+
 Prerequisities:
 - x86/x64 based host machine running Ubuntu 20.04 or 22.04
 - JetPack 6.2.1 / L4T 36.4.4 installed (Intstructions follows)
