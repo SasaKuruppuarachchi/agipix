@@ -8,7 +8,7 @@ nav_title: Heuristic autonomy
 [![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/20.04/)
 [![Linux platform](https://img.shields.io/badge/platform-linux--arm-brown.svg)](https://releases.ubuntu.com/20.04/)
 
-![Heuristic autonomy pipeline overview](../../assets/images/diag/autonomy_heuristcs.png)
+![Heuristic autonomy pipeline overview](../../assets/images/diag/autonomy_heuristics.png)
 
 
 ## AgiAUTO (ROS 2) — Agipix PX4 Autonomy Stack
@@ -77,7 +77,7 @@ This repository is the **AgiAUTO** autonomy module of **Agipix** for PX4-based U
 
 Validated against **PX4 v1.16.1** message definitions.
 
-Prerequiste : PX4 ROS 2 interface setup (see [PX4 ROS 2 interface](../real/4_interfacing_sensors.Md))
+Prerequiste : PX4 ROS 2 interface setup (see [PX4 ROS 2 interface](../real/4_interfacing_sensors.md))
 
 Build: 
 

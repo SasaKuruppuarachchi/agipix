@@ -37,6 +37,7 @@ Quantities are per vehicle/unit unless noted otherwise. `bom/BOM.md` is the cano
 | Battery straps | Tekno RC Battery Straps (1x center, 1x side, EB/ET48 2.0) TKR9019 | 1 | ~9.84 | ~9.84 | [teknorc.com](https://www.teknorc.com/?p=48524) | 2026-11-07 | US$10.99, snippet only. No EU shop found. |
 | Lipo status | VALUERC LIPO VOLTAGE CHECKER 1-8S | 1 | 7.90 | 7.90 | [hobbyfactory.fi](https://hobbyfactory.fi/en/p43002/valuerc-lipo-voltage-checker-1-8s) | 2026-11-07 | |
 | M3 damper | VIBRATION DAMPER - M3 -: 8MM - RUBBER - PIT: 8MM - THREAD PIT: 6MM - 24N | 4 | ~0.94 | ~3.76 | [tme.com](https://www.tme.com/in/en/details/dva2-8-8-m3-40/vibration-dampers/elesa-ganter/dva-2-8-8-m3-6-40/) | 2026-11-07 | Elesa+Ganter DVA.2-8-8-M3-6-40. US$1.05 ex VAT, snippet only. |
+| LiDAR mount isolator | Lundahl M3 isolator (damped bolt) | — | — | — | [soundimports.eu](https://www.soundimports.eu/en/lundahl-m3-isolator.html) | — | Mounts the Livox Mid-360. Quantity and price not yet recorded. |
 
 ## Compute + autonomy sensors
 
@@ -51,7 +52,7 @@ Quantities are per vehicle/unit unless noted otherwise. `bom/BOM.md` is the cano
 | Lidar | Livox MID-360 | 1 | ~772.95 | ~772.95 | [mybotshop.de](https://www.mybotshop.de/Livox-Mid360S_1) | 2026-11-07 | Mid-360: n/a, not sold to Finland on the DJI store and no reputable EU listing found. Price shown is for the newer **Livox Mid-360S**; check driver and mount compatibility before substituting. |
 | Optical flow | CubePilot HereFlow (optical flow + short-range ToF lidar, DroneCAN) | 1 | 119.50 | 119.50 | [altigator.com](https://drones.altigator.com/hereflow-p-42706.html) | 2026-11-07 | Out of stock at the EU shops checked; supply looks intermittent. |
 | RS-232 to TTL converter | Seeed Studio RS-232 To TTL Converter (MAX3232IDR), 103990363 | 1 | 4.34 | 4.34 | [eu.robotshop.com](https://eu.robotshop.com/products/seeedstudio-rs-232-to-ttl-converter-max3232idr) | 2026-11-07 | On the Jetson-PX4 DDS serial link. VAT not stated. |
-| Time-sync board | DFRobot FireBeetle 2 ESP32-S3 (DFR0975) | 1 | 22.18 | 22.18 | [digikey.fi](https://www.digikey.fi/en/products/detail/dfrobot/DFR0975/20500154) | 2026-11-07 | PPS + GPRMC for the LiDAR; see `docs/real/5_hardware_syncronisation.Md`. |
+| Time-sync board | DFRobot FireBeetle 2 ESP32-S3 (DFR0975) | 1 | 22.18 | 22.18 | [digikey.fi](https://www.digikey.fi/en/products/detail/dfrobot/DFR0975/20500154) | 2026-11-07 | PPS + GPRMC for the LiDAR; see `docs/real/5_hardware_synchronisation.md`. |
 | USB camera | Vitade AF USB webcam (autofocus, 1080p) | 1 | n/a | n/a | — | 2026-11-07 | n/a: exact model not identified (likely Vitade 960A), and it is sold only on Amazon, which could not be checked. |
 | Power capacitor | Low-ESR electrolytic capacitor, 63 V (e.g. Panasonic EEU-FS1J102B, 1000 µF) | 2 | 3.50 | 7.00 | [digikey.fi](https://www.digikey.fi/en/products/detail/panasonic-industry/EEU-FS1J102B/8567301) | 2026-11-07 | Across the 6S input of the Jetson carrier and of the LiDAR. The docs don't give the capacitance. |
 

@@ -30,7 +30,7 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 - `doc/` — Setup and usage guides
 	- `sim/2_setup_sim.md` — Simulation setup
 	- `real/1_hardware_assembly.md` — Hardware assembly
-	- `real/2_flashing_hardware.Md` — Flashing and firmware
+	- `real/2_flashing_hardware.md` — Flashing and firmware
 	- `real/9_software_setup.md` — Software setup on the robot
 	- `autonomy/1_perception` - Perception side of the Agipix Autonomy
 	- `autonomy/2_planning_control` - Planning and control side of the Agipix Autonomy
@@ -49,7 +49,7 @@ For the accompanying paper-style write-up, see `todo` (IEEE conference format). 
 
 ### Real hardware
 - Start with [Hardware assembly](docs/real/1_hardware_assembly.md) for assembly.
-- Then [Flashing and firmware](docs/real/2_flashing_hardware.Md).
+- Then [Flashing and firmware](docs/real/2_flashing_hardware.md).
 - Finally [Software setup](docs/real/9_software_setup.md) to deploy the containerized stack.
 
 ## Bill of Materials (BOM)
@@ -83,7 +83,7 @@ The LaTeX source of the manuscript is in [root.tex](root.tex).
 
 ## License
 
-This project is released under the terms in [LICENSE](LICENSE).
+This project is released under the [GNU General Public License v3.0](LICENSE).
 
 ## Acknowledgment
 

@@ -124,7 +124,7 @@ All documentation pages feature:
 The site pulls content from the repository's `doc/` directory:
 - `doc/sim/1_setup_sim.md` → Simulation Setup page
 - `doc/real/1_hardware_assembly.md` → Hardware Assembly page
-- `doc/real/2_flashing_hardware.Md` → Flashing Hardware page
+- `doc/real/2_flashing_hardware.md` → Flashing Hardware page
 - `doc/real/3_software_setup.md` → Software Setup page
 - `doc/autonomy/2_planning_control.md` → Autonomy Framework page
 - `bom/BOM.md` → Bill of Materials page

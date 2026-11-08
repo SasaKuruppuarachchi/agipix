@@ -18,43 +18,29 @@ Use this page to jump into the full real-platform bring-up flow, from mechanical
 - Refer to the [Interactive 3D CAD Model on Autodesk A360](https://a360.co/4gY1h8M) for an interactive 3d view of the assembly.
 - Cut CF plates from the provided DXF patterns and post‑process as needed.
 - Print TPU parts from the STL set (recommended: 0.2 mm layers, 40% infill; higher for bushings).
-- Assemble frame, power, ESCs, motors, RC receiver, and flight controller (CubePilot Cube Orange+ Mini set). Telemetry runs over Wi-Fi from the Jetson.
+- Assemble frame, power, ESCs, motors, radio/telemetry, and flight controller.
 - Complete low‑level checks and a brief manual flight validation.
-- Mount compute (Jetson Orin NX 16 GB + Hadron), antennas, wiring, and sensor cage (Livox Mid‑360, optional RGB/RGB‑D).
+- Mount compute (Jetson Orin NX + Hadron), antennas, wiring, and sensor cage (Livox Mid‑360, optional RGB/RGB‑D).
 
-Current onboard hardware (full list with prices in the [BOM](../../bom.md)):
-
-| Subsystem | Device |
-|---|---|
-| Compute | NVIDIA Jetson Orin NX 16 GB on ConnectTech Hadron (Dual MIPI) carrier, JetPack 6.2 / L4T R36.4.4 |
-| Storage / network | WD_BLACK SN770M 1 TB NVMe (M.2 2230), Intel Wireless-AC 9260 Wi-Fi/BT (M.2), Ethernet on the carrier |
-| Flight controller | CubePilot Cube Orange+ (Mini set, with Power Brick Mini), PX4 v1.17.0 |
-| Optical flow | CubePilot HereFlow (flow + short-range ToF lidar) on DroneCAN |
-| LiDAR | Livox Mid-360 |
-| PX4 link | RS-232 to TTL converter (MAX3232) on the Jetson–PX4 DDS serial link |
-| Time sync | Software PTP (`ptp4l`) from the Jetson to the LiDAR; DFRobot FireBeetle 2 ESP32-S3 as fallback (PPS + GPRMC) and 10 Hz camera trigger |
-| Radio | FrSky Archer Plus SR12+ RC receiver; telemetry over Wi-Fi (no telemetry radio) |
-| Cameras | USB webcam; optional Arducam OG02B10 (RGB) and Intel RealSense D455 (RGB‑D) |
-
-![Exploded view of the Agipix airframe with labelled components](../../assets/images/exploded_labled.jpg)
+![Exploded view of the Agipix airframe with labelled components](../../assets/images/exploded_labeled.jpg)
 
 Read: [Hardware Assembly](./1_hardware_assembly.md)
 
 ## 2) Flashing the Hardware
 
-- Target: JetPack 6.2 (Jetson Linux R36.4.4) on Orin NX/Nano with Connect Tech carriers.
+- Target: JetPack 6.x (Jetson Linux R36.3) on Orin NX/Nano with Connect Tech carriers.
 - Prepare BSP_ROOT with NVIDIA BSP + sample rootfs; install CTI L4T BSP.
 - Put the board in recovery, then flash via CTI menu script or manual NVMe script.
 - On first boot: complete setup, join Wi‑Fi, SSH in; consider NoMachine, nvpmodel, Docker/NVIDIA toolkit.
 - Keep handy: CTI docs/KB and NVIDIA references linked in the guide.
 
-Read: [Flashing Hardware](./2_flashing_hardware.Md)
+Read: [Flashing Hardware](./2_flashing_hardware.md)
 
 ## 3) PX4 and Sensor Interfacing
 - PX4 low-level control wiring and DDS interface setup.
 - LiDAR, monocular camera, and optional RGB-D sensor integration.
 
-Read: [Interfacing Sensors](./4_interfacing_sensors.Md)
+Read: [Interfacing Sensors](./4_interfacing_sensors.md)
 
 ## 4) Container and Software Setup
 
@@ -62,12 +48,12 @@ Read: [Interfacing Sensors](./4_interfacing_sensors.Md)
 - Branches: `agipix-hard` (hardware), `agipix-sim` (simulation).
 - For sim instructions, see the simulation docs; for autonomy, continue to perception stack.
 
-Read: [Docker Build](./3_docker_build.Md) and [Software Setup](./9_software_setup.md)
+Read: [Docker Build](./3_docker_build.md) and [Software Setup](./9_software_setup.md)
 
 ## 5) MANET Mesh Networking
 - Work-in-progress extension using [Wi-Fi HaLow](https://heltec.org/project/ht-hc01/) for long-range resilient links.
 
-Read: [MANET Mesh Networking](./7_manet_mesh_networking.Md)
+Read: [MANET Mesh Networking](./7_manet_mesh_networking.md)
 
 ## 6) Preflight Checklist
 - Mission readiness checks for power, sensing, comms, and safety.

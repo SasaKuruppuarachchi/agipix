@@ -1,0 +1,6 @@
+---
+layout: null
+permalink: /docs/v2.0.0/search-docs.json
+sitemap: false
+---
+{%- include search-index.json -%}

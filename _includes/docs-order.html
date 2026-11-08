@@ -1,15 +1,17 @@
 {%- comment -%}
-  Builds `docs_ordered`: every page under docs/<section>/ in reading order
+  Builds `docs_ordered`: every page of the current docs version in reading order
   (sections as listed in _data/docs.yml; inside a section: index.md first, then by
   `nav_order` front matter if set, else by the number prefix of the file name, so
   10_x sorts after 9_x). Outputs nothing.
 {%- endcomment -%}
+{%- include docs-version.html -%}
 {%- assign docs_ordered = "" | split: "" -%}
 {%- for s in site.data.docs.sections -%}
-  {%- capture _prefix -%}docs/{{ s.key }}/{%- endcapture -%}
+  {%- capture _prefix -%}{{ doc_src }}{{ s.key }}/{%- endcapture -%}
   {%- assign _sec = site.pages | where_exp: "p", "p.path contains _prefix" -%}
   {%- assign _keys = "" | split: "" -%}
   {%- for p in _sec -%}
+    {%- if p.redirect -%}{%- continue -%}{%- endif -%}
     {%- if p.name == "index.md" or p.name == "index.html" -%}
       {%- assign _n = 0 -%}
     {%- elsif p.nav_order -%}

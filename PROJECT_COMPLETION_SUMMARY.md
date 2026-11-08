@@ -27,7 +27,7 @@ Successfully built a complete GitHub Pages website for the Agipix project with a
 - Content pulls from `doc/` directory:
   - `doc/sim/1_setup_sim.md` → Simulation Setup
   - `doc/real/1_hardware_assembly.md` → Hardware Assembly
-  - `doc/real/2_flashing_hardware.Md` → Flashing Guide
+  - `doc/real/2_flashing_hardware.md` → Flashing Guide
   - `doc/real/3_software_setup.md` → Software Setup
   - `doc/autonomy/2_planning_control.md` → Autonomy Framework
   - `bom/BOM.md` → Bill of Materials

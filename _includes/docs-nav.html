@@ -2,11 +2,11 @@
 <aside class="docs-nav" id="docs-nav" aria-label="Documentation">
   <div class="docs-nav__inner">
     <div class="docs-nav__head">
-      <a class="docs-nav__home{% if page.url == '/docs/' %} is-current{% endif %}" href="{{ '/docs/' | relative_url }}"{% if page.url == '/docs/' %} aria-current="page"{% endif %}>{% include icon.html name="book" %}Docs hub</a>
-      <a class="docs-nav__all{% if page.url == '/docs/all/' %} is-current{% endif %}" href="{{ '/docs/all/' | relative_url }}" title="Every page on one page, for printing or saving as PDF"{% if page.url == '/docs/all/' %} aria-current="page"{% endif %}>{% include icon.html name="print" %}All docs</a>
+      <a class="docs-nav__home{% if page.url == doc_root %} is-current{% endif %}" href="{{ doc_root | relative_url }}"{% if page.url == doc_root %} aria-current="page"{% endif %}>{% include icon.html name="book" %}Docs hub</a>
+      <a class="docs-nav__all{% if page.url == doc_all %} is-current{% endif %}" href="{{ doc_all | relative_url }}" title="Every page on one page, for printing or saving as PDF"{% if page.url == doc_all %} aria-current="page"{% endif %}>{% include icon.html name="print" %}All docs</a>
     </div>
     {%- for s in site.data.docs.sections %}
-    {%- capture _prefix -%}docs/{{ s.key }}/{%- endcapture -%}
+    {%- capture _prefix -%}{{ doc_src }}{{ s.key }}/{%- endcapture -%}
     {%- assign _pages = docs_ordered | where_exp: "p", "p.path contains _prefix" -%}
     {%- assign _here = false -%}{%- if page.path contains _prefix -%}{%- assign _here = true -%}{%- endif %}
     <details class="nav-group" data-key="{{ s.key }}" open{% if _here %} data-current{% endif %}>

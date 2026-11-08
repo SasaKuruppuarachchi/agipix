@@ -7,4 +7,4 @@ wip: true
 
 # UI in Autonomous exploration
 
-TODO: The UI should show the reconstruction of the pointcloud and the robot. Also UI should explain what the robot is doing to the user
+> **Status: planned.** An exploration UI is in development and will be documented when it is released. It will show the live 3D map and the drone, the exploration frontiers and planned path, and a plain-language status of what the drone is doing.

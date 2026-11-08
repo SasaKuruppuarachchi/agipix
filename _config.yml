@@ -26,6 +26,7 @@ social:
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
+  - jekyll-redirect-from
 
 # Build settings
 markdown: kramdown
@@ -41,7 +42,7 @@ exclude:
   - model_exports/
   - todo/
   - root.tex
-  - flashing_hardware.Md
+  - flashing_hardware.md
   - scripts/
   - .git/
   - .gitignore
@@ -82,6 +83,9 @@ defaults:
   - scope: { path: "GITHUB_PAGES_README.md" }
     values: { sitemap: false }
   - scope: { path: "PROJECT_COMPLETION_SUMMARY.md" }
+    values: { sitemap: false }
+  # Unreleased docs version: not offered to search engines
+  - scope: { path: "docs/v2.0.0" }
     values: { sitemap: false }
   - scope: { path: "assets" }
     values: { sitemap: false }

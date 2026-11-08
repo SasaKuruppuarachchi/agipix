@@ -2,9 +2,9 @@
 layout: default
 ---
 {%- include docs-order.html -%}
-{%- assign _segs = page.url | split: "/" -%}
+{%- assign _segs = page.url | remove_first: doc_root | split: "/" -%}
 {%- assign section = nil -%}
-{%- if _segs[1] == "docs" and _segs.size > 2 -%}{%- assign section = site.data.docs.sections | where: "key", _segs[2] | first -%}{%- endif -%}
+{%- if page.url != doc_root and _segs.size > 0 -%}{%- assign section = site.data.docs.sections | where: "key", _segs[0] | first -%}{%- endif -%}
 {%- assign is_index = false -%}{%- if page.name == "index.md" -%}{%- assign is_index = true -%}{%- endif -%}
 
 {%- comment -%} prev / next within the reading order {%- endcomment -%}
@@ -16,7 +16,7 @@ layout: default
     {%- assign _j = _i | plus: 1 -%}{%- assign next_doc = docs_ordered[_j] -%}
   {%- endif -%}
 {%- endfor -%}
-{%- if page.url == "/docs/" -%}{%- assign next_doc = docs_ordered | first -%}{%- endif -%}
+{%- if page.url == doc_root -%}{%- assign next_doc = docs_ordered | first -%}{%- endif -%}
 
 {%- comment -%} meta {%- endcomment -%}
 {%- assign _words = content | strip_html | number_of_words -%}
@@ -38,21 +38,23 @@ layout: default
       <nav class="breadcrumbs" aria-label="Breadcrumb">
         <ol>
           <li><a href="{{ '/' | relative_url }}">Home</a></li>
-          {%- if page.url != "/docs/" %}
-          <li><a href="{{ '/docs/' | relative_url }}">Docs</a></li>
+          {%- if page.url != doc_root %}
+          <li><a href="{{ doc_root | relative_url }}">Docs</a></li>
           {%- endif %}
           {%- if section %}
           {%- if is_index %}
           <li><span aria-current="page">{{ section.title }}</span></li>
           {%- else %}
-          <li><a href="{{ '/docs/' | append: section.key | append: '/' | relative_url }}">{{ section.title }}</a></li>
+          <li><a href="{{ doc_root | append: section.key | append: '/' | relative_url }}">{{ section.title }}</a></li>
           <li><span aria-current="page">{{ page_label }}</span></li>
           {%- endif %}
           {%- else %}
-          <li><span aria-current="page">{% if page.url == "/docs/" %}Docs{% else %}{{ page_label }}{% endif %}</span></li>
+          <li><span aria-current="page">{% if page.url == doc_root %}Docs{% else %}{{ page_label }}{% endif %}</span></li>
           {%- endif %}
         </ol>
       </nav>
+
+      {% include version-banner.html %}
 
       <div class="doc-meta">
         <span title="About {{ _words }} words">{% include icon.html name="clock" %}{{ minutes }} min read</span>
@@ -91,16 +93,16 @@ layout: default
       {%- if prev_doc or next_doc %}
       <nav class="pager" aria-label="Previous and next page">
         {%- if prev_doc %}
-        {%- assign _ps = prev_doc.path | split: "/" -%}
-        {%- assign _psec = site.data.docs.sections | where: "key", _ps[1] | first %}
+        {%- assign _ps = prev_doc.path | remove_first: doc_src | split: "/" -%}
+        {%- assign _psec = site.data.docs.sections | where: "key", _ps[0] | first %}
         <a class="pager__prev" href="{{ prev_doc.url | relative_url }}" rel="prev">
           <span class="pager__k">{% include icon.html name="arrow-left" %} Previous · {{ _psec.title }}</span>
           <span class="pager__t">{{ prev_doc.nav_title | default: prev_doc.title | strip }}</span>
         </a>
         {%- endif %}
         {%- if next_doc %}
-        {%- assign _ns = next_doc.path | split: "/" -%}
-        {%- assign _nsec = site.data.docs.sections | where: "key", _ns[1] | first %}
+        {%- assign _ns = next_doc.path | remove_first: doc_src | split: "/" -%}
+        {%- assign _nsec = site.data.docs.sections | where: "key", _ns[0] | first %}
         <a class="pager__next" href="{{ next_doc.url | relative_url }}" rel="next">
           <span class="pager__k">Next · {{ _nsec.title }} {% include icon.html name="arrow-right" %}</span>
           <span class="pager__t">{{ next_doc.nav_title | default: next_doc.title | strip }}</span>

@@ -118,7 +118,7 @@ Modify these variables to change the color scheme.
 Documentation pages in `docs/` pull content from the main repository documentation:
 - `doc/sim/1_setup_sim.md` → Simulation setup
 - `doc/real/1_hardware_assembly.md` → Hardware assembly
-- `doc/real/2_flashing_hardware.Md` → Flashing guide
+- `doc/real/2_flashing_hardware.md` → Flashing guide
 - `doc/real/3_software_setup.md` → Software setup
 - `doc/autonomy/2_planning_control.md` → Autonomy framework
 

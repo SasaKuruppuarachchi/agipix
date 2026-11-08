@@ -288,6 +288,24 @@
     requestAnimationFrame(function () { go(0, false); });
   }
 
+  /* ---------- Docs version menu: same page in the other version ---------- */
+  var versionSwitch = $('[data-version-switch]');
+  if (versionSwitch) {
+    versionSwitch.addEventListener('change', function () {
+      var root = versionSwitch.getAttribute('data-current-root');
+      var path = window.location.pathname;
+      window.location.href = path.indexOf(root) === 0
+        ? versionSwitch.value + path.slice(root.length) + window.location.hash
+        : versionSwitch.value;
+    });
+    /* Back/forward restores the page: show its own version, not the last choice */
+    window.addEventListener('pageshow', function () {
+      Array.prototype.forEach.call(versionSwitch.options, function (o, i) {
+        if (o.defaultSelected) versionSwitch.selectedIndex = i;
+      });
+    });
+  }
+
   /* ---------- Home: collaboration form -> mailto ---------- */
   var form = $('#collabForm');
   if (form) {

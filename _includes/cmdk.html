@@ -1,4 +1,6 @@
-<dialog class="cmdk" id="cmdk" aria-label="Search documentation" data-index-url="{{ '/search-docs.json' | relative_url }}?v={{ site.time | date: '%s' }}">
+{%- include docs-version.html -%}
+{%- if doc_version.default -%}{%- assign _idx = "/search-docs.json" -%}{%- else -%}{%- capture _idx -%}{{ doc_root }}search-docs.json{%- endcapture -%}{%- endif -%}
+<dialog class="cmdk" id="cmdk" aria-label="Search documentation" data-index-url="{{ _idx | relative_url }}?v={{ site.time | date: '%s' }}">
   <div class="cmdk__box">
     <div class="cmdk__field">
       {% include icon.html name="search" %}

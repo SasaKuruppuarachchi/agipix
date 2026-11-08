@@ -1,4 +1,5 @@
 {%- assign _url = page.url -%}
+{%- include docs-version.html -%}
 <header class="site-header"{% if page.title_bottom_gap %} style="--title-bottom-gap: {{ page.title_bottom_gap }}"{% endif %}>
   {%- if page.url == "/" %}
   <h1 class="site-brand"><a href="{{ '/' | relative_url }}"><span class="sr-only">{{ site.data.paper.title }}</span></a></h1>
@@ -17,14 +18,23 @@
     </button>
     <div class="nav-links" id="primary-navigation">
       <a href="{{ '/' | relative_url }}" class="nav-link"{% if _url == "/" %} aria-current="page"{% endif %}>Home</a>
-      <a href="{{ '/docs/' | relative_url }}" class="nav-link"{% if _url == "/docs/" or _url == "/docs/all/" %} aria-current="page"{% endif %}>Docs Hub</a>
+      <a href="{{ doc_root | relative_url }}" class="nav-link"{% if _url == doc_root or _url == doc_all %} aria-current="page"{% endif %}>Docs Hub</a>
       {%- for s in site.data.docs.sections %}
-      {%- capture _p %}/docs/{{ s.key }}/{% endcapture %}
+      {%- capture _p %}{{ doc_root }}{{ s.key }}/{% endcapture %}
       <a href="{{ _p | relative_url }}" class="nav-link"{% if _url contains _p %} aria-current="page"{% endif %}>{% case s.key %}{% when "sim" %}Sim{% when "real" %}Real{% when "ui" %}UI{% else %}{{ s.title }}{% endcase %}</a>
       {%- endfor %}
       <a href="{{ '/bom.html' | relative_url }}" class="nav-link"{% if _url == "/bom.html" %} aria-current="page"{% endif %}>BOM</a>
       <a href="{{ site.code_repo }}" class="nav-link" target="_blank" rel="noopener">GitHub</a>
     </div>
+    <label class="nav-version" title="Documentation version">
+      <span class="sr-only">Documentation version</span>
+      <select class="nav-version__select" data-version-switch data-current-root="{{ doc_root | relative_url }}">
+        {%- for _v in site.data.docs.versions %}
+        {%- if _v.default %}{% assign _vroot = "/docs/" %}{% else %}{% capture _vroot %}/docs/{{ _v.id }}/{% endcapture %}{% endif %}
+        <option value="{{ _vroot | relative_url }}"{% if _v.id == doc_version.id %} selected{% endif %}>{{ _v.id }} ({{ _v.status }})</option>
+        {%- endfor %}
+      </select>
+    </label>
     <button class="nav-search" type="button" data-cmdk-open aria-label="Search the docs (Ctrl+K)" aria-keyshortcuts="Control+K Meta+K">
       {% include icon.html name="search" %}<span class="nav-search__label">Search</span><kbd class="nav-search__kbd" data-kbd-mod>Ctrl K</kbd>
     </button>

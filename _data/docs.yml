@@ -2,6 +2,16 @@
 # from docs/<key>/: the section's index.md comes first, then the other pages
 # sorted by file name (so keep the 1_, 2_, ... prefixes).
 # `nav_title` in a page's front matter sets its label in the sidebar.
+#
+# Versions, listed in the menu bar. The default version lives at docs/; any other
+# lives at docs/<id>/ and shows the "unreleased" banner on every page.
+versions:
+  - id: v1.1.0
+    status: released
+    default: true
+  - id: v2.0.0
+    status: unreleased
+
 sections:
   - key: sim
     title: Simulation

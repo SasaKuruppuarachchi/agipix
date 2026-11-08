@@ -32,7 +32,7 @@ Read: [Exploration Autonomy](./2_exploration_autonomy.md)
 - Operator-in-the-loop supervision and intervention.
 - Continuous state and map feedback for trust and safety.
 
-Read: [Human in the Loop Autonomy](./3_humen_in_the_loop_autonomy.md)
+Read: [Human in the Loop Autonomy](./3_human_in_the_loop_autonomy.md)
 
 ---
 

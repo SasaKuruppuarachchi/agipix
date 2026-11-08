@@ -1,0 +1,9 @@
+{%- comment -%} Shown on every page of a version that is not the default. Needs doc_version. {%- endcomment -%}
+{%- unless doc_version.default %}
+{%- assign _rel = site.data.docs.versions | where: "default", true | first -%}
+{%- assign _rel_url = page.url | replace_first: doc_root, "/docs/" %}
+<div class="callout callout--dev" role="note">
+  <p class="callout__title">Unreleased development branch</p>
+  <p>{{ doc_version.id }} documents the stack under active development. It is not released and may change without notice. For the released stack, <a href="{{ _rel_url | relative_url }}">select {{ _rel.id }}</a>.</p>
+</div>
+{%- endunless %}

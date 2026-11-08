@@ -34,6 +34,6 @@ Read: [Planning & Control](./2_planning_control.md)
 Read: [Learning-Based Planning & Control](./3_planning_control_data.md)
 
 ## Next steps
-- If runtime is not ready yet, start with [Real Docker Build](../real/3_docker_build.Md)
+- If runtime is not ready yet, start with [Real Docker Build](../real/3_docker_build.md)
 - To test in simulation first: [Simulation Quick Guide](../sim/index.md)
 - For operator workflows: [UI Quick Guide](../ui/index.md)

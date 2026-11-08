@@ -1,0 +1,19 @@
+{%- comment -%}
+  Sets, for the current page: doc_version (entry from _data/docs.yml), doc_src ("docs/" or
+  "docs/v2.0.0/"), doc_root ("/docs/" or "/docs/v2.0.0/") and doc_all (the all-docs page).
+  Pages outside the docs get the default version. Outputs nothing.
+{%- endcomment -%}
+{%- assign doc_version = site.data.docs.versions | where: "default", true | first -%}
+{%- for _v in site.data.docs.versions -%}
+  {%- unless _v.default -%}
+    {%- capture _vsrc -%}docs/{{ _v.id }}/{%- endcapture -%}
+    {%- if page.path contains _vsrc -%}{%- assign doc_version = _v -%}{%- endif -%}
+  {%- endunless -%}
+{%- endfor -%}
+{%- if doc_version.default -%}
+  {%- assign doc_src = "docs/" -%}
+{%- else -%}
+  {%- capture doc_src -%}docs/{{ doc_version.id }}/{%- endcapture -%}
+{%- endif -%}
+{%- capture doc_root -%}/{{ doc_src }}{%- endcapture -%}
+{%- capture doc_all -%}{{ doc_root }}all/{%- endcapture -%}

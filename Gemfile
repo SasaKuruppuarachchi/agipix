@@ -1,10 +1,6 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 4.4"
-gem "kramdown-parser-gfm"
-
-group :jekyll_plugins do
-  gem "jekyll-feed"
-  gem "jekyll-seo-tag"
-  gem "jekyll-sitemap"
-end
+# Same gems and versions GitHub Pages uses, so local builds and the Actions
+# workflow produce the same site as the classic Pages build.
+gem "github-pages", group: :jekyll_plugins
+gem "webrick"

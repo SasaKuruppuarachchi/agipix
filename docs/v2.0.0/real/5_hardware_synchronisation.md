@@ -143,7 +143,7 @@ The ESP32 disciplines its clock to the PX4 flight controller via MAVLink `SYSTEM
 
 The ESP32 firmware code can be found at [TimerSyncBridge](https://github.com/SasaKuruppuarachchi/esp32_timersync-open.git). The 2026-11 fixes (E1–E5, firmware label `sync-fixes-2026-11`) are on `master`.
 
-![PPS sync wiring](../../assets/images/real/wiring/hw_sync.png)
+![PPS sync wiring](../../../assets/images/real/wiring/hw_sync.png)
 
 ### ESP32 Firmware Update (`sync-fixes-2026-11`)
 
@@ -262,7 +262,7 @@ PWM_AUX_FUNC5=2064    # AUX5 = PPS input
 
 ### PX4 Custom Firmware (v1.17.0, Cube Orange+)
 
-The drone runs PX4 v1.17.0 with three small patches. Build and flashing steps, and the full parameter notes (including `EKF2_MAG_TYPE=5`), are in [Interfacing PX4 and Sensors](./4_interfacing_sensors.Md).
+The drone runs PX4 v1.17.0 with three small patches. Build and flashing steps, and the full parameter notes (including `EKF2_MAG_TYPE=5`), are in [Interfacing PX4 and Sensors](./4_interfacing_sensors.md).
 
 | Patch | Change | Why |
 |---|---|---|

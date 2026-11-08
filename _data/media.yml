@@ -61,10 +61,10 @@
   bytes: 428729
   web_bytes: 75300
   fallback_bytes: 312385
-- src: "assets/images/diag/autonomy_heuristcs.png"
-  webp: "assets/images/diag/autonomy_heuristcs.web.webp"
-  fallback: "assets/images/diag/autonomy_heuristcs.web.png"
-  sm: "assets/images/diag/autonomy_heuristcs.web.sm.webp"
+- src: "assets/images/diag/autonomy_heuristics.png"
+  webp: "assets/images/diag/autonomy_heuristics.web.webp"
+  fallback: "assets/images/diag/autonomy_heuristics.web.png"
+  sm: "assets/images/diag/autonomy_heuristics.web.sm.webp"
   sm_w: 960
   w: 1937
   h: 1486
@@ -111,10 +111,10 @@
   bytes: 1205004
   web_bytes: 151488
   fallback_bytes: 252223
-- src: "assets/images/exploded_labled.jpg"
-  webp: "assets/images/exploded_labled.web.webp"
-  fallback: "assets/images/exploded_labled.web.jpg"
-  sm: "assets/images/exploded_labled.web.sm.webp"
+- src: "assets/images/exploded_labeled.jpg"
+  webp: "assets/images/exploded_labeled.web.webp"
+  fallback: "assets/images/exploded_labeled.web.jpg"
+  sm: "assets/images/exploded_labeled.web.sm.webp"
   sm_w: 960
   w: 2000
   h: 1127

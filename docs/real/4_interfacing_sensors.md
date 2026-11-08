@@ -15,36 +15,10 @@ Wire the Pixhawk up as shown in the diagram. Refer to the [official guide](https
 ## 2) Connecting Px4
 ### PX4 Parameter setup
 
-Flash the Pixhawk with the latest stable branch using QGroundControl. PX4 `v1.17.0` is tested on the drone (Cube Orange+, `cubepilot_cubeorangeplus_default`). The drone runs a custom v1.17.0 build with three small patches; see [Custom PX4 firmware](#custom-px4-firmware-v1170--patches) below.
+Flash the Pixhawk with the latest stable branch branch using QGroundControl. Branch `1.16.0` is tested.
 
 List of all the updated parmeters
 TODO
-
-Parameters set for the time sync and the GPS-denied EKF2 setup (2026-11):
-
-| Parameter | Value | Why |
-|---|---|---|
-| `EKF2_MAG_TYPE` | 5 (None) | No magnetometer fusion; heading comes from the LIO external vision (see below) |
-| `EKF2_EV_CTRL` | 11 | Fuse external-vision horizontal position, vertical position and yaw |
-| `EKF2_HGT_REF` | 3 (Vision) | Height reference from the LIO |
-| `EKF2_GPS_CTRL` | 0 | No GPS |
-| `EKF2_EV_QMIN` | 0 | Accept every EV sample |
-| `UXRCE_DDS_SYNCT` | 1 | uXRCE-DDS timesync with the Jetson |
-| `PPS_CAP_ENABLE` | 1 | Custom build only: capture the ESP32 trigger edges (reboot needed) |
-| `PWM_AUX_FUNC5` | 2064 | AUX5 = PPS input for `pps_capture` |
-
-The ESP32 MAVLink link parameters (`MAV_1_CONFIG=GPS2`, `SER_GPS2_*`) are in [Hardware Syncronisation](./5_hardware_syncronisation.Md).
-
-### Compass and EKF2 heading (GPS-denied)
-
-The drone flies GPS-denied, with the magnetometer **off** in EKF2 (`EKF2_MAG_TYPE=5`). The LIO (LiDAR-inertial odometry) is sent to PX4 as external vision in the **NED** frame, and EKF2 takes the heading from it. The preflight check passes with this setup.
-
-Why not the compass:
-- With the compass on, a magnetometer calibration change on the ground clears EKF2's yaw alignment and stops vision position fusion, so arming in Position mode is refused. It happens without any user action too: PX4 writes the EKF-learned magnetometer offsets back to the calibration at every disarm.
-- Sending EV in the **FRD** frame also avoids it, but PX4's heading then stays "not aligned" (no yaw hold in Auto modes).
-- FRD with the compass on was worst: in simulation, short vision dropouts caused heading resets of ±54°.
-
-So: **NED + no compass**.
 
 
 ### Hardware wiring
@@ -70,7 +44,7 @@ sudo apt install git make cmake python3-pip
 pip install kconfiglib jinja2 empy jsonschema pyros-genmsg packaging toml numpy future
 
 cd $HOME
-git clone https://github.com/PX4/PX4-Autopilot.git -b v1.17.0 --recursive
+git clone https://github.com/PX4/PX4-Autopilot.git -b v1.16.1 --recursive
 cd PX4-Autopilot
 
 # 1. Run the official PX4 Ubuntu setup script (it handles apt packages and toolchains)
@@ -106,26 +80,6 @@ make cubepilot_cubeorangeplus_default
 ```bash
 make cubepilot_cubeorangeplus_default upload
 ```
-
-### Custom PX4 firmware (v1.17.0 + patches)
-
-The drone runs PX4 v1.17.0 for the Cube Orange+ with three patches, applied in order to a clean `v1.17.0` checkout before `make cubepilot_cubeorangeplus_default`:
-
-| Patch | Change |
-|---|---|
-| 01 | `src/modules/uxrce_dds_client/dds_topics.yaml`: `rate_limit: 400.` on `/fmu/out/sensor_combined`, so the PX4 IMU reaches the Jetson at its full rate (~200 Hz) instead of 100 Hz |
-| 02 | MAVLink `SYSTEM_TIME` sends the DDS-synced companion time: hrt minus the converged uXRCE-DDS offset (`src/lib/timesync/Timesync.{hpp,cpp}`, `src/modules/mavlink/streams/SYSTEM_TIME.hpp`). After a link drop it holds the last offset; before the first convergence it is stock. The ESP32 time bridge on GPS2 then locks to Jetson time |
-| 03 | `CONFIG_DRIVERS_PPS_CAPTURE=y` in `boards/cubepilot/cubeorangeplus/default.px4board`, and `/fmu/out/pps_capture` added to `dds_topics.yaml`. Only its `timestamp` is meaningful (in Jetson time); `rtc_timestamp` assumes a GNSS receiver |
-
-Patch 01 in full:
-
-```yaml
-  - topic: /fmu/out/sensor_combined
-    type: px4_msgs::msg::SensorCombined
-    rate_limit: 400.
-```
-
-Flash the `.px4` with QGC's **Custom Firmware** option (above). Parameters are kept across the flash. Then set `PPS_CAP_ENABLE=1` and `PWM_AUX_FUNC5=2064` (AUX5 = PPS input, on Timer4, separate from the motors on AUX1–4) and `EKF2_MAG_TYPE=5`, and reboot PX4. Keep `SENS_EN_LL40LS=0` and `FD_EXT_ATS_EN=0` (they also use AUX5). The trigger wiring and the time-sync details are in [Hardware Syncronisation](./5_hardware_syncronisation.Md).
 
 
 ### Verify connection
@@ -438,4 +392,4 @@ git submodule update --init --recursive
 ```
 ---
 
-Next step is [Hardware Syncronisation](./5_hardware_syncronisation.Md)
+Next step is [Hardware Synchronisation](./5_hardware_synchronisation.md)

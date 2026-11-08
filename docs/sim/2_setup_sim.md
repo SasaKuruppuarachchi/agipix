@@ -32,9 +32,9 @@ Quick install instructions: [Official Documentation](https://docs.isaacsim.omniv
 ```bash
 mkdir isaac-sim
 cd isaac-sim/
-wget https://download.isaacsim.omniverse.nvidia.com/isaac-sim-standalone-6.0.1-linux-x86_64.zip
-unzip "isaac-sim-standalone-6.0.1-linux-x86_64.zip" -d ~/isaacsim
-rm isaac-sim-standalone-6.0.1-linux-x86_64.zip # optionally clean install artifacts
+wget https://download.isaacsim.omniverse.nvidia.com/isaac-sim-standalone-5.1.0-linux-x86_64.zip
+unzip "isaac-sim-standalone-5.1.0-linux-x86_64.zip" -d ~/isaacsim
+rm isaac-sim-standalone-5.1.0-linux-x86_64.zip # optionally clean install artifacts
 cd ~/isaacsim
 ./post_install.sh
 ```
@@ -134,10 +134,6 @@ isaac_run() {
 }
 alias agisim="cd ~/workspace/raicam-ros/src/isaac_ros_common/ && ./run_sim.sh"
 export ROS_DOMAIN_ID=3
-export ROS_DISTRO=humble
-export RMW_IMPLEMENTATION=rmw_cyclonedds_cpp
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/sasa/isaacsim/exts/isaacsim.ros2.core/jazzy/lib
-
 EOF
 source ~/.bashrc
 ```
@@ -195,7 +191,7 @@ sudo apt install git make cmake python3-pip
 pip install kconfiglib jinja2 empy jsonschema pyros-genmsg packaging toml numpy future
 
 cd $HOME
-git clone https://github.com/PX4/PX4-Autopilot.git -b v1.17.0 --recursive
+git clone https://github.com/PX4/PX4-Autopilot.git -b v1.16.1 --recursive
 cd PX4-Autopilot
 make px4_sitl_default none
 ```
@@ -239,13 +235,15 @@ make px4_sitl_default none
 &emsp; Cloning into the repo and the assets
 ```bash
 cd $HOME
-git clone https://github.com/SasaKuruppuarachchi/AgiSIM.git --recursive
+git clone https://github.com/SasaKuruppuarachchi/PegasusSimulator.git
+cd PegasusSimulator/extensions/pegasus.simulator/pegasus/simulator/assets/Worlds
+git clone https://github.com/SasaKuruppuarachchi/isaac_envs.git
 ```
 &emsp; Installing the extension as a library
 
 ```bash
 cd ~/isaacsim
-./python.sh -m pip install --editable  $HOME/AgiSIM/extensions/pegasus.simulator
+./python.sh -m pip install --editable  /home/sasa/PegasusSimulator/extensions/pegasus.simulator
 ```
 
 > [!NOTE]
@@ -282,68 +280,39 @@ When enabling the extension for the first time, the python requirements should b
    ![Pegasus Simulator window docked in Isaac Sim](https://github.com/PegasusSimulator/PegasusSimulator/blob/main/docs/_static/pegasus_gui_example.png?raw=1)
 
 ## Post setups
-The helper script will do following tasks:
-- Setup the environment variables for IsaacSim and ROS2 bridge
-- download the required assets for the simulation
-- setup lidar assets and the required configuration files for the simulation
-```bash
-cd $HOME/AgiSIM/scripts
-./setup_isaacsim.sh
-```
-#### MicroXRCE DDS Primary link -> udp8
+### Download assets
+- Download assets from [Official page](https://docs.isaacsim.omniverse.nvidia.com/5.1.0/installation/download.html) and same them in `~/isaacsim/assets/` 
+- then `mkdir ~/isaacsim/assets/Isaac/5.1/NVIDIA`
+- Open `~/isaacsim/exts/isaacsim.asset.browser/config/extension.toml` and add the asset paths at 
 
-and launching ```agidocker```
-```bash
-agidocker
-# *** Inside agidocker
-cd /workspaces/dds
-git clone -b v2.4.3 https://github.com/eProsima/Micro-XRCE-DDS-Agent.git
-cd Micro-XRCE-DDS-Agent
+    ```toml
+    [settings]
+    # Root folder URLs to list and monitor.
+    exts."isaacsim.asset.browser".folders = [
+        # asset paths here
+    ]
+    ```
 
-```
-According to the Fast RTPS documentation specify the ROS2 domain ID by adding the following to the participant profile into the `agent.refs`
-
-```xml
-<participant .....>
-    <rtps>
-        .....
-        <builtin>
-            <domainId>3</domainId>
-        </buitin>
-    </rtps>
-</participan
-```
-
-```bash
-# *** Inside agidocker
-mkdir build
-cd build
-cmake ..
-make
-sudo make install
-sudo ldconfig /usr/local/lib/
-sudo MicroXRCEAgent serial --dev udp8 -p 8888
-```
+- Open `~isaacsim/exts/isaacsim.storage.native/config/extension.toml` and replace persistent.isaac.asset_root.default with `persistent.isaac.asset_root.default = "/home/sasa/isaacsim/assets/Isaac/5.1"`
 
 
+### Add Lidar definitions
+To replicate Mid360 lidar in the Agipix we create this custom Lidar model in Isaacsim.
 
-##  Software Setup
-Follow the next steps
-[Software Setup for px4](../real/9_software_setup.md)
-[Perception](../autonomy/1_perception.md)
-[Planning and Control](../autonomy/2_planning_control.md)
+- Copy Mid360 usda file `cp ~/PegasusSimulator/assets/lidar/Mid_360.usda ~/isaacsim/assets/Isaac/5.1/Isaac/Sensors/NVIDIA/Mid_360.usda`
+- Open `~/isaacsim/exts/isaacsim.sensors.rtx/isaacsim/sensors/rtx/impl/supported_lidar_configs.py` and add `"/Isaac/Sensors/NVIDIA/Mid_360.usda": set(),` under the `SUPPORTED_LIDAR_CONFIGS`
+
 
 ## Running the Simulation
 
 1. Open a new terminal to launch the simulator
    ```bash
-   cd $HOME/AgiSIM/scripts && ./run_sim.sh
+   cd $ISAAC_ROS_DEV_DIR/src/isaac_ros_common/ && ./run_sim.sh
    # press ENTER after moving to the right pane to launch IsaacSim
    ```
 
 2. In a new terminal run the docker container
    ```bash
-   # inside the agidocker container
    runagi
    ```
 3. Controlling the drone
@@ -352,7 +321,7 @@ Follow the instructions in the top right pane of docker tmux window
 
 4. Opening the UI
 
-   1. Open up a [Foxglow](https://app.foxglove.dev/) account and navigate to the dashboard
+   1. Open up a [Foxglow](https://app.foxglove.dev/) account and bavigate to the dashboard
    2. Open connection with "ws://localhost:8765"
 
 Now we are ready for autonomy setup. See [Instructions](../autonomy/1_perception.md) to continue.
