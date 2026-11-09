@@ -1,0 +1,20 @@
+---
+layout: default
+---
+<article class="doc-content doc post">
+  <nav class="breadcrumbs" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ '/' | relative_url }}">Home</a></li>
+      <li><a href="{{ '/posts/' | relative_url }}">Posts</a></li>
+      <li><span aria-current="page">{{ page.short_title | default: page.title }}</span></li>
+    </ol>
+  </nav>
+  <div class="doc-body">
+    {%- if page.status %}<p class="paper-card__venue">{{ page.status }}</p>{% endif %}
+    <h1>{{ page.title }}</h1>
+    {%- if page.authors %}<p class="paper-card__authors">{{ page.authors }}</p>{% endif %}
+    {%- if page.affiliations %}<p class="post-meta">{{ page.affiliations }}</p>{% endif %}
+    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %Y" }}</time></p>
+    {% include media.html html=content %}
+  </div>
+</article>

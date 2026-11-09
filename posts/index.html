@@ -1,0 +1,17 @@
+---
+layout: default
+title: Posts
+permalink: /posts/
+description: "Research and project updates built on the AgiPIX platform."
+---
+<section class="highlights post-list">
+  <h2>Posts</h2>
+  {%- for post in site.posts %}
+  <div class="panel paper-card">
+    {%- if post.status %}<p class="paper-card__venue">{{ post.status }}</p>{% endif %}
+    <h3 class="paper-card__title"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+    <p class="paper-card__authors">{{ post.description }}</p>
+    <p class="post-meta"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %Y" }}</time></p>
+  </div>
+  {%- endfor %}
+</section>

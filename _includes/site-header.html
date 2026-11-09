@@ -24,6 +24,7 @@
       <a href="{{ _p | relative_url }}" class="nav-link"{% if _url contains _p %} aria-current="page"{% endif %}>{% case s.key %}{% when "sim" %}Sim{% when "real" %}Real{% when "ui" %}UI{% else %}{{ s.title }}{% endcase %}</a>
       {%- endfor %}
       <a href="{{ '/bom.html' | relative_url }}" class="nav-link"{% if _url == "/bom.html" %} aria-current="page"{% endif %}>BOM</a>
+      <a href="{{ '/posts/' | relative_url }}" class="nav-link"{% if _url contains "/posts/" %} aria-current="page"{% endif %}>Posts</a>
       <a href="{{ site.code_repo }}" class="nav-link" target="_blank" rel="noopener">GitHub</a>
     </div>
     <label class="nav-version" title="Documentation version">

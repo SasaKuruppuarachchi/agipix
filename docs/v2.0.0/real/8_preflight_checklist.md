@@ -23,6 +23,10 @@ sudo journalctl -u mavlink-router -f
 
 See [Hardware Synchronisation](./5_hardware_synchronisation.md).
 
+### Power and USB
+- [ ] On the flight battery, not a bench supply, before arming or running a motor test (props off for motor tests). See [Bench and bring-up notes](./4_interfacing_sensors.md#bench-and-bring-up-notes).
+- [ ] The Cube USB cable was not plugged or unplugged while PX4 was powered.
+
 ### Todos:
 HW
 - PPS Sync

@@ -30,9 +30,10 @@ Parameters changed from the PX4 v1.17.0 defaults on the tested drone. Calibratio
 | | `PWM_MAIN_MIN1-4` / `PWM_MAIN_MAX1-4` | 1100 / 1900 | Tentative; see note |
 | | `PWM_AUX_FUNC5` | 2064 | AUX5 = PPS input (time sync) |
 | Battery | `BAT1_N_CELLS` | 6 | |
-| | `BAT1_V_CHARGED` / `BAT1_V_EMPTY` | 4.2 / 3.4 | Under review; see note |
+| | `BAT1_V_CHARGED` / `BAT1_V_EMPTY` | 4.2 / 3.5 | |
 | | `BAT1_A_PER_V` / `BAT1_V_DIV` | 17.0 / 12.27 | Calibrate against a multimeter |
-| | `BAT_CRIT_THR` / `BAT_EMERGEN_THR` | 0.05 / 0.03 | Under review; see note |
+| | `BAT_CRIT_THR` / `BAT_EMERGEN_THR` | 0.10 / 0.05 | |
+| | `COM_LOW_BAT_ACT` | 2 | Land |
 | RC | `RC_MAP_THROTTLE` / `YAW` / `PITCH` / `ROLL` | 1 / 2 / 3 / 4 | |
 | | `RC_MAP_FLTMODE` / `ARM_SW` / `LOITER_SW` / `OFFB_SW` / `KILL_SW` | 5 / 6 / 7 / 8 / 9 | |
 | | `MAN_ARM_GESTURE` | 0 | Arm with the switch only |
@@ -52,24 +53,33 @@ Parameters changed from the PX4 v1.17.0 defaults on the tested drone. Calibratio
 | GPS-denied | `SYS_HAS_GPS` | 0 | |
 | | `GPS_1_CONFIG` | 0 | |
 | | `EKF2_GPS_CTRL` | 0 | |
-| | `CAL_MAG0_PRIO` | 50 | |
 | | see the time-sync / EKF2 table below | | |
 | EKF2 | `EKF2_MULTI_IMU` | 3 | |
 | | `EKF2_RNG_A_HMAX` / `EKF2_RNG_FOG` | 10 / 1.0 | |
 | | `EKF2_OF_POS_X` | -0.115 | |
 | | `EKF2_GPS_POS_X` / `_Z` | -0.055 / -0.05 | |
+| | `EKF2_RNG_CTRL` / `EKF2_OF_CTRL` | 0 / 0 | |
+| | `EKF2_NOAID_TOUT` | 2 s | |
 | Sensors | `IMU_GYRO_RATEMAX` / `IMU_INTEG_RATE` | 800 / 250 | |
 | | `SENS_IMU_MODE` | 0 | |
-| Failsafe | `COM_RC_LOSS_T` / `NAV_RCL_ACT` | 5 s / 1 | Under review; see note |
+| Failsafe | `COM_RC_LOSS_T` / `NAV_RCL_ACT` | 1.0 s / 3 | Land on RC loss |
+| | `COM_RC_IN_MODE` | 0 | |
 | | `COM_FLTT_LOW_ACT` | 1 | |
-| | `RTL_RETURN_ALT` / `RTL_DESCEND_ALT` | 3 / 10 | |
+| | `RTL_RETURN_ALT` / `RTL_DESCEND_ALT` | 3 / 10 | RTL is unavailable without GPS; values not tuned |
+| Speed limits | `MPC_VEL_MANUAL` / `MPC_XY_VEL_MAX` | 2.0 / 2.0 | m/s |
+| | `MPC_Z_VEL_MAX_UP` / `MPC_Z_VEL_MAX_DN` | 1.0 / 0.8 | m/s |
+| | `MPC_Z_V_AUTO_UP` / `MPC_Z_V_AUTO_DN` | 1.0 / 0.7 | m/s |
+| | `MPC_TKO_SPEED` | 0.8 | m/s |
+| | `MPC_XY_CRUISE` | 1.0 | m/s |
+| | `MPC_MAN_TILT_MAX` | 25 | Degrees |
 | Mission | `MIS_TAKEOFF_ALT` | 1.5 | |
 | | `NAV_ACC_RAD` | 2.0 | |
 | Tuning | `MC_AT_EN` | 1 | |
 | | `SYS_VEHICLE_RESP` | -0.46 | Sets the `MPC_ACC_*` / `MPC_JERK_*` values |
 | | `MPC_MAN_Y_MAX` / `MPC_MAN_Y_TAU` | 158 / 0.32 | |
+| Logging | `SDLOG_PROFILE` | 3 | |
 
-> **Note:** rows marked "under review" record what the tested drone ran on 2026-11-08. They are being reviewed and may change, so do not treat them as recommended values. Rows marked "tentative" are awaiting confirmation in a flight-test session.
+> **Note:** the failsafe, speed-limit, battery-threshold and logging values were set on the drone and read back on 2026-11-09. The row marked "under review" records the flight-mode slots the drone ran on 2026-11-08, which are still changing. Rows marked "tentative" are awaiting the QGroundControl motor test.
 
 Parameters set for the time sync and the GPS-denied EKF2 setup (2026-11):
 
@@ -176,7 +186,7 @@ Patch 01 in full:
     rate_limit: 400.
 ```
 
-Flash the `.px4` with QGC's **Custom Firmware** option (above). Parameters are kept across the flash. Then set `PPS_CAP_ENABLE=1` and `PWM_AUX_FUNC5=2064` (AUX5 = PPS input, on Timer4, separate from the motors on AUX1–4) and `EKF2_MAG_TYPE=5`, and reboot PX4. Keep `SENS_EN_LL40LS=0` and `FD_EXT_ATS_EN=0` (they also use AUX5). The trigger wiring and the time-sync details are in [Hardware Synchronisation](./5_hardware_synchronisation.md).
+Flash the `.px4` with QGC's **Custom Firmware** option (above). Parameters are kept across the flash. Then set `PPS_CAP_ENABLE=1` and `PWM_AUX_FUNC5=2064` (AUX5 = PPS input, on Timer4) and `EKF2_MAG_TYPE=5`, and reboot PX4. Keep `SENS_EN_LL40LS=0` and `FD_EXT_ATS_EN=0` (they also use AUX5). The trigger wiring and the time-sync details are in [Hardware Synchronisation](./5_hardware_synchronisation.md).
 
 
 ### Verify connection
@@ -274,6 +284,14 @@ go into the MAVLink consol of QGC and
   ```
 
 > ***Troubleshoot*** : If `ros2 topic list`do not show the /fmu/.. topics, check if the domain id settings match between the **ROS2** in the docker, **uxrce_dds_client** and the **MicroXRCEAgent**
+
+#### Bench and bring-up notes
+
+- **Don't hot-plug the Cube USB.** Plugging or unplugging the USB cable while PX4 is powered caused two PX4 hard faults, in the USB MAVLink connection. Use the network MAVLink route instead: mavlink-router on the Jetson, TCP 5760. After a hard fault, PX4 refuses to arm ("Crash dumps present on SD card") until the `fault_*.log` file is moved out of the SD card's root folder.
+- **Don't arm on a bench supply.** A 24 V / 3 A bench supply cannot spin the motors, and the Jetson browns out and reboots. Run motor tests on the flight battery, with the props off.
+- **Battery current reads 0 A** on the current build, although the voltage is correct. Don't rely on current-based battery estimates until the power-module calibration is checked.
+- **DDS after a PX4 reboot.** The link usually reconnects by itself within about a minute. Sometimes it comes back one-way: `uxrce_dds_client status` shows `Payload rx: 0 B/s` and PX4 receives nothing from the companion. Restart the MicroXRCEAgent to fix it.
+
 ---
 
 #### [Smart WiFi Manager Project](https://github.com/alireza787b/smart-wifi-manager)

@@ -15,7 +15,7 @@ Every sensor stamp is on one clock: the Jetson's `CLOCK_REALTIME`.
 | Clock consumer | Time source | Path |
 |---|---|---|
 | Livox Mid-360 (point cloud + IMU) | Jetson, **primary** | Software PTP: `ptp4l` as the systemd service `ptp4l-livox.service` on the LiDAR Ethernet port `enP8p1s0` |
-| Livox Mid-360 | ESP32, **fallback** ("option B") | 1 PPS (M12 pin 8) + GPRMC (M12 pin 10); the Mid-360 uses it only when no PTP master answers |
+| Livox Mid-360 | ESP32, **fallback** ("option B") | 1 PPS (M12 pin 8) + GPRMC (M12 pin 10); the Mid-360 uses it until a PTP master answers |
 | PX4 (`/fmu/out/*` stamps) | Jetson | uXRCE-DDS timesync (`UXRCE_DDS_SYNCT=1`) |
 | ESP32 TimerSync Bridge | Jetson, through PX4 | MAVLink `SYSTEM_TIME` on GPS2; the custom PX4 build fills it with the DDS-synced companion time |
 | Cameras (planned OAK-FFC-4P) | Jetson (host stamps) | Exposure triggered by the ESP32 10 Hz output; PX4 `pps_capture` stamps every trigger edge in Jetson time |
@@ -58,7 +58,13 @@ The Mid-360 prefers PTP over GPS. `livox_ros_driver2` reports the source in `tim
 | 1 | gPTP / PTP | Jetson `CLOCK_REALTIME` via `ptp4l` |
 | 2 | GPS (PPS + GPRMC) | ESP32 disciplined clock (Jetson time through PX4) |
 
-Because PTP wins, the ESP32 PPS and GPRMC wires can stay connected. If `ptp4l` stops, the LiDAR falls back to the ESP32 (option B).
+Because PTP wins, the ESP32 PPS and GPRMC wires can stay connected.
+
+Observed behaviour on the drone (2026-11-09):
+
+- After a LiDAR power cycle, the Mid-360 reports GPS time for about 5 s, then switches to PTP.
+- If the PTP master stops, the Mid-360 stays in PTP holdover (drift about 7 µs/s). It did not fall back to GPS in the 60 s tested; longer holdover has not been measured.
+- It re-locks within about 7 s of the master coming back.
 
 ---
 
@@ -115,7 +121,7 @@ journalctl -u ptp4l-livox -f
 ```
 
 - The port goes `LISTENING` → `MASTER` a few seconds after start and stays `MASTER`. A `FAULTY` state means the TX-timestamp timeout was hit (see [Troubleshooting](#troubleshooting)).
-- The Mid-360 switches to PTP at once: the driver logs `timestamp_type changed to 1`, and `livox/time_sync` reads `1`.
+- The Mid-360 switches to PTP within a few seconds: the driver logs `timestamp_type changed to 1`, and `livox/time_sync` reads `1`.
 - In the stack, `<ns>/time_sync/lidar` shows source PTP and `synced=true` (see [Stack Integration](#stack-integration-time-sync-health)).
 
 ### Uninstall
@@ -134,7 +140,7 @@ sudo systemctl daemon-reload
 
 The ESP32 now has two jobs:
 
-1. **GPS-style fallback time source** for the Mid-360: 1 PPS on GPIO 5 / A1 (M12 pin 8, 100 ms high) and GPRMC on GPIO 12 (M12 pin 10). The LiDAR uses them only when no PTP master is present.
+1. **GPS-style fallback time source** for the Mid-360: 1 PPS on GPIO 5 / A1 (M12 pin 8, 100 ms high) and GPRMC on GPIO 12 (M12 pin 10). The LiDAR uses them until a PTP master answers; if the master stops later, it stays in PTP holdover instead of returning to them.
 2. **PPS-aligned 10 Hz camera trigger** on GPIO 4 / A0 (50 % duty, phase-reset at every PPS edge). See [Camera Trigger and PX4 Trigger Capture](#camera-trigger-and-px4-trigger-capture).
 
 The ESP32 disciplines its clock to the PX4 flight controller via MAVLink `SYSTEM_TIME` over UART. With the custom PX4 build (patch 02, [below](#px4-custom-firmware-v1170-cube-orange)), `SYSTEM_TIME` carries the Jetson time, so the ESP32 locks to the Jetson clock as well.
@@ -415,11 +421,20 @@ pio device monitor -b 115200
 ```
 
 ### Verify LiDAR time sync
-With `ptp4l` running the LiDAR uses PTP (`timestamp_type changed to 1`). To test the ESP32 fallback, stop the PTP service (`sudo systemctl stop ptp4l-livox`) and restart the driver. The GPRMC signal goes directly to the LiDAR (M12 pin 10). Verify sync in `livox_ros_driver2` log — look for:
-```
-timestamp_type changed to 2
-```
-This confirms the LiDAR has accepted the GPRMC and switched to GPS/UART time sync mode.
+With `ptp4l` running the LiDAR uses PTP (`timestamp_type changed to 1`).
+
+Stopping `ptp4l` alone does not trigger the ESP32 fallback: with `ptp4l` stopped for 60 s and the driver left running, the Mid-360 stayed on `timestamp_type` 1 (PTP holdover). To test the fallback, power-cycle the LiDAR as well.
+
+> **Expected, to be confirmed:** this exact sequence has not been run yet.
+
+1. Stop the PTP service: `sudo systemctl stop ptp4l-livox`
+2. Power-cycle the LiDAR.
+3. After it boots, `timestamp_type` should read 2 (GPS, ESP32 fallback) and stay 2 while `ptp4l` is stopped. The GPRMC signal goes directly to the LiDAR (M12 pin 10). The `livox_ros_driver2` log shows:
+   ```
+   timestamp_type changed to 2
+   ```
+4. Start the PTP service again: `sudo systemctl start ptp4l-livox`
+5. `timestamp_type` should switch back to 1 within seconds.
 
 ---
 
@@ -630,12 +645,13 @@ Connect the Mid-360 LiDAR and MVS camera to the ESP32 and run the full sensor st
 |---|---|---|
 | `ptp4l-livox` goes `FAULTY` ("timed out while polling for tx timestamp") | Default 1 ms TX-timestamp timeout with software timestamps | Use `--tx_timestamp_timeout 100` (as in the unit file) |
 | Driver reports `timestamp_type` 0 | No PTP master and no GPS fallback | `systemctl status ptp4l-livox`; check the Ethernet link; then the ESP32 state and the GPIO 5 / GPIO 12 wires |
+| "PX4 DDS offset error" of a few ms to 20+ ms just after boot | The Jetson's NTP is adjusting the clock quickly (about 130 ppm seen) | Expected; it clears once the clock settles |
 | LIO start held at `wait_time_sync` | LiDAR stamps not yet on the host clock | Check the two rows above; Enter in the pane overrides |
 | LiDAR time jumped with no sync change | Host clock stepped (e.g. timesyncd at boot); PTP serves the host clock | Check `<ns>/time_sync/host_clock`; restart the LIO if it was already running |
 | No `[MAV]`/`[S]` lines | UART2 wiring wrong or baud mismatch | Check GPIO 38→PX4 RX, GPIO 3←PX4 TX, shared GND; verify `SER_GPS2_BAUD=57600` on PX4 |
 | Stays in WARMING, or `[CLK] seed rejected` repeats | `SYSTEM_TIME` stops or is very noisy | Check the GPS2 link (`MAV_1_CONFIG=GPS2`, baud); check `uxrce_dds_client status` on PX4 NSH — need `timesync converged: true`, so that `SYSTEM_TIME` is Jetson time |
 | PPS and GPRMC absent indefinitely | Clock never reaches LOCKED (2026-11 firmware keeps them off until then) | See the row above |
-| `livox_ros_driver2` does not show `timestamp_type changed to 2` (with PTP stopped) | GPRMC not reaching LiDAR | Check GPIO 12 → Mid-360 pin 10 wire and shared GND; confirm ESP32 is LOCKED before starting driver |
+| `livox_ros_driver2` does not show `timestamp_type changed to 2` (with PTP stopped and the LiDAR power-cycled) | GPRMC not reaching LiDAR | Check GPIO 12 → Mid-360 pin 10 wire and shared GND; confirm ESP32 is LOCKED before starting driver |
 | 10 Hz or 1 Hz signal absent | GPIO conflict or wiring; with the 2026-11 firmware the PPS is off until LOCKED | Confirm scope on GPIO 4 and GPIO 5; check no strapping pin conflict |
 | `STEP_PENDING` / re-seed after a PX4 reboot or Jetson clock change | Expected: the `SYSTEM_TIME` source stepped | It returns to LOCKED within 20 s, or re-seeds once (one PPS gap of ~5 s) |
 | No `/fmu/out/pps_capture` | Stock firmware, `PPS_CAP_ENABLE=0`, or AUX5 not wired | Flash the custom build; set `PPS_CAP_ENABLE=1`, `PWM_AUX_FUNC5=2064`, reboot; check the GPIO 4 → AUX5 wire and common ground |

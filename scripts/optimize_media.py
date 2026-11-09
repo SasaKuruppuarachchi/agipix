@@ -51,7 +51,7 @@ SMALL_QUALITY = 76
 # Per-file WebP quality (e.g. textures that sit under a dark overlay)
 QUALITY_OVERRIDES = {"assets/images/carbon.jpg": 50}
 RASTER = {".jpg", ".jpeg", ".png"}
-SCAN_GLOBS = ["*.md", "*.Md", "*.html", "_layouts/*.html", "_includes/*.html", "docs/**/*.md",
+SCAN_GLOBS = ["*.md", "*.Md", "*.html", "_layouts/*.html", "_includes/*.html", "_posts/*.md", "docs/**/*.md",
               "docs/**/*.Md", "assets/css/*.scss", "assets/css/*.css"]
 SKIP_DIRS = {"_site", ".git", "cad", "vendor", "node_modules"}
 REF_RE = re.compile(r"assets/images/[^\s\"')<>]+?\.(?:png|jpe?g)", re.I)
