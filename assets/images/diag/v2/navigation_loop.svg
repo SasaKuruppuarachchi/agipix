@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" role="img" aria-labelledby="t d">
+  <title id="t">Inside agipix_auto: two loops and SUPER's exploratory and backup trajectories</title>
+  <desc id="d">Left: a planning worker at 10 Hz owns the map and planner and publishes immutable trajectory snapshots; an independent 100 Hz control callback reads the latest trajectory and odometry snapshots and runs the MPC. Right: SUPER plans an exploratory trajectory that may enter unknown space and a backup trajectory that branches from it and stops inside known free space, each inside safe corridors.</desc>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#c8c8c8"/></marker>
+    <marker id="ao" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#e8662e"/></marker>
+    <pattern id="unk" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="#151515"/><line x1="0" y1="0" x2="0" y2="10" stroke="#262626" stroke-width="4"/></pattern>
+  </defs>
+  <style>
+    text { font-family: "Inter", "Segoe UI", Helvetica, Arial, sans-serif; fill: #ececec; }
+    .h { font-size: 15px; font-weight: 700; letter-spacing: .08em; fill: #e8662e; }
+    .t { font-size: 17px; font-weight: 600; }
+    .s { font-size: 13.5px; fill: #b4b4b4; }
+    .l { font-size: 13px; fill: #c8c8c8; }
+    .box { fill: #1f1f1f; stroke: #464646; stroke-width: 1.5; }
+    .core { fill: #241a14; stroke: #e8662e; stroke-width: 1.5; }
+    .w { stroke: #c8c8c8; stroke-width: 2; fill: none; }
+    .o { stroke: #e8662e; stroke-width: 2.4; fill: none; }
+  </style>
+  <rect width="1200" height="560" rx="14" fill="#121212"/>
+
+  <!-- left: two loops -->
+  <text class="h" x="40" y="44">TWO LOOPS, ONE PROCESS</text>
+  <rect x="30" y="62" width="520" height="290" rx="12" fill="#191513" stroke="#5a3a28" stroke-width="1.4"/>
+  <text class="t" x="50" y="92">Planning worker · 10 Hz</text>
+  <text class="s" x="50" y="112">owns the map and planner state</text>
+  <rect class="core" x="50" y="128" width="148" height="52" rx="8"/><text class="l" x="124" y="159" text-anchor="middle">scan → ROG-Map</text>
+  <rect class="core" x="216" y="128" width="148" height="52" rx="8"/><text class="l" x="290" y="159" text-anchor="middle">mission goal</text>
+  <rect class="core" x="382" y="128" width="148" height="52" rx="8"/><text class="l" x="456" y="159" text-anchor="middle">SUPER replan</text>
+  <path class="o" d="M198 154 H214" marker-end="url(#ao)"/><path class="o" d="M364 154 H380" marker-end="url(#ao)"/>
+  <rect class="box" x="216" y="214" width="314" height="44" rx="8" style="stroke:#d4af37"/>
+  <text class="l" x="373" y="241" text-anchor="middle">immutable trajectory snapshot</text>
+  <path class="w" d="M456 180 V212" marker-end="url(#a)"/>
+  <text class="t" x="50" y="298">Control callback · 100 Hz</text>
+  <text class="s" x="50" y="318">independent of planner and map time</text>
+  <rect class="core" x="382" y="282" width="148" height="52" rx="8"/><text class="l" x="456" y="313" text-anchor="middle">MPC</text>
+  <path class="w" d="M373 258 V270 H456 V280" marker-end="url(#a)"/>
+  <text class="s" x="50" y="342">reads the latest odometry snapshot</text>
+  <path class="o" d="M530 308 H566" marker-end="url(#ao)"/>
+  <text class="l" x="574" y="304">to PX4:</text>
+  <text class="l" x="574" y="321">attitude</text>
+  <text class="l" x="574" y="338">+ thrust</text>
+
+  <!-- left bottom: mission modes -->
+  <text class="h" x="40" y="398">MISSION MODES</text>
+  <rect class="box" x="30" y="414" width="168" height="118" rx="9"/>
+  <text class="t" x="44" y="442">Exploration</text>
+  <text class="s" x="44" y="464">frontier progress,</text><text class="s" x="44" y="482">multi-storey, then</text><text class="s" x="44" y="500">return home</text>
+  <rect class="box" x="210" y="414" width="168" height="118" rx="9"/>
+  <text class="t" x="224" y="442">Waypoints</text>
+  <text class="s" x="224" y="464">pass-through points,</text><text class="s" x="224" y="482">route guidance,</text><text class="s" x="224" y="500">missed points skipped</text>
+  <rect class="box" x="390" y="414" width="168" height="118" rx="9"/>
+  <text class="t" x="404" y="442">Area scan</text>
+  <text class="s" x="404" y="464">drawn scan lines at a</text><text class="s" x="404" y="482">height above the live</text><text class="s" x="404" y="500">terrain estimate</text>
+
+  <!-- right: exp / backup -->
+  <text class="h" x="650" y="44">EXPLORATORY AND BACKUP TRAJECTORIES</text>
+  <rect x="640" y="62" width="530" height="470" rx="12" fill="url(#unk)" stroke="#333"/>
+  <path d="M640 74 Q640 62 652 62 H930 C 900 150 960 260 900 330 C 860 380 760 400 700 532 H652 Q640 532 640 520 Z" fill="#20231f" stroke="#3f4a3c" stroke-width="1.4"/>
+  <text class="l" x="660" y="96" style="fill:#9fb59a">known free space</text>
+  <text class="l" x="1150" y="96" text-anchor="end" style="fill:#8a8a8a">unknown space</text>
+  <rect x="984" y="190" width="58" height="150" rx="4" fill="#3a3a3a" stroke="#5a5a5a"/>
+  <text class="l" x="1013" y="360" text-anchor="middle" style="fill:#9a9a9a">obstacle</text>
+  <!-- corridors -->
+  <path d="M690 420 L760 300 L860 230 L960 150 L1070 120 L1100 160 L990 205 L890 285 L800 345 L735 445 Z" fill="#e8662e" fill-opacity="0.10" stroke="#e8662e" stroke-opacity="0.35"/>
+  <path d="M800 330 L850 300 L905 300 L905 350 L850 365 Z" fill="#d4af37" fill-opacity="0.12" stroke="#d4af37" stroke-opacity="0.4"/>
+  <!-- trajectories -->
+  <path d="M712 432 C 760 360 800 330 860 270 S 980 170 1080 138" class="o" marker-end="url(#ao)"/>
+  <path d="M812 322 C 840 312 870 318 892 330" stroke="#d4af37" stroke-width="2.6" fill="none" stroke-dasharray="7 5"/>
+  <circle cx="892" cy="330" r="6" fill="#d4af37"/>
+  <!-- drone -->
+  <g transform="translate(712 440)">
+    <circle r="15" fill="#2a2a2a" stroke="#ececec" stroke-width="1.6"/>
+    <circle cx="-11" cy="-11" r="6" fill="none" stroke="#ececec"/><circle cx="11" cy="-11" r="6" fill="none" stroke="#ececec"/>
+    <circle cx="-11" cy="11" r="6" fill="none" stroke="#ececec"/><circle cx="11" cy="11" r="6" fill="none" stroke="#ececec"/>
+  </g>
+  <circle cx="1088" cy="134" r="7" fill="none" stroke="#e8662e" stroke-width="2"/>
+  <text class="l" x="1094" y="116" text-anchor="end" style="fill:#e8662e">goal</text>
+  <text class="t" x="664" y="470" style="font-size:15px;fill:#e8662e">Exploratory trajectory</text>
+  <text class="s" x="664" y="488">fast, may enter unknown space</text>
+  <text class="t" x="900" y="410" style="font-size:15px;fill:#d4af37">Backup trajectory</text>
+  <text class="s" x="900" y="428">branches off and stops inside</text>
+  <text class="s" x="900" y="446">known free space</text>
+  <text class="s" x="664" y="514">Shaded areas: safe flight corridors (CIRI) each trajectory must stay inside</text>
+</svg>

@@ -37,7 +37,7 @@ Parameters changed from the PX4 v1.17.0 defaults on the tested drone. Calibratio
 | RC | `RC_MAP_THROTTLE` / `YAW` / `PITCH` / `ROLL` | 1 / 2 / 3 / 4 | |
 | | `RC_MAP_FLTMODE` / `ARM_SW` / `LOITER_SW` / `OFFB_SW` / `KILL_SW` | 5 / 6 / 7 / 8 / 9 | |
 | | `MAN_ARM_GESTURE` | 0 | Arm with the switch only |
-| Flight modes | `COM_FLTMODE1-6` | 8, 2, 10, 100, 101, 11 | Stabilized, Position, Takeoff, External 1, External 2, Land. Under review; see note |
+| Flight modes | `COM_FLTMODE1-6` | 1, 2, 10, 100, 101, 11 | Altitude, Position, Takeoff, External 1, External 2, Land, on RC channel 5. External 1 is *AgiPix Auto* while agipix_auto runs; External 2 is reserved and nothing registers it yet. Stabilized is deliberately not on the switch |
 | Uplink (Jetson) | `UXRCE_DDS_CFG` | 102 | TELEM2 |
 | | `SER_TEL2_BAUD` | 1500000 | |
 | | `UXRCE_DDS_DOM_ID` | 5 | |
@@ -79,7 +79,7 @@ Parameters changed from the PX4 v1.17.0 defaults on the tested drone. Calibratio
 | | `MPC_MAN_Y_MAX` / `MPC_MAN_Y_TAU` | 158 / 0.32 | |
 | Logging | `SDLOG_PROFILE` | 3 | |
 
-> **Note:** the failsafe, speed-limit, battery-threshold and logging values were set on the drone and read back on 2026-11-09. The row marked "under review" records the flight-mode slots the drone ran on 2026-11-08, which are still changing. Rows marked "tentative" are awaiting the QGroundControl motor test.
+> **Note:** the failsafe, speed-limit, battery-threshold and logging values were set on the drone and read back on 2026-11-09. Rows marked "tentative" are awaiting the QGroundControl motor test.
 
 Parameters set for the time sync and the GPS-denied EKF2 setup (2026-11):
 

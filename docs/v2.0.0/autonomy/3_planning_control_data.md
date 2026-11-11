@@ -4,26 +4,15 @@ layout: doc
 nav_title: Data-driven autonomy
 wip: true
 ---
-# Agipix Autonomy: Data-driven Planning and Control
-[![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) 
-[![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/20.04/)
-[![Linux platform](https://img.shields.io/badge/platform-linux--arm-brown.svg)](https://releases.ubuntu.com/20.04/)
+# Data-driven planning and control
 
-![Data-driven autonomy pipeline overview](../../../assets/images/diag/autonomy_data.png)
+Learned navigation policies can fly AgiPIX in place of the planner. They run outside agipix_auto, as separate experiments.
 
 ## [FAINT](https://lasuomela.github.io/faint/)
 
-The Robot Navigates to given subgoals using the end to end model. By leveraging pretrained visual representations, the proposed policy achieves up to 50% higher navigation success and generalizes across ground and aerial robots.
+FAINT is a visual navigation policy trained in simulation. It steers the robot to given subgoals from camera images alone. By building on pretrained visual representations, the policy reaches up to 50% higher navigation success than prior methods, and it transfers between ground and aerial robots. On AgiPIX it was deployed without modification, running on board the Jetson Orin NX; see the [FAINT post]({{ '/posts/faint/' | relative_url }}).
 
- <div class="video-container text-width">
-	<iframe
-		src="https://www.youtube.com/embed/izExoAxZoeo"
-		title="YouTube video player"
-		frameborder="0"
-		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-		allowfullscreen
-	></iframe>
-	<p class="small" style="margin-top:0.4em; opacity:0.85;">Agipix running FAINT - CoRL 25</p>
-	<!-- To change the video, replace EMFauA1CU8M with the new YouTube ID. -->
-	<!-- If you prefer privacy-enhanced mode, use: https://www.youtube-nocookie.com/embed/VIDEO_ID -->
+<div class="video-container text-width">
+  <iframe src="https://www.youtube.com/embed/izExoAxZoeo" title="AgiPIX running FAINT" frameborder="0" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 </div>
+<p class="small">AgiPIX running FAINT.</p>

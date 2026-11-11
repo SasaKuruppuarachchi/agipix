@@ -1,143 +1,107 @@
 ---
-title: "Planning & control: heuristic autonomy"
+title: "Navigation: agipix_auto and SUPER"
 layout: doc
-nav_title: Heuristic autonomy
+nav_title: Navigation (SUPER)
 ---
-# Agipix Autonomy: Planning and Control
-[![license](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT) 
-[![Linux platform](https://img.shields.io/badge/platform-linux--64-orange.svg)](https://releases.ubuntu.com/20.04/)
-[![Linux platform](https://img.shields.io/badge/platform-linux--arm-brown.svg)](https://releases.ubuntu.com/20.04/)
+# Navigation: agipix_auto and SUPER
 
-![Heuristic autonomy pipeline overview](../../../assets/images/diag/autonomy_heuristics.png)
+agipix_auto is the v2.0 navigation stack. It integrates the [SUPER](https://github.com/hku-mars/SUPER) planner and [ROG-Map](https://github.com/hku-mars/ROG-Map) from the HKU MaRS Lab with a mission layer, an MPC and a PX4 ROS 2 external mode, all in one ROS 2 process.
 
+> **Status:** agipix_auto has flown in simulation with ground-truth odometry, and has been demonstrated on LIO in simulation. LIO flight, the Jetson Orin NX build and real flight are not yet qualified. The code is not released yet; the launch commands below require the v2.0.0 development branch.
 
-## AgiAUTO (ROS 2) — Agipix PX4 Autonomy Stack
+<figure>
+  <img src="../../../assets/images/diag/v2/navigation_loop.svg" width="1200" height="560" data-zoomable alt="Left: inside agipix_auto, a planning worker at 10 Hz runs scan to ROG-Map, mission goal and SUPER replan, and publishes an immutable trajectory snapshot; a control callback at 100 Hz reads it with the latest odometry and runs the MPC, which sends attitude and thrust to PX4. Below: the three mission modes, exploration, waypoints and area scan. Right: an exploratory trajectory runs from the drone towards a goal in unknown space, and a backup trajectory branches off it and stops inside known free space; both stay inside shaded safe corridors.">
+  <figcaption>Inside agipix_auto: the two loops, the mission modes and SUPER's exploratory and backup trajectories.</figcaption>
+</figure>
 
-This repository is the **AgiAUTO** autonomy module of **Agipix** for PX4-based UAV missions in ROS 2.
+## One process, two loops
 
-- HW and SIM Platform Repository: https://github.com/SasaKuruppuarachchi/agipix.git
-- Platform docs: https://sasakuruppuarachchi.github.io/agipix/
-- Publication: *"AgiPIX: Bridging Simulation and Reality in Indoor Aerial Inspection"*, International Conference on Unmanned Aircraft Systems (ICUAS) 2026, pp. 844–852. [DOI: 10.1109/ICUAS69441.2026.11598625](https://doi.org/10.1109/ICUAS69441.2026.11598625) · [arXiv:2604.08009](https://arxiv.org/abs/2604.08009)
+- **Planning worker (10 Hz by default).** One worker thread owns the map and the planner. On each tick it adds the latest scan to ROG-Map, asks the mission layer for the current goal, replans with SUPER and publishes the result as an immutable trajectory snapshot.
+- **Control callback (100 Hz).** An independent callback reads the latest trajectory snapshot and odometry, runs the MPC and sends attitude and thrust setpoints to PX4. It never waits for the planner or the map.
 
----
+## Mapping: ROG-Map
 
-## System architecture (current)
+- Each LiDAR scan is deskewed point by point with the odometry before it enters the map, so fast flight does not smear walls.
+- ROG-Map keeps a sliding occupancy grid around the drone and tracks frontiers, the boundaries between known free space and unknown space. There is no ESDF.
+- For display only, the occupied cells are also accumulated into a coarse global map over the mission.
 
-```text
-									Sensors 
-						(depth / point cloud / RGB / lidar) 
-								+ PX4 state topics
-										│
-										▼
-								onboard_detector
-					(dynamic obstacle detection + tracking)
-										│
-										▼
-									map_manager 
-					(occupancy/dynamic map + collision/raycast)
-										│
-					┌───────────────────┴──────────────────────────┐
-					▼                                              ▼
-			global_planner (RRT/RRT*/DEP)                    trajectory_planner
-		(global waypoints / exploration path) 	            (poly/PWL/B-spline)
-					└───────────────────┬──────────────────────────┘
-										▼
-							 	 time_optimizer 
-								   (optional)
-								        │
-										▼
-								autonomous_flight 
-						(mission executive/state machine)
-										│
-										▼
-							  px4_control_interface 
-				(DDS tracking mode + setpoint writer + executor flow)
-										▼
-  									   PX4
-```
+## Planning: SUPER
 
----
+SUPER plans from the drone's current moving state, so replanning does not slow or stop the drone.
 
-## Package roles
+- **Exploratory trajectory.** A fast trajectory towards the goal. It may pass through space the LiDAR has not seen yet.
+- **Backup trajectory.** It branches off the exploratory trajectory and stops inside free space that has been observed. If a later scan shows the exploratory trajectory is blocked, the drone still has a safe way to stop.
+- **Safe corridors.** Both trajectories are optimised inside safe flight corridors generated by CIRI. The robot radius is 0.25 m.
+- **Heading.** Because the LiDAR is pitched 45° nose-down, the planned yaw keeps the sensor looking along the direction of travel.
+- **Route guidance.** For long routes, a persistent route map and a 3D A* search give SUPER intermediate goals, so it does not get stuck behind large obstacles.
 
-- `autonomous_flight`: mission orchestration (`takeoff`, `navigation`, `rl_navigation`, `dynamic_navigation`, `inspection`, `dynamic_inspection`, `dynamic_exploration`)
-- `px4_control_interface`: DDS-native PX4 mode/executor runtime and target tracking bridge
-- `map_manager`: occupancy and dynamic map representations, map services
-- `onboard_detector`: dynamic obstacle perception, data association, tracking
-- `global_planner`: global planning and exploration planning (RRT/RRT*, DEP)
-- `trajectory_planner`: smooth local trajectory generation (poly/PWL/B-spline)
-- `time_optimizer`: trajectory time allocation optimization utilities
-- `agi_viz`: centralized RViz profiles for autonomy stack visualization
+## Missions
 
-> Note: the standalone legacy middle-level controller package is no longer part of the active DDS runtime control path.
+SUPER plans only to a goal; the mission layer decides what the goal is. A mission is one ROS 2 parameter file (a *profile*) chosen at launch, and every mission follows the same sequence: take off, scan for 12 s, run the mission, return home, land. The mission starts only when the operator calls the start service, and a return-home service ends it early.
 
----
+| Mode | What it does |
+|---|---|
+| Exploration | Ranks ROG-Map frontiers so the drone makes progress across the map, rather than visiting the nearest frontier. In multi-storey buildings it commits to one storey at a time and climbs through known shafts and openings. When the leg, time or return budget runs out, the drone returns home along its recorded route. |
+| Waypoints | Flies an ordered list of points. Intermediate points are passed in motion; the final point is reached within 0.3 m. Unreachable points are skipped and reported as missed. |
+| Area scan | Flies a drawn scan path at a set height above the ground, which is estimated online from the LiDAR with no prior map. A height band makes SUPER go round obstacles such as trees, not over them, and points drawn inside obstacles are moved to free space or skipped. Scan paths can be drawn in Foxglove with the mission planner tool. |
 
-## Setup
+## Flying PX4
 
-Validated against **PX4 v1.16.1** message definitions.
+- agipix_auto registers one PX4 external mode, **AgiPix Auto**, using the [PX4 ROS 2 interface library](https://github.com/Auterion/px4-ros2-interface-lib). A mode executor arms the vehicle, runs PX4 Takeoff, switches to AgiPix Auto for the mission and finishes with PX4 Land.
+- The mission aborts if PX4 triggers a failsafe or the pilot switches out of the mode. The pilot can always take over on the RC.
+- Without GPS, PX4's Hold and Return modes cannot run, so failsafes end in Land. Indoors, the horizontal speed is capped at 2 m/s. See [Interfacing PX4 and Sensors](../real/4_interfacing_sensors.md) for the parameters.
+- PX4's EKF2 fuses the selected odometry as external vision; see [Perception](./1_perception.md).
 
-Prerequiste : PX4 ROS 2 interface setup (see [PX4 ROS 2 interface](../real/4_interfacing_sensors.md))
+## Simulation and the drone
 
-Build: 
+| | Simulation (AgiSIM) | Drone |
+|---|---|---|
+| Computer | x86 desktop, in the development container | Jetson Orin NX 16 GB; the stack is not yet built or qualified there |
+| Odometry | ground truth, LIO or emulated motion capture | LIO, or motion capture (OptiTrack or Vicon) |
+| LiDAR | simulated Mid-360, 10 Hz, same 45° mount | Mid-360, 10 Hz, PTP time |
+| PX4 link | uXRCE-DDS over UDP, simulation time | uXRCE-DDS over serial, wall time |
+| Vehicle model | idealised rotors; the MPC uses the simulated vehicle's mass and thrust | real airframe; MPC calibration not done yet |
+
+On the drone today, only the estimation side runs: the Livox driver, the LIO, the TF node, the PX4 bridge and the time-sync check. agipix_auto has not run on the drone yet.
+
+## Running it in simulation
+
+> Requires the v2.0.0 development branch.
+
+Start the simulator on the host, from the AgiSIM folder. The launch script sets the PX4 SITL defaults for this stack (no GPS, no magnetometer, external-vision fusion) and starts Isaac Sim; add `--gui` to open the Isaac Sim window. See [Simulation setup](../sim/2_setup_sim.md) for installing AgiSIM.
 
 ```bash
-cd ~/workspace/agipix_control/src
-git clone https://github.com/SasaKuruppuarachchi/agipix_autonomy.git -b dds
-git clone https://github.com/SasaKuruppuarachchi/agipix_user_interfaces.git
-agidocker
-# inside the container
-
-cd /workspaces/agipix_control
-colcon build # builds the autonomy stack
-source install/setup.bash
+python3 examples/8_agipix_launch.py --headless --environment AKW_2F --namespace drone --id 0 --px4-dir <PX4 dir>
 ```
 
----
-
-## Demo media (placeholders)
+Then, inside the development container, after building (`bilcon`) and sourcing (`sorcon`):
 
 ```bash
-ros2 launch px4_control_interface dds_shadow.launch.py use_sim_time:=true start_legacy_stack:=true mission:=<mission_name>
+AGIPIX_AUTO_START=false runagi --foxglove -o gt -n drone0 \
+  -c $(ros2 pkg prefix agipix_auto)/share/agipix_auto/config/profiles/gt_explore_akw2f.yaml
+ros2 service call /drone0/auto/start std_srvs/srv/Trigger '{}'        # start the mission
+ros2 service call /drone0/auto/return_home std_srvs/srv/Trigger '{}'  # optional: end early
 ```
 
-Available missions: 
-`takeoff_and_hover`, `takeoff_and_track_circle`, `navigation`, `rl_navigation`, `dynamic_navigation`, `dynamic_inspection`, `dynamic_exploration`, `inspection`
+| Option | Effect |
+|---|---|
+| `-o gt`, `-o lio`, `-o mocap` | Odometry source: ground truth, LIO or emulated motion capture |
+| `-n drone0` | Namespace |
+| `-c <profile>` | Mission profile (ROS 2 parameter file) |
+| `--foxglove` | Start the Foxglove bridge on port 8765 |
+| `--planner` | Open the Foxglove scan-path planner instead; the mission never starts |
+| `-r` | Record a bag |
+| `-d` | Dry run: shows the session without starting nodes |
 
-- [PLACEHOLDER] Takeoff + hover demo video
-- [PLACEHOLDER] Dynamic navigation demo video
-- Dynamic exploration demo video:
+`AGIPIX_AUTO_START=false` keeps the mission from starting by itself; it starts when the start service is called. Open Foxglove at `ws://localhost:8765` to watch the flight.
 
-<div class="quick-start-video" style="max-width: 720px; margin: 1rem 0;">
-  <iframe src="https://www.youtube.com/embed/__Awe89ndag" title="Dynamic Exploration Demo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-</div>
+## Operator tools
 
-- [PLACEHOLDER] Dynamic inspection demo video
-
----
-
-## Current status
-
-- ROS 1 → ROS 2 porting completed for the autonomy stack in this repository.
-- Runtime stack is **PX4 DDS-native** (MAVROS backend removed from active control path).
-- Mission validation status:
-	- ✅ takeoff and hover
-	- ✅ takeoff and track circle
-	- ✅ navigation
-	- ✅ rl navigation
-	- ✅ dynamic navigation
-	- ✅ dynamic exploration
-	- ✅ dynamic inspection
-
----
+- `/<ns>/auto/status` reports the mission phase, planning and map timing, and the control state; a terminal viewer shows it with the PX4 state.
+- RViz and Foxglove views show the ROG-Map ring, frontiers, the committed trajectory and the safe corridors.
 
 ## Credits
 
-This stack builds on original CERLAB autonomy components and research implementations by **Zhefan Xu** and collaborators.
-
-This repository version is a ROS 2 integration within Agipix by **Sasa Kuruppuarachchi**.
-
-Please credit both:
-
-1. Original algorithm/software authors (see package-level citations)
-2. Agipix ROS 2 integration and platform engineering work in this repository
+- **SUPER** (with the CIRI corridor generator) and **ROG-Map**: Yunfan Ren and colleagues, HKU MaRS Lab. Both LGPL-3.0-or-later. SUPER: Ren et al., *Safety-assured high-speed navigation for MAVs*, Science Robotics, 2025.
+- **PX4** and the **PX4 ROS 2 interface library** (BSD-3-Clause).
+- agipix_auto integration: Sasanka Kuruppu Arachchige.
