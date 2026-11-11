@@ -10,7 +10,7 @@ wip: true
 
 Agipix documentation is organized around the four platform blocks from the paper: real hardware, simulation, autonomy, and operator UI.
 
-![System overview](../../assets/images/diag/sys_overview.png)
+![System overview](../../assets/images/diag/sys_overview_v2.png)
 
 Pick a scope to dive into. Each scoped section includes a sidebar with step-by-step pages.
 

@@ -121,6 +121,16 @@
   bytes: 1205004
   web_bytes: 151488
   fallback_bytes: 252223
+- src: "assets/images/diag/sys_overview_v2.png"
+  webp: "assets/images/diag/sys_overview_v2.web.webp"
+  fallback: "assets/images/diag/sys_overview_v2.web.jpg"
+  sm: "assets/images/diag/sys_overview_v2.web.sm.webp"
+  sm_w: 960
+  w: 2000
+  h: 1141
+  bytes: 1216407
+  web_bytes: 144782
+  fallback_bytes: 244674
 - src: "assets/images/exploded_labeled.jpg"
   webp: "assets/images/exploded_labeled.web.webp"
   fallback: "assets/images/exploded_labeled.web.jpg"
